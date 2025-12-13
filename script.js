@@ -3,35 +3,68 @@ const translations = {
     'en': {
         about: 'ABOUT ME',
         projects: 'PROJECTS',
+        legal: 'LEGAL',
+        legal_title: 'Legal & Copyright',
+        legal_subtitle: 'Portfolio usage terms and rights',
         all: 'All',
         school: 'School',
         competitions: 'Competitions',
         collaboration: 'Collaboration',
         category_label: 'Category',
         year_label: 'Year',
-        location_label: 'Location'
+        location_label: 'Location',
+        prev: '← Previous',
+        next: 'Next →',
+        all_projects: 'All Projects',
+        // Project 1
+        project1_title: 'High-Speed Rail Terminal Prague-East',
+        authors_label: 'Authors',
+        visualization_label: 'Visualization',
+        client_label: 'Client'
     },
     'ru': {
         about: 'ОБО МНЕ',
         projects: 'ПРОЕКТЫ',
+        legal: 'ПРАВО',
+        legal_title: 'Правовая информация',
+        legal_subtitle: 'Условия использования портфолио и права',
         all: 'Все',
         school: 'Учебные',
         competitions: 'Конкурсы',
         collaboration: 'Сотрудничество',
         category_label: 'Категория',
         year_label: 'Год',
-        location_label: 'Локация'
+        location_label: 'Локация',
+        prev: '← Назад',
+        next: 'Далее →',
+        all_projects: 'Все проекты',
+        // Project 1
+        project1_title: 'Терминал ВСМ Прага-восток',
+        authors_label: 'Авторы',
+        visualization_label: 'Визуализация',
+        client_label: 'Клиент'
     },
     'cz': {
         about: 'O MNĚ',
         projects: 'PROJEKTY',
+        legal: 'PRÁVO',
+        legal_title: 'Právní informace',
+        legal_subtitle: 'Podmínky použití portfolia a práva',
         all: 'Vše',
         school: 'Školní',
         competitions: 'Soutěže',
         collaboration: 'Spolupráce',
         category_label: 'Kategorie',
         year_label: 'Rok',
-        location_label: 'Místo'
+        location_label: 'Místo',
+        prev: '← Předchozí',
+        next: 'Další →',
+        all_projects: 'Všechny projekty',
+        // Project 1
+        project1_title: 'Terminál VRT Praha-východ',
+        authors_label: 'Autoři',
+        visualization_label: 'Vizualizace',
+        client_label: 'Klient'
     }
 };
 
@@ -90,6 +123,15 @@ function switchLanguage(lang) {
         }
     });
 
+    // Показываем/скрываем языковые блоки (для длинного текста, например legal page)
+    const i18nBlocks = document.querySelectorAll('.i18n-block[data-lang-content]');
+    if (i18nBlocks.length) {
+        i18nBlocks.forEach(block => {
+            const blockLang = block.getAttribute('data-lang-content');
+            block.style.display = (blockLang === lang) ? 'block' : 'none';
+        });
+    }
+
     // Обновляем тексты фильтров
     document.querySelectorAll('.filter-btn').forEach(btn => {
         const key = btn.getAttribute('data-translate');
@@ -110,6 +152,12 @@ document.querySelectorAll('.lang-link').forEach(link => {
 
 // При загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
+    // Авто-год в копирайтах
+    const year = String(new Date().getFullYear());
+    document.querySelectorAll('.js-year').forEach(el => {
+        el.textContent = year;
+    });
+
     // Загружаем сохраненный язык (по умолчанию английский)
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
     switchLanguage(savedLanguage);
@@ -119,6 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedDarkMode) {
         document.body.classList.add('dark-mode');
     }
+
+    // Мягкая защита изображений (не влияет на копирование текста):
+    // - запрет drag
+    // - запрет контекстного меню только на изображениях
+    document.querySelectorAll('img').forEach(img => {
+        img.setAttribute('draggable', 'false');
+        img.addEventListener('dragstart', (e) => e.preventDefault());
+        img.addEventListener('contextmenu', (e) => e.preventDefault());
+    });
+    
 });
 
 // Přepínání nočního režimu
