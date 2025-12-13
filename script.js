@@ -20,7 +20,8 @@ const translations = {
         project1_title: 'High-Speed Rail Terminal Prague-East',
         authors_label: 'Authors',
         visualization_label: 'Visualization',
-        client_label: 'Client'
+        client_label: 'Client',
+        scroll_down: 'Scroll'
     },
     'ru': {
         about: 'ОБО МНЕ',
@@ -42,7 +43,8 @@ const translations = {
         project1_title: 'Терминал ВСМ Прага-восток',
         authors_label: 'Авторы',
         visualization_label: 'Визуализация',
-        client_label: 'Клиент'
+        client_label: 'Клиент',
+        scroll_down: 'Листать'
     },
     'cz': {
         about: 'O MNĚ',
@@ -64,7 +66,8 @@ const translations = {
         project1_title: 'Terminál VRT Praha-východ',
         authors_label: 'Autoři',
         visualization_label: 'Vizualizace',
-        client_label: 'Klient'
+        client_label: 'Klient',
+        scroll_down: 'Scrollovat'
     }
 };
 

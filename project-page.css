@@ -1,9 +1,86 @@
 /* Стили для страницы проекта в стиле MVRDV */
+/* Na stránce projektu - header vždy bílý */
+.main-header {
+    background: #fff !important;
+}
+
+.main-header .logo a,
+.main-header .lang-link.active,
+.main-header .lang-link:hover {
+    color: #1a1a1a !important;
+}
+
+.main-header .lang-link {
+    color: #999 !important;
+}
+
+.main-header .dark-mode-toggle {
+    color: #1a1a1a !important;
+}
+
+.main-header .about-link a {
+    color: #FF9999 !important;
+    border-color: #FF9999 !important;
+    background: transparent !important;
+}
+
+.main-header .about-link a:hover {
+    background: #FF9999 !important;
+    color: #fff !important;
+}
+
+.main-header::after {
+    background: #f5f5f5 !important;
+}
+
 .project-hero {
     width: 100%;
-    height: 80vh;
+    height: calc(100vh - 120px - 150px); /* Místo pro header a název */
     overflow: hidden;
     margin-top: 120px;
+    position: relative;
+}
+
+/* Scroll indikátor */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    animation: bounce 2s infinite;
+    z-index: 10;
+}
+
+.scroll-indicator span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.scroll-indicator .arrow {
+    font-size: 24px;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+body.dark-mode .scroll-indicator {
+    color: #fff;
 }
 
 .project-hero img {
@@ -23,6 +100,50 @@
     grid-template-columns: 2fr 1fr;
     gap: 80px;
     margin-bottom: 80px;
+}
+
+/* Název projektu - vždy viditelný pod obrázkem */
+.project-title-section {
+    padding: 40px 80px;
+    background: #a1b497; /* Zelená */
+}
+
+.project-title-container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.project-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin: 0;
+    color: #ffffff; /* Bílý text */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+body.dark-mode .project-title-section {
+    background: #8a9d80; /* Tmavší zelená v dark mode */
+}
+
+body.dark-mode .project-title {
+    color: #f0f0f0; /* Bílý text v dark mode */
+}
+
+@media (max-width: 992px) {
+    .project-title-section {
+        padding: 30px 20px;
+    }
+    
+    .project-title {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-title {
+        font-size: 26px;
+    }
 }
 
 .project-main-info {
