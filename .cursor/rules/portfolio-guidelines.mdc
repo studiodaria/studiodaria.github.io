@@ -1,0 +1,25 @@
+# Portfolio Website Guidelines
+
+## Design Principles
+- Clean, minimal aesthetic that lets the architecture work speak for itself
+- Large, high-quality images are the focus
+- Easy navigation between projects
+- Mobile-responsive design (looks good on phones and tablets)
+- Fast loading times (optimize images)
+
+## Tech Stack
+This project uses simple HTML, CSS, and JavaScript:
+- index.html - главная страница
+- style.css - стили для всего сайта
+- project-page.css - стили для страниц проектов
+- script.js - интерактивность
+
+## Project Structure
+- Homepage with introduction and project grid
+- Individual project pages in /projects folder
+- Images stored in /images folder
+
+## Image Handling
+- Suggest appropriate image sizes (max 1920px wide for full-width, optimize for web)
+- Use lazy loading for image galleries
+- Support common formats: JPG, PNG, WebP

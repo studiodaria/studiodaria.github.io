@@ -3,94 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 1 - STUDIO DARIA</title>
+    <title>Terminál VRT Praha-východ - STUDIO DARIA</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../project-page.css">
 </head>
 <body>
-    <!-- Хедер -->
+    <!-- Header -->
     <header class="main-header">
+        <button class="dark-mode-toggle" id="darkModeToggle" title="Dark mode">
+            <span class="icon-sun">☀</span>
+            <span class="icon-moon">☾</span>
+        </button>
+        <div class="header-center">
+            <h1 class="logo">
+                <a href="../index.html">STUDIO DARIA</a>
+            </h1>
+            <div class="about-link">
+                <a href="../about.html" data-translate="about">ABOUT ME</a>
+            </div>
+        </div>
         <div class="language-switcher">
             <a href="#" class="lang-link" data-lang="cz">cz</a>
             <a href="#" class="lang-link active" data-lang="en">en</a>
             <a href="#" class="lang-link" data-lang="ru">ru</a>
         </div>
-        <h1 class="logo">
-            <a href="../index.html">STUDIO DARIA</a>
-        </h1>
-        <div class="about-link">
-            <a href="#" data-translate="about">ABOUT ME</a>
-        </div>
     </header>
 
-    <!-- Основное изображение проекта -->
+    <!-- Hlavní obrázek projektu -->
     <div class="project-hero">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600" alt="Modern Residential Building">
+        <img src="../images/project1/ra15_Terminal_0013 (1).jpg" alt="Terminál vysokorychlostní železnice Praha-východ">
     </div>
 
-    <!-- Информация о проекте -->
+    <!-- Informace o projektu -->
     <main class="project-content">
         <div class="project-info-grid">
-            <!-- Левая колонка с основной информацией -->
+            <!-- Levý sloupec - hlavní info -->
             <div class="project-main-info">
-                <h2 class="project-title">Modern Residential Complex</h2>
+                <h2 class="project-title">Terminál vysokorychlostní železnice Praha-východ</h2>
                 <p class="project-description">
-                    A contemporary residential project that combines functionality with aesthetic excellence. 
-                    The design emphasizes natural light and open spaces, creating a harmonious living environment 
-                    that connects with its surroundings. The use of sustainable materials and energy-efficient 
-                    solutions makes this project both environmentally conscious and future-proof.
+                    Idea návrhu je založena na práci s krajinou a v hledání oboustranně 
+                    prospěšné synergie dopravní infrastruktury s přírodou.
+                </p>
+                <p class="project-description">
+                    Dominantním cílem návrhu je nová krajina a její důležité prvky, 
+                    ve které se jako loďka v potoce ztrácí hala terminálu.
+                </p>
+                <p class="project-description">
+                    Projekt navrhujeme jako silně enviromentální s výraznou symbolikou 
+                    ekologického myšlení, které je vtisknuto do architektury návrhu.
                 </p>
             </div>
             
-            <!-- Правая колонка с деталями -->
+            <!-- Pravý sloupec - detaily -->
             <div class="project-details">
                 <div class="detail-item">
-                    <h3>Location</h3>
-                    <p>Prague, Czech Republic</p>
+                    <h3 data-translate="category_label">Category</h3>
+                    <p data-translate="competitions">Competitions</p>
                 </div>
                 <div class="detail-item">
-                    <h3>Year</h3>
+                    <h3 data-translate="year_label">Year</h3>
                     <p>2024</p>
                 </div>
                 <div class="detail-item">
-                    <h3>Status</h3>
-                    <p>Completed</p>
-                </div>
-                <div class="detail-item">
-                    <h3>Category</h3>
-                    <p>Residential</p>
-                </div>
-                <div class="detail-item">
-                    <h3>Size</h3>
-                    <p>250 m²</p>
+                    <h3 data-translate="location_label">Location</h3>
+                    <p>Praha-východ, Česká republika</p>
                 </div>
             </div>
         </div>
 
-        <!-- Галерея изображений -->
-        <div class="project-gallery">
-            <figure class="gallery-item full-width">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600" alt="Project view 1">
-                <figcaption>Main facade view showcasing the innovative use of materials and lighting</figcaption>
-            </figure>
-            <figure class="gallery-item half-width">
-                <img src="https://images.unsplash.com/photo-1600607687644-c94bf1fc99c0?w=800" alt="Project view 2">
-                <figcaption>Interior courtyard with sustainable landscaping</figcaption>
-            </figure>
-            <figure class="gallery-item half-width">
-                <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800" alt="Project view 3">
-                <figcaption>Detail of the architectural elements and natural light integration</figcaption>
-            </figure>
+        <!-- Galerie obrázků - horizontální scroll -->
+        <div class="project-gallery-scroll">
+            <div class="gallery-track">
+                <figure class="gallery-scroll-item">
+                    <img src="../images/project1/ra15_Terminal_0000 (2).jpg" alt="Terminál VRT" loading="lazy">
+                </figure>
+                <figure class="gallery-scroll-item">
+                    <img src="../images/project1/ra15_Terminal_0002.jpg" alt="Terminál VRT" loading="lazy">
+                </figure>
+                <figure class="gallery-scroll-item">
+                    <img src="../images/project1/ra15_Terminal_0003.jpg" alt="Terminál VRT" loading="lazy">
+                </figure>
+                <figure class="gallery-scroll-item">
+                    <img src="../images/project1/ra15_Terminal_0004 (1).jpg" alt="Terminál VRT" loading="lazy">
+                </figure>
+                <figure class="gallery-scroll-item">
+                    <img src="../images/project1/ra15_Terminal_0005 (4).jpg" alt="Terminál VRT" loading="lazy">
+                </figure>
+                <figure class="gallery-scroll-item">
+                    <img src="../images/project1/ra15_Terminal_0009.jpg" alt="Terminál VRT" loading="lazy">
+                </figure>
+            </div>
         </div>
 
-        <!-- Навигация между проектами -->
+        <!-- Navigace mezi projekty -->
         <div class="project-navigation">
-            <a href="project25.html" class="prev-project">Previous Project</a>
-            <a href="../index.html" class="back-to-grid">Back to Projects</a>
-            <a href="project2.html" class="next-project">Next Project</a>
+            <a href="project9.html" class="prev-project">← Previous</a>
+            <a href="../index.html" class="back-to-grid">All Projects</a>
+            <a href="project2.html" class="next-project">Next →</a>
         </div>
     </main>
 
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../about.html" class="footer-about-link" data-translate="about">ABOUT ME</a>
+                <span class="footer-divider">|</span>
+                <a href="mailto:your@email.com" class="footer-contact">your@email.com</a>
+            </div>
+            <p class="footer-copyright">&copy; 2024 Studio Daria</p>
+        </div>
+    </footer>
+
     <script src="../script.js"></script>
 </body>
-</html> 
+</html>

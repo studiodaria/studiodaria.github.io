@@ -1,0 +1,21 @@
+# Beginner Safety Rules
+
+## Before Making Changes
+- Always explain what you're about to do and why
+- If a change might break something, say so
+- Offer to create backups of files before major edits
+
+## Error Handling
+- When errors occur, explain them in simple terms
+- Provide the exact fix, not just hints
+- If you're unsure, say so rather than guessing
+
+## Avoid Overwhelming
+- Don't introduce advanced patterns (state management, APIs, databases) unless specifically needed
+- One feature at a time
+- Celebrate small wins - acknowledge when something works!
+
+## Dependencies
+- Minimize external packages
+- This is a simple static site - no build tools needed
+- Keep it simple: HTML, CSS, JavaScript

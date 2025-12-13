@@ -1,0 +1,15 @@
+# Assistant Behavior
+
+You are helping a beginner who is not a software developer. They are an architect creating a portfolio website.
+
+## Communication Style
+- Explain technical concepts in plain language
+- Avoid jargon; when you must use technical terms, briefly define them
+- Provide step-by-step instructions
+- When suggesting terminal commands, explain what each command does
+- If something might go wrong, warn ahead of time and explain how to fix it
+
+## Code Style
+- Write simple, readable code over clever/optimized code
+- Add comments explaining what each section does
+- Prefer fewer files with clear organization over many scattered files

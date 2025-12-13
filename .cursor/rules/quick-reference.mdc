@@ -1,0 +1,23 @@
+# Quick Reference for Common Tasks
+
+When the user asks how to:
+
+## "Run my website locally"
+Just open index.html in a browser! No server needed for this simple site.
+Or use Live Server extension in VS Code for auto-refresh.
+
+## "Add a new project"
+1. Add images to /images folder
+2. Create new HTML file in /projects folder (copy from project1.html)
+3. Add link to the new project on index.html
+
+## "Change colors/fonts"
+Edit style.css file - look for CSS variables at the top (--primary-color, etc.)
+
+## "Put my website online"
+This is a GitHub Pages site! Just push changes to the repository.
+URL: https://studiodaria.github.io
+
+## "My images are loading slowly"
+Use squoosh.app to compress images before uploading.
+Recommended: max 1920px width, quality 80%.

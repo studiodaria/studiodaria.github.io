@@ -1,19 +1,83 @@
 :root {
-    --primary-color: #ffffff;
+    --bg-color: #ffffff;
     --text-color: #1a1a1a;
-    --accent-color: #333333;
+    --accent-color: #FF9999;
+    --border-color: #eee;
+    --gray-color: #999;
     --transition: 0.3s ease;
     --spacing: 20px;
+}
+
+/* Noční režim */
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --accent-color: #FF9999;
+    --border-color: #333;
+    --gray-color: #888;
+}
+
+body.dark-mode .main-header,
+body.dark-mode .filters,
+body.dark-mode .main-footer {
+    background: #1a1a1a;
+}
+
+body.dark-mode .main-header::after {
+    background: #333;
+}
+
+body.dark-mode .filters {
+    border-color: #333;
+}
+
+body.dark-mode .main-footer {
+    border-color: #333;
+}
+
+body.dark-mode .logo a {
+    color: #f0f0f0;
+}
+
+body.dark-mode .lang-link {
+    color: #666;
+}
+
+body.dark-mode .lang-link:hover,
+body.dark-mode .lang-link.active {
+    color: #f0f0f0;
+}
+
+body.dark-mode .filter-btn {
+    color: #666;
+}
+
+body.dark-mode .filter-btn:hover,
+body.dark-mode .filter-btn.active {
+    color: #f0f0f0;
+}
+
+body.dark-mode .project-info {
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+}
+
+body.dark-mode .footer-copyright {
+    color: #555;
+}
+
+body.dark-mode .footer-contact {
+    color: #666;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background: var(--primary-color);
+    background: var(--bg-color);
     color: var(--text-color);
     font-family: 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Подключаем шрифт Intro для всех начертаний */
@@ -29,13 +93,27 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 100px;
+    height: 120px;
     background: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
     box-sizing: border-box;
+    padding: 0 35px;
+}
+
+/* Центральный блок с логотипом и about */
+.header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Пустой блок убран - не нужен */
+.header-spacer {
+    display: none;
 }
 
 /* Логотип по центру */
@@ -48,12 +126,53 @@ body {
     margin: 0;
 }
 
-/* Контейнер для языков */
+/* Контейнер для языков - правый верхний угол */
 .language-switcher {
     position: absolute;
-    left: 35px;
+    top: 20px;
+    right: 35px;
     display: flex;
     gap: 8px;
+}
+
+/* Tlačítko pro noční režim - levý horní roh */
+.dark-mode-toggle {
+    position: absolute;
+    top: 20px;
+    left: 35px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+    transition: transform 0.3s ease;
+    color: #1a1a1a;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Ve světlém režimu: černý měsíc (klikni pro tmavý režim) */
+/* V tmavém režimu: bílé slunce (klikni pro světlý režim) */
+.icon-sun {
+    display: none;
+}
+
+.icon-moon {
+    display: inline;
+}
+
+body.dark-mode .dark-mode-toggle {
+    color: #ffffff;
+}
+
+body.dark-mode .icon-sun {
+    display: inline;
+}
+
+body.dark-mode .icon-moon {
+    display: none;
 }
 
 .lang-link {
@@ -71,24 +190,26 @@ body {
     color: #000;
 }
 
-/* About Me */
+/* About Me - под логотипом */
 .about-link {
-    position: absolute;
-    right: 35px;
+    /* Теперь внутри header-center, не абсолютное позиционирование */
 }
 
 .about-link a {
     text-decoration: none;
     color: #FF9999;
-    font-size: 16px;
-    transition: color 0.3s ease;
-    padding: 5px;
-    letter-spacing: 0.5px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    padding: 5px 15px;
+    letter-spacing: 2px;
     white-space: nowrap;
+    border: 1px solid #FF9999;
+    border-radius: 2px;
 }
 
 .about-link a:hover {
-    color: #FF6666; /* Чуть более темный оттенок розового при наведении */
+    background: #FF9999;
+    color: #fff;
 }
 
 /* Добавляем тонкую линию снизу */
@@ -180,7 +301,7 @@ nav a {
     grid-template-columns: repeat(5, 1fr);
     gap: 3px;
     padding: 3px;
-    margin-top: 120px;
+    margin-top: 170px;
     width: 100%;
 }
 
@@ -409,7 +530,7 @@ nav a {
 /* Стили для фильтров */
 .filters {
     position: fixed;
-    top: 100px;
+    top: 120px;
     left: 0;
     width: 100%;
     background: #fff;
@@ -465,4 +586,139 @@ nav a {
 
 .logo a:hover {
     color: #FF9999; /* Розовый цвет */
+}
+
+/* Footer - минималистичный светлый */
+.main-footer {
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    margin-top: 60px;
+    background: #fff;
+}
+
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.footer-about-link {
+    color: #FF9999;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+.footer-about-link:hover {
+    color: #FF6666;
+}
+
+.footer-divider {
+    color: #ddd;
+}
+
+.footer-contact {
+    color: #999;
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.footer-contact:hover {
+    color: #FF9999;
+}
+
+.footer-copyright {
+    font-size: 11px;
+    color: #bbb;
+    margin: 0;
+}
+
+/* Project hover effect - show title */
+.project-item .project-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover .project-info {
+    transform: translateY(0);
+}
+
+.project-item .project-info span {
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Active link style */
+.about-link a.active {
+    color: #000;
+    font-weight: 500;
+}
+
+/* Mobile header improvements */
+@media (max-width: 600px) {
+    .main-header {
+        height: 80px;
+        padding: 0 15px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .language-switcher {
+        left: 15px;
+    }
+
+    .lang-link {
+        font-size: 12px;
+        padding: 3px;
+    }
+
+    .about-link {
+        right: 15px;
+    }
+
+    .about-link a {
+        font-size: 12px;
+    }
+
+    .filters {
+        top: 80px;
+        padding: 10px 0;
+    }
+
+    .filter-group {
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 0 10px;
+    }
+
+    .filter-btn {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+
+    .project-grid {
+        margin-top: 140px;
+        gap: 2px;
+        padding: 2px;
+    }
 }
