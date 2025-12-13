@@ -21,7 +21,9 @@ const translations = {
         authors_label: 'Authors',
         visualization_label: 'Visualization',
         client_label: 'Client',
-        scroll_down: 'Scroll'
+        scroll_down: 'Scroll',
+        // Footer
+        no_copy: 'All content is protected by copyright. Reproduction without permission is not allowed.'
     },
     'ru': {
         about: 'ОБО МНЕ',
@@ -44,7 +46,9 @@ const translations = {
         authors_label: 'Авторы',
         visualization_label: 'Визуализация',
         client_label: 'Клиент',
-        scroll_down: 'Листать'
+        scroll_down: 'Листать',
+        // Footer
+        no_copy: 'Весь контент защищён авторским правом. Воспроизведение без разрешения запрещено.'
     },
     'cz': {
         about: 'O MNĚ',
@@ -67,7 +71,9 @@ const translations = {
         authors_label: 'Autoři',
         visualization_label: 'Vizualizace',
         client_label: 'Klient',
-        scroll_down: 'Scrollovat'
+        scroll_down: 'Scrollovat',
+        // Footer
+        no_copy: 'Veškerý obsah je chráněn autorským právem. Reprodukce bez souhlasu není povolena.'
     }
 };
 
