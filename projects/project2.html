@@ -3,46 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 2 - STUDIO DARIA</title>
+    <title>Design – Art – and – Peace – Factory - STUDIO DARIA</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../project-page.css">
 </head>
-<body>
+<body class="project-2">
+    <!-- Header -->
     <header class="main-header">
+        <button class="dark-mode-toggle" id="darkModeToggle" title="Dark mode">
+            <span class="icon-sun">☀</span>
+            <span class="icon-moon">☾</span>
+        </button>
+        <div class="header-center">
+            <h1 class="logo">
+                <a href="../index.html">STUDIO DARIA</a>
+            </h1>
+            <div class="about-link">
+                <a href="../about.html" data-translate="about">ABOUT ME</a>
+            </div>
+        </div>
         <div class="language-switcher">
             <a href="#" class="lang-link" data-lang="cz">cz</a>
             <a href="#" class="lang-link active" data-lang="en">en</a>
             <a href="#" class="lang-link" data-lang="ru">ru</a>
         </div>
-        <h1 class="logo">STUDIO DARIA</h1>
-        <div class="about-link">
-            <a href="#" data-translate="about">ABOUT ME</a>
-        </div>
     </header>
 
+    <!-- Hlavní obrázek projektu -->
+    <div class="project-hero">
+        <img src="../images/project2/hlavni copy.jpg" alt="Design – Art – and – Peace – Factory">
+    </div>
+
+    <!-- Název projektu - vždy viditelný -->
+    <section class="project-title-section">
+        <div class="project-title-container">
+            <h2 class="project-title" data-translate="project2_title">Design – Art – and – Peace – Factory</h2>
+        </div>
+    </section>
+
+    <!-- Informace o projektu -->
     <main class="project-content">
-        <div class="project-header">
-            <h2 class="project-title">Project 2</h2>
+        <div class="project-info-grid">
+            <!-- Levý sloupec - hlavní info -->
+            <div class="project-main-info">
+                
+                <!-- CZ verze -->
+                <div class="i18n-block" data-lang-content="cz">
+                    <p class="project-description">
+                        Design – Art – and – Peace – Factory je návrh školy designu a umění na okraji města, 
+                        v pobřežním svahu v přímém kontaktu s vodní hladinou. Právě tato poloha dává projektu smysl: 
+                        škola se stává bránou k víkendovým aktivitám v přírodě a zároveň klidným kulturním bodem, 
+                        kam se dá dojít na procházku podél vody. Zalomený objem je vyzdvižený nad hladinu a pod sebou 
+                        vytváří krytou náplavku s kavárnou – místo pro setkávání, odpočinek a malé akce na rozhraní 
+                        města a krajiny.
+                    </p>
+                    <p class="project-description">
+                        Klíčovým motivem je pochozí zelená střecha, která navazuje na terén a proměňuje budovu 
+                        v umělecký park: veřejnou promenádu s výhledy a pobytovými plochami, kde mohou probíhat 
+                        studentské výstavy, instalace a venkovní workshopy. Vnitřek funguje jako otevřená kreativní 
+                        struktura s ateliéry, dílnami a výstavními prostory, které doplňují veřejné funkce. 
+                        Dům obíhají pavlače, jež propojují jednotlivé části, zjednodušují orientaci a plynule 
+                        spojují interiér, náplavku i střechu v jeden čitelný celek.
+                    </p>
+                    <p class="project-description">
+                        Uvnitř je škola navržená jako otevřená tvůrčí infrastruktura, kde se potkává výuka, 
+                        výroba i prezentace. Provoz je čitelně členěný na klidnější studijní a ateliérové zóny 
+                        a na „hlučnější" dílny a technologické provozy, aby se jednotlivé činnosti nerušily, 
+                        ale zůstaly v kontaktu. Klíčové prostory (ateliéry, dílny, foto/produkce, teoretické učebny) 
+                        doplňuje výstavní část, která umožňuje průběžně prezentovat výsledky práce – od rychlých 
+                        prototypů po hotové instalace. Komunikace je pojatá jako pobytová trasa s místy pro setkávání 
+                        a neformální konzultace; propojuje školu s náplavkou a přirozeně pokračuje až na střešní park, 
+                        takže se veřejné a studentské dění plynule přelévá mezi interiérem a exteriérem.
+                    </p>
+                </div>
+                
+                <!-- EN verze -->
+                <div class="i18n-block" data-lang-content="en" style="display: none;">
+                    <p class="project-description">
+                        Design – Art – and – Peace – Factory is a design for a school of design and art on the edge 
+                        of the city, on a coastal slope in direct contact with the water surface. This location gives 
+                        the project its meaning: the school becomes a gateway to weekend activities in nature and at 
+                        the same time a quiet cultural point that can be reached by walking along the water. The angled 
+                        volume is raised above the water level and creates a covered embankment with a café underneath – 
+                        a place for meetings, relaxation and small events at the interface of city and landscape.
+                    </p>
+                    <p class="project-description">
+                        The key motif is a walkable green roof that connects to the terrain and transforms the building 
+                        into an art park: a public promenade with views and living areas where student exhibitions, 
+                        installations and outdoor workshops can take place. The interior functions as an open creative 
+                        structure with studios, workshops and exhibition spaces that complement public functions. 
+                        The building is surrounded by galleries that connect the individual parts, simplify orientation 
+                        and seamlessly connect the interior, embankment and roof into one legible whole.
+                    </p>
+                    <p class="project-description">
+                        Inside, the school is designed as an open creative infrastructure where teaching, production 
+                        and presentation meet. The operation is clearly divided into quieter study and studio zones 
+                        and "noisier" workshops and technological operations, so that individual activities do not 
+                        disturb each other but remain in contact. Key spaces (studios, workshops, photo/production, 
+                        theoretical classrooms) are complemented by an exhibition section that allows ongoing presentation 
+                        of work results – from quick prototypes to finished installations. Communication is conceived 
+                        as a residential route with places for meetings and informal consultations; it connects the school 
+                        with the embankment and naturally continues to the rooftop park, so public and student activities 
+                        flow seamlessly between interior and exterior.
+                    </p>
+                </div>
+                
+                <!-- RU verze -->
+                <div class="i18n-block" data-lang-content="ru" style="display: none;">
+                    <p class="project-description">
+                        Design – Art – and – Peace – Factory — это проект школы дизайна и искусства на окраине города, 
+                        на прибрежном склоне в непосредственном контакте с водной гладью. Именно это расположение придаёт 
+                        проекту смысл: школа становится воротами к выходным активностям на природе и одновременно тихой 
+                        культурной точкой, куда можно дойти пешком вдоль воды. Изломанный объём приподнят над уровнем воды 
+                        и создаёт под собой крытую набережную с кафе — место для встреч, отдыха и небольших мероприятий 
+                        на границе города и ландшафта.
+                    </p>
+                    <p class="project-description">
+                        Ключевым мотивом является пешеходная зелёная крыша, которая соединяется с рельефом и превращает 
+                        здание в арт-парк: общественный променад с видами и зонами отдыха, где могут проходить студенческие 
+                        выставки, инсталляции и уличные мастер-классы. Интерьер функционирует как открытая креативная 
+                        структура с мастерскими, цехами и выставочными пространствами, дополняющими общественные функции. 
+                        Здание опоясывают галереи, соединяющие отдельные части, упрощающие ориентацию и плавно связывающие 
+                        интерьер, набережную и крышу в единое читаемое целое.
+                    </p>
+                    <p class="project-description">
+                        Внутри школа спроектирована как открытая творческая инфраструктура, где встречаются обучение, 
+                        производство и презентация. Функционал чётко разделён на более тихие учебные и ателье-зоны 
+                        и «шумные» мастерские и технологические производства, чтобы отдельные виды деятельности не мешали 
+                        друг другу, но оставались в контакте. Ключевые пространства (ателье, мастерские, фото/продакшн, 
+                        теоретические аудитории) дополняет выставочная часть, позволяющая постоянно презентовать результаты 
+                        работы — от быстрых прототипов до готовых инсталляций. Коммуникация задумана как жилой маршрут 
+                        с местами для встреч и неформальных консультаций; она соединяет школу с набережной и естественно 
+                        продолжается до парка на крыше, так что общественная и студенческая жизнь плавно перетекает 
+                        между интерьером и экстерьером.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Pravý sloupec - detaily -->
             <div class="project-details">
-                <p class="project-year">2024</p>
-                <p class="project-location">Prague</p>
-                <p class="project-category">Commercial</p>
+                <div class="detail-item">
+                    <h3 data-translate="category_label">Category</h3>
+                    <p data-translate="school">School</p>
+                </div>
+                <div class="detail-item">
+                    <h3 data-translate="year_label">Year</h3>
+                    <p>2022/2023</p>
+                </div>
+                <div class="detail-item">
+                    <h3 data-translate="location_label">Location</h3>
+                    <p>Kherson, Ukrajina</p>
+                </div>
+                <div class="detail-item">
+                    <h3 data-translate="client_label">Client</h3>
+                    <p>FA ČVUT, Ateliér Fránek</p>
+                </div>
             </div>
         </div>
 
-        <div class="project-gallery">
-            <img src="../images/project2/1.jpg" alt="Project 2 view 1">
-            <img src="../images/project2/2.jpg" alt="Project 2 view 2">
-            <img src="../images/project2/3.jpg" alt="Project 2 view 3">
+        <!-- Galerie obrázků - vertikální fullwidth (styl MVRDV) -->
+        <div class="project-gallery-vertical">
+            <figure class="gallery-vertical-item">
+                <img src="../images/project2/nadhledd copy.jpg" alt="Design Art Peace Factory - nadhled" loading="lazy">
+            </figure>
+            <figure class="gallery-vertical-item">
+                <img src="../images/project2/0000_REZ copy.jpg" alt="Design Art Peace Factory - řez" loading="lazy">
+            </figure>
+            <figure class="gallery-vertical-item">
+                <img src="../images/project2/000%251 copy.jpg" alt="Design Art Peace Factory - půdorys" loading="lazy">
+            </figure>
+            <figure class="gallery-vertical-item">
+                <img src="../images/project2/000%252copy.JPG" alt="Design Art Peace Factory - půdorys" loading="lazy">
+            </figure>
         </div>
 
-        <div class="project-navigation">
-            <a href="project1.html" class="prev-project">Previous Project</a>
-            <a href="../index.html" class="back-to-grid">Back to Projects</a>
-            <a href="project3.html" class="next-project">Next Project</a>
+        <!-- Autoři projektu -->
+        <div class="project-credits">
+            <div class="credit-item">
+                <h3 data-translate="authors_label">Authors</h3>
+                <p>Daria Vlasova</p>
+            </div>
         </div>
+
     </main>
+
+    <!-- Navigace mezi projekty -->
+    <nav class="project-navigation">
+        <a href="project1.html" class="prev-project" data-translate="prev">← Previous</a>
+        <a href="../index.html" class="back-to-grid" data-translate="all_projects">All Projects</a>
+        <a href="project3.html" class="next-project" data-translate="next">Next →</a>
+    </nav>
+
+    <!-- Simple Footer -->
+    <footer class="main-footer">
+        <p class="footer-copyright">&copy; STUDIO DARIA</p>
+        <p class="footer-notice" data-translate="no_copy">All content is protected by copyright. Reproduction without permission is not allowed.</p>
+    </footer>
 
     <script src="../script.js"></script>
 </body>
-</html> 
+</html>

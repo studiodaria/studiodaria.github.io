@@ -18,6 +18,8 @@ const translations = {
         all_projects: 'All Projects',
         // Project 1
         project1_title: 'High-Speed Rail Terminal Prague-East',
+        // Project 2
+        project2_title: 'Design – Art – and – Peace – Factory',
         authors_label: 'Authors',
         visualization_label: 'Visualization',
         client_label: 'Client',
@@ -43,6 +45,8 @@ const translations = {
         all_projects: 'Все проекты',
         // Project 1
         project1_title: 'Терминал ВСМ Прага-восток',
+        // Project 2
+        project2_title: 'Школа дизайна и искусства',
         authors_label: 'Авторы',
         visualization_label: 'Визуализация',
         client_label: 'Клиент',
@@ -68,6 +72,8 @@ const translations = {
         all_projects: 'Všechny projekty',
         // Project 1
         project1_title: 'Terminál VRT Praha-východ',
+        // Project 2
+        project2_title: 'Škola designu a umění',
         authors_label: 'Autoři',
         visualization_label: 'Vizualizace',
         client_label: 'Klient',
