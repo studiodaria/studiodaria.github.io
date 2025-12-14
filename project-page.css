@@ -103,6 +103,27 @@ body.dark-mode .scroll-indicator {
     object-fit: cover;
 }
 
+/* Project 2 - větší výška hero obrázku aby bylo vidět slunce */
+body.project-2 .project-hero {
+    height: calc(100vh - 120px - 100px);
+}
+
+body.project-2 .project-hero img {
+    object-position: center 65%;
+}
+
+body.project-2 .project-title-section {
+    background: #DFBBA9;
+}
+
+body.project-2 .main-header {
+    background: #F3F3F3 !important;
+}
+
+body.project-2 .project-hero {
+    background: #F3F3F3;
+}
+
 .project-content {
     max-width: 1440px;
     margin: 0 auto;
