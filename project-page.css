@@ -124,6 +124,50 @@ body.project-2 .project-hero {
     background: #F3F3F3;
 }
 
+/* Project 3 - Hotel Žluté lázně */
+body.project-3 .project-title-section {
+    background: #B1A19E;
+}
+
+body.dark-mode.project-3 .project-title-section {
+    background: #B1A19E;
+}
+
+/* Project 4 - The Roof Club */
+body.project-4 .main-header {
+    background: #E9D6D6 !important;
+}
+
+body.project-4 .project-hero {
+    background: #E9D6D6;
+}
+
+body.project-4 .project-title-section {
+    background: #525258;
+}
+
+body.dark-mode.project-4 .project-title-section {
+    background: #525258;
+}
+
+/* Project 4: výkresy/obrázky v "equal row" se nesmí ořezávat.
+   Aktuálně se levý obrázek ořezává, protože se natahuje na výšku pravého sloupce (součet 2 obrázků). */
+body.project-4 .gallery-row-equal {
+    height: min(85vh, 1100px);
+}
+
+body.project-4 .gallery-item-half img {
+    object-fit: contain;
+    background: #fff;
+}
+
+body.project-4 .gallery-item-stacked img {
+    flex: 1;
+    height: 0;
+    object-fit: contain;
+    background: #fff;
+}
+
 .project-content {
     max-width: 1440px;
     margin: 0 auto;
@@ -159,7 +203,11 @@ body.project-2 .project-hero {
 }
 
 body.dark-mode .project-title-section {
-    background: #8a8f59; /* Tmavší zelená v dark mode */
+    background: #8a8f59; /* Zelená v dark mode */
+}
+
+body.dark-mode.project-2 .project-title-section {
+    background: #DFBBA9; /* Stejná barva i v dark mode */
 }
 
 body.dark-mode .project-title {
@@ -250,6 +298,106 @@ body.dark-mode .project-title {
     gap: 3px;
 }
 
+/* Řádek s obrázky vedle sebe (široký + úzký) */
+.gallery-row-split {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+}
+
+.gallery-item-wide {
+    flex: 3;
+    margin: 0;
+    overflow: hidden;
+}
+
+.gallery-item-narrow {
+    flex: 1;
+    margin: 0;
+    overflow: hidden;
+}
+
+.gallery-item-wide img,
+.gallery-item-narrow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item-wide:hover img,
+.gallery-item-narrow:hover img {
+    transform: scale(1.03);
+}
+
+/* Řádek s dvěma stejnými obrázky */
+.gallery-row-equal {
+    align-items: stretch;
+}
+
+.gallery-item-half {
+    flex: 1;
+    margin: 0;
+    overflow: hidden;
+}
+
+.gallery-item-half img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item-half:hover img {
+    transform: scale(1.03);
+}
+
+/* Stacked obrázky (více obrázků nad sebou v jednom sloupci) */
+.gallery-item-stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.gallery-item-stacked img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item-stacked img:hover {
+    transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+    .gallery-row-split {
+        flex-direction: column;
+    }
+    
+    .gallery-item-narrow img {
+        max-height: 60vh;
+        object-fit: cover;
+    }
+    
+    .gallery-item-half img {
+        height: auto;
+    }
+
+    /* Project 4: na mobilu nechceme "fixní" výšku řádku */
+    body.project-4 .gallery-row-equal {
+        height: auto;
+    }
+
+    body.project-4 .gallery-item-stacked img {
+        flex: initial;
+        height: auto;
+    }
+}
+
 .gallery-vertical-item {
     margin: 0;
     width: 100%;
@@ -322,31 +470,65 @@ body.dark-mode .credit-item p {
     color: #ccc;
 }
 
-.project-navigation {
+/* Navigace nahoře - šipky */
+.project-navigation-top {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
+    padding: 0 15px;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.nav-arrow {
+    pointer-events: auto;
+    display: flex;
     align-items: center;
-    padding: 20px 40px;
-    background: #fff;
-    border-top: 1px solid #eee;
-}
-
-.project-navigation a {
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 50%;
     text-decoration: none;
-    color: #000;
-    font-size: 12px;
-    text-transform: uppercase;
-    transition: opacity 0.3s ease;
+    color: #333;
+    font-size: 18px;
+    transition: all 0.3s ease;
 }
 
-.project-navigation a:hover {
-    opacity: 0.7;
-}
-
-body.dark-mode .project-navigation {
-    background: #1a1a1a;
+.nav-arrow:hover {
+    background: #333;
+    color: #fff;
     border-color: #333;
 }
+
+body.dark-mode .nav-arrow {
+    background: rgba(30, 30, 30, 0.9);
+    border-color: #444;
+    color: #fff;
+}
+
+body.dark-mode .nav-arrow:hover {
+    background: #fff;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .nav-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+    
+    .project-navigation-top {
+        padding: 0 10px;
+    }
+}
+
 
 /* Footer na project page */
 .main-footer {

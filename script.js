@@ -20,6 +20,10 @@ const translations = {
         project1_title: 'High-Speed Rail Terminal Prague-East',
         // Project 2
         project2_title: 'Design – Art – and – Peace – Factory',
+        // Project 3
+        project3_title: 'Yellow Shelter – Hotel & Spa',
+        // Project 4
+        project4_title: 'The Roof Club – Yacht Club Podolí',
         authors_label: 'Authors',
         visualization_label: 'Visualization',
         client_label: 'Client',
@@ -47,6 +51,10 @@ const translations = {
         project1_title: 'Терминал ВСМ Прага-восток',
         // Project 2
         project2_title: 'Школа дизайна и искусства',
+        // Project 3
+        project3_title: 'Жёлтое Убежище – Отель & Бани',
+        // Project 4
+        project4_title: 'The Roof Club – Яхт-клуб Подоли',
         authors_label: 'Авторы',
         visualization_label: 'Визуализация',
         client_label: 'Клиент',
@@ -74,6 +82,10 @@ const translations = {
         project1_title: 'Terminál VRT Praha-východ',
         // Project 2
         project2_title: 'Škola designu a umění',
+        // Project 3
+        project3_title: 'Žlutý Úkryt – Hotel & Lázně',
+        // Project 4
+        project4_title: 'The Roof Club – Jachtařský klub Podolí',
         authors_label: 'Autoři',
         visualization_label: 'Vizualizace',
         client_label: 'Klient',
