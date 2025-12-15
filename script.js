@@ -278,7 +278,229 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Galleries (Drawings / thumbnails style)
     initDrawingsGallery();
+
+    // Project 5: make full-width frames less aggressively cropped by auto-sizing height
+    initProject5GalleryAutoHeights();
 });
+
+function initProject5GalleryAutoHeights() {
+    if (!document.body.classList.contains('project-5')) return;
+
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+    function getNaturalAspectFromImg(img) {
+        const w = img?.naturalWidth || 0;
+        const h = img?.naturalHeight || 0;
+        if (!w || !h) return null;
+        return w / h;
+    }
+
+    function loadAspect(src) {
+        return new Promise((resolve) => {
+            const tmp = new Image();
+            tmp.onload = () => {
+                const w = tmp.naturalWidth || 0;
+                const h = tmp.naturalHeight || 0;
+                resolve(w && h ? (w / h) : null);
+            };
+            tmp.onerror = () => resolve(null);
+            tmp.src = src;
+        });
+    }
+
+    // 1) Full-width vertical gallery frames
+    const verticalGallery = document.querySelector('.project-gallery-vertical');
+    const frameFigures = verticalGallery
+        ? Array.from(verticalGallery.querySelectorAll('figure.gallery-frame'))
+        : [];
+
+    const frameImgs = frameFigures
+        .filter(fig => !fig.classList.contains('slide-situace')) // situation is handled with contain (no crop)
+        .map(fig => fig.querySelector('img'))
+        .filter(Boolean);
+
+    // 2) Drawings gallery main preview
+    const drawingsGalleries = Array.from(document.querySelectorAll('.drawings-gallery'));
+
+    function markContainFrames(aspects, minAspect) {
+        if (!aspects?.length || !minAspect) return;
+        const threshold = minAspect * 1.02; // allow tiny rounding differences
+        aspects.forEach(({ fig, aspect }) => {
+            if (!fig) return;
+            const shouldContain = typeof aspect === 'number' && aspect > 0 && aspect <= threshold;
+            fig.classList.toggle('p5-contain', shouldContain);
+        });
+    }
+
+    function setupAutoHeightForFrames(minAspect, aspects) {
+        if (!verticalGallery || !frameFigures.length || !minAspect) return;
+
+        const apply = () => {
+            const width = verticalGallery.clientWidth || window.innerWidth;
+            // Height chosen so the narrowest image (min aspect) has no crop with object-fit: cover.
+            const desired = width / minAspect;
+            const minH = 360;
+            const maxH = window.innerHeight * 0.82;
+            const heightPx = Math.round(clamp(desired, minH, maxH));
+
+            frameFigures.forEach(fig => {
+                fig.style.height = `${heightPx}px`;
+            });
+
+            // Keep the split-row block aligned to the same "frame height"
+            const splitFrames = Array.from(
+                document.querySelectorAll('.gallery-row-split.gallery-row-frame')
+            );
+            splitFrames.forEach(el => {
+                el.style.height = `${heightPx}px`;
+            });
+
+            // Special-case: situace composition should size itself to the main situation image (contain, no crop),
+            // so it looks visually bigger and doesn't get huge white padding.
+            applySituaceComboHeight();
+        };
+
+        // Even if we can't make the frame tall enough on every screen, ensure the narrowest slide isn't cropped:
+        markContainFrames(aspects, minAspect);
+
+        apply();
+
+        // Debounced resize
+        let t = null;
+        window.addEventListener('resize', () => {
+            if (t) window.clearTimeout(t);
+            t = window.setTimeout(apply, 120);
+        }, { passive: true });
+    }
+
+    let situaceAspect = null;
+    function applySituaceComboHeight() {
+        const combo = document.querySelector('.p5-situace-combo');
+        if (!combo) return;
+        const img = combo.querySelector('figure.slide-situace img');
+        if (!img) return;
+
+        // Cache aspect once loaded (or when available)
+        const natural = getNaturalAspectFromImg(img);
+        if (typeof natural === 'number' && natural > 0) situaceAspect = natural;
+
+        if (!situaceAspect) return;
+
+        // Use the actual rendered width of the left column (2/3) to compute a tight height for "contain".
+        const leftFig = combo.querySelector('figure.slide-situace');
+        const leftW = leftFig?.clientWidth || 0;
+        if (!leftW) return;
+
+        const desired = leftW / situaceAspect;
+        const minH = 320;
+        const maxH = window.innerHeight * 0.86;
+        const heightPx = Math.round(clamp(desired, minH, maxH));
+
+        combo.style.height = `${heightPx}px`;
+    }
+
+    async function computeAspectsForFrames() {
+        if (!frameImgs.length) return [];
+
+        const pairs = await Promise.all(
+            frameImgs.map(async (img) => {
+                const fig = img?.closest('figure.gallery-frame');
+                const natural = getNaturalAspectFromImg(img);
+                if (typeof natural === 'number' && natural > 0) return { fig, aspect: natural };
+                const src = img?.getAttribute('src');
+                const loaded = src ? await loadAspect(src) : null;
+                return { fig, aspect: loaded };
+            })
+        );
+
+        return pairs.filter(p => p?.fig);
+    }
+
+    function setupAutoHeightForDrawings(gallery, minAspect) {
+        if (!gallery || !minAspect) return;
+        const main = gallery.querySelector('.drawings-main');
+        if (!main) return;
+
+        const apply = () => {
+            const width = main.clientWidth || window.innerWidth;
+            const desired = width / minAspect;
+            const minH = 360;
+            const maxH = window.innerHeight * 0.82;
+            const heightPx = Math.round(clamp(desired, minH, maxH));
+            main.style.height = `${heightPx}px`;
+        };
+
+        apply();
+
+        let t = null;
+        window.addEventListener('resize', () => {
+            if (t) window.clearTimeout(t);
+            t = window.setTimeout(apply, 120);
+        }, { passive: true });
+    }
+
+    async function computeMinAspectForDrawings(gallery) {
+        const thumbs = Array.from(gallery.querySelectorAll('.drawings-thumb'))
+            .map(btn => btn.dataset?.src)
+            .filter(Boolean);
+        if (!thumbs.length) return null;
+
+        const aspects = (await Promise.all(thumbs.map(loadAspect)))
+            .filter(a => typeof a === 'number' && a > 0);
+
+        return aspects.length ? Math.min(...aspects) : null;
+    }
+
+    async function setupContainToggleForDrawings(gallery, minAspect) {
+        if (!gallery || !minAspect) return;
+        const main = gallery.querySelector('.drawings-main');
+        const mainImg = gallery.querySelector('.drawings-main img');
+        if (!main || !mainImg) return;
+
+        const threshold = minAspect * 1.02;
+
+        const srcs = Array.from(gallery.querySelectorAll('.drawings-thumb'))
+            .map(btn => btn.dataset?.src)
+            .filter(Boolean);
+
+        const aspectMap = new Map();
+        await Promise.all(
+            srcs.map(async (src) => {
+                const a = await loadAspect(src);
+                if (typeof a === 'number' && a > 0) aspectMap.set(src, a);
+            })
+        );
+
+        const apply = () => {
+            const src = mainImg.getAttribute('src') || '';
+            const a = aspectMap.get(src);
+            const shouldContain = typeof a === 'number' && a > 0 && a <= threshold;
+            main.classList.toggle('is-contain', shouldContain);
+        };
+
+        apply();
+
+        // Track changes when user navigates (thumbs / arrows update mainImg.src)
+        const obs = new MutationObserver(apply);
+        obs.observe(mainImg, { attributes: true, attributeFilter: ['src'] });
+    }
+
+    // Kick off (async, but safe)
+    computeAspectsForFrames().then((pairs) => {
+        const aspects = pairs
+            .map(p => p.aspect)
+            .filter(a => typeof a === 'number' && a > 0);
+        const minAspect = aspects.length ? Math.min(...aspects) : null;
+        setupAutoHeightForFrames(minAspect, pairs);
+    });
+
+    drawingsGalleries.forEach(gallery => {
+        computeMinAspectForDrawings(gallery).then(minAspect => {
+            setupAutoHeightForDrawings(gallery, minAspect);
+            setupContainToggleForDrawings(gallery, minAspect);
+        });
+    });
+}
 
 // Drawings Gallery (MVRDV style)
 function initDrawingsGallery() {
