@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 5 - STUDIO DARIA</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../project-page.css">
+</head>
+<body class="project-5">
+    <!-- Header -->
+    <header class="main-header">
+        <button class="dark-mode-toggle" id="darkModeToggle" title="Dark mode">
+            <span class="icon-sun">☀</span>
+            <span class="icon-moon">☾</span>
+        </button>
+        <div class="header-center">
+            <h1 class="logo">
+                <a href="../index.html">STUDIO DARIA</a>
+            </h1>
+            <div class="about-link">
+                <a href="../about.html" data-translate="about">ABOUT ME</a>
+            </div>
+        </div>
+        <div class="language-switcher">
+            <a href="#" class="lang-link" data-lang="cz">cz</a>
+            <a href="#" class="lang-link active" data-lang="en">en</a>
+            <a href="#" class="lang-link" data-lang="ru">ru</a>
+        </div>
+    </header>
+
+    <!-- Navigace nahoře -->
+    <nav class="project-navigation-top">
+        <a href="project4.html" class="nav-arrow nav-prev" title="Previous">←</a>
+        <a href="project6.html" class="nav-arrow nav-next" title="Next">→</a>
+    </nav>
+
+    <!-- Hlavní obrázek projektu -->
+    <div class="project-hero">
+        <img src="../images/project5/hlavni.jpg" alt="Project 5">
+    </div>
+
+    <!-- Název projektu - vždy viditelný -->
+    <section class="project-title-section">
+        <div class="project-title-container">
+            <h2 class="project-title" data-translate="project5_title">NÁZEV PROJEKTU 5</h2>
+        </div>
+    </section>
+
+    <!-- Informace o projektu -->
+    <main class="project-content">
+        <div class="project-info-grid">
+            <!-- Levý sloupec - hlavní info -->
+            <div class="project-main-info">
+                
+                <!-- CZ verze -->
+                <div class="i18n-block" data-lang-content="cz">
+                    <p class="project-description">
+                        Popis projektu v češtině. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                </div>
+                
+                <!-- EN verze -->
+                <div class="i18n-block" data-lang-content="en" style="display: none;">
+                    <p class="project-description">
+                        Project description in English. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                </div>
+                
+                <!-- RU verze -->
+                <div class="i18n-block" data-lang-content="ru" style="display: none;">
+                    <p class="project-description">
+                        Описание проекта на русском. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Pravý sloupec - detaily -->
+            <div class="project-details">
+                <div class="detail-item">
+                    <h3 data-translate="category_label">Category</h3>
+                    <p data-translate="competitions">Competitions</p>
+                </div>
+                <div class="detail-item">
+                    <h3 data-translate="year_label">Year</h3>
+                    <p>2024</p>
+                </div>
+                <div class="detail-item">
+                    <h3 data-translate="location_label">Location</h3>
+                    <p>Praha</p>
+                </div>
+                <div class="detail-item">
+                    <h3 data-translate="client_label">Client</h3>
+                    <p>—</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Galerie obrázků - čistý vertikální layout -->
+        <div class="project-gallery-vertical">
+            <!-- 1. Situace -->
+            <figure class="gallery-vertical-item slide-situace">
+                <a class="lightbox-link" href="../images/project5/situace.jpg">
+                    <img src="../images/project5/situace.jpg" alt="Project 5 - situace" loading="lazy">
+                </a>
+            </figure>
+            
+            <!-- Další obrázky přidejte zde -->
+        </div>
+
+        <!-- Autoři projektu -->
+        <div class="project-credits">
+            <div class="credit-item">
+                <h3 data-translate="authors_label">Authors</h3>
+                <p>Daria Vlasova</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="main-footer">
+        <p class="footer-copyright">&copy; STUDIO DARIA</p>
+        <p class="footer-notice" data-translate="no_copy">All content is protected by copyright. Reproduction without permission is not allowed.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
+

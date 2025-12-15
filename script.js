@@ -26,6 +26,8 @@ const translations = {
         project4_title: 'The Roof Club – Yacht Club Podolí',
         authors_label: 'Authors',
         visualization_label: 'Visualization',
+        gallery_visualizations: 'Visualizations',
+        gallery_drawings: 'Drawings',
         client_label: 'Client',
         scroll_down: 'Scroll',
         // Footer
@@ -57,6 +59,8 @@ const translations = {
         project4_title: 'The Roof Club – Яхт-клуб Подоли',
         authors_label: 'Авторы',
         visualization_label: 'Визуализация',
+        gallery_visualizations: 'Визуализации',
+        gallery_drawings: 'Чертежи',
         client_label: 'Клиент',
         scroll_down: 'Листать',
         // Footer
@@ -88,12 +92,71 @@ const translations = {
         project4_title: 'The Roof Club – Jachtařský klub Podolí',
         authors_label: 'Autoři',
         visualization_label: 'Vizualizace',
+        gallery_visualizations: 'Vizualizace',
+        gallery_drawings: 'Výkresy',
         client_label: 'Klient',
         scroll_down: 'Scrollovat',
         // Footer
         no_copy: 'Veškerý obsah je chráněn autorským právem. Reprodukce bez souhlasu není povolena.'
     }
 };
+
+function initLightbox() {
+    const links = Array.from(document.querySelectorAll('a.lightbox-link[href]'));
+    if (!links.length) return;
+
+    let overlay = document.querySelector('.lightbox-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'lightbox-overlay';
+        overlay.innerHTML = `
+            <button class="lightbox-close" type="button" aria-label="Close">×</button>
+            <div class="lightbox-content" role="dialog" aria-modal="true">
+                <img alt="">
+                <div class="lightbox-caption"></div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    }
+
+    const imgEl = overlay.querySelector('.lightbox-content img');
+    const captionEl = overlay.querySelector('.lightbox-caption');
+    const closeBtn = overlay.querySelector('.lightbox-close');
+
+    const close = () => {
+        overlay.classList.remove('is-open');
+        document.body.classList.remove('lightbox-open');
+        imgEl.removeAttribute('src');
+        captionEl.textContent = '';
+    };
+
+    const open = (href, caption) => {
+        imgEl.src = href;
+        imgEl.alt = caption || '';
+        captionEl.textContent = caption || '';
+        overlay.classList.add('is-open');
+        document.body.classList.add('lightbox-open');
+    };
+
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            const caption = link.querySelector('img')?.getAttribute('alt') || '';
+            if (href) open(href, caption);
+        });
+    });
+
+    closeBtn?.addEventListener('click', close);
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+    });
+}
 
 // Функция для фильтрации проектов
 function filterProjects(category) {
@@ -203,8 +266,92 @@ document.addEventListener('DOMContentLoaded', () => {
         img.addEventListener('dragstart', (e) => e.preventDefault());
         img.addEventListener('contextmenu', (e) => e.preventDefault());
     });
+
+    // Lightbox pro full-size zobrazení obrázků
+    initLightbox();
     
+    // Drawings gallery initialization
+    initDrawingsGallery();
 });
+
+// Drawings Gallery (MVRDV style)
+function initDrawingsGallery() {
+    const gallery = document.querySelector('.drawings-gallery');
+    if (!gallery) return;
+    
+    const mainImg = document.getElementById('drawingsMainImg');
+    const thumbs = gallery.querySelectorAll('.drawings-thumb');
+    const prevBtn = gallery.querySelector('.drawings-prev');
+    const nextBtn = gallery.querySelector('.drawings-next');
+    const currentNum = document.getElementById('drawingsCurrentNum');
+    const totalNum = document.getElementById('drawingsTotalNum');
+    
+    if (!mainImg || !thumbs.length) return;
+    
+    let currentIndex = 0;
+    const total = thumbs.length;
+    
+    if (totalNum) totalNum.textContent = total;
+    
+    function updateGallery(index) {
+        currentIndex = index;
+        const thumb = thumbs[index];
+        const src = thumb.dataset.src;
+        const alt = thumb.dataset.alt || '';
+        
+        // Fade effect
+        mainImg.style.opacity = '0';
+        setTimeout(() => {
+            mainImg.src = src;
+            mainImg.alt = alt;
+            mainImg.style.opacity = '1';
+        }, 150);
+        
+        // Update active thumb
+        thumbs.forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        
+        // Update counter
+        if (currentNum) currentNum.textContent = index + 1;
+    }
+    
+    // Thumb clicks
+    thumbs.forEach((thumb, i) => {
+        thumb.addEventListener('click', () => updateGallery(i));
+    });
+    
+    // Arrow navigation
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            const newIndex = (currentIndex - 1 + total) % total;
+            updateGallery(newIndex);
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const newIndex = (currentIndex + 1) % total;
+            updateGallery(newIndex);
+        });
+    }
+    
+    // Click on main image opens lightbox
+    const mainContainer = gallery.querySelector('.drawings-main');
+    if (mainContainer) {
+        mainContainer.addEventListener('click', () => {
+            const overlay = document.querySelector('.lightbox-overlay');
+            if (overlay) {
+                const imgEl = overlay.querySelector('.lightbox-content img');
+                const captionEl = overlay.querySelector('.lightbox-caption');
+                imgEl.src = mainImg.src;
+                imgEl.alt = mainImg.alt;
+                captionEl.textContent = mainImg.alt;
+                overlay.classList.add('is-open');
+                document.body.classList.add('lightbox-open');
+            }
+        });
+    }
+}
 
 // Přepínání nočního režimu
 const darkModeToggle = document.getElementById('darkModeToggle');

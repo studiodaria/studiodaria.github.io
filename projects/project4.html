@@ -143,39 +143,68 @@
             </div>
         </div>
 
-        <!-- Galerie obrázků - kreativní layout -->
+        <!-- Galerie obrázků - čistý vertikální layout -->
         <div class="project-gallery-vertical">
-            <!-- Nadhled - fullwidth první -->
-            <figure class="gallery-vertical-item">
-                <img src="../images/project4/NADHLED copy.jpg" alt="The Roof Club - nadhled" loading="lazy">
+            <!-- 1. Situace - široká -->
+            <figure class="gallery-vertical-item slide-situace">
+                <a class="lightbox-link" href="../images/project4/BP_situace_2020_09_24-Лист3_page-0001.jpg">
+                    <img src="../images/project4/BP_situace_2020_09_24-Лист3_page-0001.jpg" alt="The Roof Club - situace" loading="lazy">
+                </a>
             </figure>
             
-            <!-- Vizualizace interiéru - fullwidth -->
-            <figure class="gallery-vertical-item">
-                <img src="../images/project4/rustu copy.jpg" alt="The Roof Club - vizualizace" loading="lazy">
-            </figure>
-            
-            <!-- Axonometrie vedle řezu a detailu -->
-            <div class="gallery-row-split gallery-row-equal">
-                <figure class="gallery-item-half">
-                    <img src="../images/project4/axi_page-0001.jpg" alt="The Roof Club - axonometrie" loading="lazy">
+            <!-- 2. Axonometrie (1/3) + Nadhled (2/3) -->
+            <div class="gallery-row-split">
+                <figure class="gallery-item-narrow slide-axi">
+                    <a class="lightbox-link" href="../images/project4/axi_page-0001.jpg">
+                        <img src="../images/project4/axi_page-0001.jpg" alt="The Roof Club - axonometrie" loading="lazy">
+                    </a>
                 </figure>
-                <figure class="gallery-item-half gallery-item-stacked">
-                    <img src="../images/project4/A1 D.1.2 (2)_page-0001 COPY.JPG" alt="The Roof Club - řez" loading="lazy">
-                    <img src="../images/project4/A3 D.1.2 (3)_page-0001 COPY.JPG" alt="The Roof Club - detail" loading="lazy">
+                <figure class="gallery-item-wide slide-nadhled">
+                    <a class="lightbox-link" href="../images/project4/nadhled.jpg">
+                        <img src="../images/project4/nadhled.jpg" alt="The Roof Club - nadhled" loading="lazy">
+                    </a>
                 </figure>
             </div>
             
-            <!-- Řez samostatný - fullwidth -->
-            <figure class="gallery-vertical-item">
-                <img src="../images/project4/A1 D.1.2 (1)_page-0001 COPY.JPG" alt="The Roof Club - řez podélný" loading="lazy">
+            <!-- 3. Panorama s Vyšehradem -->
+            <figure class="gallery-vertical-item slide-panorama">
+                <a class="lightbox-link" href="../images/project4/page-9_2 copy.jpg">
+                    <img src="../images/project4/page-9_2 copy.jpg" alt="The Roof Club - panorama" loading="lazy">
+                </a>
             </figure>
             
-            <!-- Urban - fullwidth -->
-            <figure class="gallery-vertical-item">
-                <img src="../images/project4/page-9_2 copy.jpg" alt="The Roof Club - urbanismus" loading="lazy">
+            <!-- 4. Vizualizace střechy -->
+            <figure class="gallery-vertical-item slide-rustu">
+                <a class="lightbox-link" href="../images/project4/rustu copy.jpg">
+                    <img src="../images/project4/rustu copy.jpg" alt="The Roof Club - vizualizace střechy" loading="lazy">
+                </a>
             </figure>
         </div>
+
+        <!-- Drawings Gallery - MVRDV style -->
+        <section class="drawings-section">
+            <h3 class="drawings-title" data-translate="gallery_drawings">Drawings</h3>
+            <div class="drawings-gallery">
+                <div class="drawings-main">
+                    <img src="../images/project4/A1 D.1.2 (1)_page-0001 COPY.JPG" alt="Section 1" id="drawingsMainImg">
+                </div>
+                <div class="drawings-nav">
+                    <button class="drawings-arrow drawings-prev" aria-label="Previous">‹</button>
+                    <div class="drawings-thumbnails">
+                        <button class="drawings-thumb active" data-src="../images/project4/A1 D.1.2 (1)_page-0001 COPY.JPG" data-alt="Section 1">
+                            <img src="../images/project4/A1 D.1.2 (1)_page-0001 COPY.JPG" alt="Section 1">
+                        </button>
+                        <button class="drawings-thumb" data-src="../images/project4/A1 D.1.2 (2)_page-0001 COPY.JPG" data-alt="Section 2">
+                            <img src="../images/project4/A1 D.1.2 (2)_page-0001 COPY.JPG" alt="Section 2">
+                        </button>
+                        <button class="drawings-thumb" data-src="../images/project4/A3 D.1.2 (3)_page-0001 COPY.JPG" data-alt="Detail">
+                            <img src="../images/project4/A3 D.1.2 (3)_page-0001 COPY.JPG" alt="Detail">
+                        </button>
+                    </div>
+                    <button class="drawings-arrow drawings-next" aria-label="Next">›</button>
+                </div>
+            </div>
+        </section>
 
         <!-- Autoři projektu -->
         <div class="project-credits">

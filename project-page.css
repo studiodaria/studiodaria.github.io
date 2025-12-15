@@ -7,7 +7,7 @@
     background: #fff !important;
 }
 
-/* Project 1 - speciální barva headeru */
+/* Project 1 - speciální barva */
 body.project-1 .main-header {
     background: #edf2f9 !important;
 }
@@ -38,17 +38,17 @@ body.project-1 .main-header {
 }
 
 .main-header::after {
-    background: #f5f5f5 !important;
+    display: none; /* Skryjeme spodní čáru na project pages */
 }
 
 .project-hero {
     width: 100%;
-    height: calc(100vh - 120px - 150px); /* Místo pro header a název */
+    height: calc(100vh - 120px - 150px); /* Výška minus header minus název */
     overflow: hidden;
-    margin-top: 0;
-    padding-top: 120px;
+    margin-top: 120px; /* Odsazení pro fixovaný header */
+    padding-top: 0;
     position: relative;
-    background: #fff;
+    /* Pozadí dědíme z body.project-X stylů, default bílá */
 }
 
 body.project-1 .project-hero {
@@ -150,22 +150,93 @@ body.dark-mode.project-4 .project-title-section {
     background: #525258;
 }
 
-/* Project 4: výkresy/obrázky v "equal row" se nesmí ořezávat.
-   Aktuálně se levý obrázek ořezává, protože se natahuje na výšku pravého sloupce (součet 2 obrázků). */
-body.project-4 .gallery-row-equal {
-    height: min(85vh, 1100px);
+/* Project 4: čistý layout bez rámečků */
+body.project-4 .gallery-row-2col {
+    display: flex;
+    gap: 3px;
+    width: 100%;
+    align-items: flex-start;
 }
 
-body.project-4 .gallery-item-half img {
-    object-fit: contain;
-    background: #fff;
-}
-
-body.project-4 .gallery-item-stacked img {
+body.project-4 .gallery-row-2col .gallery-item-half {
     flex: 1;
-    height: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+body.project-4 .gallery-row-2col .gallery-item-half img {
+    width: 100%;
+    height: auto;
     object-fit: contain;
+    display: block;
+}
+
+/* Lightbox (klik na obrázek = full-size) */
+.lightbox-link {
+    display: block;
+}
+
+.lightbox-link img {
+    cursor: zoom-in;
+}
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    z-index: 2000;
+}
+
+.lightbox-overlay.is-open {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: min(1400px, 96vw);
+    max-height: 90vh;
+}
+
+.lightbox-content img {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    display: block;
     background: #fff;
+}
+
+.lightbox-caption {
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 1px;
+}
+
+.lightbox-close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    font-size: 20px;
+    line-height: 38px;
+    cursor: pointer;
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .project-content {
@@ -295,18 +366,19 @@ body.dark-mode .project-title {
     margin-right: -80px;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 5px;
 }
 
-/* Řádek s obrázky vedle sebe (široký + úzký) */
+/* Řádek s obrázky vedle sebe (1:2 poměr) */
 .gallery-row-split {
     display: flex;
-    gap: 3px;
+    gap: 5px;
     width: 100%;
+    height: 100vh;
 }
 
 .gallery-item-wide {
-    flex: 3;
+    flex: 2;
     margin: 0;
     overflow: hidden;
 }
@@ -322,8 +394,14 @@ body.dark-mode .project-title {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
     display: block;
     transition: transform 0.5s ease;
+}
+
+/* Fix: flex děti musí mít 100% výšku, jinak se může objevit „bílý“ blok */
+.gallery-row-split > figure {
+    height: 100%;
 }
 
 .gallery-item-wide:hover img,
@@ -386,15 +464,9 @@ body.dark-mode .project-title {
     .gallery-item-half img {
         height: auto;
     }
-
-    /* Project 4: na mobilu nechceme "fixní" výšku řádku */
-    body.project-4 .gallery-row-equal {
-        height: auto;
-    }
-
-    body.project-4 .gallery-item-stacked img {
-        flex: initial;
-        height: auto;
+    
+    body.project-4 .gallery-row-2col {
+        flex-direction: column;
     }
 }
 
@@ -406,13 +478,70 @@ body.dark-mode .project-title {
 
 .gallery-vertical-item img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
     display: block;
     transition: transform 0.5s ease;
 }
 
 .gallery-vertical-item:hover img {
     transform: scale(1.03);
+}
+
+/* ========================================
+   Project 4: „ořezové rámečky“ pro kompozici
+   ======================================== */
+body.project-4 .project-gallery-vertical .gallery-vertical-item {
+    height: 70vh;
+    background: #fff;
+}
+
+body.project-4 .project-gallery-vertical .gallery-row-split {
+    height: 80vh;
+}
+
+/* Důležité: a.lightbox-link musí mít výšku, jinak img(height:100%) nevyplní rám */
+.project-gallery-vertical .gallery-vertical-item .lightbox-link,
+.project-gallery-vertical .gallery-row-split .lightbox-link {
+    height: 100%;
+}
+
+/* Situace: posun dolů, aby nebylo tolik „prázdna“ nahoře */
+body.project-4 .project-gallery-vertical .slide-situace img {
+    object-position: center 70%;
+}
+
+/* Axonometrie: lehce výš, aby byl čitelnější objekt */
+body.project-4 .project-gallery-vertical .slide-axi img {
+    object-position: center 35%;
+}
+
+/* Nadhled: posun nahoru, aby bylo víc budovy a méně vody */
+body.project-4 .project-gallery-vertical .slide-nadhled img {
+    object-position: center 45%;
+}
+
+/* Panorama: posun dolů, aby bylo méně oblohy a víc děje */
+body.project-4 .project-gallery-vertical .slide-panorama img {
+    object-position: center 70%;
+}
+
+/* Rústů: výrazně dolů, aby se odřízla bílá plocha nahoře */
+body.project-4 .project-gallery-vertical .slide-rustu img {
+    object-position: center 85%;
+}
+
+@media (max-width: 768px) {
+    /* Na mobilech nechceme pevné "vh" rámy (dělají divné mezery) */
+    body.project-4 .project-gallery-vertical .gallery-vertical-item,
+    body.project-4 .project-gallery-vertical .gallery-row-split {
+        height: auto;
+    }
+
+    body.project-4 .project-gallery-vertical .gallery-vertical-item img {
+        height: auto;
+    }
 }
 
 
@@ -621,4 +750,171 @@ body.dark-mode .project-navigation {
 
 body.dark-mode .project-navigation a {
     color: #f0f0f0;
+}
+
+/* ========================================
+   Drawings Gallery - Clean MVRDV Style
+   ======================================== */
+.drawings-section {
+    margin-top: 80px;
+    margin-left: -80px;
+    margin-right: -80px;
+}
+
+.drawings-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #999;
+    margin-bottom: 30px;
+    font-weight: 400;
+    padding: 0 80px;
+}
+
+.drawings-gallery {
+    position: relative;
+}
+
+.drawings-main {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+    cursor: zoom-in;
+}
+
+.drawings-main img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.drawings-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px 80px;
+    background: #fff;
+}
+
+.drawings-arrow {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    flex-shrink: 0;
+}
+
+.drawings-arrow:hover {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+.drawings-thumbnails {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 5px 0;
+}
+
+.drawings-thumb {
+    width: 70px;
+    height: 45px;
+    border: none;
+    background: #f5f5f5;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    opacity: 0.4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drawings-thumb:hover {
+    opacity: 0.8;
+}
+
+.drawings-thumb.active {
+    opacity: 1;
+}
+
+.drawings-thumb img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Dark mode */
+body.dark-mode .drawings-title {
+    color: #888;
+}
+
+body.dark-mode .drawings-main {
+    background: #1a1a1a;
+}
+
+body.dark-mode .drawings-nav {
+    background: #1a1a1a;
+}
+
+body.dark-mode .drawings-arrow {
+    background: #333;
+    border-color: #444;
+    color: #fff;
+}
+
+body.dark-mode .drawings-arrow:hover {
+    background: #fff;
+    color: #333;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .drawings-section {
+        margin-left: -20px;
+        margin-right: -20px;
+        margin-top: 60px;
+    }
+    
+    .drawings-title {
+        padding: 0 20px;
+    }
+    
+    .drawings-nav {
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .drawings-thumb {
+        width: 60px;
+        height: 40px;
+    }
+    
+    .drawings-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
 } 
