@@ -404,6 +404,27 @@ body.dark-mode .project-title {
     height: 100%;
 }
 
+/* Split row: stacked column (2 obrázky nad sebou) */
+.gallery-row-split > .gallery-item-stacked {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.gallery-row-split > .gallery-item-stacked > figure {
+    flex: 1;
+    margin: 0;
+    overflow: hidden;
+}
+
+.gallery-row-split > .gallery-item-stacked > figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .gallery-item-wide:hover img,
 .gallery-item-narrow:hover img {
     transform: scale(1.03);
@@ -412,6 +433,13 @@ body.dark-mode .project-title {
 /* Řádek s dvěma stejnými obrázky */
 .gallery-row-equal {
     align-items: stretch;
+}
+
+.gallery-row-2col {
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    align-items: flex-start;
 }
 
 .gallery-item-half {
@@ -430,6 +458,11 @@ body.dark-mode .project-title {
 
 .gallery-item-half:hover img {
     transform: scale(1.03);
+}
+
+/* Project 5: ve 2 sloupcích nechceme agresivní crop – radši přirozená výška */
+body.project-5 .gallery-row-2col .gallery-item-half img {
+    height: auto;
 }
 
 /* Stacked obrázky (více obrázků nad sebou v jednom sloupci) */
@@ -455,6 +488,10 @@ body.dark-mode .project-title {
     .gallery-row-split {
         flex-direction: column;
     }
+
+    .gallery-row-2col {
+        flex-direction: column;
+    }
     
     .gallery-item-narrow img {
         max-height: 60vh;
@@ -478,9 +515,7 @@ body.dark-mode .project-title {
 
 .gallery-vertical-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
+    height: auto;
     display: block;
     transition: transform 0.5s ease;
 }
@@ -490,21 +525,27 @@ body.dark-mode .project-title {
 }
 
 /* ========================================
-   Project 4: „ořezové rámečky“ pro kompozici
+   Framed gallery (ořezové rámečky) – pouze tam, kde je .gallery-frame
    ======================================== */
-body.project-4 .project-gallery-vertical .gallery-vertical-item {
+.gallery-frame {
     height: 70vh;
     background: #fff;
 }
 
-body.project-4 .project-gallery-vertical .gallery-row-split {
-    height: 80vh;
+.gallery-frame .lightbox-link {
+    height: 100%;
 }
 
-/* Důležité: a.lightbox-link musí mít výšku, jinak img(height:100%) nevyplní rám */
-.project-gallery-vertical .gallery-vertical-item .lightbox-link,
-.project-gallery-vertical .gallery-row-split .lightbox-link {
+.gallery-frame img {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* „Frame“ pro split row */
+.gallery-row-split.gallery-row-frame {
+    height: 80vh;
 }
 
 /* Situace: posun dolů, aby nebylo tolik „prázdna“ nahoře */
@@ -534,15 +575,160 @@ body.project-4 .project-gallery-vertical .slide-rustu img {
 
 @media (max-width: 768px) {
     /* Na mobilech nechceme pevné "vh" rámy (dělají divné mezery) */
-    body.project-4 .project-gallery-vertical .gallery-vertical-item,
-    body.project-4 .project-gallery-vertical .gallery-row-split {
+    .gallery-frame,
+    .gallery-row-split.gallery-row-frame {
         height: auto;
     }
 
-    body.project-4 .project-gallery-vertical .gallery-vertical-item img {
+    .gallery-frame img {
         height: auto;
     }
 }
+
+/* ========================================
+   Project 4: výšky framed slidů
+   ======================================== */
+body.project-4 .project-gallery-vertical .gallery-frame {
+    height: 70vh;
+}
+
+body.project-4 .project-gallery-vertical .gallery-row-split.gallery-row-frame {
+    height: 80vh;
+}
+
+/* ========================================
+   Project 5: jemně menší rámečky + ořez pozic
+   ======================================== */
+body.project-5 .project-gallery-vertical .gallery-frame {
+    height: auto; /* no crop: let image define its own height */
+}
+
+/* Project 5: aby kompozice (fasáda + 2 stacked) měla stejnou výšku jako framy */
+body.project-5 .gallery-row-split.gallery-row-frame {
+    height: auto; /* no crop: let content size the row */
+}
+
+/* Situační plán: posun dolů, ať není prázdno nahoře */
+body.project-5 .project-gallery-vertical .slide-situace img {
+    object-position: center 65%;
+}
+
+/* Situace je plán – nechceme ji ořezávat */
+body.project-5 .project-gallery-vertical .slide-situace.gallery-frame img {
+    object-fit: contain;
+    background: #fff;
+}
+
+/* ========================================
+   Project 5: NO-CROP image rules (user-friendly)
+   - remove fixed vh frames
+   - avoid object-fit: cover cropping
+   - disable hover zoom that visually "cuts" edges
+   ======================================== */
+body.project-5 .project-hero {
+    height: auto;
+    overflow: visible;
+}
+
+body.project-5 .project-hero img {
+    height: auto;
+    object-fit: contain;
+    object-position: center 78%; /* keep the intended framing, but without cropping */
+}
+
+/* Any framed slide on Project 5 should not crop */
+body.project-5 .project-gallery-vertical .gallery-frame {
+    background: #fff;
+}
+
+body.project-5 .project-gallery-vertical .gallery-frame img {
+    height: auto;
+    object-fit: contain;
+    object-position: center center;
+}
+
+/* Split row (wide + stacked): keep layout, but don't force equal vh heights */
+body.project-5 .gallery-row-split {
+    height: auto;
+    align-items: flex-start;
+}
+
+body.project-5 .gallery-item-wide img,
+body.project-5 .gallery-item-narrow img,
+body.project-5 .gallery-row-split > .gallery-item-stacked > figure img {
+    height: auto;
+    object-fit: contain;
+    object-position: center center;
+}
+
+body.project-5 .gallery-row-split > .gallery-item-stacked {
+    height: auto;
+}
+
+body.project-5 .gallery-row-split > .gallery-item-stacked > figure {
+    flex: 0 0 auto;
+}
+
+/* Disable hover zoom on Project 5 (can look like cropping due to overflow: hidden) */
+body.project-5 .gallery-vertical-item:hover img,
+body.project-5 .gallery-item-wide:hover img,
+body.project-5 .gallery-item-narrow:hover img,
+body.project-5 .gallery-item-half:hover img,
+body.project-5 .gallery-item-stacked img:hover {
+    transform: none;
+}
+
+/* Typicky je na vizualizacích hodně oblohy – dáme ořez níž */
+body.project-5 .project-gallery-vertical .slide-ou img,
+body.project-5 .project-gallery-vertical .slide-ou2 img,
+body.project-5 .project-gallery-vertical .slide-kostel img,
+body.project-5 .project-gallery-vertical .slide-spolky img,
+body.project-5 .project-gallery-vertical .slide-hasicarna img,
+body.project-5 .project-gallery-vertical .slide-hasicarna-facada img,
+body.project-5 .project-gallery-vertical .slide-skolska img,
+body.project-5 .project-gallery-vertical .slide-park-odpadu img {
+    object-position: center 60%;
+}
+
+/* (Project 5 hero) object-position handled above */
+
+/* ========================================
+   Project 5: Sekce s textem mezi obrázky
+   ======================================== */
+body.project-5 .project-section-text {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 80px;
+}
+
+body.project-5 .project-section-text .project-description {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #333;
+}
+
+body.project-5 .project-section-text .project-description strong {
+    font-weight: 600;
+}
+
+body.dark-mode.project-5 .project-section-text .project-description {
+    color: #ccc;
+}
+
+@media (max-width: 992px) {
+    body.project-5 .project-section-text {
+        padding: 0 20px;
+        margin: 40px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    body.project-5 .project-section-text .project-description {
+        font-size: 16px;
+    }
+}
+
+/* (Project 5) používá stejnou "drawings-gallery" jako project4 */
 
 
 /* Responsive */

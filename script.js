@@ -24,6 +24,8 @@ const translations = {
         project3_title: 'Yellow Shelter – Hotel & Spa',
         // Project 4
         project4_title: 'The Roof Club – Yacht Club Podolí',
+        // Project 5
+        project5_title: 'Středokluky Village Center',
         authors_label: 'Authors',
         visualization_label: 'Visualization',
         gallery_visualizations: 'Visualizations',
@@ -57,6 +59,8 @@ const translations = {
         project3_title: 'Жёлтое Убежище – Отель & Бани',
         // Project 4
         project4_title: 'The Roof Club – Яхт-клуб Подоли',
+        // Project 5
+        project5_title: 'Центр деревни Стршедоклуки',
         authors_label: 'Авторы',
         visualization_label: 'Визуализация',
         gallery_visualizations: 'Визуализации',
@@ -90,6 +94,8 @@ const translations = {
         project3_title: 'Žlutý Úkryt – Hotel & Lázně',
         // Project 4
         project4_title: 'The Roof Club – Jachtařský klub Podolí',
+        // Project 5
+        project5_title: 'Centrum obce Středokluky',
         authors_label: 'Autoři',
         visualization_label: 'Vizualizace',
         gallery_visualizations: 'Vizualizace',
@@ -270,87 +276,94 @@ document.addEventListener('DOMContentLoaded', () => {
     // Lightbox pro full-size zobrazení obrázků
     initLightbox();
     
-    // Drawings gallery initialization
+    // Galleries (Drawings / thumbnails style)
     initDrawingsGallery();
 });
 
 // Drawings Gallery (MVRDV style)
 function initDrawingsGallery() {
-    const gallery = document.querySelector('.drawings-gallery');
-    if (!gallery) return;
-    
-    const mainImg = document.getElementById('drawingsMainImg');
-    const thumbs = gallery.querySelectorAll('.drawings-thumb');
-    const prevBtn = gallery.querySelector('.drawings-prev');
-    const nextBtn = gallery.querySelector('.drawings-next');
-    const currentNum = document.getElementById('drawingsCurrentNum');
-    const totalNum = document.getElementById('drawingsTotalNum');
-    
-    if (!mainImg || !thumbs.length) return;
-    
-    let currentIndex = 0;
-    const total = thumbs.length;
-    
-    if (totalNum) totalNum.textContent = total;
-    
-    function updateGallery(index) {
-        currentIndex = index;
-        const thumb = thumbs[index];
-        const src = thumb.dataset.src;
-        const alt = thumb.dataset.alt || '';
-        
-        // Fade effect
-        mainImg.style.opacity = '0';
-        setTimeout(() => {
-            mainImg.src = src;
-            mainImg.alt = alt;
-            mainImg.style.opacity = '1';
-        }, 150);
-        
-        // Update active thumb
-        thumbs.forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-        
-        // Update counter
-        if (currentNum) currentNum.textContent = index + 1;
-    }
-    
-    // Thumb clicks
-    thumbs.forEach((thumb, i) => {
-        thumb.addEventListener('click', () => updateGallery(i));
-    });
-    
-    // Arrow navigation
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            const newIndex = (currentIndex - 1 + total) % total;
-            updateGallery(newIndex);
+    const galleries = Array.from(document.querySelectorAll('.drawings-gallery'));
+    if (!galleries.length) return;
+
+    galleries.forEach(gallery => {
+        const mainImg = gallery.querySelector('.drawings-main img');
+        const thumbs = Array.from(gallery.querySelectorAll('.drawings-thumb'));
+        const prevBtn = gallery.querySelector('.drawings-prev');
+        const nextBtn = gallery.querySelector('.drawings-next');
+        const currentNum = gallery.querySelector('#drawingsCurrentNum');
+        const totalNum = gallery.querySelector('#drawingsTotalNum');
+
+        if (!mainImg || !thumbs.length) return;
+
+        let currentIndex = thumbs.findIndex(t => t.classList.contains('active'));
+        if (currentIndex < 0) currentIndex = 0;
+
+        const total = thumbs.length;
+        if (totalNum) totalNum.textContent = total;
+
+        function updateGallery(index) {
+            currentIndex = index;
+            const thumb = thumbs[index];
+            const src = thumb.dataset.src;
+            const alt = thumb.dataset.alt || '';
+
+            // Fade effect
+            mainImg.style.opacity = '0';
+            setTimeout(() => {
+                mainImg.src = src;
+                mainImg.alt = alt;
+                mainImg.style.opacity = '1';
+            }, 150);
+
+            // Update active thumb
+            thumbs.forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+
+            // Optional counter
+            if (currentNum) currentNum.textContent = String(index + 1);
+        }
+
+        // Initialize from current active thumb
+        const activeThumb = thumbs[currentIndex];
+        if (activeThumb?.dataset?.src) {
+            mainImg.src = activeThumb.dataset.src;
+            mainImg.alt = activeThumb.dataset.alt || '';
+        }
+
+        thumbs.forEach((thumb, i) => {
+            thumb.addEventListener('click', () => updateGallery(i));
         });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            const newIndex = (currentIndex + 1) % total;
-            updateGallery(newIndex);
-        });
-    }
-    
-    // Click on main image opens lightbox
-    const mainContainer = gallery.querySelector('.drawings-main');
-    if (mainContainer) {
-        mainContainer.addEventListener('click', () => {
-            const overlay = document.querySelector('.lightbox-overlay');
-            if (overlay) {
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                updateGallery((currentIndex - 1 + total) % total);
+            });
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                updateGallery((currentIndex + 1) % total);
+            });
+        }
+
+        // Click on main image opens lightbox
+        const mainContainer = gallery.querySelector('.drawings-main');
+        if (mainContainer) {
+            mainContainer.addEventListener('click', () => {
+                const overlay = document.querySelector('.lightbox-overlay');
+                if (!overlay) return;
                 const imgEl = overlay.querySelector('.lightbox-content img');
                 const captionEl = overlay.querySelector('.lightbox-caption');
+                if (!imgEl || !captionEl) return;
+
                 imgEl.src = mainImg.src;
                 imgEl.alt = mainImg.alt;
                 captionEl.textContent = mainImg.alt;
                 overlay.classList.add('is-open');
                 document.body.classList.add('lightbox-open');
-            }
-        });
-    }
+            });
+        }
+    });
 }
 
 // Přepínání nočního režimu
