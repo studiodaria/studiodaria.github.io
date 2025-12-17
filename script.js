@@ -322,15 +322,9 @@ function initProject5GalleryAutoHeights() {
     // 2) Drawings gallery main preview
     const drawingsGalleries = Array.from(document.querySelectorAll('.drawings-gallery'));
 
-    function markContainFrames(aspects, minAspect) {
-        if (!aspects?.length || !minAspect) return;
-        const threshold = minAspect * 1.02; // allow tiny rounding differences
-        aspects.forEach(({ fig, aspect }) => {
-            if (!fig) return;
-            const shouldContain = typeof aspect === 'number' && aspect > 0 && aspect <= threshold;
-            fig.classList.toggle('p5-contain', shouldContain);
-        });
-    }
+    // We no longer auto-switch the "narrowest" slide to contain. It caused one image (often the church)
+    // to render visually smaller than the rest until hover zoom kicked in.
+    function markContainFrames() {}
 
     function setupAutoHeightForFrames(minAspect, aspects) {
         if (!verticalGallery || !frameFigures.length || !minAspect) return;

@@ -399,9 +399,10 @@ body.dark-mode .project-title {
     transition: transform 0.5s ease;
 }
 
-/* Fix: flex děti musí mít 100% výšku, jinak se může objevit „bílý“ blok */
+/* Fix: flex děti musí mít 100% výšku, jinak se může objevit „bílý" blok */
 .gallery-row-split > figure {
     height: 100%;
+    overflow: hidden;
 }
 
 /* Split row: stacked column (2 obrázky nad sebou) */
@@ -530,6 +531,7 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
 .gallery-frame {
     height: 70vh;
     background: #fff;
+    overflow: hidden;
 }
 
 .gallery-frame .lightbox-link {
@@ -602,11 +604,42 @@ body.project-4 .project-gallery-vertical .gallery-row-split.gallery-row-frame {
 body.project-5 .project-gallery-vertical .gallery-frame {
     height: clamp(360px, 56vh, 740px); /* consistent, attractive framing */
     background: #fff;
+    overflow: hidden;
 }
 
 /* Project 5: aby kompozice (fasáda + 2 stacked) měla stejnou výšku jako framy */
 body.project-5 .gallery-row-split.gallery-row-frame {
     height: clamp(360px, 56vh, 740px);
+}
+
+/* Project 5: hasičárna - stejná výška jako situace */
+body.project-5 .project-gallery-vertical .gallery-vertical-item.gallery-frame {
+    height: clamp(360px, 56vh, 740px);
+}
+
+/* Project 5: jednotný gap pro celou galerii */
+body.project-5 {
+    --p5-gallery-gap: 20px;
+}
+
+body.project-5 .project-gallery-vertical {
+    gap: var(--p5-gallery-gap) !important;
+}
+
+body.project-5 .project-gallery-vertical .gallery-row-split {
+    gap: var(--p5-gallery-gap) !important;
+}
+
+body.project-5 .project-gallery-vertical .p5-triple-row {
+    gap: var(--p5-gallery-gap) !important;
+}
+
+body.project-5 .project-gallery-vertical .p5-triple-row .gallery-item-stacked {
+    gap: var(--p5-gallery-gap) !important;
+}
+
+body.project-5 .gallery-row-split > .gallery-item-stacked {
+    gap: var(--p5-gallery-gap) !important;
 }
 
 /* Project 5: "drawings" gallery preview should behave like the framed gallery (no side white bars) */
@@ -641,6 +674,7 @@ body.project-5 .project-gallery-vertical .slide-situace img {
 }
 
 /* Situace je plán – nechceme ji ořezávat */
+/* Situace mimo kompozici by měla contain, ale v kompozici se používá cover (viz níže s !important) */
 body.project-5 .project-gallery-vertical .slide-situace.gallery-frame img {
     object-fit: contain;
     background: #fff;
@@ -650,27 +684,20 @@ body.project-5 .project-gallery-vertical .slide-situace.gallery-frame img {
    - main situation (left) stays "contain" (no crop), centered
    - 3 small detail plans (right) use "cover" to keep consistent visual padding */
 body.project-5 .project-gallery-vertical .p5-situace-combo .gallery-item-wide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: #fff;
+    overflow: hidden;
 }
 
 body.project-5 .project-gallery-vertical .p5-situace-combo .gallery-item-wide a.lightbox-link {
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
 }
 
 body.project-5 .project-gallery-vertical .p5-situace-combo .gallery-item-wide img {
-    width: auto;
-    max-width: 100%;
+    width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover !important;
     object-position: center center;
-    /* Scale up to minimize white padding around the plan */
-    transform: scale(1.14);
 }
 
 body.project-5 .project-gallery-vertical .p5-situace-combo .p5-plan-detail {
@@ -685,9 +712,6 @@ body.project-5 .project-gallery-vertical .p5-situace-combo .p5-plan-detail img {
     object-position: center center;
     background: #fff;
     display: block;
-    /* Normalize "visual padding" by slightly cropping the white border inside plan images */
-    --p5-plan-zoom: 1.08;
-    transform: scale(var(--p5-plan-zoom));
 }
 
 /* Layout for the right column: top wide + bottom 2-up */
@@ -695,13 +719,13 @@ body.project-5 .project-gallery-vertical .p5-situace-combo .p5-situace-right {
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 25px; /* larger gap between small images (no white padding from cover) */
+    gap: var(--p5-gallery-gap) !important;
     overflow: hidden;
 }
 
 /* Ensure the main/right split stays exactly 2/3 : 1/3 with the same gap as inside */
 body.project-5 .project-gallery-vertical .p5-situace-combo {
-    gap: 5px; /* smaller gap here because main situace has white padding from contain */
+    gap: var(--p5-gallery-gap) !important;
 }
 
 body.project-5 .project-gallery-vertical .p5-situace-combo > .gallery-item-wide {
@@ -720,7 +744,7 @@ body.project-5 .project-gallery-vertical .p5-situace-combo .p5-plan-top {
 body.project-5 .project-gallery-vertical .p5-situace-combo .p5-situace-bottom {
     flex: 1;
     display: flex;
-    gap: 25px; /* larger gap between small images (no white padding from cover) */
+    gap: var(--p5-gallery-gap) !important;
     overflow: hidden;
 }
 
@@ -761,16 +785,7 @@ body.project-5 .project-gallery-vertical .gallery-frame img {
     object-position: center center;
 }
 
-/* Project 5: for the narrowest slide only, avoid cropping (contain) and allow subtle padding */
-body.project-5 .project-gallery-vertical .gallery-frame.p5-contain {
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-body.project-5 .project-gallery-vertical .gallery-frame.p5-contain img {
-    object-fit: contain !important;
-    background: #fff;
-}
+/* Project 5: (removed) p5-contain auto-mode — it made one slide look smaller than the rest */
 
 body.project-5 .gallery-row-split {
     align-items: stretch;
@@ -852,9 +867,13 @@ body.dark-mode.project-5 .project-section-text .project-description {
         gap: 2px;
     }
 
-    /* Project 5: keep the same spacing as desktop (requested 5px gaps in the situace composition) */
+    /* Project 5: keep the same spacing as desktop */
     body.project-5 .project-gallery-vertical {
-        gap: 5px;
+        gap: var(--p5-gallery-gap) !important;
+    }
+    
+    body.project-5 .project-gallery-vertical .gallery-row-split {
+        gap: var(--p5-gallery-gap) !important;
     }
     
     .gallery-vertical-item {
