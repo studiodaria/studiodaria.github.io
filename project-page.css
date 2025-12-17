@@ -1031,12 +1031,14 @@ body.project-6 .project-gallery-vertical .p6-composition .p6-kub1 img {
 
 /* Kub 2 - pohled shora (objekt zabírá ~55% obrázku, potřebuje víc) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub2 img {
-    transform: scale(1.5);
+    /* push in until the cube frame aligns with the tile edges */
+    transform: scale(1.32);
+    object-position: 50% 50%;
 }
 
 /* Pohled 1 - fasáda (objekt je malý na širokém obrázku) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled1 img {
-    transform: scale(1.9);
+    transform: scale(1.8);
     object-position: center 38%;
 }
 
@@ -1055,11 +1057,11 @@ body.project-6 .project-gallery-vertical .p6-composition .p6-kub1:hover img {
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub2:hover img {
-    transform: scale(1.53);
+    transform: scale(1.35);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled1:hover img {
-    transform: scale(1.95);
+    transform: scale(1.85);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled2:hover img {
