@@ -80,6 +80,27 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* Light mode header typography color */
+body:not(.dark-mode) {
+    color: var(--text-color);
+}
+
+body:not(.dark-mode) .main-header,
+body:not(.dark-mode) .logo a,
+body:not(.dark-mode) .lang-link,
+body:not(.dark-mode) .dark-mode-toggle {
+    color: #3C3A3A;
+}
+
+body:not(.dark-mode) .lang-link {
+    color: rgba(60, 58, 58, 0.7);
+}
+
+body:not(.dark-mode) .lang-link:hover,
+body:not(.dark-mode) .lang-link.active {
+    color: #3C3A3A;
+}
+
 /* Подключаем шрифт Intro для всех начертаний */
 @import url('https://fonts.cdnfonts.com/css/intro');
 
@@ -187,7 +208,7 @@ body.dark-mode .icon-moon {
 
 .lang-link:hover,
 .lang-link.active {
-    color: #000;
+    color: #3C3A3A;
 }
 
 /* About Me - под логотипом */
@@ -329,6 +350,13 @@ nav a {
     height: 100%;
     object-fit: cover; /* Сохраняет пропорции изображения */
     object-position: center; /* Центрирует изображение */
+}
+
+/* Homepage: Project 6 thumbnail — center the sphere visually */
+.project-item--p6 img {
+    object-position: 50% 54%;
+    transform: scale(1.7);
+    transform-origin: 50% 54%;
 }
 
 .project-info {
@@ -608,10 +636,12 @@ nav a {
 .footer-notice {
     font-size: 10px;
     color: #bbb;
-    margin: 0 0 20px 0;
+    margin: 0 auto 20px;
     letter-spacing: 0.5px;
     line-height: 1.4;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    max-width: 920px;
 }
 
 /* Dark mode footer */
@@ -642,6 +672,13 @@ body.dark-mode .footer-notice {
 
 .project-item:hover .project-info {
     transform: translateY(0);
+}
+
+/* Touch devices: no hover -> keep titles visible */
+@media (hover: none) and (pointer: coarse) {
+    .project-item .project-info {
+        transform: translateY(0);
+    }
 }
 
 .project-item .project-info span {

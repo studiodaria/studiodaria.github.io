@@ -150,6 +150,23 @@ body.dark-mode.project-4 .project-title-section {
     background: #525258;
 }
 
+/* Project 5 - Centrum obce Středokluky */
+body.project-5 .main-header {
+    background: #B0B8BA !important;
+}
+
+body.project-5 .project-title-section {
+    background: #3C3A3A;
+}
+
+body.dark-mode.project-5 .main-header {
+    background: #B0B8BA !important;
+}
+
+body.dark-mode.project-5 .project-title-section {
+    background: #3C3A3A;
+}
+
 /* Project 4: čistý layout bez rámečků */
 body.project-4 .gallery-row-2col {
     display: flex;
@@ -814,6 +831,356 @@ body.project-5 .project-gallery-vertical .slide-park-odpadu img {
 }
 
 /* (Project 5 hero) object-position handled above */
+
+/* ========================================
+   Project 6: ČVUT Exhibition - Vibrant neon aesthetic
+   ======================================== */
+body.project-6 {
+    --p6-gallery-gap: 20px;
+    --p6-accent: #00D4FF;
+    --p6-accent-pink: #FF00AA;
+    --p6-accent-yellow: #FFD600;
+    --p6-dark: #1a1a2e;
+}
+
+/* Header: dark to match the neon vibe */
+body.project-6 .main-header {
+    background: #1a1a2e !important;
+}
+
+body.project-6 .main-header .logo a {
+    color: #fff !important;
+}
+
+body.project-6 .main-header .lang-link {
+    color: #666 !important;
+}
+
+body.project-6 .main-header .lang-link.active,
+body.project-6 .main-header .lang-link:hover {
+    color: var(--p6-accent) !important;
+}
+
+body.project-6 .main-header .dark-mode-toggle {
+    color: #fff !important;
+}
+
+body.project-6 .main-header .about-link a {
+    color: var(--p6-accent-pink) !important;
+    border-color: var(--p6-accent-pink) !important;
+}
+
+body.project-6 .main-header .about-link a:hover {
+    background: var(--p6-accent-pink) !important;
+    color: #fff !important;
+}
+
+/* Hero: dark background to make the colorful render pop */
+body.project-6 .project-hero {
+    background: #1a1a2e;
+}
+
+body.project-6 .project-hero img {
+    object-fit: contain;
+    object-position: center center;
+}
+
+/* Title section: gradient neon style */
+body.project-6 .project-title-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+body.project-6 .project-title-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        rgba(0, 212, 255, 0.1) 0%, 
+        rgba(255, 0, 170, 0.1) 50%, 
+        rgba(255, 214, 0, 0.1) 100%);
+    pointer-events: none;
+}
+
+body.project-6 .project-title {
+    color: #fff;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode.project-6 .project-title-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+}
+
+/* Gallery spacing */
+body.project-6 .project-gallery-vertical {
+    gap: var(--p6-gallery-gap) !important;
+}
+
+body.project-6 .project-gallery-vertical .gallery-row-split {
+    gap: var(--p6-gallery-gap) !important;
+}
+
+body.project-6 .project-gallery-vertical .gallery-item-stacked {
+    gap: var(--p6-gallery-gap) !important;
+}
+
+body.project-6 .project-gallery-vertical .gallery-row-2col {
+    gap: var(--p6-gallery-gap) !important;
+}
+
+/* Fullwidth frames: white bg for renders, full viewport height */
+body.project-6 .project-gallery-vertical .gallery-frame {
+    background: #fff;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Scheme slide: white bg, contain, centered */
+body.project-6 .project-gallery-vertical .slide-scheme {
+    background: #fff;
+    height: 100vh;
+}
+
+body.project-6 .project-gallery-vertical .slide-scheme img {
+    object-fit: contain !important;
+    object-position: center center;
+    background: #fff;
+}
+
+/* Render images: cover to fill nicely */
+body.project-6 .project-gallery-vertical .gallery-frame img {
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* Composition: scheme left (1/3), two cubes stacked right (2/3) */
+body.project-6 .project-gallery-vertical .p6-composition {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    gap: var(--p6-gallery-gap);
+    background: #fff;
+}
+
+/* Scheme on the left - narrow column */
+body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6-scheme {
+    flex: 1;
+    background: #fff;
+    overflow: hidden;
+    height: 100%;
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6-scheme a {
+    display: block;
+    height: 100%;
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6-scheme img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background: #fff;
+    transition: transform 0.5s ease;
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6-scheme:hover img {
+    transform: scale(1.02);
+}
+
+/* 2x2 grid on the right - wide column */
+body.project-6 .project-gallery-vertical .p6-composition .gallery-item-wide.p6-grid-2x2 {
+    flex: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: var(--p6-gallery-gap);
+    height: 100%;
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .p6-grid-item {
+    overflow: hidden;
+    margin: 0;
+    background: #fff;
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .p6-grid-item a {
+    display: block;
+    height: 100%;
+}
+
+/* Default for grid items - contain so nothing is cropped */
+body.project-6 .project-gallery-vertical .p6-composition .p6-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background: #fff;
+    transition: transform 0.5s ease;
+}
+
+/* Kub 1 - axonometrie (objekt zabírá ~70% obrázku) */
+body.project-6 .project-gallery-vertical .p6-composition .p6-kub1 img {
+    transform: scale(1.35);
+}
+
+/* Kub 2 - pohled shora (objekt zabírá ~55% obrázku, potřebuje víc) */
+body.project-6 .project-gallery-vertical .p6-composition .p6-kub2 img {
+    transform: scale(1.5);
+}
+
+/* Pohled 1 - fasáda (objekt je malý na širokém obrázku) */
+body.project-6 .project-gallery-vertical .p6-composition .p6-pohled1 img {
+    transform: scale(1.9);
+    object-position: center 38%;
+}
+
+/* Pohled 2 - fasáda (objekt je trochu větší než pohled1) */
+body.project-6 .project-gallery-vertical .p6-composition .p6-pohled2 img {
+    transform: scale(2.0);
+    object-position: center 42%;
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .p6-grid-item:hover img {
+    transform: scale(1.02);
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .p6-kub1:hover img {
+    transform: scale(1.38);
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .p6-kub2:hover img {
+    transform: scale(1.53);
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .p6-pohled1:hover img {
+    transform: scale(1.95);
+}
+
+body.project-6 .project-gallery-vertical .p6-composition .p6-pohled2:hover img {
+    transform: scale(2.05);
+}
+
+/* Dark row for facade views (pohled images have black bg) */
+body.project-6 .project-gallery-vertical .p6-dark-row {
+    background: #000;
+    height: 100vh;
+}
+
+body.project-6 .project-gallery-vertical .p6-dark-row .gallery-item-half {
+    background: #000;
+    height: 100%;
+}
+
+body.project-6 .project-gallery-vertical .p6-dark-row .gallery-item-half img {
+    object-fit: contain;
+    background: #000;
+}
+
+/* Drawings section */
+body.project-6 .drawings-section {
+    background: transparent;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+body.project-6 .drawings-main {
+    background: #fff;
+    height: clamp(300px, 50vh, 600px);
+}
+
+body.project-6 .drawings-main img {
+    object-fit: contain;
+}
+
+body.project-6 .drawings-nav {
+    background: transparent;
+}
+
+/* Dark mode adjustments */
+body.dark-mode.project-6 .project-gallery-vertical .gallery-frame {
+    background: #1a1a1a;
+}
+
+body.dark-mode.project-6 .project-gallery-vertical .gallery-row-2col .gallery-item-half {
+    background: #1a1a1a;
+}
+
+body.dark-mode.project-6 .project-gallery-vertical .gallery-row-2col .gallery-item-half img {
+    background: #1a1a1a;
+}
+
+body.dark-mode.project-6 .project-gallery-vertical .slide-scheme {
+    background: #1a1a1a;
+}
+
+body.dark-mode.project-6 .project-gallery-vertical .slide-scheme img {
+    background: #1a1a1a;
+}
+
+body.dark-mode.project-6 .drawings-section {
+    background: transparent;
+}
+
+body.dark-mode.project-6 .drawings-main {
+    background: #1a1a1a;
+}
+
+body.dark-mode.project-6 .drawings-nav {
+    background: transparent;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    body.project-6 {
+        --p6-gallery-gap: 10px;
+    }
+
+    body.project-6 .project-gallery-vertical .gallery-frame {
+        height: 60vh;
+    }
+
+    body.project-6 .project-gallery-vertical .slide-scheme {
+        height: auto;
+    }
+
+    body.project-6 .project-gallery-vertical .p6-composition {
+        flex-direction: column;
+        height: auto;
+    }
+
+    body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6-scheme {
+        height: auto;
+        aspect-ratio: auto;
+    }
+
+    body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6-scheme img {
+        height: auto;
+    }
+
+    body.project-6 .project-gallery-vertical .p6-composition .gallery-item-wide.p6-grid-2x2 {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        height: auto;
+    }
+
+    body.project-6 .project-gallery-vertical .p6-composition .p6-grid-item {
+        height: 50vh;
+    }
+
+    body.project-6 .project-gallery-vertical .p6-dark-row {
+        height: auto;
+    }
+
+    body.project-6 .project-gallery-vertical .p6-dark-row .gallery-item-half {
+        height: 50vh;
+    }
+}
 
 /* ========================================
    Project 5: Sekce s textem mezi obrázky

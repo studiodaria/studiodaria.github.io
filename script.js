@@ -26,10 +26,13 @@ const translations = {
         project4_title: 'The Roof Club – Yacht Club Podolí',
         // Project 5
         project5_title: 'Středokluky Village Center',
+        // Project 6
+        project6_title: 'ČVUT Exhibition for the Gaudeamus Higher Education Fair',
         authors_label: 'Authors',
         visualization_label: 'Visualization',
         gallery_visualizations: 'Visualizations',
         gallery_drawings: 'Drawings',
+        drawings_label: 'Drawings',
         client_label: 'Client',
         scroll_down: 'Scroll',
         // Footer
@@ -61,10 +64,13 @@ const translations = {
         project4_title: 'The Roof Club – Яхт-клуб Подоли',
         // Project 5
         project5_title: 'Центр деревни Стршедоклуки',
+        // Project 6
+        project6_title: 'Экспозиция ЧВУТ для выставки вузов Gaudeamus',
         authors_label: 'Авторы',
         visualization_label: 'Визуализация',
         gallery_visualizations: 'Визуализации',
         gallery_drawings: 'Чертежи',
+        drawings_label: 'Чертежи',
         client_label: 'Клиент',
         scroll_down: 'Листать',
         // Footer
@@ -96,10 +102,13 @@ const translations = {
         project4_title: 'The Roof Club – Jachtařský klub Podolí',
         // Project 5
         project5_title: 'Centrum obce Středokluky',
+        // Project 6
+        project6_title: 'Expozice ČVUT pro veletrh vysokých škol Gaudeamus',
         authors_label: 'Autoři',
         visualization_label: 'Vizualizace',
         gallery_visualizations: 'Vizualizace',
         gallery_drawings: 'Výkresy',
+        drawings_label: 'Výkresy',
         client_label: 'Klient',
         scroll_down: 'Scrollovat',
         // Footer
