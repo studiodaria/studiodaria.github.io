@@ -41,7 +41,7 @@ const translations = {
         gallery_drawings: 'Drawings',
         drawings_label: 'Drawings',
         client_label: 'Client',
-        scroll_down: 'Scroll',
+        // scroll_down removed (scroll indicator disabled)
         // Footer
         no_copy: 'All content is protected by copyright. Reproduction without permission is not allowed.'
     },
@@ -86,7 +86,7 @@ const translations = {
         gallery_drawings: 'Чертежи',
         drawings_label: 'Чертежи',
         client_label: 'Клиент',
-        scroll_down: 'Листать',
+        // scroll_down removed (scroll indicator disabled)
         // Footer
         no_copy: 'Весь контент защищён авторским правом. Воспроизведение без разрешения запрещено.'
     },
@@ -131,7 +131,7 @@ const translations = {
         gallery_drawings: 'Výkresy',
         drawings_label: 'Výkresy',
         client_label: 'Klient',
-        scroll_down: 'Scrollovat',
+        // scroll_down removed (scroll indicator disabled)
         // Footer
         no_copy: 'Veškerý obsah je chráněn autorským právem. Reprodukce bez souhlasu není povolena.'
     }
