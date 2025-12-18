@@ -1338,33 +1338,33 @@ body.project-8 {
 
 /* Header: light blue */
 body.project-8 .main-header {
-    background: #9497AA !important;
+    background: #C1C4D8 !important;
 }
 
 body.project-8 .main-header .logo a {
-    color: #fff !important;
+    color: #262423 !important;
 }
 
 body.project-8 .main-header .lang-link {
-    color: rgba(255, 255, 255, 0.65) !important;
+    color: rgba(38, 36, 35, 0.6) !important;
 }
 
 body.project-8 .main-header .lang-link.active,
 body.project-8 .main-header .lang-link:hover {
-    color: #fff !important;
+    color: #262423 !important;
 }
 
 body.project-8 .main-header .dark-mode-toggle {
-    color: #fff !important;
+    color: #262423 !important;
 }
 
 body.project-8 .main-header .about-link a {
-    color: #fff !important;
-    border-color: rgba(255, 255, 255, 0.8) !important;
+    color: #FF9999 !important;
+    border-color: #FF9999 !important;
 }
 
 body.project-8 .main-header .about-link a:hover {
-    background: rgba(255, 255, 255, 0.18) !important;
+    background: #FF9999 !important;
     color: #fff !important;
 }
 
