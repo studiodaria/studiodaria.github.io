@@ -1193,14 +1193,15 @@ body.dark-mode.project-6 .drawings-nav {
    ======================================== */
 body.project-7 {
     --p7-gallery-gap: 20px;
-    --p7-accent: #C4A77D;
+    /* Project 7 palette (as specified) */
+    --p7-accent: #9B8079;
     --p7-dark: #2C2C2C;
-    --p7-warm: #E8DDD4;
+    --p7-warm: #B8AEB2;
 }
 
 /* Header: warm neutral */
 body.project-7 .main-header {
-    background: #F5F0EB !important;
+    background: linear-gradient(135deg, #B8AEB2 0%, #B5ACB1 100%) !important;
 }
 
 body.project-7 .main-header .logo a {
@@ -1232,7 +1233,7 @@ body.project-7 .main-header .about-link a:hover {
 
 /* Hero: warm background */
 body.project-7 .project-hero {
-    background: #F5F0EB;
+    background: #B8AEB2;
 }
 
 body.project-7 .project-hero img {
@@ -1242,7 +1243,7 @@ body.project-7 .project-hero img {
 
 /* Title section: terracotta/warm brown */
 body.project-7 .project-title-section {
-    background: #8B7355;
+    background: linear-gradient(135deg, #A58981 0%, #9B8079 100%);
 }
 
 body.project-7 .project-title {
