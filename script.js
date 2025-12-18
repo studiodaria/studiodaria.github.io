@@ -30,9 +30,12 @@ const translations = {
         project6_title: 'ČVUT Exhibition for the Gaudeamus Higher Education Fair',
         // Project 7
         project7_title: 'New Branch of Olomouc City Library – Trnkova',
+        // Project 8
+        project8_title: 'Primary School Stará Boleslav',
         type_label: 'Type',
         conversion: 'Conversion',
         authors_label: 'Authors',
+        collaboration_label: 'Collaboration',
         visualization_label: 'Visualization',
         gallery_visualizations: 'Visualizations',
         gallery_drawings: 'Drawings',
@@ -72,9 +75,12 @@ const translations = {
         project6_title: 'Экспозиция ЧВУТ для выставки вузов Gaudeamus',
         // Project 7
         project7_title: 'Новый филиал библиотеки города Оломоуц – Трнкова',
+        // Project 8
+        project8_title: 'Начальная школа Стара-Болеслав',
         type_label: 'Тип',
         conversion: 'Конверсия',
         authors_label: 'Авторы',
+        collaboration_label: 'Сотрудничество',
         visualization_label: 'Визуализация',
         gallery_visualizations: 'Визуализации',
         gallery_drawings: 'Чертежи',
@@ -114,9 +120,12 @@ const translations = {
         project6_title: 'Expozice ČVUT pro veletrh vysokých škol Gaudeamus',
         // Project 7
         project7_title: 'Nová pobočka knihovny města Olomouce – Trnkova',
+        // Project 8
+        project8_title: 'ZŠ Stará Boleslav',
         type_label: 'Typ',
         conversion: 'Konverze',
         authors_label: 'Autoři',
+        collaboration_label: 'Spolupráce',
         visualization_label: 'Vizualizace',
         gallery_visualizations: 'Vizualizace',
         gallery_drawings: 'Výkresy',

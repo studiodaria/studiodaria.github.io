@@ -367,6 +367,13 @@ nav a {
     transform-origin: center 55%;
 }
 
+/* Homepage: Project 8 thumbnail — slightly cinematic crop */
+.project-item--p8 img {
+    object-position: center 55%;
+    transform: scale(1.08);
+    transform-origin: center 55%;
+}
+
 .project-info {
     position: absolute;
     bottom: 0;

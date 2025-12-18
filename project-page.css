@@ -1367,6 +1367,241 @@ body.project-7 .drawings-main img {
 }
 
 /* ========================================
+   Project 8: ZŠ Stará Boleslav — calm academic blue
+   ======================================== */
+body.project-8 {
+    --p8-gallery-gap: 20px;
+    --p8-accent: #3A6EA5;
+    --p8-bg: #EAF2FB;
+    --p8-dark: #1F2A33;
+}
+
+/* Header: light blue */
+body.project-8 .main-header {
+    background: #9497AA !important;
+}
+
+body.project-8 .main-header .logo a {
+    color: #fff !important;
+}
+
+body.project-8 .main-header .lang-link {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+
+body.project-8 .main-header .lang-link.active,
+body.project-8 .main-header .lang-link:hover {
+    color: #fff !important;
+}
+
+body.project-8 .main-header .dark-mode-toggle {
+    color: #fff !important;
+}
+
+body.project-8 .main-header .about-link a {
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+body.project-8 .main-header .about-link a:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+}
+
+/* Hero */
+body.project-8 .project-hero {
+    background: var(--p8-bg);
+}
+
+body.project-8 .project-hero img {
+    object-fit: cover;
+    object-position: center 55%;
+}
+
+/* Title section */
+body.project-8 .project-title-section {
+    background: #D3AEA6;
+}
+
+body.project-8 .project-title {
+    color: #fff;
+}
+
+/* Gallery spacing */
+body.project-8 .project-gallery-vertical {
+    gap: var(--p8-gallery-gap) !important;
+}
+
+body.project-8 .project-gallery-vertical .gallery-row-split {
+    gap: var(--p8-gallery-gap) !important;
+}
+
+body.project-8 .project-gallery-vertical .gallery-item-stacked {
+    gap: var(--p8-gallery-gap) !important;
+}
+
+body.project-8 .project-gallery-vertical .gallery-row-2col {
+    gap: var(--p8-gallery-gap) !important;
+}
+
+/* Framed slides */
+body.project-8 .project-gallery-vertical .gallery-frame {
+    background: #fff;
+    height: clamp(460px, 78vh, 980px);
+    overflow: hidden;
+}
+
+body.project-8 .project-gallery-vertical .gallery-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+/* Make split rows match the framed slide height */
+body.project-8 .project-gallery-vertical .gallery-row-split.gallery-row-frame {
+    height: clamp(460px, 78vh, 980px);
+    align-items: stretch;
+}
+
+/* Project 8: "Project 5" style — even framed split + nicer zoom */
+body.project-8 .project-gallery-vertical .p8-axi-combo > .p8-axi {
+    background: #fff;
+    /* Give axonometry more room (reduce "white margins" without scaling/cropping the image) */
+    flex: 3;
+}
+
+/* Fill empty margins (contain) with a blurred version of the same image */
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-axi,
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-visuals > figure {
+    position: relative;
+    background: #fff;
+}
+
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-axi::before,
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-visuals > figure::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--p8-tile-bg);
+    background-size: cover;
+    background-position: center center;
+    filter: blur(22px);
+    transform: scale(1.12);
+    opacity: 0.28;
+    pointer-events: none;
+}
+
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-axi > a.lightbox-link,
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-visuals > figure > a.lightbox-link {
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure the right stacked column takes the remaining width (otherwise it can collapse) */
+body.project-8 .project-gallery-vertical .p8-axi-combo > .p8-visuals {
+    flex: 1;
+    height: 100%;
+}
+
+/* Default crop/zoom so we don't see only sky */
+body.project-8 .project-gallery-vertical .p8-axi-combo img {
+    object-fit: cover;
+    object-position: center 62%;
+    transform: scale(1.08);
+    transform-origin: center 62%;
+}
+
+/* Project 8: do NOT crop the 3 visualizations in the right column */
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-visuals img {
+    object-fit: contain;
+    object-position: 50% 50% !important;
+    transform: none;
+    background: #fff;
+}
+
+/* Center the "contain" visuals inside their frames */
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-visuals > figure {
+    background: #fff;
+}
+
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-visuals > figure > a.lightbox-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* Don't re-enable cropping via hover zoom on the "contain" visuals */
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-visuals img:hover {
+    transform: none;
+}
+
+/* Axonometry: centered, slightly stronger zoom to fill the frame */
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-axi img {
+    object-fit: contain;
+    object-position: 50% 50% !important;
+    transform: none;
+    transform-origin: center center;
+    background: #fff;
+}
+
+/* Hover should zoom in from the already-zoomed baseline (not shrink) */
+body.project-8 .project-gallery-vertical .p8-axi-combo img:hover {
+    transform: scale(1.15);
+}
+
+/* Center the axonometry inside its frame (contain mode) */
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-axi > a.lightbox-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+/* Don't apply hover zoom to contain-based axonometry */
+body.project-8 .project-gallery-vertical .p8-axi-combo .p8-axi img:hover {
+    transform: none;
+}
+
+/* Keep the combo row exactly the same height as the other frames */
+body.project-8 .project-gallery-vertical .p8-axi-combo.gallery-row-split.gallery-row-frame {
+    height: clamp(460px, 78vh, 980px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    body.project-8 {
+        --p8-gallery-gap: 10px;
+    }
+
+    body.project-8 .project-gallery-vertical .gallery-frame {
+        height: 56vh;
+    }
+
+    /* On mobile, stack the split row vertically with predictable heights */
+    body.project-8 .project-gallery-vertical .gallery-row-split.gallery-row-frame {
+        height: auto;
+        flex-direction: column;
+    }
+
+    body.project-8 .project-gallery-vertical .p8-axi-combo .p8-axi {
+        height: 60vh;
+    }
+
+    body.project-8 .project-gallery-vertical .p8-axi-combo .p8-visuals > figure {
+        height: 40vh;
+    }
+
+    body.project-8 .project-gallery-vertical .p8-axi-combo .p8-axi img,
+    body.project-8 .project-gallery-vertical .p8-axi-combo .p8-visuals > figure img {
+        height: 100%;
+    }
+}
+
+/* ========================================
    Project 5: Sekce s textem mezi obrázky
    ======================================== */
 body.project-5 .project-section-text {
