@@ -989,11 +989,11 @@ body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6
     background: #fff;
     transition: transform 0.5s ease;
     /* remove excessive white margins in the scheme */
-    transform: scale(1.18);
+    transform: scale(1.06);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6-scheme:hover img {
-    transform: scale(1.21);
+    transform: scale(1.09);
 }
 
 /* 2x2 grid on the right - wide column */
@@ -1029,25 +1029,25 @@ body.project-6 .project-gallery-vertical .p6-composition .p6-grid-item img {
 
 /* Kub 1 - axonometrie (objekt zabírá ~70% obrázku) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub1 img {
-    transform: scale(1.25);
+    transform: scale(1.13);
 }
 
 /* Kub 2 - pohled shora (objekt zabírá ~55% obrázku, potřebuje víc) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub2 img {
     /* push in until the cube frame aligns with the tile edges */
-    transform: scale(1.22);
+    transform: scale(1.10);
     object-position: 50% 50%;
 }
 
 /* Pohled 1 - fasáda (objekt je malý na širokém obrázku) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled1 img {
-    transform: scale(1.65);
+    transform: scale(1.49);
     object-position: center 38%;
 }
 
 /* Pohled 2 - fasáda (objekt je trochu větší než pohled1) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled2 img {
-    transform: scale(1.85);
+    transform: scale(1.67);
     object-position: center 42%;
 }
 
@@ -1056,19 +1056,19 @@ body.project-6 .project-gallery-vertical .p6-composition .p6-grid-item:hover img
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub1:hover img {
-    transform: scale(1.28);
+    transform: scale(1.15);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub2:hover img {
-    transform: scale(1.25);
+    transform: scale(1.13);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled1:hover img {
-    transform: scale(1.7);
+    transform: scale(1.53);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled2:hover img {
-    transform: scale(1.9);
+    transform: scale(1.71);
 }
 
 /* Dark row for facade views (pohled images have black bg) */
@@ -1108,36 +1108,37 @@ body.project-6 .drawings-nav {
 }
 
 /* Dark mode adjustments */
+/* Project 6 stays “gallery-on-white” even in dark mode */
 body.dark-mode.project-6 .project-gallery-vertical .gallery-frame {
-    background: #1a1a1a;
+    background: #fff;
 }
 
 body.dark-mode.project-6 .project-gallery-vertical .gallery-row-2col .gallery-item-half {
-    background: #1a1a1a;
+    background: #fff;
 }
 
 body.dark-mode.project-6 .project-gallery-vertical .gallery-row-2col .gallery-item-half img {
-    background: #1a1a1a;
+    background: #fff;
 }
 
 body.dark-mode.project-6 .project-gallery-vertical .slide-scheme {
-    background: #1a1a1a;
+    background: #fff;
 }
 
 body.dark-mode.project-6 .project-gallery-vertical .slide-scheme img {
-    background: #1a1a1a;
+    background: #fff;
 }
 
 body.dark-mode.project-6 .drawings-section {
-    background: transparent;
+    background: #fff;
 }
 
 body.dark-mode.project-6 .drawings-main {
-    background: #1a1a1a;
+    background: #fff;
 }
 
 body.dark-mode.project-6 .drawings-nav {
-    background: transparent;
+    background: #fff;
 }
 
 /* Mobile */
