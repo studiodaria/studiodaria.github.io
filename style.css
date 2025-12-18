@@ -354,9 +354,17 @@ nav a {
 
 /* Homepage: Project 6 thumbnail — center the sphere visually */
 .project-item--p6 img {
-    object-position: 50% 54%;
-    transform: scale(1.7);
-    transform-origin: 50% 54%;
+    /* Center the sphere exactly in the tile, then zoom in to remove empty margins */
+    object-position: 50% 50%;
+    transform: scale(2.05);
+    transform-origin: 50% 50%;
+}
+
+/* Homepage: Project 7 thumbnail — scale to fill without white space */
+.project-item--p7 img {
+    object-position: center 55%;
+    transform: scale(1.15);
+    transform-origin: center 55%;
 }
 
 .project-info {

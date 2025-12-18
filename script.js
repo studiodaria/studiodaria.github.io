@@ -28,6 +28,10 @@ const translations = {
         project5_title: 'Středokluky Village Center',
         // Project 6
         project6_title: 'ČVUT Exhibition for the Gaudeamus Higher Education Fair',
+        // Project 7
+        project7_title: 'New Branch of Olomouc City Library – Trnkova',
+        type_label: 'Type',
+        conversion: 'Conversion',
         authors_label: 'Authors',
         visualization_label: 'Visualization',
         gallery_visualizations: 'Visualizations',
@@ -66,6 +70,10 @@ const translations = {
         project5_title: 'Центр деревни Стршедоклуки',
         // Project 6
         project6_title: 'Экспозиция ЧВУТ для выставки вузов Gaudeamus',
+        // Project 7
+        project7_title: 'Новый филиал библиотеки города Оломоуц – Трнкова',
+        type_label: 'Тип',
+        conversion: 'Конверсия',
         authors_label: 'Авторы',
         visualization_label: 'Визуализация',
         gallery_visualizations: 'Визуализации',
@@ -104,6 +112,10 @@ const translations = {
         project5_title: 'Centrum obce Středokluky',
         // Project 6
         project6_title: 'Expozice ČVUT pro veletrh vysokých škol Gaudeamus',
+        // Project 7
+        project7_title: 'Nová pobočka knihovny města Olomouce – Trnkova',
+        type_label: 'Typ',
+        conversion: 'Konverze',
         authors_label: 'Autoři',
         visualization_label: 'Vizualizace',
         gallery_visualizations: 'Vizualizace',
