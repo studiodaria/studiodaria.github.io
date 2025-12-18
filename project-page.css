@@ -987,10 +987,12 @@ body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6
     object-position: center center;
     background: #fff;
     transition: transform 0.5s ease;
+    /* remove excessive white margins in the scheme */
+    transform: scale(1.18);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .gallery-item-narrow.p6-scheme:hover img {
-    transform: scale(1.02);
+    transform: scale(1.21);
 }
 
 /* 2x2 grid on the right - wide column */
@@ -1026,25 +1028,25 @@ body.project-6 .project-gallery-vertical .p6-composition .p6-grid-item img {
 
 /* Kub 1 - axonometrie (objekt zabírá ~70% obrázku) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub1 img {
-    transform: scale(1.35);
+    transform: scale(1.25);
 }
 
 /* Kub 2 - pohled shora (objekt zabírá ~55% obrázku, potřebuje víc) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub2 img {
     /* push in until the cube frame aligns with the tile edges */
-    transform: scale(1.32);
+    transform: scale(1.22);
     object-position: 50% 50%;
 }
 
 /* Pohled 1 - fasáda (objekt je malý na širokém obrázku) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled1 img {
-    transform: scale(1.8);
+    transform: scale(1.65);
     object-position: center 38%;
 }
 
 /* Pohled 2 - fasáda (objekt je trochu větší než pohled1) */
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled2 img {
-    transform: scale(2.0);
+    transform: scale(1.85);
     object-position: center 42%;
 }
 
@@ -1053,19 +1055,19 @@ body.project-6 .project-gallery-vertical .p6-composition .p6-grid-item:hover img
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub1:hover img {
-    transform: scale(1.38);
+    transform: scale(1.28);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-kub2:hover img {
-    transform: scale(1.35);
+    transform: scale(1.25);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled1:hover img {
-    transform: scale(1.85);
+    transform: scale(1.7);
 }
 
 body.project-6 .project-gallery-vertical .p6-composition .p6-pohled2:hover img {
-    transform: scale(2.05);
+    transform: scale(1.9);
 }
 
 /* Dark row for facade views (pohled images have black bg) */
