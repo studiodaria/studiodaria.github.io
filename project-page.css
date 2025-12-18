@@ -881,7 +881,8 @@ body.project-6 .project-hero {
 }
 
 body.project-6 .project-hero img {
-    object-fit: contain;
+    /* Fill hero area */
+    object-fit: cover;
     object-position: center center;
 }
 
