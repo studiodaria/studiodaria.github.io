@@ -1562,6 +1562,110 @@ body.project-8 .project-gallery-vertical .p8-axi-combo.gallery-row-split.gallery
 }
 
 /* ========================================
+   Project 9: neutral editorial look
+   ======================================== */
+body.project-9 {
+    --p9-gallery-gap: 20px;
+    --p9-bg: #f2f0ee;
+    --p9-title-bg: #E6DED2;
+    --p9-title-fg: #2f3b2f;
+}
+
+body.project-9 .main-header {
+    background: var(--p9-bg) !important;
+}
+
+body.project-9 .project-hero {
+    background: var(--p9-bg);
+}
+
+body.project-9 .project-hero img {
+    object-fit: cover;
+    /* align to bottom edge */
+    object-position: 50% 82%;
+}
+
+body.project-9 .project-title-section {
+    background: var(--p9-title-bg);
+}
+
+body.dark-mode.project-9 .project-title-section {
+    background: var(--p9-title-bg);
+}
+
+body.project-9 .project-title {
+    color: var(--p9-title-fg);
+}
+
+body.project-9 .project-gallery-vertical {
+    gap: var(--p9-gallery-gap) !important;
+}
+
+body.project-9 .project-gallery-vertical .gallery-row-split {
+    gap: var(--p9-gallery-gap) !important;
+}
+
+body.project-9 .project-gallery-vertical .gallery-row-2col {
+    gap: var(--p9-gallery-gap) !important;
+}
+
+/* Project 9: situation plan should not be cropped */
+body.project-9 .project-gallery-vertical .p9-situace {
+    height: auto;
+    background: #fff;
+}
+
+body.project-9 .project-gallery-vertical .p9-situace a.lightbox-link {
+    height: auto;
+}
+
+body.project-9 .project-gallery-vertical .p9-situace img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: #fff;
+    display: block;
+}
+
+/* Keep 2-col row consistent with framed slides */
+body.project-9 .gallery-row-2col.gallery-row-frame {
+    height: clamp(420px, 72vh, 860px);
+    align-items: stretch;
+}
+
+body.project-9 .gallery-row-2col .gallery-item-half {
+    height: 100%;
+    background: #fff;
+}
+
+body.project-9 .gallery-row-2col .gallery-item-half a.lightbox-link {
+    display: block;
+    height: 100%;
+}
+
+body.project-9 .gallery-row-2col .gallery-item-half img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+@media (max-width: 768px) {
+    body.project-9 {
+        --p9-gallery-gap: 10px;
+    }
+
+    body.project-9 .gallery-row-2col.gallery-row-frame {
+        height: auto;
+        flex-direction: column;
+    }
+
+    body.project-9 .gallery-row-2col .gallery-item-half {
+        height: 50vh;
+    }
+}
+
+/* ========================================
    Project 5: Sekce s textem mezi obrázky
    ======================================== */
 body.project-5 .project-section-text {

@@ -320,7 +320,7 @@ nav a {
 /* Стили для сетки проектов */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 3px;
     padding: 3px;
     margin-top: 170px;
@@ -372,6 +372,12 @@ nav a {
     object-position: center 55%;
     transform: scale(1.08);
     transform-origin: center 55%;
+}
+
+/* Homepage: Project 9 thumbnail — align crop to the right edge */
+.project-item--p9 img {
+    object-position: right center;
+    transform-origin: right center;
 }
 
 .project-info {
@@ -443,13 +449,6 @@ nav a {
 .project-card:hover .project-overlay h3,
 .project-card:hover .project-overlay p {
     transform: translateY(0);
-}
-
-/* Медиа-запросы для адаптивности */
-@media (max-width: 1200px) {
-    .project-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
 }
 
 @media (max-width: 992px) {

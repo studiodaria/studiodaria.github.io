@@ -32,6 +32,8 @@ const translations = {
         project7_title: 'New Branch of Olomouc City Library – Trnkova',
         // Project 8
         project8_title: 'Primary School Stará Boleslav',
+        // Project 9
+        project9_title: 'In-between Spaces of Prague Market — Urban & Landscape Proposal',
         type_label: 'Type',
         conversion: 'Conversion',
         authors_label: 'Authors',
@@ -77,6 +79,8 @@ const translations = {
         project7_title: 'Новый филиал библиотеки города Оломоуц – Трнкова',
         // Project 8
         project8_title: 'Начальная школа Стара-Болеслав',
+        // Project 9
+        project9_title: 'Межпространства Пражского рынка — градостроительно-ландшафтное предложение',
         type_label: 'Тип',
         conversion: 'Конверсия',
         authors_label: 'Авторы',
@@ -122,6 +126,8 @@ const translations = {
         project7_title: 'Nová pobočka knihovny města Olomouce – Trnkova',
         // Project 8
         project8_title: 'ZŠ Stará Boleslav',
+        // Project 9
+        project9_title: 'Meziprostory Pražské tržnice — urbanisticko-krajinářský návrh',
         type_label: 'Typ',
         conversion: 'Konverze',
         authors_label: 'Autoři',
@@ -192,6 +198,59 @@ function initLightbox() {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
     });
+}
+
+function randomInt(maxExclusive) {
+    // Prefer cryptographically strong randomness when available
+    if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+        const buf = new Uint32Array(1);
+        crypto.getRandomValues(buf);
+        return buf[0] % maxExclusive;
+    }
+    return Math.floor(Math.random() * maxExclusive);
+}
+
+function shuffleInPlace(arr) {
+    // Fisher–Yates
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = randomInt(i + 1);
+        const tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+    return arr;
+}
+
+function initRandomizeHomepageProjects() {
+    const grid = document.querySelector('.project-grid');
+    if (!grid) return;
+
+    const items = Array.from(grid.children).filter(el => el.classList?.contains('project-item'));
+    if (items.length < 2) return;
+
+    const key = 'projectGridOrderSignature';
+    const last = (() => {
+        try { return sessionStorage.getItem(key) || ''; } catch { return ''; }
+    })();
+
+    const signatureOf = (els) => els
+        .map(el => el.querySelector('a')?.getAttribute('href') || '')
+        .filter(Boolean)
+        .join('|');
+
+    // Try a few times to avoid repeating the exact same order after refresh in the same tab.
+    let attempt = 0;
+    let next = items.slice();
+    let sig = '';
+    do {
+        next = shuffleInPlace(next);
+        sig = signatureOf(next);
+        attempt += 1;
+    } while (attempt < 5 && sig && sig === last);
+
+    next.forEach(el => grid.appendChild(el));
+
+    try { sessionStorage.setItem(key, sig); } catch {}
 }
 
 // Функция для фильтрации проектов
@@ -287,6 +346,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Загружаем сохраненный язык (по умолчанию английский)
     const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
     switchLanguage(savedLanguage);
+
+    // Homepage: randomize project tiles order on every load
+    initRandomizeHomepageProjects();
     
     // Загружаем сохраненный режим (светлый/темный)
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
