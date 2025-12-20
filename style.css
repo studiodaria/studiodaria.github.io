@@ -6,6 +6,7 @@
     --gray-color: #999;
     --transition: 0.3s ease;
     --spacing: 20px;
+
 }
 
 /* Noční režim */
@@ -15,6 +16,13 @@ body.dark-mode {
     --accent-color: #FF9999;
     --border-color: #333;
     --gray-color: #888;
+}
+
+/* Ensure overlays (titles/buttons) remain above watermark */
+.project-info,
+.lightbox-close {
+    position: relative;
+    z-index: 5;
 }
 
 body.dark-mode .main-header,
@@ -103,6 +111,8 @@ body:not(.dark-mode) .lang-link.active {
 
 /* Подключаем шрифт Intro для всех начертаний */
 @import url('https://fonts.cdnfonts.com/css/intro');
+/* Carlito for project titles (cards + project pages) */
+@import url('https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap');
 
 /* Общие стили для всего сайта */
 * {
@@ -332,6 +342,8 @@ nav a {
     width: 100%;
     padding-bottom: 100%; /* Создает квадратную форму */
     overflow: hidden;
+    transition: box-shadow 0.25s ease;
+    will-change: box-shadow;
 }
 
 .project-link {
@@ -674,33 +686,103 @@ body.dark-mode .footer-notice {
 
 /* Project hover effect - show title */
 .project-item .project-info {
+    /* MVRDV-like hover: image disappears, solid background with centered title */
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 15px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    text-align: center;
+    background: var(--tile-bg, rgba(255, 255, 255, 0.96));
+    opacity: 0;
+    transform: scale(0.985);
+    transition: opacity 140ms cubic-bezier(0.2, 0.9, 0.2, 1),
+                transform 140ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    will-change: opacity, transform;
+    z-index: 2;
 }
 
 .project-item:hover .project-info {
-    transform: translateY(0);
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* Touch devices: no hover -> keep titles visible */
 @media (hover: none) and (pointer: coarse) {
     .project-item .project-info {
-        transform: translateY(0);
+        /* On touch we keep the original behavior: show image with title strip */
+        inset: auto 0 0 0;
+        display: block;
+        padding: 15px;
+        text-align: center;
+        background: linear-gradient(transparent, rgba(0,0,0,0.7));
+        opacity: 1;
+        transform: none;
     }
 }
 
 .project-item .project-info span {
-    color: #fff;
-    font-size: 14px;
+    color: var(--tile-fg, #1a1a1a);
+    /* Must always fit inside the tile */
+    width: 100%;
+    max-width: 100%;
+    padding: 0 22px;
+    font-family: 'Carlito', sans-serif;
+    font-weight: 700;
+    font-size: clamp(11px, 1.05vw, 15px);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: clamp(0.6px, 0.12vw, 1px);
+    line-height: 1.18;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+    text-wrap: balance;
+
+    /* Clamp lines so long titles never overflow the card */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
+
+/* Hide image on hover/focus (desktop) */
+.project-item img {
+    transition: opacity 120ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    will-change: opacity;
+}
+
+.project-item:hover img,
+.project-item:focus-within img {
+    opacity: 0;
+}
+
+.project-item:hover,
+.project-item:focus-within {
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+    z-index: 2;
+}
+
+.project-item:focus-within .project-info {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Dark mode variant for the overlay */
+/* (we keep project-specific colors even in dark mode) */
+
+/* Project tile colors (match each project's title section color) */
+.project-item--p1 { --tile-bg: #8a8f59; --tile-fg: #ffffff; } /* default .project-title-section */
+.project-item--p2 { --tile-bg: #DFBBA9; --tile-fg: #ffffff; }
+.project-item--p3 { --tile-bg: #B1A19E; --tile-fg: #ffffff; }
+.project-item--p4 { --tile-bg: #525258; --tile-fg: #ffffff; }
+.project-item--p5 { --tile-bg: #3C3A3A; --tile-fg: #ffffff; }
+
+/* Project 6: match the project header color on project pages */
+.project-item--p6 { --tile-bg: #1a1a2e; --tile-fg: #ffffff; }
+.project-item--p7 { --tile-bg: #9B8079; --tile-fg: #ffffff; }
+
+.project-item--p8 { --tile-bg: #ebc9dd; --tile-fg: #ffffff; }
+.project-item--p9 { --tile-bg: #E6DED2; --tile-fg: #2f3b2f; }
 
 /* Active link style */
 .about-link a.active {

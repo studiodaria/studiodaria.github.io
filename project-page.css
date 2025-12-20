@@ -1,7 +1,8 @@
 /* Стили для страницы проекта в стиле MVRDV */
 
-/* Font Geom pro názvy - Google Fonts */
+/* Fonts (Google Fonts) */
 @import url('https://fonts.googleapis.com/css2?family=Geom:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&display=swap');
 /* Na stránce projektu - header barva podle projektu */
 .main-header {
     background: #fff !important;
@@ -241,9 +242,9 @@ body.lightbox-open {
 }
 
 .project-title {
-    font-family: 'Geom', sans-serif;
+    font-family: 'Carlito', sans-serif;
     font-size: 30px;
-    font-weight: 400;
+    font-weight: 700;
     margin: 0;
     color: #ffffff;
     text-transform: uppercase;

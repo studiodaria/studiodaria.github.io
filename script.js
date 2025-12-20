@@ -356,6 +356,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dark-mode');
     }
 
+    // Service Worker (cache for faster navigations + offline fallback)
+    registerServiceWorker();
+
+    // Prefetch likely next navigations (project pages + homepage tiles)
+    initPrefetching();
+
     // Мягкая защита изображений (не влияет на копирование текста):
     // - запрет drag
     // - запрет контекстного меню только на изображениях
@@ -374,6 +380,67 @@ document.addEventListener('DOMContentLoaded', () => {
     // Project 5: make full-width frames less aggressively cropped by auto-sizing height
     initProject5GalleryAutoHeights();
 });
+
+function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    // Avoid noisy errors when running via file:// (SW requires http/https)
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') return;
+
+    // IMPORTANT: this file (`script.js`) is referenced as "../script.js" on /projects/* pages,
+    // but the resolved URL is still "/script.js". We use that to reliably locate "/sw.js".
+    const scriptTag =
+        document.querySelector('script[src$="/script.js"]') ||
+        document.querySelector('script[src$="script.js"]');
+    const scriptUrl = scriptTag?.src ? new URL(scriptTag.src) : null;
+    const siteRoot = scriptUrl ? new URL('.', scriptUrl) : new URL('/', location.origin);
+
+    const swUrl = new URL('sw.js', siteRoot);
+    const scope = siteRoot.pathname; // usually "/"
+
+    navigator.serviceWorker.register(swUrl.href, { scope }).catch(() => {
+        // Fail silently; site should work without SW
+    });
+}
+
+function initPrefetching() {
+    // Helper: safe prefetch without breaking older browsers
+    const seen = new Set();
+    const prefetchUrl = (url) => {
+        if (!url) return;
+        try {
+            const abs = new URL(url, location.href);
+            if (abs.origin !== location.origin) return;
+            if (seen.has(abs.href)) return;
+            seen.add(abs.href);
+
+            // 1) Hint browser
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = abs.href;
+            link.as = 'document';
+            document.head.appendChild(link);
+
+            // 2) Warm HTTP cache (and SW cache if installed)
+            fetch(abs.href, { credentials: 'same-origin' }).catch(() => {});
+        } catch {
+            // ignore
+        }
+    };
+
+    // Project pages: prefetch prev/next
+    const navLinks = Array.from(document.querySelectorAll('.project-navigation-top a.nav-arrow[href]'));
+    navLinks.forEach(a => prefetchUrl(a.getAttribute('href')));
+
+    // Homepage: prefetch on hover/focus (cheap, user-intent based)
+    const projectLinks = Array.from(document.querySelectorAll('.project-grid a.project-link[href]'));
+    projectLinks.forEach(a => {
+        const href = a.getAttribute('href');
+        const onIntent = () => prefetchUrl(href);
+        a.addEventListener('mouseenter', onIntent, { passive: true });
+        a.addEventListener('focus', onIntent, { passive: true });
+        a.addEventListener('touchstart', onIntent, { passive: true });
+    });
+}
 
 function initProject5GalleryAutoHeights() {
     if (!document.body.classList.contains('project-5')) return;
