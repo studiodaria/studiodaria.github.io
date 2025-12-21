@@ -113,10 +113,30 @@ body:not(.dark-mode) .lang-link.active {
 @import url('https://fonts.cdnfonts.com/css/intro');
 /* Stack Sans Text for project titles (cards + project pages) */
 @import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@400;700&display=swap');
+/* Free elegant text font (similar to the reference): Manrope */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap');
 
 /* Общие стили для всего сайта */
 * {
     font-family: 'Intro', sans-serif;
+}
+
+/* Body text: lighter, more editorial (free alternative) */
+p,
+.project-description,
+.footer-notice,
+.footer-contact,
+.legal-content p {
+    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.2px;
+}
+
+/* Project meta (Category / Year / Location / Client...) */
+.detail-item h3,
+.detail-item p {
+    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    letter-spacing: 0.2px;
 }
 
 /* Стили хедера */
@@ -772,7 +792,7 @@ body.dark-mode .footer-notice {
 
 /* Project tile colors (match each project's title section color) */
 .project-item--p1 { --tile-bg: #8a8f59; --tile-fg: #ffffff; } /* default .project-title-section */
-.project-item--p2 { --tile-bg: #DFBBA9; --tile-fg: #ffffff; }
+.project-item--p2 { --tile-bg: #F6C08A; --tile-fg: #ffffff; }
 .project-item--p3 { --tile-bg: #B1A19E; --tile-fg: #ffffff; }
 .project-item--p4 { --tile-bg: #525258; --tile-fg: #ffffff; }
 .project-item--p5 { --tile-bg: #3C3A3A; --tile-fg: #ffffff; }

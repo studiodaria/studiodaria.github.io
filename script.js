@@ -10,6 +10,10 @@ const translations = {
         school: 'School',
         competitions: 'Competitions',
         collaboration: 'Collaboration',
+        // Category values on project pages
+        school_detail: 'school',
+        competitions_detail: 'competitions',
+        collaboration_detail: 'collaboration',
         category_label: 'Category',
         year_label: 'Year',
         location_label: 'Location',
@@ -21,7 +25,7 @@ const translations = {
         // Project 2
         project2_title: 'Design – Art – and – Peace – Factory',
         // Project 3
-        project3_title: 'Yellow Shelter – Hotel & Spa',
+        project3_title: 'Žluté lázně – Riverside Leisure & Spa',
         // Project 4
         project4_title: 'The Roof Club – Yacht Club Podolí',
         // Project 5
@@ -57,6 +61,10 @@ const translations = {
         school: 'Учебные',
         competitions: 'Конкурсы',
         collaboration: 'Сотрудничество',
+        // Category values on project pages
+        school_detail: 'учебные',
+        competitions_detail: 'конкурсы',
+        collaboration_detail: 'сотрудничество',
         category_label: 'Категория',
         year_label: 'Год',
         location_label: 'Локация',
@@ -68,7 +76,7 @@ const translations = {
         // Project 2
         project2_title: 'Школа дизайна и искусства',
         // Project 3
-        project3_title: 'Жёлтое Убежище – Отель & Бани',
+        project3_title: 'Žluté lázně – Riverside Leisure & Spa',
         // Project 4
         project4_title: 'The Roof Club – Яхт-клуб Подоли',
         // Project 5
@@ -104,6 +112,10 @@ const translations = {
         school: 'Školní',
         competitions: 'Soutěže',
         collaboration: 'Spolupráce',
+        // Category values on project pages (lowercase / regular)
+        school_detail: 'školní',
+        competitions_detail: 'soutěže',
+        collaboration_detail: 'spolupráce',
         category_label: 'Kategorie',
         year_label: 'Rok',
         location_label: 'Místo',
@@ -115,7 +127,7 @@ const translations = {
         // Project 2
         project2_title: 'Škola designu a umění',
         // Project 3
-        project3_title: 'Žlutý Úkryt – Hotel & Lázně',
+        project3_title: 'Žluté lázně – Riverside Leisure & Spa',
         // Project 4
         project4_title: 'The Roof Club – Jachtařský klub Podolí',
         // Project 5
@@ -343,9 +355,11 @@ document.addEventListener('DOMContentLoaded', () => {
         el.textContent = year;
     });
 
-    // Загружаем сохраненный язык (по умолчанию английский)
-    const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
-    switchLanguage(savedLanguage);
+    // Load saved language; if none is saved, default to Czech for Czech browsers.
+    const storedLanguage = localStorage.getItem('selectedLanguage');
+    const browserLang = (navigator.language || '').toLowerCase();
+    const defaultLanguage = browserLang.startsWith('cs') ? 'cz' : 'en';
+    switchLanguage(storedLanguage || defaultLanguage);
 
     // Homepage: randomize project tiles order on every load
     initRandomizeHomepageProjects();
