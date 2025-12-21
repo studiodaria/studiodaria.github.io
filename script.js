@@ -427,8 +427,10 @@ function initPrefetching() {
         }
     };
 
-    // Project pages: prefetch prev/next
-    const navLinks = Array.from(document.querySelectorAll('.project-navigation-top a.nav-arrow[href]'));
+    // Project pages: prefetch prev/next (new project-nav + legacy fallback)
+    const navLinks = Array.from(
+        document.querySelectorAll('.project-nav a[href], .project-navigation-top a.nav-arrow[href]')
+    );
     navLinks.forEach(a => prefetchUrl(a.getAttribute('href')));
 
     // Homepage: prefetch on hover/focus (cheap, user-intent based)

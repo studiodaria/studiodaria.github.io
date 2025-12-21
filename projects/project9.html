@@ -29,12 +29,6 @@
         </div>
     </header>
 
-    <!-- Navigace nahoře -->
-    <nav class="project-navigation-top">
-        <a href="project8.html" class="nav-arrow nav-prev" title="Previous">←</a>
-        <a href="project1.html" class="nav-arrow nav-next" title="Next">→</a>
-    </nav>
-
     <!-- Hlavní obrázek projektu -->
     <div class="project-hero">
         <img src="../images/project9/vizo3.jpg" alt="Project 9 - main visualization">
@@ -188,6 +182,30 @@
                 <h3 data-translate="authors_label">Authors</h3>
                 <p>Radek Lampa, Libor Hrdoušek, Daria Vlasová, Max Petricov, Jiří Ptáček, David Buroň, Dominika Klavrzová, Andrei Kazlouski, Renata Bartková</p>
             </div>
+        </div>
+
+        <!-- Navigation at the end of the project (recommended placement) -->
+        <div class="project-end-nav">
+            <nav class="project-nav" aria-label="Project navigation">
+                <a class="project-nav__btn project-nav__prev" href="project8.html" aria-label="Previous project" title="Previous">
+                    <svg class="project-nav__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="sr-only" data-translate="prev">← Previous</span>
+                </a>
+                <a class="project-nav__btn project-nav__all" href="../index.html" aria-label="All projects" title="All projects">
+                    <svg class="project-nav__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z" fill="currentColor"/>
+                    </svg>
+                    <span class="sr-only" data-translate="all_projects">All Projects</span>
+                </a>
+                <a class="project-nav__btn project-nav__next" href="project1.html" aria-label="Next project" title="Next">
+                    <svg class="project-nav__icon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="sr-only" data-translate="next">Next →</span>
+                </a>
+            </nav>
         </div>
     </main>
 
