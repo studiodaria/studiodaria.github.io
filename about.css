@@ -238,44 +238,152 @@ body.dark-mode .contact-link {
 }
 
 @media (max-width: 768px) {
-    .about-title {
-        font-size: 36px;
-    }
-
-    .about-bio p {
-        font-size: 16px;
-    }
-
-    .about-list li {
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .about-list .year {
-        min-width: auto;
-    }
-}
-
-@media (max-width: 480px) {
     .about-page {
-        padding: 30px 15px;
+        margin-top: 100px;
+        padding: 35px 18px;
     }
 
     .about-title {
         font-size: 28px;
+        letter-spacing: 0.5px;
     }
 
     .about-subtitle {
+        font-size: 13px;
+        letter-spacing: 1.5px;
+        margin-bottom: 30px;
+    }
+
+    .about-bio p {
         font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .about-section h3 {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        margin-bottom: 15px;
+    }
+
+    .about-list li {
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 12px;
+        font-size: 13px;
+    }
+
+    .about-list .year {
+        min-width: auto;
+        font-size: 11px;
+    }
+
+    .about-list .info {
+        font-size: 13px;
+    }
+
+    .contact-link {
+        font-size: 13px;
+        gap: 12px;
+    }
+
+    .contact-icon {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-page {
+        margin-top: 90px;
+        padding: 30px 15px;
+    }
+
+    .about-title {
+        font-size: 22px;
+    }
+
+    .about-subtitle {
+        font-size: 11px;
+        letter-spacing: 1.2px;
+        margin-bottom: 25px;
+    }
+
+    .about-bio p {
+        font-size: 13px;
+    }
+
+    .about-section {
+        margin-bottom: 30px;
+        padding-top: 20px;
+    }
+
+    .about-section h3 {
+        font-size: 10px;
+    }
+
+    .about-list li {
+        font-size: 12px;
+    }
+
+    .about-list .year {
+        font-size: 10px;
     }
 
     .skills-grid {
-        gap: 8px;
+        gap: 6px;
     }
 
     .skill-tag {
-        padding: 6px 12px;
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+
+    .contact-link {
         font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .about-page {
+        margin-top: 80px;
+        padding: 25px 12px;
+    }
+
+    .about-title {
+        font-size: 18px;
+    }
+
+    .about-subtitle {
+        font-size: 10px;
+    }
+
+    .about-bio p {
+        font-size: 12px;
+    }
+
+    .about-section h3 {
+        font-size: 9px;
+    }
+
+    .about-list li {
+        font-size: 11px;
+    }
+
+    .skill-tag {
+        padding: 4px 8px;
+        font-size: 9px;
+    }
+
+    .contact-link {
+        font-size: 11px;
+    }
+
+    .contact-icon {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
     }
 }
 
