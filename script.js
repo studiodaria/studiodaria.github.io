@@ -157,14 +157,26 @@ const translations = {
 
 function initLightbox() {
     const links = Array.from(document.querySelectorAll('a.lightbox-link[href]'));
+    
+    // Don't create lightbox if there are no lightbox links on the page
     if (!links.length) return;
-
+    
     let overlay = document.querySelector('.lightbox-overlay');
     if (!overlay) {
         overlay = document.createElement('div');
         overlay.className = 'lightbox-overlay';
         overlay.innerHTML = `
             <button class="lightbox-close" type="button" aria-label="Close">×</button>
+            <button class="lightbox-prev" type="button" aria-label="Previous">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+            <button class="lightbox-next" type="button" aria-label="Next">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
             <div class="lightbox-content" role="dialog" aria-modal="true">
                 <img alt="">
                 <div class="lightbox-caption"></div>
@@ -176,40 +188,178 @@ function initLightbox() {
     const imgEl = overlay.querySelector('.lightbox-content img');
     const captionEl = overlay.querySelector('.lightbox-caption');
     const closeBtn = overlay.querySelector('.lightbox-close');
+    const prevBtn = overlay.querySelector('.lightbox-prev');
+    const nextBtn = overlay.querySelector('.lightbox-next');
+
+    // Gallery state
+    let galleryImages = [];
+    let currentGalleryIndex = 0;
 
     const close = () => {
         overlay.classList.remove('is-open');
         document.body.classList.remove('lightbox-open');
         imgEl.removeAttribute('src');
         captionEl.textContent = '';
+        galleryImages = [];
+        currentGalleryIndex = 0;
     };
 
-    const open = (href, caption) => {
-        imgEl.src = href;
-        imgEl.alt = caption || '';
-        captionEl.textContent = caption || '';
+    const showImage = (index) => {
+        if (galleryImages.length === 0) return;
+        currentGalleryIndex = (index + galleryImages.length) % galleryImages.length;
+        const img = galleryImages[currentGalleryIndex];
+        
+        imgEl.style.opacity = '0';
+        setTimeout(() => {
+            imgEl.src = img.src;
+            imgEl.alt = img.alt || '';
+            captionEl.textContent = img.alt || '';
+            imgEl.style.opacity = '1';
+        }, 100);
+        
+        // Show/hide arrows based on gallery size
+        const showArrows = galleryImages.length > 1;
+        prevBtn.style.display = showArrows ? 'flex' : 'none';
+        nextBtn.style.display = showArrows ? 'flex' : 'none';
+    };
+
+    const openGallery = (gallery, startIndex = 0) => {
+        galleryImages = gallery;
+        currentGalleryIndex = startIndex;
+        
         overlay.classList.add('is-open');
         document.body.classList.add('lightbox-open');
+        showImage(currentGalleryIndex);
     };
 
+    const prev = () => {
+        if (galleryImages.length > 1) {
+            showImage(currentGalleryIndex - 1);
+        }
+    };
+    
+    const next = () => {
+        if (galleryImages.length > 1) {
+            showImage(currentGalleryIndex + 1);
+        }
+    };
+
+    // Collect all gallery images from the page
+    const collectGalleryImages = (clickedLink) => {
+        const images = [];
+        
+        // Get all lightbox links on the page
+        document.querySelectorAll('a.lightbox-link[href]').forEach(link => {
+            const src = link.getAttribute('href');
+            const alt = link.querySelector('img')?.getAttribute('alt') || '';
+            if (src && !images.some(i => i.src === src)) {
+                images.push({ src, alt });
+            }
+        });
+        
+        // Also get images from drawings gallery thumbnails
+        document.querySelectorAll('.drawings-gallery .drawings-thumb').forEach(thumb => {
+            const src = thumb.dataset.src;
+            const alt = thumb.dataset.alt || '';
+            if (src && !images.some(i => i.src === src)) {
+                images.push({ src, alt });
+            }
+        });
+        
+        return images;
+    };
+
+    // Standard lightbox links - open with gallery navigation
     links.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const href = link.getAttribute('href');
             const caption = link.querySelector('img')?.getAttribute('alt') || '';
-            if (href) open(href, caption);
+            
+            // Collect all images and find current index
+            const allImages = collectGalleryImages(link);
+            let startIndex = allImages.findIndex(img => img.src === href);
+            
+            if (startIndex < 0) startIndex = 0;
+            
+            if (allImages.length > 0) {
+                openGallery(allImages, startIndex);
+            } else {
+                // Fallback: single image
+                openGallery([{ src: href, alt: caption }], 0);
+            }
         });
     });
 
-    closeBtn?.addEventListener('click', close);
-
+    // Use event delegation on overlay for all button clicks
     overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) close();
+        const target = e.target;
+        
+        // Close button
+        if (target.closest('.lightbox-close')) {
+            e.preventDefault();
+            e.stopPropagation();
+            close();
+            return;
+        }
+        
+        // Prev button
+        if (target.closest('.lightbox-prev')) {
+            e.preventDefault();
+            e.stopPropagation();
+            prev();
+            return;
+        }
+        
+        // Next button
+        if (target.closest('.lightbox-next')) {
+            e.preventDefault();
+            e.stopPropagation();
+            next();
+            return;
+        }
+        
+        // Click on overlay background closes
+        if (target === overlay) {
+            close();
+        }
     });
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+        if (!overlay.classList.contains('is-open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
     });
+    
+    // Listen for custom event from drawings gallery
+    document.addEventListener('openLightboxGallery', (e) => {
+        const { images, startIndex } = e.detail;
+        if (images && images.length > 0) {
+            openGallery(images, startIndex || 0);
+        }
+    });
+    
+    // Swipe support for lightbox
+    let touchStartX = 0;
+    overlay.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    overlay.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) next();
+            else prev();
+        }
+    }, { passive: true });
+
+    // Expose gallery open function for mobile gallery
+    window.openLightboxGallery = (href, caption, gallery, startIndex) => {
+        openGallery(gallery, startIndex);
+    };
 }
 
 function randomInt(maxExclusive) {
@@ -393,6 +543,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Project 5: make full-width frames less aggressively cropped by auto-sizing height
     initProject5GalleryAutoHeights();
+    
+    // Mobile gallery: convert vertical gallery to swipeable gallery on mobile
+    initMobileGallery();
 });
 
 function registerServiceWorker() {
@@ -737,24 +890,181 @@ function initDrawingsGallery() {
             });
         }
 
-        // Click on main image opens lightbox
+        // Click on main image opens lightbox with full gallery
         const mainContainer = gallery.querySelector('.drawings-main');
         if (mainContainer) {
-            mainContainer.addEventListener('click', () => {
-                const overlay = document.querySelector('.lightbox-overlay');
-                if (!overlay) return;
-                const imgEl = overlay.querySelector('.lightbox-content img');
-                const captionEl = overlay.querySelector('.lightbox-caption');
-                if (!imgEl || !captionEl) return;
-
-                imgEl.src = mainImg.src;
-                imgEl.alt = mainImg.alt;
-                captionEl.textContent = mainImg.alt;
-                overlay.classList.add('is-open');
-                document.body.classList.add('lightbox-open');
+            mainContainer.addEventListener('click', (e) => {
+                // Don't open lightbox if clicking arrows
+                if (e.target.closest('.drawings-arrow')) return;
+                
+                // Collect all images from this drawings gallery
+                const galleryImages = thumbs.map(thumb => ({
+                    src: thumb.dataset.src,
+                    alt: thumb.dataset.alt || ''
+                })).filter(img => img.src);
+                
+                // Trigger custom event to open lightbox with gallery
+                const event = new CustomEvent('openLightboxGallery', {
+                    detail: {
+                        images: galleryImages,
+                        startIndex: currentIndex
+                    }
+                });
+                document.dispatchEvent(event);
             });
         }
     });
+}
+
+// Mobile Gallery: Convert vertical gallery to swipeable gallery on mobile
+function initMobileGallery() {
+    const verticalGallery = document.querySelector('.project-gallery-vertical');
+    if (!verticalGallery) return;
+    
+    // Check if mobile gallery already exists
+    if (document.querySelector('.mobile-gallery')) return;
+    
+    // Collect all images from the vertical gallery
+    const allImages = [];
+    
+    // Get images from figures and lightbox links
+    verticalGallery.querySelectorAll('img').forEach(img => {
+        const link = img.closest('a.lightbox-link');
+        const src = link ? link.getAttribute('href') : img.getAttribute('src');
+        const alt = img.getAttribute('alt') || '';
+        if (src && !allImages.some(i => i.src === src)) {
+            allImages.push({ src, alt });
+        }
+    });
+    
+    if (allImages.length === 0) return;
+    
+    // Create mobile gallery HTML with modern navigation
+    const mobileGallery = document.createElement('div');
+    mobileGallery.className = 'mobile-gallery';
+    
+    const dotsHtml = allImages.map((_, i) => `
+        <button class="mobile-gallery-dot${i === 0 ? ' active' : ''}" data-index="${i}" aria-label="Image ${i + 1}"></button>
+    `).join('');
+    
+    mobileGallery.innerHTML = `
+        <div class="mobile-gallery-main">
+            <img src="${allImages[0].src}" alt="${allImages[0].alt}">
+            <div class="mobile-gallery-arrows">
+                <button class="mobile-gallery-arrow mobile-gallery-prev" aria-label="Previous">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="mobile-gallery-arrow mobile-gallery-next" aria-label="Next">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-gallery-nav">
+            <div class="mobile-gallery-progress">
+                <div class="mobile-gallery-progress-bar" style="width: ${100 / allImages.length}%"></div>
+            </div>
+            <div class="mobile-gallery-dots">
+                ${dotsHtml}
+            </div>
+            <div class="mobile-gallery-counter">${allImages.length} images</div>
+        </div>
+    `;
+    
+    // Insert after vertical gallery
+    verticalGallery.parentNode.insertBefore(mobileGallery, verticalGallery.nextSibling);
+    
+    // Initialize gallery functionality
+    const mainImg = mobileGallery.querySelector('.mobile-gallery-main img');
+    const dots = Array.from(mobileGallery.querySelectorAll('.mobile-gallery-dot'));
+    const prevBtn = mobileGallery.querySelector('.mobile-gallery-prev');
+    const nextBtn = mobileGallery.querySelector('.mobile-gallery-next');
+    const progressBar = mobileGallery.querySelector('.mobile-gallery-progress-bar');
+    
+    let currentIndex = 0;
+    const total = allImages.length;
+    
+    function updateGallery(index) {
+        currentIndex = index;
+        const img = allImages[index];
+        
+        // Fade effect
+        mainImg.style.opacity = '0';
+        setTimeout(() => {
+            mainImg.src = img.src;
+            mainImg.alt = img.alt;
+            mainImg.style.opacity = '1';
+        }, 120);
+        
+        // Update active dot
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        
+        // Update progress bar
+        if (progressBar) {
+            const progress = ((index + 1) / total) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+    }
+    
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => updateGallery(i));
+    });
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            updateGallery((currentIndex - 1 + total) % total);
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            updateGallery((currentIndex + 1) % total);
+        });
+    }
+    
+    // Click on main image opens lightbox with full gallery
+    const mainContainer = mobileGallery.querySelector('.mobile-gallery-main');
+    if (mainContainer) {
+        mainContainer.addEventListener('click', (e) => {
+            // Don't open lightbox if clicking arrows
+            if (e.target.closest('.mobile-gallery-arrow')) return;
+            
+            if (window.openLightboxGallery) {
+                window.openLightboxGallery(
+                    allImages[currentIndex].src,
+                    allImages[currentIndex].alt,
+                    allImages,
+                    currentIndex
+                );
+            }
+        });
+    }
+    
+    // Swipe support for touch devices
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    mainContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    mainContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                // Swipe left - next
+                updateGallery((currentIndex + 1) % total);
+            } else {
+                // Swipe right - prev
+                updateGallery((currentIndex - 1 + total) % total);
+            }
+        }
+    }, { passive: true });
 }
 
 // Přepínání nočního režimu
