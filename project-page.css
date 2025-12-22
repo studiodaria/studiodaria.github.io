@@ -5,13 +5,13 @@
 /* Home button in header */
 .home-btn {
     position: absolute;
-    top: 20px;
+    top: 50px;
     left: 35px;
-    width: 50px;
-    height: 50px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.12);
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: #3C3A3A;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,49 +19,47 @@
     color: #fff;
     transition: all 0.2s ease;
     z-index: 10;
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
 }
 
 .home-btn:hover {
-    background: rgba(0, 0, 0, 0.2);
-    border-color: rgba(0, 0, 0, 0.3);
-    color: #FF9999;
-    transform: scale(1.1);
+    background: #FF9999;
+    color: #fff;
 }
 
-/* Tmavé headery - světlý kroužek */
+/* Všechny projekty - stejný styl */
 body.project-6 .home-btn {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: #3C3A3A;
+    color: #fff;
 }
 
 body.project-6 .home-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: #FF9999;
+    color: #fff;
 }
 
 .home-btn svg {
-    width: 32px;
-    height: 32px;
+    width: 16px;
+    height: 16px;
 }
 
 @media (max-width: 768px) {
     .home-btn {
-        left: 15px;
-        width: 36px;
-        height: 36px;
+        left: 20px;
+        top: 42px;
+        width: 28px;
+        height: 28px;
     }
     
     .home-btn svg {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
     }
 }
 
 @media (max-width: 480px) {
     .home-btn {
-        left: 12px;
+        left: 15px;
+        top: 38px;
         width: 32px;
         height: 32px;
     }
