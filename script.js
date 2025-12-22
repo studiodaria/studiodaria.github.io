@@ -497,8 +497,17 @@ document.querySelectorAll('.lang-link').forEach(link => {
     });
 });
 
+// Scroll to top immediately on page load (before DOMContentLoaded)
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 // При загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
+    // Scroll to top on page load/refresh
+    window.scrollTo(0, 0);
+    
     // Авто-год в копирайтах
     const year = String(new Date().getFullYear());
     document.querySelectorAll('.js-year').forEach(el => {
