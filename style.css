@@ -622,56 +622,74 @@ nav a {
 
 /* Project hover effect - show title */
 .project-item .project-info {
-    /* MVRDV-like hover: image disappears, solid background with centered title */
+    /* Static: title visible at bottom with gradient overlay */
     position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    padding: 12px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 40px 12px 12px;
     box-sizing: border-box;
     text-align: center;
-    background: var(--tile-bg, rgba(255, 255, 255, 0.96));
-    opacity: 0;
-    transform: scale(0.985);
-    transition: opacity 140ms cubic-bezier(0.2, 0.9, 0.2, 1),
-                transform 140ms cubic-bezier(0.2, 0.9, 0.2, 1);
-    will-change: opacity, transform;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+    opacity: 1;
+    transform: none;
+    transition: all 140ms cubic-bezier(0.2, 0.9, 0.2, 1);
+    will-change: opacity, transform, inset, background;
     z-index: 2;
     overflow: hidden;
 }
 
+/* Hover: full card with colored background */
 .project-item:hover .project-info {
-    opacity: 1;
-    transform: scale(1);
+    inset: 0;
+    bottom: 0;
+    display: grid;
+    place-items: center;
+    padding: 12px;
+    background: var(--tile-bg, rgba(255, 255, 255, 0.96));
 }
 
-/* Touch devices: same hover effect as desktop - tap to reveal */
+/* Touch devices: title always visible, tap to reveal full card */
 @media (hover: none) and (pointer: coarse) {
     .project-item .project-info {
-        /* Same overlay style as desktop */
+        /* Static: title at bottom with gradient */
         position: absolute;
-        inset: 0;
-        display: grid;
-        place-items: center;
-        padding: 12px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        padding: 40px 12px 12px;
         box-sizing: border-box;
         text-align: center;
-        background: var(--tile-bg, rgba(255, 255, 255, 0.96));
-        opacity: 0;
-        transform: scale(0.985);
-        transition: opacity 140ms cubic-bezier(0.2, 0.9, 0.2, 1),
-                    transform 140ms cubic-bezier(0.2, 0.9, 0.2, 1);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+        opacity: 1;
+        transform: none;
+        transition: all 140ms cubic-bezier(0.2, 0.9, 0.2, 1);
     }
 
     .project-item .project-info span {
-        color: var(--tile-fg, #1a1a1a);
+        color: #ffffff;
     }
 
-    /* Show on tap/active */
+    /* Show full card on tap/active */
     .project-item:active .project-info,
     .project-item:focus-within .project-info {
-        opacity: 1;
-        transform: scale(1);
+        inset: 0;
+        bottom: 0;
+        display: grid;
+        place-items: center;
+        padding: 12px;
+        background: var(--tile-bg, rgba(255, 255, 255, 0.96));
+    }
+
+    .project-item:active .project-info span,
+    .project-item:focus-within .project-info span {
+        color: var(--tile-fg, #1a1a1a);
     }
 
     .project-item:active img,
@@ -680,22 +698,24 @@ nav a {
     }
 }
 
+/* Static state: white text on gradient - light weight, semi-transparent */
 .project-item .project-info span {
-    color: var(--tile-fg, #1a1a1a);
+    color: rgba(255, 255, 255, 0.85);
     /* Must always fit inside the tile */
     width: 100%;
     max-width: 100%;
     padding: 0 16px;
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
-    font-weight: 600;
-    font-size: clamp(10px, 0.95vw, 14px);
+    font-weight: 400;
+    font-size: clamp(8px, 0.75vw, 11px);
     text-transform: uppercase;
     letter-spacing: clamp(0.5px, 0.1vw, 1.2px);
     line-height: 1.3;
     overflow-wrap: break-word;
     word-break: break-word;
     hyphens: auto;
+    transition: color 140ms ease, font-weight 140ms ease, font-size 140ms ease;
 
     /* Clamp lines so long titles never overflow the card */
     display: -webkit-box;
@@ -703,6 +723,13 @@ nav a {
     -webkit-line-clamp: 4;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* Hover state: use tile color for text, bold, larger */
+.project-item:hover .project-info span {
+    color: var(--tile-fg, #1a1a1a);
+    font-weight: 600;
+    font-size: clamp(10px, 0.95vw, 14px);
 }
 
 /* Hide image on hover/focus (desktop) */
