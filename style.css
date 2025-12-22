@@ -9,72 +9,11 @@
 
 }
 
-/* Noční režim */
-body.dark-mode {
-    --bg-color: #1a1a1a;
-    --text-color: #f0f0f0;
-    --accent-color: #FF9999;
-    --border-color: #333;
-    --gray-color: #888;
-}
-
 /* Ensure overlays (titles/buttons) remain above watermark */
 .project-info,
 .lightbox-close {
     position: relative;
     z-index: 5;
-}
-
-body.dark-mode .main-header,
-body.dark-mode .filters,
-body.dark-mode .main-footer {
-    background: #1a1a1a;
-}
-
-body.dark-mode .main-header::after {
-    background: #333;
-}
-
-body.dark-mode .filters {
-    border-color: #333;
-}
-
-body.dark-mode .main-footer {
-    border-color: #333;
-}
-
-body.dark-mode .logo a {
-    color: #f0f0f0;
-}
-
-body.dark-mode .lang-link {
-    color: #666;
-}
-
-body.dark-mode .lang-link:hover,
-body.dark-mode .lang-link.active {
-    color: #f0f0f0;
-}
-
-body.dark-mode .filter-btn {
-    color: #666;
-}
-
-body.dark-mode .filter-btn:hover,
-body.dark-mode .filter-btn.active {
-    color: #f0f0f0;
-}
-
-body.dark-mode .project-info {
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
-}
-
-body.dark-mode .footer-copyright {
-    color: #555;
-}
-
-body.dark-mode .footer-contact {
-    color: #666;
 }
 
 body {
@@ -88,24 +27,19 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Light mode header typography color */
-body:not(.dark-mode) {
-    color: var(--text-color);
-}
-
-body:not(.dark-mode) .main-header,
-body:not(.dark-mode) .logo a,
-body:not(.dark-mode) .lang-link,
-body:not(.dark-mode) .dark-mode-toggle {
+/* Header typography color */
+.main-header,
+.logo a,
+.lang-link {
     color: #3C3A3A;
 }
 
-body:not(.dark-mode) .lang-link {
+.lang-link {
     color: rgba(60, 58, 58, 0.7);
 }
 
-body:not(.dark-mode) .lang-link:hover,
-body:not(.dark-mode) .lang-link.active {
+.lang-link:hover,
+.lang-link.active {
     color: #3C3A3A;
 }
 
@@ -186,45 +120,6 @@ p,
     gap: 8px;
 }
 
-/* Tlačítko pro noční režim - levý horní roh */
-.dark-mode-toggle {
-    position: absolute;
-    top: 20px;
-    left: 35px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    padding: 5px;
-    transition: transform 0.3s ease;
-    color: #1a1a1a;
-}
-
-.dark-mode-toggle:hover {
-    transform: scale(1.1);
-}
-
-/* Ve světlém režimu: černý měsíc (klikni pro tmavý režim) */
-/* V tmavém režimu: bílé slunce (klikni pro světlý režim) */
-.icon-sun {
-    display: none;
-}
-
-.icon-moon {
-    display: inline;
-}
-
-body.dark-mode .dark-mode-toggle {
-    color: #ffffff;
-}
-
-body.dark-mode .icon-sun {
-    display: inline;
-}
-
-body.dark-mode .icon-moon {
-    display: none;
-}
 
 .lang-link {
     text-decoration: none;
@@ -724,19 +619,6 @@ nav a {
     max-width: 920px;
 }
 
-/* Dark mode footer */
-body.dark-mode .main-footer {
-    background: transparent;
-    border-color: #333;
-}
-
-body.dark-mode .footer-copyright {
-    color: #555;
-}
-
-body.dark-mode .footer-notice {
-    color: #444;
-}
 
 /* Project hover effect - show title */
 .project-item .project-info {
@@ -886,13 +768,6 @@ body.dark-mode .footer-notice {
     .logo {
         font-size: 15px;
         letter-spacing: 1.5px;
-    }
-
-    .dark-mode-toggle {
-        position: absolute;
-        top: 8px;
-        left: 12px;
-        font-size: 14px;
     }
 
     .language-switcher {

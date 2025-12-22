@@ -22,10 +22,6 @@ body.project-1 .main-header {
     color: #999 !important;
 }
 
-.main-header .dark-mode-toggle {
-    color: #1a1a1a !important;
-}
-
 .main-header .about-link a {
     color: #FF9999 !important;
     border-color: #FF9999 !important;
@@ -205,10 +201,6 @@ body.project-3 .project-title-section {
     background: #B1A19E;
 }
 
-body.dark-mode.project-3 .project-title-section {
-    background: #B1A19E;
-}
-
 /* Project 4 - The Roof Club */
 body.project-4 .main-header {
     background: #E9D6D6 !important;
@@ -222,24 +214,12 @@ body.project-4 .project-title-section {
     background: #525258;
 }
 
-body.dark-mode.project-4 .project-title-section {
-    background: #525258;
-}
-
 /* Project 5 - Centrum obce Středokluky */
 body.project-5 .main-header {
     background: #B0B8BA !important;
 }
 
 body.project-5 .project-title-section {
-    background: #3C3A3A;
-}
-
-body.dark-mode.project-5 .main-header {
-    background: #B0B8BA !important;
-}
-
-body.dark-mode.project-5 .project-title-section {
     background: #3C3A3A;
 }
 
@@ -490,23 +470,6 @@ body.lightbox-open {
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 3.5px;
-}
-
-body.dark-mode .project-title-section {
-    background: #8a8f59; /* Zelená v dark mode */
-}
-
-body.dark-mode.project-2 .project-title-section {
-    /* Dark mode: same warm translucent strip */
-    background: rgba(164, 106, 70, 0.55);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.32);
-}
-
-body.dark-mode .project-title {
-    color: #f0f0f0; /* Bílý text v dark mode */
 }
 
 @media (max-width: 992px) {
@@ -914,45 +877,6 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
     text-transform: uppercase;
 }
 
-/* Dark mode */
-body.dark-mode .mobile-gallery-main {
-    background: #1a1a1a;
-}
-
-body.dark-mode .mobile-gallery-arrow {
-    background: rgba(40, 40, 40, 0.9);
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-}
-
-body.dark-mode .mobile-gallery-arrow:active {
-    background: rgba(60, 60, 60, 1);
-}
-
-body.dark-mode .mobile-gallery-progress {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .mobile-gallery-progress-bar {
-    background: #fff;
-}
-
-body.dark-mode .mobile-gallery-dot {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-body.dark-mode .mobile-gallery-dot:hover {
-    background: rgba(255, 255, 255, 0.4);
-}
-
-body.dark-mode .mobile-gallery-dot.active {
-    background: #fff;
-}
-
-body.dark-mode .mobile-gallery-counter {
-    color: #666;
-}
-
 .gallery-vertical-item {
     margin: 0;
     width: 100%;
@@ -1289,10 +1213,6 @@ body.project-6 .main-header .lang-link:hover {
     color: var(--p6-accent) !important;
 }
 
-body.project-6 .main-header .dark-mode-toggle {
-    color: #fff !important;
-}
-
 body.project-6 .main-header .about-link a {
     color: var(--p6-accent-pink) !important;
     border-color: var(--p6-accent-pink) !important;
@@ -1338,10 +1258,6 @@ body.project-6 .project-title-section::before {
 body.project-6 .project-title {
     color: #fff;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode.project-6 .project-title-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
 }
 
 /* Gallery spacing */
@@ -1535,40 +1451,6 @@ body.project-6 .drawings-nav {
     background: transparent;
 }
 
-/* Dark mode adjustments */
-/* Project 6 stays “gallery-on-white” even in dark mode */
-body.dark-mode.project-6 .project-gallery-vertical .gallery-frame {
-    background: #fff;
-}
-
-body.dark-mode.project-6 .project-gallery-vertical .gallery-row-2col .gallery-item-half {
-    background: #fff;
-}
-
-body.dark-mode.project-6 .project-gallery-vertical .gallery-row-2col .gallery-item-half img {
-    background: #fff;
-}
-
-body.dark-mode.project-6 .project-gallery-vertical .slide-scheme {
-    background: #fff;
-}
-
-body.dark-mode.project-6 .project-gallery-vertical .slide-scheme img {
-    background: #fff;
-}
-
-body.dark-mode.project-6 .drawings-section {
-    background: #fff;
-}
-
-body.dark-mode.project-6 .drawings-main {
-    background: #fff;
-}
-
-body.dark-mode.project-6 .drawings-nav {
-    background: #fff;
-}
-
 /* Mobile */
 @media (max-width: 768px) {
     body.project-6 {
@@ -1645,10 +1527,6 @@ body.project-7 .main-header .lang-link:hover {
     color: var(--p7-accent) !important;
 }
 
-body.project-7 .main-header .dark-mode-toggle {
-    color: #2C2C2C !important;
-}
-
 body.project-7 .main-header .about-link a {
     color: var(--p7-accent) !important;
     border-color: var(--p7-accent) !important;
@@ -1692,10 +1570,6 @@ body.project-7 .project-title-section {
 
 body.project-7 .project-title {
     color: #fff;
-}
-
-body.dark-mode.project-7 .project-title-section {
-    background: #8B7355;
 }
 
 /* Gallery spacing - jednotný gap pro všechny prvky */
@@ -1835,10 +1709,6 @@ body.project-8 .main-header .lang-link {
 
 body.project-8 .main-header .lang-link.active,
 body.project-8 .main-header .lang-link:hover {
-    color: #262423 !important;
-}
-
-body.project-8 .main-header .dark-mode-toggle {
     color: #262423 !important;
 }
 
@@ -2073,10 +1943,6 @@ body.project-9 .project-title-section {
     background: var(--p9-title-bg);
 }
 
-body.dark-mode.project-9 .project-title-section {
-    background: var(--p9-title-bg);
-}
-
 body.project-9 .project-title {
     color: var(--p9-title-fg);
 }
@@ -2168,10 +2034,6 @@ body.project-5 .project-section-text .project-description strong {
     font-weight: 600;
 }
 
-body.dark-mode.project-5 .project-section-text .project-description {
-    color: #ccc;
-}
-
 @media (max-width: 992px) {
     body.project-5 .project-section-text {
         padding: 0 20px;
@@ -2237,18 +2099,6 @@ body.dark-mode.project-5 .project-section-text .project-description {
     font-size: 16px;
     color: #333;
     line-height: 1.8;
-}
-
-body.dark-mode .project-credits {
-    border-color: #333;
-}
-
-body.dark-mode .credit-item h3 {
-    color: #888;
-}
-
-body.dark-mode .credit-item p {
-    color: #ccc;
 }
 
 /* Screen-reader-only utility */
@@ -2337,24 +2187,6 @@ body.dark-mode .credit-item p {
     border-top: 1px solid rgba(0, 0, 0, 0.10);
     display: flex;
     justify-content: center;
-}
-
-body.dark-mode .project-end-nav {
-    border-top-color: rgba(255, 255, 255, 0.14);
-}
-
-body.dark-mode .project-nav__btn {
-    color: rgba(255, 255, 255, 0.92);
-    background: rgba(20, 20, 20, 0.62);
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.40),
-        0 10px 24px rgba(0, 0, 0, 0.35);
-}
-
-body.dark-mode .project-nav__btn:hover {
-    background: rgba(30, 30, 30, 0.78);
-    border-color: rgba(255, 255, 255, 0.22);
 }
 
 /* Legacy: if any page still uses the old overlay arrows, disable them */
@@ -2534,39 +2366,6 @@ body.dark-mode .project-nav__btn:hover {
     }
 }
 
-/* Dark mode pro project page */
-body.dark-mode .project-title {
-    color: #f0f0f0;
-}
-
-body.dark-mode .project-description {
-    color: #ccc;
-}
-
-body.dark-mode .project-details {
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .detail-item h3 {
-    color: rgba(255, 255, 255, 0.4);
-}
-
-body.dark-mode .detail-item p {
-    color: #e8e8e8;
-}
-
-body.dark-mode .gallery-item figcaption {
-    color: #888;
-}
-
-body.dark-mode .project-navigation {
-    border-color: #333;
-}
-
-body.dark-mode .project-navigation a {
-    color: #f0f0f0;
-}
-
 /* ========================================
    Drawings Gallery - Clean MVRDV Style
    ======================================== */
@@ -2690,30 +2489,6 @@ body.project-5 .drawings-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-/* Dark mode */
-body.dark-mode .drawings-title {
-    color: #888;
-}
-
-body.dark-mode .drawings-main {
-    background: #1a1a1a;
-}
-
-body.dark-mode .drawings-nav {
-    background: #1a1a1a;
-}
-
-body.dark-mode .drawings-arrow {
-    background: #333;
-    border-color: #444;
-    color: #fff;
-}
-
-body.dark-mode .drawings-arrow:hover {
-    background: #fff;
-    color: #333;
 }
 
 /* Responsive */

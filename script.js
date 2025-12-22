@@ -514,12 +514,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Homepage: randomize project tiles order on every load
     initRandomizeHomepageProjects();
     
-    // Загружаем сохраненный режим (светлый/темный)
-    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-    if (savedDarkMode) {
-        document.body.classList.add('dark-mode');
-    }
-
     // Service Worker (cache for faster navigations + offline fallback)
     registerServiceWorker();
 
@@ -1067,13 +1061,3 @@ function initMobileGallery() {
     }, { passive: true });
 }
 
-// Přepínání nočního režimu
-const darkModeToggle = document.getElementById('darkModeToggle');
-if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        // Uložit do localStorage
-        const isDarkMode = document.body.classList.contains('dark-mode');
-        localStorage.setItem('darkMode', isDarkMode);
-    });
-}
