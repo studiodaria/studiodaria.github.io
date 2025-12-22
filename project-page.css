@@ -782,7 +782,8 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
 /* Main image container */
 .mobile-gallery-main {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    min-height: 250px;
+    max-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -794,8 +795,9 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
 
 .mobile-gallery-main img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
     transition: opacity 0.25s ease;
 }
 
@@ -1664,7 +1666,23 @@ body.project-7 .project-hero {
 
 body.project-7 .project-hero img {
     object-fit: cover;
-    object-position: center center;
+    object-position: center 40%;
+}
+
+/* Project 7: different hero image for mobile/tablet */
+body.project-7 .project-hero img.hero-mobile {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    body.project-7 .project-hero img.hero-desktop {
+        display: none;
+    }
+    
+    body.project-7 .project-hero img.hero-mobile {
+        display: block;
+        object-position: center center;
+    }
 }
 
 /* Title section: terracotta/warm brown */
