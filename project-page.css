@@ -70,14 +70,18 @@ body.project-6 .home-btn:hover {
     }
 }
 
-/* Na stránce projektu - header barva podle projektu */
+/* Na stránce projektu - poloprůhledný header s blur efektem */
 .main-header {
-    background: #fff !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 
-/* Project 1 - speciální barva */
+/* Project 1 - poloprůhledná verze */
 body.project-1 .main-header {
-    background: #edf2f9 !important;
+    background: rgba(237, 242, 249, 0.2) !important;
 }
 
 .main-header .logo a,
@@ -107,9 +111,9 @@ body.project-1 .main-header {
 
 .project-hero {
     width: 100%;
-    height: calc(100vh - 120px); /* Fullscreen hero pod headerem */
+    height: 100vh; /* Fullscreen hero */
     overflow: hidden;
-    margin-top: 120px; /* Odsazení pro fixovaný header */
+    margin-top: 0; /* Hero začíná od vrchu - header je poloprůhledný */
     padding-top: 0;
     position: relative;
     /* Pozadí dědíme z body.project-X stylů, default bílá */
@@ -257,7 +261,7 @@ body.project-2 .project-hero img {
 /* Project 2 mobile: uses same translucent overlay as desktop (no colored bar) */
 
 body.project-2 .main-header {
-    background: #F3F3F3 !important;
+    background: rgba(243, 243, 243, 0.2) !important;
 }
 
 body.project-2 .project-hero {
@@ -271,7 +275,7 @@ body.project-3 .project-title-section {
 
 /* Project 4 - The Roof Club */
 body.project-4 .main-header {
-    background: #E9D6D6 !important;
+    background: rgba(233, 214, 214, 0.2) !important;
 }
 
 body.project-4 .project-hero {
@@ -284,7 +288,7 @@ body.project-4 .project-title-section {
 
 /* Project 5 - Centrum obce Středokluky */
 body.project-5 .main-header {
-    background: #B0B8BA !important;
+    background: rgba(176, 184, 186, 0.2) !important;
 }
 
 body.project-5 .project-title-section {
@@ -1265,7 +1269,7 @@ body.project-6 {
 
 /* Header: dark to match the neon vibe */
 body.project-6 .main-header {
-    background: #1a1a2e !important;
+    background: rgba(26, 26, 46, 0.2) !important;
 }
 
 body.project-6 .main-header .logo a {
@@ -1579,7 +1583,7 @@ body.project-7 {
 
 /* Header: warm neutral */
 body.project-7 .main-header {
-    background: linear-gradient(135deg, #B8AEB2 0%, #B5ACB1 100%) !important;
+    background: linear-gradient(135deg, rgba(184, 174, 178, 0.2) 0%, rgba(181, 172, 177, 0.2) 100%) !important;
 }
 
 body.project-7 .main-header .logo a {
@@ -1764,7 +1768,7 @@ body.project-8 {
 
 /* Header: light blue */
 body.project-8 .main-header {
-    background: #C1C4D8 !important;
+    background: rgba(193, 196, 216, 0.2) !important;
 }
 
 body.project-8 .main-header .logo a {
@@ -1994,7 +1998,7 @@ body.project-9 {
 }
 
 body.project-9 .main-header {
-    background: var(--p9-bg) !important;
+    background: rgba(242, 240, 238, 0.2) !important;
 }
 
 body.project-9 .project-hero {
@@ -2300,8 +2304,8 @@ body.project-5 .project-section-text .project-description strong {
 
 @media (max-width: 768px) {
     .project-hero {
-        height: 50vh;
-        margin-top: 100px;
+        height: 100vh;
+        margin-top: 0;
     }
 
     .project-gallery {
@@ -2367,8 +2371,8 @@ body.project-5 .project-section-text .project-description strong {
 /* Small mobile (< 600px) */
 @media (max-width: 600px) {
     .project-hero {
-        height: 45vh;
-        margin-top: 90px;
+        height: 100vh;
+        margin-top: 0;
     }
     
     .project-content {
@@ -2412,8 +2416,8 @@ body.project-5 .project-section-text .project-description strong {
 /* Extra small mobile (< 400px) */
 @media (max-width: 400px) {
     .project-hero {
-        height: 40vh;
-        margin-top: 80px;
+        height: 100vh;
+        margin-top: 0;
     }
     
     .project-title {
