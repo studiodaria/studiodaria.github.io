@@ -520,8 +520,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const defaultLanguage = browserLang.startsWith('cs') ? 'cz' : 'en';
     switchLanguage(storedLanguage || defaultLanguage);
 
-    // Homepage: randomize project tiles order on every load
-    initRandomizeHomepageProjects();
+    // Homepage: keep projects in original order (randomization disabled)
+    // initRandomizeHomepageProjects();
     
     // Service Worker (cache for faster navigations + offline fallback)
     registerServiceWorker();
