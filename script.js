@@ -429,7 +429,61 @@ function filterProjects(category) {
     });
 }
 
+// Animated underline for filter buttons
+function initFilterUnderline() {
+    const filterGroup = document.querySelector('.filter-group');
+    if (!filterGroup) return;
+    
+    // Create the underline element
+    let underline = filterGroup.querySelector('.filter-underline');
+    if (!underline) {
+        underline = document.createElement('span');
+        underline.className = 'filter-underline';
+        filterGroup.appendChild(underline);
+    }
+    
+    function moveUnderline(btn) {
+        if (!btn) return;
+        const groupRect = filterGroup.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+        
+        // Get text width by measuring the button's text content
+        const textWidth = btn.offsetWidth;
+        const btnCenter = btnRect.left - groupRect.left + (btnRect.width / 2);
+        
+        // Underline is 50% of button width, centered under text
+        const width = textWidth * 0.5;
+        const left = btnCenter - (width / 2);
+        
+        underline.style.left = `${left}px`;
+        underline.style.width = `${width}px`;
+        underline.style.opacity = '1';
+    }
+    
+    // Position underline on active button
+    const activeBtn = filterGroup.querySelector('.filter-btn.active');
+    if (activeBtn) {
+        // Initial position without animation
+        underline.style.transition = 'none';
+        moveUnderline(activeBtn);
+        // Re-enable animation after initial position
+        requestAnimationFrame(() => {
+            underline.style.transition = '';
+        });
+    }
+    
+    // Update on window resize
+    window.addEventListener('resize', () => {
+        const active = filterGroup.querySelector('.filter-btn.active');
+        if (active) moveUnderline(active);
+    });
+    
+    return moveUnderline;
+}
+
 // Обработчики для фильтров
+const moveFilterUnderline = initFilterUnderline();
+
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         // Убираем активный класс у всех кнопок
@@ -439,6 +493,9 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         
         // Добавляем активный класс нажатой кнопке
         btn.classList.add('active');
+        
+        // Move underline to active button
+        if (moveFilterUnderline) moveFilterUnderline(btn);
         
         // Фильтруем проекты
         const category = btn.getAttribute('data-filter');

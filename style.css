@@ -37,16 +37,16 @@ body {
 .main-header,
 .logo a,
 .lang-link {
-    color: #3C3A3A;
+    color: #2a2a2a;
 }
 
 .lang-link {
-    color: rgba(60, 58, 58, 0.7);
+    color: rgba(42, 42, 42, 0.6);
 }
 
 .lang-link:hover,
 .lang-link.active {
-    color: #3C3A3A;
+    color: #2a2a2a;
 }
 
 /* Общие стили для всего сайта */
@@ -77,14 +77,14 @@ p,
     position: fixed;
     top: 0;
     width: 100%;
-    height: 130px;
+    height: 72px; /* compact header */
     background: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
     box-sizing: border-box;
-    padding: 0 35px;
+    padding: 0 40px;
 }
 
 /* Центральный блок с логотипом и about */
@@ -92,7 +92,7 @@ p,
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
 }
 
 /* Пустой блок убран - не нужен */
@@ -103,15 +103,26 @@ p,
 /* Логотип по центру */
 .logo {
     font-family: 'Intro', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-size: 22px; /* smaller for compact header */
+    font-weight: 400;
+    letter-spacing: 0;
     margin: 0;
+    position: relative;
 }
 
 /* "STUDIO" part - stays uppercase in Intro font */
 .logo-studio {
     text-transform: uppercase;
+    letter-spacing: 0.16em; /* tighter tracking - elegant but solid */
+    font-size: 0.88em; /* slightly smaller to let Daria shine */
+    font-weight: 500; /* slightly heavier for better legibility at small sizes */
+    color: #2a2a2a;
+    position: relative;
+    z-index: 2; /* "O" stays clearly on top */
+    /* Remove any potential color fringing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
 }
 
 /* "Daria" part - elegant script font Ms Madi */
@@ -119,13 +130,22 @@ p,
     font-family: 'Ms Madi', cursive !important;
     font-weight: 400;
     text-transform: none;
-    font-size: 2em;
+    font-size: 2.2em; /* larger - the hero element */
     letter-spacing: 0;
     vertical-align: baseline;
-    color: #3C3A3A;
-    margin-left: -35px;
+    color: #2a2a2a;
+    margin-left: -0.42em; /* clear intentional overlap: D behind O */
     position: relative;
-    top: 5px;
+    top: 0.1em; /* shifted down for natural baseline alignment */
+    z-index: 3; /* D layer ON TOP of O - clear intentional overlap */
+    /* Slightly bolder stroke for better legibility */
+    -webkit-text-stroke: 0.5px #2a2a2a;
+    text-stroke: 0.5px #2a2a2a;
+    paint-order: stroke fill;
+    /* Remove any potential color fringing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
 }
 
 /* Контейнер для языков - правый верхний угол */
@@ -141,17 +161,22 @@ p,
 
 .lang-link {
     text-decoration: none;
-    color: #999;
-    font-size: 16px;
+    color: rgba(42, 42, 42, 0.45);
+    font-size: 13px;
     text-transform: lowercase;
-    transition: color 0.3s ease;
-    padding: 5px;
+    transition: all 0.2s ease;
+    padding: 4px 2px;
     cursor: pointer;
+    position: relative;
 }
 
-.lang-link:hover,
+.lang-link:hover {
+    color: #2a2a2a;
+}
+
 .lang-link.active {
-    color: #3C3A3A;
+    color: #2a2a2a;
+    font-weight: 600;
 }
 
 /* About Me - под логотипом */
@@ -195,18 +220,19 @@ p,
 
 .about-link a {
     text-decoration: none;
-    color: #3C3A3A;
-    font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    padding: 5px 0;
-    letter-spacing: 1px;
+    color: rgba(42, 42, 42, 0.75); /* darker */
+    font-size: 11px; /* smaller */
+    font-weight: 600; /* bolder */
+    transition: color 0.2s ease;
+    padding: 6px 12px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
     white-space: nowrap;
     border: none;
 }
 
 .about-link a:hover {
-    color: #FF9999;
+    color: #2a2a2a;
 }
 
 /* Добавляем тонкую линию снизу */
@@ -316,7 +342,7 @@ nav a {
     grid-template-columns: repeat(4, 1fr);
     gap: 3px;
     padding: 3px;
-    margin-top: 180px;
+    margin-top: 125px; /* below compact header + filters */
     width: 100%;
 }
 
@@ -462,21 +488,21 @@ nav a {
     }
 
     .main-header {
-        height: 100px;
+        height: 64px;
         padding: 0 20px;
     }
 
     .logo {
-        font-size: 22px;
+        font-size: 18px;
     }
 
+    /* Reduce overlap on tablet for better legibility */
     .logo-daria {
-        font-size: 1.8em;
-        margin-left: -25px;
+        margin-left: -0.32em;
     }
 
     .filters {
-        top: 100px;
+        top: 64px;
     }
 
     .filter-group {
@@ -488,7 +514,7 @@ nav a {
     }
 
     .project-grid {
-        margin-top: 160px;
+        margin-top: 115px;
     }
 
     .project-item .project-info span {
@@ -606,11 +632,11 @@ nav a {
 /* Стили для фильтров */
 .filters {
     position: fixed;
-    top: 130px;
+    top: 72px; /* below compact header */
     left: 0;
     width: 100%;
     background: #fff;
-    padding: 15px 0;
+    padding: 12px 0;
     text-align: center;
     z-index: 999;
 }
@@ -624,20 +650,35 @@ nav a {
 .filter-btn {
     background: none;
     border: none;
-    padding: 5px 10px;
+    padding: 6px 12px;
     cursor: pointer;
-    font-size: 14px;
-    color: #999;
-    transition: all 0.3s ease;
+    font-size: 12px;
+    color: rgba(42, 42, 42, 0.5); /* lighter but still readable */
+    transition: color 0.2s ease;
 }
 
 .filter-btn:hover {
-    color: #000;
+    color: #2a2a2a;
 }
 
 .filter-btn.active {
-    color: #000;
-    font-weight: 500;
+    color: #2a2a2a;
+    font-weight: 600;
+}
+
+/* Single animated underline that moves between active items */
+.filter-group {
+    position: relative;
+}
+
+.filter-underline {
+    position: absolute;
+    bottom: 8px; /* even closer to text - more solid */
+    height: 1px; /* thinner - more luxury */
+    background: #2a2a2a;
+    transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    opacity: 0;
 }
 
 /* Проекты */
@@ -854,7 +895,7 @@ nav a {
 /* Mobile header improvements */
 @media (max-width: 600px) {
     .main-header {
-        height: 90px;
+        height: 56px;
         padding: 0 12px;
         flex-direction: column;
         justify-content: center;
@@ -862,40 +903,42 @@ nav a {
 
     .header-center {
         order: 1;
-        gap: 4px;
+        gap: 3px;
     }
 
     .logo {
-        font-size: 15px;
-        letter-spacing: 1.5px;
+        font-size: 14px;
+        letter-spacing: 0;
     }
 
+    /* Mobile: reduce overlap for clarity */
     .logo-daria {
-        font-size: 1.6em;
-        margin-left: -18px;
+        margin-left: -0.25em;
     }
 
     .language-switcher {
         position: absolute;
-        top: 8px;
+        top: 50%;
+        transform: translateY(-50%);
         right: 12px;
-        gap: 4px;
+        gap: 3px;
     }
 
     .lang-link {
-        font-size: 9px;
+        font-size: 10px;
         padding: 2px;
-        letter-spacing: 0.5px;
     }
 
     .about-link {
         left: 12px;
-        top: 8px;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     .header-left {
         left: 12px;
-        top: 8px;
+        top: 50%;
+        transform: translateY(-50%);
         gap: 4px;
     }
 
@@ -906,13 +949,13 @@ nav a {
 
     .about-link a {
         font-size: 10px;
-        font-weight: 600;
+        font-weight: 400;
         padding: 2px 0;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
     }
 
     .filters {
-        top: 90px;
+        top: 56px;
         padding: 8px 0;
     }
 
@@ -929,7 +972,7 @@ nav a {
     }
 
     .project-grid {
-        margin-top: 140px;
+        margin-top: 100px;
         gap: 2px;
         padding: 2px;
     }
@@ -964,36 +1007,36 @@ nav a {
 /* Small mobile (< 400px) */
 @media (max-width: 400px) {
     .main-header {
-        height: 80px;
+        height: 50px;
     }
 
     .logo {
-        font-size: 13px;
-        letter-spacing: 1px;
+        font-size: 12px;
     }
 
+    /* Smallest screens: minimal overlap */
     .logo-daria {
-        font-size: 1.5em;
-        margin-left: -14px;
+        margin-left: -0.2em;
     }
 
     .about-link a {
-        font-size: 7px;
-        padding: 3px 8px;
+        font-size: 9px;
+        font-weight: 400;
+        padding: 2px 0;
     }
 
     .filters {
-        top: 80px;
+        top: 50px;
         padding: 6px 0;
     }
 
     .filter-btn {
-        font-size: 7px;
-        padding: 3px 5px;
+        font-size: 8px;
+        padding: 4px 6px;
     }
 
     .project-grid {
-        margin-top: 120px;
+        margin-top: 90px;
     }
 
     .project-item .project-info span {
