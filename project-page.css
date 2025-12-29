@@ -90,6 +90,11 @@ body.project-1 .main-header {
     color: #1a1a1a !important;
 }
 
+/* Keep logo hover consistent on project pages (override !important color rules above) */
+.main-header .logo a:hover {
+    color: rgba(42, 42, 42, 0.75) !important;
+}
+
 .main-header .lang-link {
     color: #999 !important;
 }

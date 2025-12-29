@@ -116,7 +116,7 @@ p,
     letter-spacing: 0.16em; /* tighter tracking - elegant but solid */
     font-size: 0.88em; /* slightly smaller to let Daria shine */
     font-weight: 500; /* slightly heavier for better legibility at small sizes */
-    color: #2a2a2a;
+    color: inherit; /* allow hover color on the whole logo */
     position: relative;
     z-index: 2; /* "O" stays clearly on top */
     /* Remove any potential color fringing */
@@ -133,14 +133,14 @@ p,
     font-size: 2.2em; /* larger - the hero element */
     letter-spacing: 0;
     vertical-align: baseline;
-    color: #2a2a2a;
+    color: inherit; /* allow hover color on the whole logo */
     margin-left: -0.42em; /* clear intentional overlap: D behind O */
     position: relative;
     top: 0.1em; /* shifted down for natural baseline alignment */
     z-index: 3; /* D layer ON TOP of O - clear intentional overlap */
     /* Slightly bolder stroke for better legibility */
-    -webkit-text-stroke: 0.5px #2a2a2a;
-    text-stroke: 0.5px #2a2a2a;
+    -webkit-text-stroke: 0.5px currentColor;
+    text-stroke: 0.5px currentColor;
     paint-order: stroke fill;
     /* Remove any potential color fringing */
     -webkit-font-smoothing: antialiased;
@@ -220,19 +220,26 @@ p,
 
 .about-link a {
     text-decoration: none;
-    color: rgba(42, 42, 42, 0.75); /* darker */
-    font-size: 11px; /* smaller */
-    font-weight: 600; /* bolder */
-    transition: color 0.2s ease;
+    /* Same system as menu items (normal nav link) */
+    color: rgba(42, 42, 42, 0.72);
+    font-size: 12px;
+    font-weight: 500; /* match menu weight */
+    transition: color 220ms cubic-bezier(0.22, 1, 0.36, 1);
     padding: 6px 12px;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     white-space: nowrap;
     border: none;
 }
 
 .about-link a:hover {
+    color: #2a2a2a; /* black/dark hover for "O MNĚ" */
+    font-weight: 600; /* match category hover */
+}
+
+.about-link a:focus-visible {
     color: #2a2a2a;
+    font-weight: 600;
 }
 
 /* Добавляем тонкую линию снизу */
@@ -645,6 +652,8 @@ nav a {
     display: flex;
     justify-content: center;
     gap: 30px;
+    align-items: flex-end;
+    padding-bottom: 8px; /* room for underline (tighter) */
 }
 
 .filter-btn {
@@ -653,15 +662,31 @@ nav a {
     padding: 6px 12px;
     cursor: pointer;
     font-size: 12px;
-    color: rgba(42, 42, 42, 0.5); /* lighter but still readable */
-    transition: color 0.2s ease;
+    color: rgba(42, 42, 42, 0.72); /* darker so it doesn't look disabled */
+    transition: color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 1; /* override legacy opacity styles so inactive isn't faded */
+    font-weight: 500; /* consistent weight for all items */
+    line-height: 1;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .filter-btn:hover {
-    color: #2a2a2a;
+    color: #2a2a2a; /* dark hover for categories */
+    font-weight: 600; /* slightly bolder on hover */
 }
 
 .filter-btn.active {
+    color: #2a2a2a;
+    font-weight: 500; /* active indicated by underline, not weight */
+}
+
+.filter-btn.active:hover,
+.filter-btn.active:focus-visible {
+    font-weight: 500; /* keep active consistent (no bold jump) */
+}
+
+.filter-btn:focus-visible {
     color: #2a2a2a;
     font-weight: 600;
 }
@@ -673,12 +698,23 @@ nav a {
 
 .filter-underline {
     position: absolute;
-    bottom: 8px; /* even closer to text - more solid */
-    height: 1px; /* thinner - more luxury */
-    background: #2a2a2a;
-    transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    bottom: 13px; /* closer to text (+3px) */
+    height: 0.75px; /* thinner - more luxury */
+    background: rgba(42, 42, 42, 0.95);
+    border-radius: 999px;
+    transition:
+        left 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        width 320ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 160ms ease;
     pointer-events: none;
     opacity: 0;
+    will-change: left, width;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .filter-underline {
+        transition: none;
+    }
 }
 
 /* Проекты */
@@ -702,7 +738,7 @@ nav a {
 }
 
 .logo a:hover {
-    color: #FF9999; /* Розовый цвет */
+    color: rgba(42, 42, 42, 0.75); /* grey hover for logo */
 }
 
 /* Simple Footer */

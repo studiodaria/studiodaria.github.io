@@ -442,18 +442,31 @@ function initFilterUnderline() {
         filterGroup.appendChild(underline);
     }
     
+    // Ensure each button has a measurable text wrapper, so underline aligns to text (not padding)
+    const buttons = Array.from(filterGroup.querySelectorAll('.filter-btn'));
+    buttons.forEach((btn) => {
+        // If translations previously replaced the button text, wrappers may be lost.
+        let label = btn.querySelector('.filter-label');
+        if (!label) {
+            const text = (btn.textContent || '').trim();
+            btn.textContent = '';
+            label = document.createElement('span');
+            label.className = 'filter-label';
+            label.textContent = text;
+            btn.appendChild(label);
+        }
+    });
+
     function moveUnderline(btn) {
         if (!btn) return;
         const groupRect = filterGroup.getBoundingClientRect();
-        const btnRect = btn.getBoundingClientRect();
-        
-        // Get text width by measuring the button's text content
-        const textWidth = btn.offsetWidth;
-        const btnCenter = btnRect.left - groupRect.left + (btnRect.width / 2);
-        
-        // Underline is 50% of button width, centered under text
-        const width = textWidth * 0.5;
-        const left = btnCenter - (width / 2);
+        const label = btn.querySelector('.filter-label') || btn;
+        const labelRect = label.getBoundingClientRect();
+
+        // Underline: constant-width dash (same everywhere), centered under label
+        const width = 20;
+        const labelCenter = (labelRect.left - groupRect.left) + (labelRect.width / 2);
+        const left = labelCenter - (width / 2);
         
         underline.style.left = `${left}px`;
         underline.style.width = `${width}px`;
@@ -465,11 +478,13 @@ function initFilterUnderline() {
     if (activeBtn) {
         // Initial position without animation
         underline.style.transition = 'none';
-        moveUnderline(activeBtn);
-        // Re-enable animation after initial position
+        // Do it on next frame (layout is more stable), then re-enable animation
         requestAnimationFrame(() => {
+            moveUnderline(activeBtn);
             underline.style.transition = '';
         });
+        // And once more after fonts/layout settle (prevents wrong position on refresh)
+        window.addEventListener('load', () => moveUnderline(activeBtn), { passive: true, once: true });
     }
     
     // Update on window resize
@@ -477,13 +492,24 @@ function initFilterUnderline() {
         const active = filterGroup.querySelector('.filter-btn.active');
         if (active) moveUnderline(active);
     });
+
+    // Premium interaction: underline follows hover, returns to active when leaving the group
+    buttons.forEach((btn) => {
+        // Defer measurement to next frame so hover/focus styles (incl. font-weight) are applied
+        btn.addEventListener('mouseenter', () => requestAnimationFrame(() => moveUnderline(btn)), { passive: true });
+        btn.addEventListener('focus', () => requestAnimationFrame(() => moveUnderline(btn)), { passive: true });
+    });
+    filterGroup.addEventListener('mouseleave', () => {
+        const active = filterGroup.querySelector('.filter-btn.active');
+        if (active) requestAnimationFrame(() => moveUnderline(active));
+    }, { passive: true });
     
+    // Expose so other code (translations / initial load) can re-sync position
+    window.__moveFilterUnderline = moveUnderline;
     return moveUnderline;
 }
 
 // Обработчики для фильтров
-const moveFilterUnderline = initFilterUnderline();
-
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         // Убираем активный класс у всех кнопок
@@ -495,7 +521,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.add('active');
         
         // Move underline to active button
-        if (moveFilterUnderline) moveFilterUnderline(btn);
+        if (window.__moveFilterUnderline) requestAnimationFrame(() => window.__moveFilterUnderline(btn));
         
         // Фильтруем проекты
         const category = btn.getAttribute('data-filter');
@@ -540,9 +566,19 @@ function switchLanguage(lang) {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         const key = btn.getAttribute('data-translate');
         if (translations[lang] && translations[lang][key]) {
-            btn.textContent = translations[lang][key];
+            const label = btn.querySelector('.filter-label');
+            if (label) label.textContent = translations[lang][key];
+            else btn.textContent = translations[lang][key];
         }
     });
+
+    // Re-sync animated underline after text changes (layout width changes)
+    if (window.__moveFilterUnderline) {
+        const active = document.querySelector('.filter-group .filter-btn.active');
+        if (active) {
+            requestAnimationFrame(() => window.__moveFilterUnderline(active));
+        }
+    }
 }
 
 // Добавляем обработчики для языковых ссылок
@@ -576,6 +612,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const browserLang = (navigator.language || '').toLowerCase();
     const defaultLanguage = browserLang.startsWith('cs') ? 'cz' : 'en';
     switchLanguage(storedLanguage || defaultLanguage);
+
+    // Init animated underline after language is applied (correct widths on refresh)
+    initFilterUnderline();
 
     // Homepage: keep projects in original order (randomization disabled)
     // initRandomizeHomepageProjects();
