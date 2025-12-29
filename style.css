@@ -168,6 +168,7 @@ p,
     padding: 4px 2px;
     cursor: pointer;
     position: relative;
+    font-weight: 400;
 }
 
 .lang-link:hover {
@@ -176,7 +177,7 @@ p,
 
 .lang-link.active {
     color: #2a2a2a;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 /* About Me - под логотипом */
@@ -194,21 +195,49 @@ p,
 
 .nav-link {
     text-decoration: none;
-    color: #3C3A3A;
-    font-size: 14px;
-    font-weight: 600;
-    transition: color 0.3s ease;
-    letter-spacing: 1px;
+    /* Same as .about-link a on homepage */
+    color: rgba(42, 42, 42, 0.72);
+    font-size: 12px;
+    font-weight: 500;
+    transition: color 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* "O MNĚ" link - slightly larger */
+.nav-link--primary {
+    font-size: 13px;
 }
 
 .nav-link:hover {
-    color: #FF9999;
+    color: #2a2a2a;
+    font-weight: 600; /* tučné jen při hoveru */
+}
+
+.nav-link:focus-visible {
+    color: #2a2a2a;
+    font-weight: 600;
 }
 
 .nav-separator {
-    color: #3C3A3A;
-    font-size: 14px;
+    color: rgba(42, 42, 42, 0.45);
+    font-size: 12px;
     font-weight: 400;
+    margin: 0 2px;
+}
+
+.nav-current {
+    color: rgba(42, 42, 42, 0.72);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: min(42vw, 400px);
 }
 
 .about-link {
@@ -222,7 +251,7 @@ p,
     text-decoration: none;
     /* Same system as menu items (normal nav link) */
     color: rgba(42, 42, 42, 0.72);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500; /* match menu weight */
     transition: color 220ms cubic-bezier(0.22, 1, 0.36, 1);
     padding: 6px 12px;
@@ -269,7 +298,20 @@ p,
     }
 
     .nav-link {
-        font-size: 12px;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+    }
+
+    .nav-separator {
+        font-size: 11px;
+    }
+
+    .nav-current {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        max-width: min(40vw, 280px);
     }
 }
 
@@ -289,6 +331,19 @@ p,
 
     .nav-link {
         font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+    }
+
+    .nav-separator {
+        font-size: 10px;
+    }
+
+    .nav-current {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        max-width: min(35vw, 200px);
     }
 }
 
@@ -1016,15 +1071,27 @@ nav a {
     }
 
     .nav-link {
-        font-size: 9px;
-        letter-spacing: 0.5px;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+    }
+
+    .nav-separator {
+        font-size: 10px;
+    }
+
+    .nav-current {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        max-width: min(32vw, 180px);
     }
 
     .about-link a {
         font-size: 10px;
         font-weight: 400;
         padding: 2px 0;
-        letter-spacing: 0.3px;
+        letter-spacing: 0.04em;
     }
 
     .filters {
@@ -1096,6 +1163,28 @@ nav a {
         font-size: 9px;
         font-weight: 400;
         padding: 2px 0;
+        letter-spacing: 0.03em;
+    }
+
+    .nav-link {
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+    }
+
+    .nav-separator {
+        font-size: 9px;
+    }
+
+    .nav-current {
+        font-size: 9px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        max-width: min(28vw, 120px);
+    }
+
+    .header-left {
+        gap: 3px;
     }
 
     .filters {
