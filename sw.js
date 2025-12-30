@@ -1,10 +1,10 @@
-/* Service Worker: lightweight caching for faster navigation on a static portfolio
+﻿/* Service Worker: lightweight caching for faster navigation on a static portfolio
    - HTML: network-first (fresh when online, fast fallback when offline)
    - CSS/JS: stale-while-revalidate
    - Images: cache-first with a small cap (to avoid unbounded storage)
 */
 
-const VERSION = 'v15';
+const VERSION = 'v29';
 const CACHE_STATIC = `static-${VERSION}`;
 const CACHE_PAGES = `pages-${VERSION}`;
 const CACHE_IMAGES = `images-${VERSION}`;
@@ -128,6 +128,7 @@ self.addEventListener('fetch', (event) => {
   // CSS/JS/fonts
   event.respondWith(staleWhileRevalidate(req, CACHE_STATIC));
 });
+
 
 
 

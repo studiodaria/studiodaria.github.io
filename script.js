@@ -74,7 +74,7 @@ const translations = {
         // Project 1
         project1_title: 'Терминал ВСМ Прага-восток',
         // Project 2
-        project2_title: 'Школа дизайна и искусства',
+        project2_title: 'Design – Art – and – Peace – Factory',
         // Project 3
         project3_title: 'Žluté lázně – Riverside Leisure & Spa',
         // Project 4
@@ -125,7 +125,7 @@ const translations = {
         // Project 1
         project1_title: 'Terminál VRT Praha-východ',
         // Project 2
-        project2_title: 'Škola designu a umění',
+        project2_title: 'Design – Art – and – Peace – Factory',
         // Project 3
         project3_title: 'Žluté lázně – Riverside Leisure & Spa',
         // Project 4
@@ -154,6 +154,68 @@ const translations = {
         no_copy: 'Veškerý obsah je chráněn autorským právem. Reprodukce bez souhlasu není povolena.'
     }
 };
+
+const imageSupport = (() => {
+    const can = (mime) => {
+        try {
+            const c = document.createElement('canvas');
+            if (!c.getContext) return false;
+            return c.toDataURL(mime).startsWith(`data:${mime}`);
+        } catch {
+            return false;
+        }
+    };
+    return {
+        avif: can('image/avif'),
+        webp: can('image/webp'),
+    };
+})();
+
+function preferOptimizedImageUrl(url) {
+    if (!url || typeof url !== 'string') return url;
+
+    const withPicweb = (u) =>
+        String(u).replace(/(images\/project\d+\/)(?!picweb\/)/i, '$1picweb/');
+
+    const swap = (ext) =>
+        withPicweb(url).replace(/\.(jpg|jpeg|png)(?=($|[?#]))/i, `.${ext}`);
+    if (imageSupport.avif) return swap('avif');
+    if (imageSupport.webp) return swap('webp');
+    return url;
+}
+
+function updatePictureSources(pictureEl, fallbackSrc) {
+    if (!pictureEl || !fallbackSrc) return;
+
+    const withPicweb = (u) =>
+        String(u).replace(/(images\/project\d+\/)(?!picweb\/)/i, '$1picweb/');
+
+    const swap = (ext) =>
+        withPicweb(fallbackSrc).replace(/\.(jpg|jpeg|png)(?=($|[?#]))/i, `.${ext}`);
+
+    const avif = pictureEl.querySelector('source[type="image/avif"]');
+    const webp = pictureEl.querySelector('source[type="image/webp"]');
+
+    if (avif) avif.setAttribute('srcset', encodeURI(swap('avif')));
+    if (webp) webp.setAttribute('srcset', encodeURI(swap('webp')));
+}
+
+function syncProjectHeroTitleAlignment() {
+    const heroTitle = document.querySelector('.project-hero-title');
+    const headerLeft = document.querySelector('.main-header .header-left');
+    if (!heroTitle || !headerLeft) return;
+
+    if (window.matchMedia && window.matchMedia('(max-width: 768px)').matches) {
+        heroTitle.style.removeProperty('--hero-title-left');
+        return;
+    }
+
+    const target = headerLeft.querySelector('.nav-separator') || headerLeft;
+    const rect = target.getBoundingClientRect();
+    const left = Math.max(16, Math.round(rect.left));
+
+    heroTitle.style.setProperty('--hero-title-left', `${left}px`);
+}
 
 function initLightbox() {
     const links = Array.from(document.querySelectorAll('a.lightbox-link[href]'));
@@ -250,7 +312,7 @@ function initLightbox() {
         
         // Get all lightbox links on the page
         document.querySelectorAll('a.lightbox-link[href]').forEach(link => {
-            const src = link.getAttribute('href');
+            const src = preferOptimizedImageUrl(link.getAttribute('href'));
             const alt = link.querySelector('img')?.getAttribute('alt') || '';
             if (src && !images.some(i => i.src === src)) {
                 images.push({ src, alt });
@@ -259,7 +321,7 @@ function initLightbox() {
         
         // Also get images from drawings gallery thumbnails
         document.querySelectorAll('.drawings-gallery .drawings-thumb').forEach(thumb => {
-            const src = thumb.dataset.src;
+            const src = preferOptimizedImageUrl(thumb.dataset.src);
             const alt = thumb.dataset.alt || '';
             if (src && !images.some(i => i.src === src)) {
                 images.push({ src, alt });
@@ -274,11 +336,12 @@ function initLightbox() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const href = link.getAttribute('href');
+            const clickedSrc = preferOptimizedImageUrl(href);
             const caption = link.querySelector('img')?.getAttribute('alt') || '';
             
             // Collect all images and find current index
             const allImages = collectGalleryImages(link);
-            let startIndex = allImages.findIndex(img => img.src === href);
+            let startIndex = allImages.findIndex(img => img.src === clickedSrc);
             
             if (startIndex < 0) startIndex = 0;
             
@@ -286,7 +349,7 @@ function initLightbox() {
                 openGallery(allImages, startIndex);
             } else {
                 // Fallback: single image
-                openGallery([{ src: href, alt: caption }], 0);
+                openGallery([{ src: clickedSrc, alt: caption }], 0);
             }
         });
     });
@@ -543,7 +606,10 @@ function switchLanguage(lang) {
     }
     
     // Сохраняем выбранный язык
-    localStorage.setItem('selectedLanguage', lang);
+    try { localStorage.setItem('selectedLanguage', lang); } catch {}
+
+    // Keep <html lang> in sync for accessibility/SEO
+    document.documentElement.lang = (lang === 'cz') ? 'cs' : lang;
     
     // Переводим текст на странице
     document.querySelectorAll('[data-translate]').forEach(element => {
@@ -579,6 +645,9 @@ function switchLanguage(lang) {
             requestAnimationFrame(() => window.__moveFilterUnderline(active));
         }
     }
+
+    // Project pages: keep hero title aligned with header breadcrumb
+    requestAnimationFrame(() => syncProjectHeroTitleAlignment());
 }
 
 // Добавляем обработчики для языковых ссылок
@@ -608,10 +677,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Load saved language; if none is saved, default to Czech for Czech browsers.
-    const storedLanguage = localStorage.getItem('selectedLanguage');
+    let storedLanguage = null;
+    try { storedLanguage = localStorage.getItem('selectedLanguage'); } catch {}
     const browserLang = (navigator.language || '').toLowerCase();
     const defaultLanguage = browserLang.startsWith('cs') ? 'cz' : 'en';
     switchLanguage(storedLanguage || defaultLanguage);
+    syncProjectHeroTitleAlignment();
+    window.addEventListener('resize', () => syncProjectHeroTitleAlignment(), { passive: true });
+    window.addEventListener('load', () => syncProjectHeroTitleAlignment(), { passive: true, once: true });
 
     // Init animated underline after language is applied (correct widths on refresh)
     initFilterUnderline();
@@ -930,6 +1003,7 @@ function initDrawingsGallery() {
 
     galleries.forEach(gallery => {
         const mainImg = gallery.querySelector('.drawings-main img');
+        const mainPicture = mainImg ? mainImg.closest('picture') : null;
         const thumbs = Array.from(gallery.querySelectorAll('.drawings-thumb'));
         const prevBtn = gallery.querySelector('.drawings-prev');
         const nextBtn = gallery.querySelector('.drawings-next');
@@ -953,6 +1027,8 @@ function initDrawingsGallery() {
             // Fade effect
             mainImg.style.opacity = '0';
             setTimeout(() => {
+                // If main image is inside a <picture>, update <source> candidates too.
+                if (mainPicture) updatePictureSources(mainPicture, src);
                 mainImg.src = src;
                 mainImg.alt = alt;
                 mainImg.style.opacity = '1';
@@ -969,6 +1045,7 @@ function initDrawingsGallery() {
         // Initialize from current active thumb
         const activeThumb = thumbs[currentIndex];
         if (activeThumb?.dataset?.src) {
+            if (mainPicture) updatePictureSources(mainPicture, activeThumb.dataset.src);
             mainImg.src = activeThumb.dataset.src;
             mainImg.alt = activeThumb.dataset.alt || '';
         }
@@ -998,7 +1075,7 @@ function initDrawingsGallery() {
                 
                 // Collect all images from this drawings gallery
                 const galleryImages = thumbs.map(thumb => ({
-                    src: thumb.dataset.src,
+                    src: preferOptimizedImageUrl(thumb.dataset.src),
                     alt: thumb.dataset.alt || ''
                 })).filter(img => img.src);
                 
@@ -1029,7 +1106,7 @@ function initMobileGallery() {
     // Get images from figures and lightbox links
     verticalGallery.querySelectorAll('img').forEach(img => {
         const link = img.closest('a.lightbox-link');
-        const src = link ? link.getAttribute('href') : img.getAttribute('src');
+        const src = preferOptimizedImageUrl(link ? link.getAttribute('href') : img.getAttribute('src'));
         const alt = img.getAttribute('alt') || '';
         if (src && !allImages.some(i => i.src === src)) {
             allImages.push({ src, alt });
