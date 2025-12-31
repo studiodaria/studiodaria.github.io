@@ -15,6 +15,92 @@
     align-items: start;
 }
 
+/* CV (Education / Experience) */
+.cv {
+    --text: var(--text-color);
+    --muted: rgba(26, 26, 26, 0.62);
+    --muted2: rgba(26, 26, 26, 0.42);
+    --line: rgba(0, 0, 0, 0.08);
+    --accent: var(--accent-color);
+    max-width: 980px;
+    margin: 0;
+}
+
+.cv__section {
+    margin: 48px 0 18px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--muted2);
+}
+
+.cv__section--spaced {
+    margin-top: 64px;
+}
+
+.cv__item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 28px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+}
+
+/* Remove top line right after a section header */
+.cv__section + .cv__item {
+    border-top: 0;
+}
+
+.cv__year {
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--muted2);
+    padding-top: 4px;
+}
+
+.cv__title {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.35;
+    color: var(--text);
+}
+
+.cv__meta {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.cv__tag {
+    color: var(--muted2);
+    font-weight: 400;
+}
+
+.cv__list {
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.cv__list li {
+    position: relative;
+    padding-left: 18px;
+    margin: 6px 0;
+}
+
+.cv__list li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--muted2);
+}
+
 /* Photo Section */
 .about-photo {
     position: sticky;
@@ -61,12 +147,15 @@
 
 .about-bio {
     margin-bottom: 50px;
+    max-width: 72ch;
+    padding-left: 16px;
+    border-left: 1px solid rgba(0, 0, 0, 0.10);
 }
 
 .about-bio p {
-    font-size: 18px;
-    line-height: 1.8;
-    color: #333;
+    font-size: 17px;
+    line-height: 1.85;
+    color: rgba(18, 18, 18, 0.82);
     margin-bottom: 20px;
 }
 
@@ -81,8 +170,20 @@
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #999;
+    color: rgba(18, 18, 18, 0.55);
     margin: 0 0 20px 0;
+    position: relative;
+    padding-left: 12px;
+}
+
+.about-section h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 1px;
+    background: rgba(18, 18, 18, 0.45);
 }
 
 /* Lists (Education, Experience) */
@@ -92,20 +193,53 @@
     margin: 0;
 }
 
-.about-list li {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 15px;
-    font-size: 16px;
+.about-list > li {
+    display: grid;
+    grid-template-columns: minmax(90px, 120px) 1fr;
+    column-gap: 28px;
+    padding: 14px 0;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.about-list > li:last-child {
+    border-bottom: none;
 }
 
 .about-list .year {
-    color: #999;
-    min-width: 120px;
+    color: rgba(18, 18, 18, 0.55);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .about-list .info {
-    color: #333;
+    color: rgba(18, 18, 18, 0.84);
+}
+
+.about-role {
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.about-meta {
+    margin-top: 4px;
+    color: rgba(18, 18, 18, 0.62);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.about-sublist {
+    margin: 10px 0 0 0;
+    padding-left: 18px;
+    color: rgba(18, 18, 18, 0.72);
+}
+
+.about-sublist li {
+    display: list-item;
+    margin: 6px 0;
+    font-size: 14px;
+    line-height: 1.6;
 }
 
 /* Skills */
@@ -226,19 +360,23 @@
         margin-bottom: 15px;
     }
 
-    .about-list li {
-        flex-direction: column;
-        gap: 4px;
-        margin-bottom: 12px;
+    .about-list > li {
+        grid-template-columns: 1fr;
+        row-gap: 6px;
+        padding: 12px 0;
         font-size: 13px;
     }
 
     .about-list .year {
-        min-width: auto;
         font-size: 11px;
     }
 
     .about-list .info {
+        font-size: 13px;
+    }
+
+    .about-meta,
+    .about-sublist li {
         font-size: 13px;
     }
 
@@ -251,6 +389,15 @@
         width: 26px;
         height: 26px;
         font-size: 12px;
+    }
+
+    .cv__item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .cv__year {
+        padding-top: 0;
     }
 }
 
@@ -283,7 +430,7 @@
         font-size: 10px;
     }
 
-    .about-list li {
+    .about-list > li {
         font-size: 12px;
     }
 
@@ -327,7 +474,7 @@
         font-size: 9px;
     }
 
-    .about-list li {
+    .about-list > li {
         font-size: 11px;
     }
 
@@ -346,4 +493,3 @@
         font-size: 10px;
     }
 }
-

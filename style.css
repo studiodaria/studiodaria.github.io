@@ -87,6 +87,27 @@ p,
     padding: 0 40px;
 }
 
+/* Home page: slightly smaller header/logo */
+body.home .main-header {
+    height: 64px;
+}
+
+body.home .logo {
+    font-size: 20px;
+}
+
+body.home .logo-daria {
+    font-size: 2.1em;
+}
+
+body.home .filters {
+    top: 64px;
+}
+
+body.home .project-grid {
+    margin-top: 117px; /* header(64) + filters spacing */
+}
+
 /* Центральный блок с логотипом и about */
 .header-center {
     display: flex;
