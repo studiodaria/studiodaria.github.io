@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/msmadi/v2/HTxsL2UxNnOji5E1N-DPiI7Q.woff2" as="font" type="font/woff2" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="about.css">
 </head>
@@ -33,93 +34,281 @@
 
     <main class="about-page">
         <div class="about-container">
-            <!-- Photo section -->
-            <div class="about-photo">
-                <div class="photo-placeholder">
-                    <!-- Replace with your photo: <img src="images/portrait.jpg" alt="Daria"> -->
-                    <span>Your Photo</span>
-                </div>
-            </div>
 
-            <!-- Bio section -->
-            <div class="about-content">
-                <h2 class="about-title">Daria</h2>
-                <p class="about-subtitle">Architect</p>
-                
-                <div class="about-bio">
-                    <p>
-                        <!-- Replace this with your real bio -->
-                        I am an architect based in Prague, Czech Republic. My work focuses on 
-                        creating spaces that balance functionality with aesthetic beauty, 
-                        always considering the human experience and environmental impact.
-                    </p>
-                    <p>
-                        With experience in residential, commercial, and cultural projects, 
-                        I approach each design challenge with curiosity and attention to detail.
-                    </p>
-                </div>
+            <!-- ═══════════════════════════════════════════════════════════
+                 ENGLISH
+                 ═══════════════════════════════════════════════════════════ -->
+            <article class="i18n-block" data-lang-content="en">
 
-                <!-- CV -->
-                <section class="cv" aria-label="Curriculum Vitae">
-                    <h2 class="cv__section">Education</h2>
-
-                    <article class="cv__item">
-                        <div class="cv__year">2012–2016</div>
-                        <div class="cv__content">
-                            <h3 class="cv__title">Vyšší odborná škola architektury a stavebnictví č. 7 v Moskvě</h3>
-                            <p class="cv__meta">Architektura</p>
+                <!-- Intro -->
+                <header class="about-intro">
+                    <div class="about-hero">
+                        <picture>
+                            <source type="image/avif" srcset="images/about/portrait.avif">
+                            <img src="images/about/portrait.jpg" alt="Portrait" class="about-photo" draggable="false">
+                        </picture>
+                        <div class="about-hero-text">
+                            <img src="images/about/name.svg" alt="Ing. arch. Daria Vlasova" class="about-name-img">
+                            <p class="about-role">Architect</p>
+                            <p class="about-location">Prague, Czech Republic</p>
                         </div>
-                    </article>
+                    </div>
+                </header>
 
-                    <article class="cv__item">
-                        <div class="cv__year">2017–2021</div>
-                        <div class="cv__content">
-                            <h3 class="cv__title">České vysoké učení technické v Praze — Fakulta architektury</h3>
-                            <p class="cv__meta">Architektura a urbanismus (bakalářský program)</p>
+                <p class="about-lead">
+                    I'm an architect based in Prague. I focus on clear concepts, thoughtful detailing,
+                    and spaces that feel good to use — with attention to sustainability and context.
+                </p>
+
+                <!-- Education -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Education</h3>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2021 – 2024</span>
+                        <div class="cv-body">
+                            <strong>Czech Technical University in Prague — Faculty of Architecture</strong>
+                            <span class="cv-detail">Architecture and Urbanism (Master's)</span>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="cv__item">
-                        <div class="cv__year">2021–2024</div>
-                        <div class="cv__content">
-                            <h3 class="cv__title">České vysoké učení technické v Praze — Fakulta architektury</h3>
-                            <p class="cv__meta">Architektura a urbanismus (navazující magisterský program)</p>
+                    <div class="cv-entry">
+                        <span class="cv-year">2017 – 2021</span>
+                        <div class="cv-body">
+                            <strong>Czech Technical University in Prague — Faculty of Architecture</strong>
+                            <span class="cv-detail">Architecture and Urbanism (Bachelor's)</span>
                         </div>
-                    </article>
+                    </div>
 
-                    <h2 class="cv__section cv__section--spaced">Experience</h2>
+                    <div class="cv-entry">
+                        <span class="cv-year">2012 – 2016</span>
+                        <div class="cv-body">
+                            <strong>Higher School of Architecture and Civil Engineering No. 7, Moscow</strong>
+                            <span class="cv-detail">Architecture</span>
+                        </div>
+                    </div>
+                </section>
 
-                    <article class="cv__item">
-                        <div class="cv__year">2019–2021</div>
-                        <div class="cv__content">
-                            <h3 class="cv__title">BRAK architekti — architekt <span class="cv__tag">(spolupráce)</span></h3>
-                            <ul class="cv__list">
-                                <li>Územní plánování</li>
-                                <li>Urbanistické studie; veřejné stavby</li>
-                                <li>Projektové stupně: studie / <strong>DÚR / DSP / DPS/ ÚS / RP</strong></li>
-                                <li>Výkresová dokumentace, 3D modely, vizualizace</li>
+                <!-- Experience -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Experience</h3>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2023 – present</span>
+                        <div class="cv-body">
+                            <strong>ZOAA</strong> <span class="cv-tag">collaboration</span>
+                            <span class="cv-detail">Architect — concept studies, interiors, project support</span>
+                            <ul class="cv-list">
+                                <li>Building and interior studies</li>
+                                <li>Project phase: concept / DPI</li>
+                                <li>Author's supervision support</li>
+                                <li>Client and consultant coordination</li>
+                                <li>Drawings, detailing, 3D modeling, visualization</li>
                             </ul>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="cv__item">
-                        <div class="cv__year">2021–2023</div>
-                        <div class="cv__content">
-                            <h3 class="cv__title">RA15 — architekt <span class="cv__tag">(spolupráce)</span></h3>
-                            <ul class="cv__list">
-                                <li>Studie staveb komerčního a veřejného sektoru</li>
-                                <li>Architektonické soutěže: návrh, variantní prověřování, podklady</li>
-                                <li>Projektové stupně: studie / <strong>DÚR / DSP / DPS</strong> / pasportizace (spolupráce na částech dokumentace)</li>
-                                <li>Výkresová dokumentace, detailní řešení, 3D modelování, vizualizace</li>
+                    <div class="cv-entry">
+                        <span class="cv-year">2021 – 2023</span>
+                        <div class="cv-body">
+                            <strong>RA15</strong> <span class="cv-tag">collaboration</span>
+                            <span class="cv-detail">Architect — competitions, commercial and public-sector projects</span>
+                            <ul class="cv-list">
+                                <li>Architectural competitions: concepts, variants, submission sets</li>
+                                <li>Project phases: concept / DÚR / DSP / DPS / building survey</li>
+                                <li>Drawings, detailing, 3D modeling, visualization</li>
                             </ul>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="cv__item">
-                        <div class="cv__year">2023–dosud</div>
-                        <div class="cv__content">
-                            <h3 class="cv__title">ZOAA — architekt <span class="cv__tag">(spolupráce)</span></h3>
-                            <ul class="cv__list">
+                    <div class="cv-entry">
+                        <span class="cv-year">2019 – 2021</span>
+                        <div class="cv-body">
+                            <strong>BRAK architekti</strong> <span class="cv-tag">collaboration</span>
+                            <span class="cv-detail">Architect — urban studies and public buildings</span>
+                            <ul class="cv-list">
+                                <li>Spatial planning, urban studies</li>
+                                <li>Project phases: concept / DÚR / DSP / DPS / ÚS / RP</li>
+                                <li>Drawings, 3D models, visualization</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2020 – present</span>
+                        <div class="cv-body">
+                            <strong>Independent practice</strong>
+                            <span class="cv-detail">Architect / consultant</span>
+                            <ul class="cv-list">
+                                <li>Private commissions: building and interior studies</li>
+                                <li>Consulting: concept, layouts, materials, optimization</li>
+                                <li>Drawings, detailing, 3D modeling, visualization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Skills -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Software</h3>
+
+                    <div class="skills-cloud">
+                        <div class="skills-group">
+                            <span class="skills-group__label">CAD / BIM</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">AutoCAD</span>
+                                <span class="skill-tag">ArchiCAD</span>
+                                <span class="skill-tag">Revit</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">3D modeling</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">SketchUp</span>
+                                <span class="skill-tag">Rhinoceros</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Visualization</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">V-Ray</span>
+                                <span class="skill-tag">Lumion</span>
+                                <span class="skill-tag">Enscape</span>
+                                <span class="skill-tag">Twinmotion</span>
+                                <span class="skill-tag">Unreal Engine</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Graphics</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">Photoshop</span>
+                                <span class="skill-tag">InDesign</span>
+                                <span class="skill-tag">Illustrator</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Programming</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">Grasshopper</span>
+                                <span class="skill-tag">Dynamo</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Other</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">ArcGIS</span>
+                                <span class="skill-tag">Navisworks</span>
+                                <span class="skill-tag">Graphic design</span>
+                                <span class="skill-tag">3D printing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Contact -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Contact</h3>
+                    <div class="contact-info">
+                        <a href="mailto:daria.vlasova.arch@gmail.com" class="contact-link">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M22 6l-10 7L2 6"/>
+                            </svg>
+                            daria.vlasova.arch@gmail.com
+                        </a>
+                        <a href="https://linkedin.com/in/daria-vlasova-arch" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                    <div class="cv-download-wrapper">
+                        <a href="cv/daria-cv-en.pdf" download class="cv-download">
+                            <svg class="cv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            DOWNLOAD CV
+                        </a>
+                    </div>
+                </section>
+
+            </article>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 ČEŠTINA
+                 ═══════════════════════════════════════════════════════════ -->
+            <article class="i18n-block" data-lang-content="cz">
+
+                <header class="about-intro">
+                    <div class="about-hero">
+                        <picture>
+                            <source type="image/avif" srcset="images/about/portrait.avif">
+                            <img src="images/about/portrait.jpg" alt="Portrait" class="about-photo" draggable="false">
+                        </picture>
+                        <div class="about-hero-text">
+                            <img src="images/about/name.svg" alt="Ing. arch. Daria Vlasova" class="about-name-img">
+                            <p class="about-role">Architektka</p>
+                            <p class="about-location">Praha, Česká republika</p>
+                        </div>
+                    </div>
+                </header>
+
+                <p class="about-lead">
+                    Jsem architektka působící v Praze. Zaměřuji se na srozumitelné koncepty, promyšlené detaily
+                    a prostory, které se dobře používají — s ohledem na udržitelnost a kontext.
+                </p>
+
+                <!-- Vzdělání -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Vzdělání</h3>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2021 – 2024</span>
+                        <div class="cv-body">
+                            <strong>České vysoké učení technické v Praze — Fakulta architektury</strong>
+                            <span class="cv-detail">Architektura a urbanismus (navazující magisterský program)</span>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2017 – 2021</span>
+                        <div class="cv-body">
+                            <strong>České vysoké učení technické v Praze — Fakulta architektury</strong>
+                            <span class="cv-detail">Architektura a urbanismus (bakalářský program)</span>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2012 – 2016</span>
+                        <div class="cv-body">
+                            <strong>Vyšší odborná škola architektury a stavebnictví č. 7 v Moskvě</strong>
+                            <span class="cv-detail">Architektura</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Praxe -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Praxe</h3>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2023 – dosud</span>
+                        <div class="cv-body">
+                            <strong>ZOAA</strong> <span class="cv-tag">spolupráce</span>
+                            <span class="cv-detail">Architektka — studie, interiéry, projektová podpora</span>
+                            <ul class="cv-list">
                                 <li>Studie staveb a interiérů</li>
                                 <li>Projektový stupeň: studie / DPI</li>
                                 <li>Podpora při autorském dozoru</li>
@@ -127,64 +316,364 @@
                                 <li>Výkresová dokumentace, detailní řešení, 3D modelování, vizualizace</li>
                             </ul>
                         </div>
-                    </article>
+                    </div>
 
-                    <article class="cv__item">
-                        <div class="cv__year">2020–dosud</div>
-                        <div class="cv__content">
-                            <h3 class="cv__title">Samostatná praxe — architekt / konzultant</h3>
-                            <ul class="cv__list">
+                    <div class="cv-entry">
+                        <span class="cv-year">2021 – 2023</span>
+                        <div class="cv-body">
+                            <strong>RA15</strong> <span class="cv-tag">spolupráce</span>
+                            <span class="cv-detail">Architektka — soutěže, komerční a veřejné projekty</span>
+                            <ul class="cv-list">
+                                <li>Architektonické soutěže: návrh, variantní prověřování, podklady</li>
+                                <li>Projektové stupně: studie / DÚR / DSP / DPS / pasportizace</li>
+                                <li>Výkresová dokumentace, detailní řešení, 3D modelování, vizualizace</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2019 – 2021</span>
+                        <div class="cv-body">
+                            <strong>BRAK architekti</strong> <span class="cv-tag">spolupráce</span>
+                            <span class="cv-detail">Architektka — urbanistické studie a veřejné stavby</span>
+                            <ul class="cv-list">
+                                <li>Územní plánování, urbanistické studie</li>
+                                <li>Projektové stupně: studie / DÚR / DSP / DPS / ÚS / RP</li>
+                                <li>Výkresová dokumentace, 3D modely, vizualizace</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2020 – dosud</span>
+                        <div class="cv-body">
+                            <strong>Samostatná praxe</strong>
+                            <span class="cv-detail">Architektka / konzultantka</span>
+                            <ul class="cv-list">
                                 <li>Individuální zakázky: studie staveb a interiérů</li>
                                 <li>Konzultace: koncepce, dispozice, materiály, optimalizace návrhu</li>
                                 <li>Výkresová dokumentace, detailní řešení, 3D modelování, vizualizace</li>
                             </ul>
                         </div>
-                    </article>
+                    </div>
                 </section>
 
-                <!-- Skills -->
-                <div class="about-section">
-                    <h3>Skills</h3>
-                    <div class="skills-grid">
-                        <span class="skill-tag">AutoCAD</span>
-                        <span class="skill-tag">Revit</span>
-                        <span class="skill-tag">SketchUp</span>
-                        <span class="skill-tag">Rhino</span>
-                        <span class="skill-tag">V-Ray</span>
-                        <span class="skill-tag">Photoshop</span>
-                        <span class="skill-tag">InDesign</span>
-                    </div>
-                </div>
+                <!-- Dovednosti -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Software</h3>
 
-                <!-- Contact -->
-                <div class="about-section contact-section">
-                    <h3>Contact</h3>
-                    <div class="contact-links">
-                        <a href="mailto:your@email.com" class="contact-link">
-                            <span class="contact-icon">✉</span>
-                            your@email.com
+                    <div class="skills-cloud">
+                        <div class="skills-group">
+                            <span class="skills-group__label">CAD / BIM</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">AutoCAD</span>
+                                <span class="skill-tag">ArchiCAD</span>
+                                <span class="skill-tag">Revit</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">3D modelování</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">SketchUp</span>
+                                <span class="skill-tag">Rhinoceros</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Vizualizace</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">V-Ray</span>
+                                <span class="skill-tag">Lumion</span>
+                                <span class="skill-tag">Enscape</span>
+                                <span class="skill-tag">Twinmotion</span>
+                                <span class="skill-tag">Unreal Engine</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Grafika</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">Photoshop</span>
+                                <span class="skill-tag">InDesign</span>
+                                <span class="skill-tag">Illustrator</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Programování</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">Grasshopper</span>
+                                <span class="skill-tag">Dynamo</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Ostatní</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">ArcGIS</span>
+                                <span class="skill-tag">Navisworks</span>
+                                <span class="skill-tag">Grafický design</span>
+                                <span class="skill-tag">3D tisk</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Kontakt -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Kontakt</h3>
+                    <div class="contact-info">
+                        <a href="mailto:daria.vlasova.arch@gmail.com" class="contact-link">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M22 6l-10 7L2 6"/>
+                            </svg>
+                            daria.vlasova.arch@gmail.com
                         </a>
-                        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
-                            <span class="contact-icon">in</span>
+                        <a href="https://linkedin.com/in/daria-vlasova-arch" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
                             LinkedIn
                         </a>
-                        <a href="https://instagram.com/yourprofile" target="_blank" class="contact-link">
-                            <span class="contact-icon">◎</span>
-                            Instagram
+                    </div>
+                    <div class="cv-download-wrapper">
+                        <a href="cv/daria-cv-cz.pdf" download class="cv-download">
+                            <svg class="cv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            STÁHNOUT CV
                         </a>
                     </div>
-                </div>
-            </div>
+                </section>
+
+            </article>
+
+            <!-- ═══════════════════════════════════════════════════════════
+                 РУССКИЙ
+                 ═══════════════════════════════════════════════════════════ -->
+            <article class="i18n-block" data-lang-content="ru">
+
+                <header class="about-intro">
+                    <div class="about-hero">
+                        <picture>
+                            <source type="image/avif" srcset="images/about/portrait.avif">
+                            <img src="images/about/portrait.jpg" alt="Portrait" class="about-photo" draggable="false">
+                        </picture>
+                        <div class="about-hero-text">
+                            <img src="images/about/name.svg" alt="Ing. arch. Daria Vlasova" class="about-name-img">
+                            <p class="about-role">Архитектор</p>
+                            <p class="about-location">Прага, Чехия</p>
+                        </div>
+                    </div>
+                </header>
+
+                <p class="about-lead">
+                    Я архитектор, живу и работаю в Праге. Мне важны ясная концепция, продуманная деталировка
+                    и пространства, которыми приятно пользоваться — с вниманием к контексту и устойчивости.
+                </p>
+
+                <!-- Образование -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Образование</h3>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2021 – 2024</span>
+                        <div class="cv-body">
+                            <strong>Чешский технический университет в Праге — Факультет архитектуры</strong>
+                            <span class="cv-detail">Архитектура и урбанизм (магистратура)</span>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2017 – 2021</span>
+                        <div class="cv-body">
+                            <strong>Чешский технический университет в Праге — Факультет архитектуры</strong>
+                            <span class="cv-detail">Архитектура и урбанизм (бакалавриат)</span>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2012 – 2016</span>
+                        <div class="cv-body">
+                            <strong>Колледж архитектуры и строительства № 7, Москва</strong>
+                            <span class="cv-detail">Архитектура</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Опыт -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Опыт</h3>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2023 – н.в.</span>
+                        <div class="cv-body">
+                            <strong>ZOAA</strong> <span class="cv-tag">сотрудничество</span>
+                            <span class="cv-detail">Архитектор — концепции, интерьеры, проектная поддержка</span>
+                            <ul class="cv-list">
+                                <li>Концепции зданий и интерьеров</li>
+                                <li>Стадия: концепция / DPI</li>
+                                <li>Поддержка при авторском надзоре</li>
+                                <li>Координация с заказчиками и консультантами</li>
+                                <li>Чертежи, деталировка, 3D‑моделирование, визуализации</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2021 – 2023</span>
+                        <div class="cv-body">
+                            <strong>RA15</strong> <span class="cv-tag">сотрудничество</span>
+                            <span class="cv-detail">Архитектор — конкурсы, коммерческие и общественные проекты</span>
+                            <ul class="cv-list">
+                                <li>Архитектурные конкурсы: концепции, варианты, комплекты подачи</li>
+                                <li>Стадии: концепция / DÚR / DSP / DPS / паспортизация</li>
+                                <li>Чертежи, деталировка, 3D‑моделирование, визуализации</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2019 – 2021</span>
+                        <div class="cv-body">
+                            <strong>BRAK architekti</strong> <span class="cv-tag">сотрудничество</span>
+                            <span class="cv-detail">Архитектор — градостроительные исследования и общественные здания</span>
+                            <ul class="cv-list">
+                                <li>Территориальное планирование, урбанистические исследования</li>
+                                <li>Стадии: концепция / DÚR / DSP / DPS / ÚS / RP</li>
+                                <li>Чертежи, 3D‑модели, визуализации</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="cv-entry">
+                        <span class="cv-year">2020 – н.в.</span>
+                        <div class="cv-body">
+                            <strong>Частная практика</strong>
+                            <span class="cv-detail">Архитектор / консультант</span>
+                            <ul class="cv-list">
+                                <li>Индивидуальные заказы: концепции зданий и интерьеров</li>
+                                <li>Консультации: концепция, планировки, материалы, оптимизация</li>
+                                <li>Чертежи, деталировка, 3D‑моделирование, визуализации</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Навыки -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Софт</h3>
+
+                    <div class="skills-cloud">
+                        <div class="skills-group">
+                            <span class="skills-group__label">CAD / BIM</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">AutoCAD</span>
+                                <span class="skill-tag">ArchiCAD</span>
+                                <span class="skill-tag">Revit</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">3D-моделирование</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">SketchUp</span>
+                                <span class="skill-tag">Rhinoceros</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Визуализация</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">V-Ray</span>
+                                <span class="skill-tag">Lumion</span>
+                                <span class="skill-tag">Enscape</span>
+                                <span class="skill-tag">Twinmotion</span>
+                                <span class="skill-tag">Unreal Engine</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Графика</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">Photoshop</span>
+                                <span class="skill-tag">InDesign</span>
+                                <span class="skill-tag">Illustrator</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Программирование</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">Grasshopper</span>
+                                <span class="skill-tag">Dynamo</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+
+                        <div class="skills-group">
+                            <span class="skills-group__label">Другое</span>
+                            <div class="skills-group__items">
+                                <span class="skill-tag">ArcGIS</span>
+                                <span class="skill-tag">Navisworks</span>
+                                <span class="skill-tag">Графический дизайн</span>
+                                <span class="skill-tag">3D-печать</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Контакты -->
+                <section class="cv-section">
+                    <h3 class="cv-heading">Контакты</h3>
+                    <div class="contact-info">
+                        <a href="mailto:daria.vlasova.arch@gmail.com" class="contact-link">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                <path d="M22 6l-10 7L2 6"/>
+                            </svg>
+                            daria.vlasova.arch@gmail.com
+                        </a>
+                        <a href="https://linkedin.com/in/daria-vlasova-arch" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                    </div>
+                    <div class="cv-download-wrapper">
+                        <a href="cv/daria-cv-ru.pdf" download class="cv-download">
+                            <svg class="cv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            СКАЧАТЬ CV
+                        </a>
+                    </div>
+                </section>
+
+            </article>
+
         </div>
     </main>
 
-    <!-- Simple Footer -->
     <footer class="main-footer">
-        <p class="footer-copyright">&copy; STUDIO DARIA</p>
+        <p class="footer-copyright">&copy; <span class="js-year">2024</span> STUDIO DARIA</p>
         <p class="footer-notice" data-translate="no_copy">All content is protected by copyright. Reproduction without permission is not allowed.</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-

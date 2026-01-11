@@ -1,495 +1,642 @@
-/* About Page Styles */
+/* ═══════════════════════════════════════════════════════════════════════════
+   ABOUT PAGE — clean, modern, single-column layout with subtle animations
+   ═══════════════════════════════════════════════════════════════════════════ */
 
+/* CSS Variables for About page — Monochrome */
+:root {
+    --about-accent: #1a1a1a;
+    --about-accent-soft: rgba(26, 26, 26, 0.06);
+    --about-text: #1a1a1a;
+    --about-text-muted: rgba(26, 26, 26, 0.55);
+    --about-border: rgba(26, 26, 26, 0.08);
+}
+
+/* Page container */
 .about-page {
-    margin-top: 120px;
-    min-height: calc(100vh - 120px);
-    padding: 60px 40px;
+    margin-top: 110px;
+    min-height: calc(100vh - 110px);
+    padding: 48px 24px 80px;
+    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    background: #ffffff;
 }
 
 .about-container {
-    max-width: 1200px;
+    max-width: 680px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 80px;
-    align-items: start;
 }
 
-/* CV (Education / Experience) */
-.cv {
-    --text: var(--text-color);
-    --muted: rgba(26, 26, 26, 0.62);
-    --muted2: rgba(26, 26, 26, 0.42);
-    --line: rgba(0, 0, 0, 0.08);
-    --accent: var(--accent-color);
-    max-width: 980px;
-    margin: 0;
+/* Hide all language blocks by default (JS shows the active one) */
+.i18n-block {
+    display: none;
 }
 
-.cv__section {
-    margin: 48px 0 18px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-size: 13px;
-    color: var(--muted2);
+/* ─────────────────────────────────────────────────────────────────────────────
+   Intro / Header — with entrance animation and photo
+   ───────────────────────────────────────────────────────────────────────────── */
+.about-intro {
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeIn 0.6s ease 0.1s forwards;
 }
 
-.cv__section--spaced {
-    margin-top: 64px;
+@keyframes fadeIn {
+    to { opacity: 1; }
 }
 
-.cv__item {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 28px;
-    padding: 22px 0;
-    border-top: 1px solid var(--line);
-}
-
-/* Remove top line right after a section header */
-.cv__section + .cv__item {
-    border-top: 0;
-}
-
-.cv__year {
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    font-size: 12px;
-    color: var(--muted2);
-    padding-top: 4px;
-}
-
-.cv__title {
-    margin: 0;
-    font-size: 18px;
-    line-height: 1.35;
-    color: var(--text);
-}
-
-.cv__meta {
-    margin: 8px 0 0;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.6;
-}
-
-.cv__tag {
-    color: var(--muted2);
-    font-weight: 400;
-}
-
-.cv__list {
-    margin: 12px 0 0;
-    padding: 0;
-    list-style: none;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.7;
-}
-
-.cv__list li {
-    position: relative;
-    padding-left: 18px;
-    margin: 6px 0;
-}
-
-.cv__list li::before {
-    content: "–";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--muted2);
-}
-
-/* Photo Section */
-.about-photo {
-    position: sticky;
-    top: 160px;
-}
-
-.photo-placeholder {
-    width: 100%;
-    aspect-ratio: 3/4;
-    background: #f5f5f5;
+/* Hero layout with photo */
+.about-hero {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-    font-size: 18px;
-    border: 2px dashed #ddd;
+    align-items: flex-start;
+    gap: 40px;
 }
 
-.about-photo img {
+/* Picture wrapper for photo */
+.about-hero picture {
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeSlideUp 0.5s ease 0.15s forwards;
+    width: 180px;
+    height: 180px;
+}
+
+.about-photo {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
+    object-position: center top;
+    border-radius: 0;
+    display: block;
+    /* Anti-copy protection */
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-/* Content Section */
-.about-content {
-    padding-top: 20px;
+.about-hero-text {
+    flex: 1;
+    padding-top: 8px;
 }
 
-.about-title {
-    font-size: 48px;
-    font-weight: 700;
-    margin: 0 0 10px 0;
-    letter-spacing: 1px;
-}
-
-.about-subtitle {
-    font-size: 18px;
-    color: #FF9999;
-    margin: 0 0 40px 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.about-bio {
-    margin-bottom: 50px;
-    max-width: 72ch;
-    padding-left: 16px;
-    border-left: 1px solid rgba(0, 0, 0, 0.10);
-}
-
-.about-bio p {
-    font-size: 17px;
-    line-height: 1.85;
-    color: rgba(18, 18, 18, 0.82);
-    margin-bottom: 20px;
-}
-
-/* Sections */
-.about-section {
-    margin-bottom: 40px;
-    padding-top: 30px;
-    border-top: 1px solid #eee;
-}
-
-.about-section h3 {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: rgba(18, 18, 18, 0.55);
-    margin: 0 0 20px 0;
-    position: relative;
-    padding-left: 12px;
-}
-
-.about-section h3::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 6px;
-    height: 1px;
-    background: rgba(18, 18, 18, 0.45);
-}
-
-/* Lists (Education, Experience) */
-.about-list {
-    list-style: none;
-    padding: 0;
+.about-name {
     margin: 0;
+    font-size: clamp(32px, 6vw, 48px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: #1a1a1a;
 }
 
-.about-list > li {
-    display: grid;
-    grid-template-columns: minmax(90px, 120px) 1fr;
-    column-gap: 28px;
-    padding: 14px 0;
-    font-size: 15px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.about-list > li:last-child {
-    border-bottom: none;
-}
-
-.about-list .year {
-    color: rgba(18, 18, 18, 0.55);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.about-list .info {
-    color: rgba(18, 18, 18, 0.84);
+.about-name-img {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-bottom: 16px;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeSlideUp 0.5s ease 0.2s forwards;
 }
 
 .about-role {
+    margin: 0;
+    font-family: 'Intro', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(26, 26, 26, 0.5);
+    opacity: 0;
+    animation: fadeIn 0.4s ease 0.35s forwards;
+}
+
+.about-location {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: rgba(26, 26, 26, 0.45);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    animation: fadeIn 0.4s ease 0.4s forwards;
+}
+
+.about-location::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    opacity: 0.35;
+}
+
+/* Lead paragraph */
+.about-lead {
+    margin: 0 0 56px;
+    font-size: 18px;
+    line-height: 1.8;
+    color: rgba(26, 26, 26, 0.75);
+    max-width: 56ch;
+    opacity: 0;
+    transform: translateY(15px);
+    animation: fadeSlideUp 0.5s ease 0.45s forwards;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   CV Sections — with scroll-triggered animations
+   ───────────────────────────────────────────────────────────────────────────── */
+.cv-section {
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(25px);
+    animation: fadeSlideUp 0.5s ease forwards;
+}
+
+.cv-section:nth-of-type(1) { animation-delay: 0.5s; }
+.cv-section:nth-of-type(2) { animation-delay: 0.6s; }
+.cv-section:nth-of-type(3) { animation-delay: 0.7s; }
+.cv-section:nth-of-type(4) { animation-delay: 0.8s; }
+
+.cv-heading {
+    margin: 0 0 24px;
+    font-family: 'Intro', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(26, 26, 26, 0.4);
+    border-bottom: none;
+    padding-bottom: 0;
+    position: relative;
+    display: inline-block;
+}
+
+.cv-heading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 24px;
+    height: 1.5px;
+    background: #1a1a1a;
+    border-radius: 1px;
+    opacity: 0.25;
+}
+
+/* Single CV entry (year + body) — Timeline style */
+.cv-entry {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.06);
+    position: relative;
+    /* Animation setup */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 0.5s ease forwards;
+}
+
+.cv-entry:nth-child(1) { animation-delay: 0.1s; }
+.cv-entry:nth-child(2) { animation-delay: 0.15s; }
+.cv-entry:nth-child(3) { animation-delay: 0.2s; }
+.cv-entry:nth-child(4) { animation-delay: 0.25s; }
+.cv-entry:nth-child(5) { animation-delay: 0.3s; }
+
+@keyframes fadeSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Timeline dot */
+.cv-entry::before {
+    content: '';
+    position: absolute;
+    left: 104px;
+    top: 24px;
+    width: 6px;
+    height: 6px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    opacity: 0.25;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+/* Timeline line */
+.cv-entry::after {
+    content: '';
+    position: absolute;
+    left: 106px;
+    top: 30px;
+    width: 1px;
+    height: calc(100% - 12px);
+    background: linear-gradient(180deg, rgba(26, 26, 26, 0.12) 0%, transparent 100%);
+    z-index: 1;
+}
+
+.cv-entry:last-child::after {
+    display: none;
+}
+
+/* Hover effect on timeline */
+.cv-entry:hover::before {
+    transform: scale(1.5);
+    opacity: 0.6;
+    box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.06);
+}
+
+.cv-entry:last-child {
+    border-bottom: none;
+}
+
+.cv-year {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: rgba(26, 26, 26, 0.45);
+    padding-top: 3px;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.cv-entry:hover .cv-year {
+    color: #1a1a1a;
+}
+
+.cv-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cv-body strong {
+    font-size: 16px;
     font-weight: 600;
-    letter-spacing: 0.2px;
+    color: #1a1a1a;
+    line-height: 1.35;
 }
 
-.about-meta {
-    margin-top: 4px;
-    color: rgba(18, 18, 18, 0.62);
+.cv-tag {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(26, 26, 26, 0.4);
+    vertical-align: middle;
+}
+
+.cv-detail {
     font-size: 14px;
-    line-height: 1.55;
+    color: rgba(26, 26, 26, 0.6);
+    line-height: 1.5;
 }
 
-.about-sublist {
-    margin: 10px 0 0 0;
-    padding-left: 18px;
-    color: rgba(18, 18, 18, 0.72);
-}
-
-.about-sublist li {
-    display: list-item;
-    margin: 6px 0;
+.cv-list {
+    margin: 10px 0 0;
+    padding: 0 0 0 18px;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.65;
+    color: rgba(26, 26, 26, 0.58);
 }
 
-/* Skills */
-.skills-grid {
+.cv-list li {
+    margin: 5px 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Skills — minimal inline list with hover highlights
+   ───────────────────────────────────────────────────────────────────────────── */
+.skills-cloud {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.skills-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    align-items: baseline;
+    gap: 6px 0;
+    padding: 8px 0;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.skills-group:hover {
+    background: var(--about-accent-soft);
+    margin: 0 -12px;
+    padding: 8px 12px;
+}
+
+.skills-group__label {
+    font-family: 'Intro', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-right: 12px;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+}
+
+.skills-group:hover .skills-group__label {
+    color: #1a1a1a;
+}
+
+.skills-group__label::after {
+    content: ":";
+}
+
+.skills-group__items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
 }
 
 .skill-tag {
-    background: #f5f5f5;
-    padding: 8px 16px;
     font-size: 14px;
-    color: #333;
-    border-radius: 2px;
-    transition: all 0.3s ease;
+    color: rgba(26, 26, 26, 0.65);
+    transition: color 0.2s ease;
 }
 
 .skill-tag:hover {
-    background: #FF9999;
-    color: #fff;
+    color: #1a1a1a;
 }
 
-/* Contact */
-.contact-section {
-    margin-top: 50px;
+/* Links in skills (contact) */
+.skill-tag--link {
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.contact-links {
+.skill-tag--link:hover {
+    text-decoration: underline;
+}
+
+/* Separator between tags */
+.skill-tag:not(:last-child)::after {
+    content: ",";
+    margin-right: 6px;
+    color: rgba(26, 26, 26, 0.25);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Contact
+   ───────────────────────────────────────────────────────────────────────────── */
+.contact-info {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 12px 24px;
 }
 
 .contact-link {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
+    font-size: 14px;
+    color: rgba(26, 26, 26, 0.7);
     text-decoration: none;
-    color: #333;
-    font-size: 16px;
-    transition: color 0.3s ease;
+    transition: all 0.25s ease;
+    padding: 8px 0;
 }
 
 .contact-link:hover {
-    color: #FF9999;
+    color: #1a1a1a;
+    transform: translateX(4px);
 }
 
 .contact-icon {
-    width: 30px;
-    height: 30px;
-    display: flex;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.contact-link:hover .contact-icon {
+    transform: scale(1.1);
+}
+
+/* CV Download button — monochrome style */
+.cv-download-wrapper {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(26, 26, 26, 0.08);
+    text-align: center;
+}
+
+.cv-download {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #f5f5f5;
-    font-size: 14px;
-    font-weight: 600;
+    gap: 10px;
+    padding: 16px 36px;
+    font-family: 'Intro', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff;
+    background: #1a1a1a;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Footer */
-.main-footer {
-    padding: 40px;
-    text-align: center;
-    border-top: 1px solid #eee;
-    margin-top: 60px;
+.cv-download::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.footer-content p {
-    font-size: 14px;
-    color: #999;
-    margin: 0;
+.cv-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-    .about-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .about-photo {
-        position: static;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .about-page {
-        padding: 40px 20px;
-    }
+.cv-download:hover::before {
+    opacity: 1;
 }
 
-@media (max-width: 768px) {
-    .about-page {
-        margin-top: 100px;
-        padding: 35px 18px;
-    }
-
-    .about-title {
-        font-size: 28px;
-        letter-spacing: 0.5px;
-    }
-
-    .about-subtitle {
-        font-size: 13px;
-        letter-spacing: 1.5px;
-        margin-bottom: 30px;
-    }
-
-    .about-bio p {
-        font-size: 14px;
-        line-height: 1.6;
-        margin-bottom: 15px;
-    }
-
-    .about-section h3 {
-        font-size: 11px;
-        letter-spacing: 1.5px;
-        margin-bottom: 15px;
-    }
-
-    .about-list > li {
-        grid-template-columns: 1fr;
-        row-gap: 6px;
-        padding: 12px 0;
-        font-size: 13px;
-    }
-
-    .about-list .year {
-        font-size: 11px;
-    }
-
-    .about-list .info {
-        font-size: 13px;
-    }
-
-    .about-meta,
-    .about-sublist li {
-        font-size: 13px;
-    }
-
-    .contact-link {
-        font-size: 13px;
-        gap: 12px;
-    }
-
-    .contact-icon {
-        width: 26px;
-        height: 26px;
-        font-size: 12px;
-    }
-
-    .cv__item {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .cv__year {
-        padding-top: 0;
-    }
+.cv-download:active {
+    transform: translateY(-1px);
 }
 
+.cv-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.cv-download:hover .cv-icon {
+    animation: downloadBounce 0.6s ease;
+}
+
+@keyframes downloadBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Responsive
+   ───────────────────────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
     .about-page {
         margin-top: 90px;
-        padding: 30px 15px;
+        padding: 32px 18px 60px;
     }
 
-    .about-title {
-        font-size: 22px;
+    /* Photo layout on mobile — stacked */
+    .about-hero {
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+        text-align: center;
     }
 
-    .about-subtitle {
+    .about-hero picture {
+        width: 140px;
+        height: 140px;
+    }
+
+    .about-photo {
+        width: 100%;
+        height: 100%;
+    }
+
+    .about-hero-text {
+        padding-top: 0;
+    }
+
+    .about-name-img {
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .about-location {
+        justify-content: center;
+    }
+
+    .about-name {
+        font-size: 28px;
+    }
+
+    .about-lead {
+        font-size: 15px;
+        margin-bottom: 36px;
+    }
+
+    .cv-entry {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        padding: 14px 0 14px 20px;
+    }
+
+    /* Timeline adjustments for mobile */
+    .cv-entry::before {
+        left: 0;
+        top: 18px;
+        width: 6px;
+        height: 6px;
+    }
+
+    .cv-entry::after {
+        left: 2px;
+        top: 24px;
+        height: calc(100% - 10px);
+    }
+
+    .cv-year {
         font-size: 11px;
-        letter-spacing: 1.2px;
-        margin-bottom: 25px;
+        padding-top: 0;
     }
 
-    .about-bio p {
+    .cv-body strong {
+        font-size: 15px;
+    }
+
+    .cv-detail,
+    .cv-list {
         font-size: 13px;
     }
 
-    .about-section {
-        margin-bottom: 30px;
-        padding-top: 20px;
+    .skills-group:hover {
+        margin: 0 -8px;
+        padding: 8px;
     }
 
-    .about-section h3 {
+    .contact-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .cv-download {
+        padding: 14px 28px;
         font-size: 10px;
-    }
-
-    .about-list > li {
-        font-size: 12px;
-    }
-
-    .about-list .year {
-        font-size: 10px;
-    }
-
-    .skills-grid {
-        gap: 6px;
-    }
-
-    .skill-tag {
-        padding: 5px 10px;
-        font-size: 10px;
-    }
-
-    .contact-link {
-        font-size: 12px;
     }
 }
 
 @media (max-width: 400px) {
     .about-page {
         margin-top: 80px;
-        padding: 25px 12px;
+        padding: 24px 14px 48px;
     }
 
-    .about-title {
-        font-size: 18px;
+    .about-name {
+        font-size: 24px;
     }
 
-    .about-subtitle {
-        font-size: 10px;
-    }
-
-    .about-bio p {
+    .about-role {
         font-size: 12px;
     }
 
-    .about-section h3 {
-        font-size: 9px;
-    }
-
-    .about-list > li {
-        font-size: 11px;
-    }
-
-    .skill-tag {
-        padding: 4px 8px;
-        font-size: 9px;
-    }
-
-    .contact-link {
-        font-size: 11px;
-    }
-
-    .contact-icon {
-        width: 22px;
-        height: 22px;
+    .cv-heading {
         font-size: 10px;
+    }
+
+    .cv-body strong {
+        font-size: 14px;
+    }
+
+    .cv-download {
+        padding: 12px 24px;
+        gap: 8px;
+    }
+
+    .cv-icon {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .about-intro,
+    .about-name-img,
+    .about-role,
+    .about-location,
+    .about-lead,
+    .cv-section,
+    .cv-entry {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .cv-entry::before,
+    .contact-link,
+    .cv-download {
+        transition: none;
     }
 }
