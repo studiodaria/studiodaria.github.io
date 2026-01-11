@@ -45,9 +45,10 @@
 
 /* Hero layout with photo */
 .about-hero {
-    display: flex;
-    align-items: flex-start;
-    gap: 40px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    align-items: center;
 }
 
 /* Picture wrapper for photo */
@@ -56,8 +57,11 @@
     opacity: 0;
     transform: translateY(15px);
     animation: fadeSlideUp 0.5s ease 0.15s forwards;
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .about-photo {
@@ -74,7 +78,7 @@
 
 .about-hero-text {
     flex: 1;
-    padding-top: 8px;
+    padding-top: 0;
 }
 
 .about-name {
@@ -505,8 +509,8 @@
     }
 
     .about-hero picture {
-        width: 140px;
-        height: 140px;
+        width: 160px;
+        height: 160px;
     }
 
     .about-photo {
