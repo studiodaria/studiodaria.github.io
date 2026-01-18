@@ -27,3 +27,14 @@
   - Individuální zakázky: studie staveb a interiérů
   - Konzultace: koncepce, dispozice, materiály, optimalizace návrhu
   - Výkresová dokumentace, detailní řešení, 3D modelování, vizualizace
+
+Selected awards & activities
+ČVUT pavilon pro veletrh Gaudeamus — soutěžní návrh · 2020 · ČVUT · 2. místo
+
+Železniční terminál Praha východ (VRT) — soutěžní návrh · 2021 · ČKA · 2. místo
+
+Mimořádné účelové stipendium „Nadaní studenti“ · 2021 · ČVUT · stipendium
+
+BIP Workshop Praha–Paříž–Glasgow (Pražské Quadriennale 2023 / PQ) · 2023 · ČVUT
+
+Studentská vědecká konference: OFF GRID HOUSING — návrh ostrovního RD (klimatický design, obnovitelné zdroje) · 2023 · ČVUT
