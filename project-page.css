@@ -675,6 +675,24 @@ body.lightbox-open {
     margin: 0;
 }
 
+/* Award highlight style */
+.detail-item--award {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.03) 0%, rgba(26, 26, 26, 0.06) 100%);
+    border-left: 2px solid #1a1a1a;
+    margin-bottom: 32px;
+}
+
+.detail-item--award h3 {
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.detail-item--award p {
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+
 .project-gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

@@ -26,9 +26,9 @@
             </div>
         </div>
         <div class="language-switcher">
-            <a href="#" class="lang-link" data-lang="cz">cz</a>
-            <a href="#" class="lang-link active" data-lang="en">en</a>
-            <a href="#" class="lang-link" data-lang="ru">ru</a>
+            <a href="?lang=cz" class="lang-link" data-lang="cz">cz</a>
+            <a href="?lang=en" class="lang-link active" data-lang="en">en</a>
+            <a href="?lang=ru" class="lang-link" data-lang="ru">ru</a>
         </div>
     </header>
 
@@ -38,7 +38,7 @@
             <!-- ═══════════════════════════════════════════════════════════
                  ENGLISH
                  ═══════════════════════════════════════════════════════════ -->
-            <article class="i18n-block" data-lang-content="en">
+            <article class="i18n-block" data-lang-content="en" lang="en">
 
                 <!-- Intro -->
                 <header class="about-intro">
@@ -51,13 +51,17 @@
                             <img src="images/about/name.svg" alt="Ing. arch. Daria Vlasova" class="about-name-img">
                             <p class="about-role">Architect</p>
                             <p class="about-location">Prague, Czech Republic</p>
+                            <div class="about-cta" aria-label="Quick action">
+                                <button type="button" class="about-cta__link about-cta__button js-scroll-contact">Contact</button>
+                            </div>
                         </div>
                     </div>
                 </header>
 
                 <p class="about-lead">
-                    I'm an architect based in Prague. I focus on clear concepts, thoughtful detailing,
-                    and spaces that feel good to use — with attention to sustainability and context.
+                    Architecture and interiors with a quiet, refined expression. Concept-led, detail-driven work shaped by light,
+                    proportion, and durable materials. Collaboration is part of the process — clear communication, clean iterations,
+                    precise outcomes.
                 </p>
 
                 <!-- Education -->
@@ -151,8 +155,22 @@
                 <!-- Skills -->
                 <section class="cv-section">
                     <h3 class="cv-heading">Software</h3>
+                    <div class="skills-top" aria-label="Main tools">
+                        <span class="skills-top__label">Core tools</span>
+                        <div class="skills-top__items">
+                            <span class="skill-tag">ArchiCAD</span>
+                            <span class="skill-tag">AutoCAD</span>
+                            <span class="skill-tag">Revit</span>
+                            <span class="skill-tag">Rhinoceros</span>
+                            <span class="skill-tag">SketchUp</span>
+                            <span class="skill-tag">Photoshop</span>
+                            <span class="skill-tag">Lumion</span>
+                        </div>
+                    </div>
 
-                    <div class="skills-cloud">
+                    <div class="skills-more" aria-label="Full list">
+                        <div class="skills-more__label">Full list</div>
+                        <div class="skills-cloud">
                         <div class="skills-group">
                             <span class="skills-group__label">CAD / BIM</span>
                             <div class="skills-group__items">
@@ -208,12 +226,13 @@
                                 <span class="skill-tag">3D printing</span>
                             </div>
                         </div>
+                        </div>
                     </div>
 
                 </section>
 
                 <!-- Contact -->
-                <section class="cv-section">
+                <section class="cv-section js-contact-section">
                     <h3 class="cv-heading">Contact</h3>
                     <div class="contact-info">
                         <a href="mailto:arch.studio.daria@gmail.com" class="contact-link">
@@ -232,24 +251,15 @@
                             LinkedIn
                         </a>
                     </div>
-                    <div class="cv-download-wrapper">
-                        <a href="cv/daria-cv-en.pdf" download class="cv-download">
-                            <svg class="cv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
-                            </svg>
-                            DOWNLOAD CV
-                        </a>
-                    </div>
                 </section>
 
+                <button class="about-fab js-scroll-contact" type="button">Contact</button>
             </article>
 
             <!-- ═══════════════════════════════════════════════════════════
                  ČEŠTINA
                  ═══════════════════════════════════════════════════════════ -->
-            <article class="i18n-block" data-lang-content="cz">
+            <article class="i18n-block" data-lang-content="cz" lang="cs">
 
                 <header class="about-intro">
                     <div class="about-hero">
@@ -261,13 +271,17 @@
                             <img src="images/about/name.svg" alt="Ing. arch. Daria Vlasova" class="about-name-img">
                             <p class="about-role">Architektka</p>
                             <p class="about-location">Praha, Česká republika</p>
+                            <div class="about-cta" aria-label="Rychlá akce">
+                                <button type="button" class="about-cta__link about-cta__button js-scroll-contact">Kontakt</button>
+                            </div>
                         </div>
                     </div>
                 </header>
 
                 <p class="about-lead">
-                    Jsem architektka působící v Praze. Zaměřuji se na srozumitelné koncepty, promyšlené detaily
-                    a prostory, které se dobře používají — s ohledem na udržitelnost a kontext.
+                    Architektura a interiéry s tichým, kultivovaným výrazem. Koncepčně vedená, detailně promyšlená práce
+                    formovaná světlem, proporcemi a trvanlivými materiály. Spolupráce je součástí procesu — jasná komunikace,
+                    čisté iterace, přesné výsledky.
                 </p>
 
                 <!-- Vzdělání -->
@@ -361,8 +375,22 @@
                 <!-- Dovednosti -->
                 <section class="cv-section">
                     <h3 class="cv-heading">Software</h3>
+                    <div class="skills-top" aria-label="Hlavní nástroje">
+                        <span class="skills-top__label">Klíčové nástroje</span>
+                        <div class="skills-top__items">
+                            <span class="skill-tag">ArchiCAD</span>
+                            <span class="skill-tag">AutoCAD</span>
+                            <span class="skill-tag">Revit</span>
+                            <span class="skill-tag">Rhinoceros</span>
+                            <span class="skill-tag">SketchUp</span>
+                            <span class="skill-tag">Photoshop</span>
+                            <span class="skill-tag">Lumion</span>
+                        </div>
+                    </div>
 
-                    <div class="skills-cloud">
+                    <div class="skills-more" aria-label="Celý seznam">
+                        <div class="skills-more__label">Celý seznam</div>
+                        <div class="skills-cloud">
                         <div class="skills-group">
                             <span class="skills-group__label">CAD / BIM</span>
                             <div class="skills-group__items">
@@ -418,12 +446,13 @@
                                 <span class="skill-tag">3D tisk</span>
                             </div>
                         </div>
+                        </div>
                     </div>
 
                 </section>
 
                 <!-- Kontakt -->
-                <section class="cv-section">
+                <section class="cv-section js-contact-section">
                     <h3 class="cv-heading">Kontakt</h3>
                     <div class="contact-info">
                         <a href="mailto:arch.studio.daria@gmail.com" class="contact-link">
@@ -442,24 +471,15 @@
                             LinkedIn
                         </a>
                     </div>
-                    <div class="cv-download-wrapper">
-                        <a href="cv/daria-cv-cz.pdf" download class="cv-download">
-                            <svg class="cv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
-                            </svg>
-                            STÁHNOUT CV
-                        </a>
-                    </div>
                 </section>
 
+                <button class="about-fab js-scroll-contact" type="button">Kontakt</button>
             </article>
 
             <!-- ═══════════════════════════════════════════════════════════
                  РУССКИЙ
                  ═══════════════════════════════════════════════════════════ -->
-            <article class="i18n-block" data-lang-content="ru">
+            <article class="i18n-block" data-lang-content="ru" lang="ru">
 
                 <header class="about-intro">
                     <div class="about-hero">
@@ -471,13 +491,17 @@
                             <img src="images/about/name.svg" alt="Ing. arch. Daria Vlasova" class="about-name-img">
                             <p class="about-role">Архитектор</p>
                             <p class="about-location">Прага, Чехия</p>
+                            <div class="about-cta" aria-label="Быстрое действие">
+                                <button type="button" class="about-cta__link about-cta__button js-scroll-contact">Контакты</button>
+                            </div>
                         </div>
                     </div>
                 </header>
 
                 <p class="about-lead">
-                    Я архитектор, живу и работаю в Праге. Мне важны ясная концепция, продуманная деталировка
-                    и пространства, которыми приятно пользоваться — с вниманием к контексту и устойчивости.
+                    Архитектура и интерьеры с тихим, выверенным выражением. Концептуальная, ориентированная на детали работа,
+                    сформированная светом, пропорциями и долговечными материалами. Сотрудничество — часть процесса: ясная коммуникация,
+                    чистые итерации, точный результат.
                 </p>
 
                 <!-- Образование -->
@@ -571,8 +595,22 @@
                 <!-- Навыки -->
                 <section class="cv-section">
                     <h3 class="cv-heading">Софт</h3>
+                    <div class="skills-top" aria-label="Основные инструменты">
+                        <span class="skills-top__label">Ключевые инструменты</span>
+                        <div class="skills-top__items">
+                            <span class="skill-tag">ArchiCAD</span>
+                            <span class="skill-tag">AutoCAD</span>
+                            <span class="skill-tag">Revit</span>
+                            <span class="skill-tag">Rhinoceros</span>
+                            <span class="skill-tag">SketchUp</span>
+                            <span class="skill-tag">Photoshop</span>
+                            <span class="skill-tag">Lumion</span>
+                        </div>
+                    </div>
 
-                    <div class="skills-cloud">
+                    <div class="skills-more" aria-label="Полный список">
+                        <div class="skills-more__label">Полный список</div>
+                        <div class="skills-cloud">
                         <div class="skills-group">
                             <span class="skills-group__label">CAD / BIM</span>
                             <div class="skills-group__items">
@@ -628,12 +666,13 @@
                                 <span class="skill-tag">3D-печать</span>
                             </div>
                         </div>
+                        </div>
                     </div>
 
                 </section>
 
                 <!-- Контакты -->
-                <section class="cv-section">
+                <section class="cv-section js-contact-section">
                     <h3 class="cv-heading">Контакты</h3>
                     <div class="contact-info">
                         <a href="mailto:arch.studio.daria@gmail.com" class="contact-link">
@@ -652,18 +691,9 @@
                             LinkedIn
                         </a>
                     </div>
-                    <div class="cv-download-wrapper">
-                        <a href="cv/daria-cv-ru.pdf" download class="cv-download">
-                            <svg class="cv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
-                            </svg>
-                            СКАЧАТЬ CV
-                        </a>
-                    </div>
                 </section>
 
+                <button class="about-fab js-scroll-contact" type="button">Контакты</button>
             </article>
 
         </div>

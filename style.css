@@ -134,7 +134,7 @@ body.home .project-grid {
 /* "STUDIO" part - stays uppercase in Intro font */
 .logo-studio {
     text-transform: uppercase;
-    letter-spacing: 0.16em; /* tighter tracking - elegant but solid */
+    letter-spacing: 0.12em; /* tighter tracking - premium, calm feel */
     font-size: 0.88em; /* slightly smaller to let Daria shine */
     font-weight: 500; /* slightly heavier for better legibility at small sizes */
     color: inherit; /* allow hover color on the whole logo */
@@ -155,13 +155,13 @@ body.home .project-grid {
     letter-spacing: 0;
     vertical-align: baseline;
     color: inherit; /* allow hover color on the whole logo */
-    margin-left: -0.42em; /* clear intentional overlap: D behind O */
+    margin-left: -0.18em; /* more space between STUDIO and Daria */
     position: relative;
-    top: 0.1em; /* shifted down for natural baseline alignment */
+    top: 0.08em; /* optical alignment with STUDIO baseline */
     z-index: 3; /* D layer ON TOP of O - clear intentional overlap */
-    /* Slightly bolder stroke for better legibility */
-    -webkit-text-stroke: 0.5px currentColor;
-    text-stroke: 0.5px currentColor;
+    /* Lighter stroke for balanced weight with STUDIO */
+    -webkit-text-stroke: 0.35px currentColor;
+    text-stroke: 0.35px currentColor;
     paint-order: stroke fill;
     /* Remove any potential color fringing */
     -webkit-font-smoothing: antialiased;
@@ -199,6 +199,12 @@ body.home .project-grid {
 .lang-link.active {
     color: #2a2a2a;
     font-weight: 700;
+}
+
+.lang-link:focus-visible {
+    outline: 2px solid rgba(255, 153, 153, 0.9);
+    outline-offset: 3px;
+    border-radius: 6px;
 }
 
 /* About Me - под логотипом */
@@ -422,7 +428,7 @@ nav a {
 /* Стили для сетки проектов */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 3px;
     padding: 3px;
     margin-top: 125px; /* below compact header + filters */
@@ -499,7 +505,7 @@ nav a {
     transform: translateY(0);
 }
 
-.project-info span {
+.project-info .project-title {
     display: block;
     font-size: 16px;
     color: #000;
@@ -560,7 +566,7 @@ nav a {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .project-item .project-info span {
+    .project-item .project-info .project-title {
         font-size: clamp(9px, 1.2vw, 13px);
     }
 }
@@ -581,7 +587,7 @@ nav a {
 
     /* Reduce overlap on tablet for better legibility */
     .logo-daria {
-        margin-left: -0.32em;
+        margin-left: -0.28em;
     }
 
     .filters {
@@ -600,7 +606,7 @@ nav a {
         margin-top: 115px;
     }
 
-    .project-item .project-info span {
+    .project-item .project-info .project-title {
         font-size: clamp(9px, 2vw, 12px);
         letter-spacing: 0.5px;
     }
@@ -735,36 +741,42 @@ nav a {
 .filter-btn {
     background: none;
     border: none;
-    padding: 6px 12px;
+    padding: 8px 14px;
     cursor: pointer;
-    font-size: 12px;
-    color: rgba(42, 42, 42, 0.72); /* darker so it doesn't look disabled */
-    transition: color 220ms cubic-bezier(0.22, 1, 0.36, 1);
-    opacity: 1; /* override legacy opacity styles so inactive isn't faded */
-    font-weight: 500; /* consistent weight for all items */
+    font-size: 11px;
+    color: rgba(42, 42, 42, 0.55);
+    transition: 
+        color 280ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 1;
+    font-weight: 500;
     line-height: 1;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
+    position: relative;
 }
 
 .filter-btn:hover {
-    color: #2a2a2a; /* dark hover for categories */
-    font-weight: 600; /* slightly bolder on hover */
+    color: rgba(42, 42, 42, 0.85);
+    transform: translateY(-1px);
 }
 
 .filter-btn.active {
-    color: #2a2a2a;
-    font-weight: 500; /* active indicated by underline, not weight */
+    color: #1a1a1a;
+    font-weight: 500;
 }
 
 .filter-btn.active:hover,
 .filter-btn.active:focus-visible {
-    font-weight: 500; /* keep active consistent (no bold jump) */
+    font-weight: 500;
+    transform: none;
 }
 
 .filter-btn:focus-visible {
-    color: #2a2a2a;
-    font-weight: 600;
+    color: #1a1a1a;
+    outline: 2px solid rgba(255, 153, 153, 0.9);
+    outline-offset: 4px;
+    border-radius: 999px;
 }
 
 /* Single animated underline that moves between active items */
@@ -774,17 +786,23 @@ nav a {
 
 .filter-underline {
     position: absolute;
-    bottom: 13px; /* closer to text (+3px) */
-    height: 0.75px; /* thinner - more luxury */
-    background: rgba(42, 42, 42, 0.95);
+    bottom: 10px;
+    height: 1.5px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(42, 42, 42, 0.9) 15%, 
+        rgba(42, 42, 42, 0.9) 85%, 
+        transparent 100%);
     border-radius: 999px;
     transition:
-        left 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        width 320ms cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 160ms ease;
+        left 380ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        width 380ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 200ms ease;
     pointer-events: none;
     opacity: 0;
     will-change: left, width;
+    /* Subtle glow effect */
+    box-shadow: 0 0 8px rgba(42, 42, 42, 0.15);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -794,7 +812,7 @@ nav a {
 }
 
 /* Проекты */
-.project-info span {
+.project-info .project-title {
     font-family: 'Intro', sans-serif;
 }
 
@@ -852,9 +870,10 @@ nav a {
     position: absolute;
     inset: 0;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 40px 12px 12px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding: 40px 12px 14px;
     box-sizing: border-box;
     text-align: center;
     background: none; /* override legacy .project-info background */
@@ -901,6 +920,7 @@ nav a {
 /* Hover: full card with colored background */
 .project-item:hover .project-info {
     align-items: center;
+    justify-content: center;
     padding: 12px;
     /* Delay padding a touch so color appears first */
     transition-delay: 40ms;
@@ -916,11 +936,7 @@ nav a {
 
 /* Touch devices: title always visible, tap to reveal full card */
 @media (hover: none) and (pointer: coarse) {
-    .project-item .project-info {
-        /* Base state already matches desktop; keep as-is */
-    }
-
-    .project-item .project-info span {
+    .project-item .project-info .project-title {
         color: #ffffff;
     }
 
@@ -928,6 +944,7 @@ nav a {
     .project-item:active .project-info,
     .project-item:focus-within .project-info {
         align-items: center;
+        justify-content: center;
         padding: 12px;
     }
 
@@ -941,8 +958,8 @@ nav a {
         opacity: 1;
     }
 
-    .project-item:active .project-info span,
-    .project-item:focus-within .project-info span {
+    .project-item:active .project-info .project-title,
+    .project-item:focus-within .project-info .project-title {
         color: var(--tile-fg, #1a1a1a);
     }
 
@@ -953,7 +970,7 @@ nav a {
 }
 
 /* Static state: white text on gradient - light weight, semi-transparent */
-.project-item .project-info span {
+.project-item .project-info .project-title {
     color: rgba(255, 255, 255, 0.85);
     /* Must always fit inside the tile */
     width: 100%;
@@ -975,15 +992,37 @@ nav a {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
+    line-clamp: 4;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 /* Hover state: use tile color for text, bold, larger */
-.project-item:hover .project-info span {
+.project-item:hover .project-info .project-title {
     color: var(--tile-fg, #1a1a1a);
     font-weight: 600;
     font-size: clamp(9px, 0.85vw, 13px);
+}
+
+/* Homepage: small meta line under title (Year · Category) */
+.project-item .project-info .project-meta {
+    color: rgba(255, 255, 255, 0.65);
+    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(7px, 0.58vw, 9px);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-top: 5px;
+    max-width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+    opacity: 0.95;
+}
+
+.project-item:hover .project-info .project-meta,
+.project-item:focus-within .project-info .project-meta {
+    color: rgba(255, 255, 255, 0.92);
 }
 
 /* Hide image on hover/focus (desktop) */
@@ -1062,7 +1101,7 @@ nav a {
 
     /* Mobile: reduce overlap for clarity */
     .logo-daria {
-        margin-left: -0.25em;
+        margin-left: -0.22em;
     }
 
     .language-switcher {
@@ -1139,11 +1178,12 @@ nav a {
     }
 
     /* Mobile project tiles - same hover effect as desktop */
-    .project-item .project-info span {
+    .project-item .project-info .project-title {
         font-size: clamp(8px, 3vw, 11px);
         letter-spacing: 0.3px;
         padding: 0 8px;
         -webkit-line-clamp: 3;
+        line-clamp: 3;
     }
 
     /* Footer mobile */
@@ -1177,7 +1217,7 @@ nav a {
 
     /* Smallest screens: minimal overlap */
     .logo-daria {
-        margin-left: -0.2em;
+        margin-left: -0.18em;
     }
 
     .about-link a {
@@ -1222,11 +1262,22 @@ nav a {
         margin-top: 90px;
     }
 
-    .project-item .project-info span {
+    .project-item .project-info .project-title {
         font-size: 8px;
     }
 }
-
+/* Screen-reader-only utility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
 
 /* Media wrapper */
 picture { display: block; }

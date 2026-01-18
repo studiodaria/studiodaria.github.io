@@ -6,12 +6,13 @@ const translations = {
         legal: 'LEGAL',
         legal_title: 'Legal & Copyright',
         legal_subtitle: 'Portfolio usage terms and rights',
+        home_h1: 'Selected projects',
         all: 'All',
-        school: 'School',
+        school: 'Academic',
         competitions: 'Competitions',
         collaboration: 'Collaboration',
         // Category values on project pages
-        school_detail: 'school',
+        school_detail: 'academic',
         competitions_detail: 'competitions',
         collaboration_detail: 'collaboration',
         category_label: 'Category',
@@ -47,6 +48,8 @@ const translations = {
         gallery_drawings: 'Drawings',
         drawings_label: 'Drawings',
         client_label: 'Client',
+        award_label: 'Award',
+        award_2nd_place: '2nd Place',
         // scroll_down removed (scroll indicator disabled)
         // Footer
         no_copy: 'All content is protected by copyright. Reproduction without permission is not allowed.'
@@ -57,12 +60,13 @@ const translations = {
         legal: 'ПРАВО',
         legal_title: 'Правовая информация',
         legal_subtitle: 'Условия использования портфолио и права',
+        home_h1: 'Избранные проекты',
         all: 'Все',
-        school: 'Учебные',
+        school: 'Академические',
         competitions: 'Конкурсы',
         collaboration: 'Сотрудничество',
         // Category values on project pages
-        school_detail: 'учебные',
+        school_detail: 'академические',
         competitions_detail: 'конкурсы',
         collaboration_detail: 'сотрудничество',
         category_label: 'Категория',
@@ -98,6 +102,8 @@ const translations = {
         gallery_drawings: 'Чертежи',
         drawings_label: 'Чертежи',
         client_label: 'Клиент',
+        award_label: 'Награда',
+        award_2nd_place: '2-е место',
         // scroll_down removed (scroll indicator disabled)
         // Footer
         no_copy: 'Весь контент защищён авторским правом. Воспроизведение без разрешения запрещено.'
@@ -108,12 +114,13 @@ const translations = {
         legal: 'PRÁVO',
         legal_title: 'Právní informace',
         legal_subtitle: 'Podmínky použití portfolia a práva',
+        home_h1: 'Vybrané projekty',
         all: 'Vše',
-        school: 'Školní',
+        school: 'Akademické',
         competitions: 'Soutěže',
         collaboration: 'Spolupráce',
         // Category values on project pages (lowercase / regular)
-        school_detail: 'školní',
+        school_detail: 'akademické',
         competitions_detail: 'soutěže',
         collaboration_detail: 'spolupráce',
         category_label: 'Kategorie',
@@ -149,6 +156,8 @@ const translations = {
         gallery_drawings: 'Výkresy',
         drawings_label: 'Výkresy',
         client_label: 'Klient',
+        award_label: 'Ocenění',
+        award_2nd_place: '2. místo',
         // scroll_down removed (scroll indicator disabled)
         // Footer
         no_copy: 'Veškerý obsah je chráněn autorským právem. Reprodukce bez souhlasu není povolena.'
@@ -198,6 +207,25 @@ function updatePictureSources(pictureEl, fallbackSrc) {
 
     if (avif) avif.setAttribute('srcset', encodeURI(swap('avif')));
     if (webp) webp.setAttribute('srcset', encodeURI(swap('webp')));
+}
+
+function updateHomepageProjectMeta(lang) {
+    if (!document.body.classList.contains('home')) return;
+
+    const t = translations?.[lang] || translations?.en || {};
+    const items = Array.from(document.querySelectorAll('.project-grid .project-item'));
+
+    items.forEach((item) => {
+        const metaEl = item.querySelector('[data-project-meta]');
+        if (!metaEl) return;
+        const year = (item.getAttribute('data-year') || '').trim();
+        const category = (item.getAttribute('data-category') || '').trim();
+        const categoryLabel = (t && category && t[category]) ? t[category] : category;
+
+        // Minimal “studio-level” meta line: Year · Category
+        const parts = [year, categoryLabel].filter(Boolean);
+        metaEl.textContent = parts.join(' · ');
+    });
 }
 
 function syncProjectHeroTitleAlignment() {
@@ -578,10 +606,12 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         // Убираем активный класс у всех кнопок
         document.querySelectorAll('.filter-btn').forEach(b => {
             b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
         });
         
         // Добавляем активный класс нажатой кнопке
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         
         // Move underline to active button
         if (window.__moveFilterUnderline) requestAnimationFrame(() => window.__moveFilterUnderline(btn));
@@ -648,6 +678,27 @@ function switchLanguage(lang) {
 
     // Project pages: keep hero title aligned with header breadcrumb
     requestAnimationFrame(() => syncProjectHeroTitleAlignment());
+
+    // Homepage: update the “Year · Category” micro-line under titles
+    updateHomepageProjectMeta(lang);
+}
+
+function getLangFromUrl() {
+    try {
+        const q = new URLSearchParams(location.search);
+        const raw = (q.get('lang') || '').toLowerCase();
+        if (raw === 'en' || raw === 'cz' || raw === 'ru') return raw;
+    } catch {}
+    return null;
+}
+
+function setLangInUrl(lang) {
+    if (!lang) return;
+    try {
+        const url = new URL(location.href);
+        url.searchParams.set('lang', lang);
+        history.replaceState({}, '', url.toString());
+    } catch {}
 }
 
 // Добавляем обработчики для языковых ссылок
@@ -656,20 +707,12 @@ document.querySelectorAll('.lang-link').forEach(link => {
         e.preventDefault();
         const lang = link.getAttribute('data-lang');
         switchLanguage(lang);
+        setLangInUrl(lang);
     });
 });
 
-// Scroll to top immediately on page load (before DOMContentLoaded)
-if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-}
-window.scrollTo(0, 0);
-
 // При загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-    // Scroll to top on page load/refresh
-    window.scrollTo(0, 0);
-    
     // Авто-год в копирайтах
     const year = String(new Date().getFullYear());
     document.querySelectorAll('.js-year').forEach(el => {
@@ -681,7 +724,8 @@ document.addEventListener('DOMContentLoaded', () => {
     try { storedLanguage = localStorage.getItem('selectedLanguage'); } catch {}
     const browserLang = (navigator.language || '').toLowerCase();
     const defaultLanguage = browserLang.startsWith('cs') ? 'cz' : 'en';
-    switchLanguage(storedLanguage || defaultLanguage);
+    const urlLanguage = getLangFromUrl();
+    switchLanguage(urlLanguage || storedLanguage || defaultLanguage);
     syncProjectHeroTitleAlignment();
     window.addEventListener('resize', () => syncProjectHeroTitleAlignment(), { passive: true });
     window.addEventListener('load', () => syncProjectHeroTitleAlignment(), { passive: true, once: true });
@@ -718,7 +762,49 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Mobile gallery: convert vertical gallery to swipeable gallery on mobile
     initMobileGallery();
+
+    // About page: scroll-to-contact button (works with language blocks)
+    initAboutContactScroll();
+
+    // About page: "Download PDF" (Print → Save as PDF)
+    initAboutPdfDownload();
 });
+
+function initAboutContactScroll() {
+    const triggers = Array.from(document.querySelectorAll('.js-scroll-contact'));
+    if (!triggers.length) return;
+
+    const getActiveBlock = () => {
+        const blocks = Array.from(document.querySelectorAll('.i18n-block[data-lang-content]'));
+        return blocks.find((b) => window.getComputedStyle(b).display !== 'none') || null;
+    };
+
+    const scrollToContact = () => {
+        const active = getActiveBlock();
+        const target = active?.querySelector('.js-contact-section') || document.querySelector('.js-contact-section');
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    triggers.forEach((el) => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            scrollToContact();
+        });
+    });
+}
+
+function initAboutPdfDownload() {
+    const btns = Array.from(document.querySelectorAll('.js-print-pdf'));
+    if (!btns.length) return;
+    btns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // User can "Save as PDF" in the print dialog
+            window.print();
+        });
+    });
+}
 
 function registerServiceWorker() {
     if (!('serviceWorker' in navigator)) return;

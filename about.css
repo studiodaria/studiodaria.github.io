@@ -81,6 +81,48 @@
     padding-top: 0;
 }
 
+/* Quick CTA row under intro */
+.about-cta {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: baseline;
+    font-family: 'Intro', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(26, 26, 26, 0.45);
+}
+
+.about-cta__link {
+    color: rgba(26, 26, 26, 0.65);
+    text-decoration: none;
+    transition: color 180ms ease;
+}
+
+.about-cta__link:hover {
+    color: #1a1a1a;
+}
+
+.about-cta__sep {
+    color: rgba(26, 26, 26, 0.25);
+}
+
+/* (No longer used, but safe to keep if we add more links later) */
+
+.about-cta__button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
 .about-name {
     margin: 0;
     font-size: clamp(32px, 6vw, 48px);
@@ -139,11 +181,56 @@
     margin: 0 0 56px;
     font-size: 18px;
     line-height: 1.8;
-    color: rgba(26, 26, 26, 0.75);
+    color: rgba(26, 26, 26, 0.82);
     max-width: 56ch;
     opacity: 0;
     transform: translateY(15px);
     animation: fadeSlideUp 0.5s ease 0.45s forwards;
+}
+
+/* Mobile floating CTA */
+.about-fab {
+    display: none;
+}
+
+/* Software: Top + More */
+.skills-top {
+    margin: 6px 0 18px;
+    padding: 14px 0 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.skills-top__label {
+    display: block;
+    font-family: 'Intro', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(26, 26, 26, 0.45);
+    margin-bottom: 10px;
+}
+
+.skills-top__items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+
+.skills-more {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: 14px;
+}
+
+.skills-more__label {
+    font-family: 'Intro', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(26, 26, 26, 0.55);
+}
+
+.skills-more .skills-cloud {
+    margin-top: 14px;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -303,8 +390,8 @@
     margin: 10px 0 0;
     padding: 0 0 0 18px;
     font-size: 14px;
-    line-height: 1.65;
-    color: rgba(26, 26, 26, 0.58);
+    line-height: 1.75;
+    color: rgba(26, 26, 26, 0.66);
 }
 
 .cv-list li {
@@ -451,6 +538,9 @@
     transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .cv-download::before {
@@ -502,9 +592,9 @@
 
     /* Photo layout on mobile — stacked */
     .about-hero {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 24px;
-        align-items: center;
+        justify-items: center;
         text-align: center;
     }
 
@@ -530,6 +620,43 @@
 
     .about-location {
         justify-content: center;
+    }
+
+    .about-cta {
+        justify-content: center;
+    }
+
+    .project-mini {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 14px 0;
+    }
+
+    .project-mini__img {
+        width: 100%;
+        height: 140px;
+    }
+
+    .skills-top__items {
+        justify-content: center;
+    }
+
+    .about-fab {
+        display: inline-flex;
+        position: fixed;
+        right: 14px;
+        bottom: 14px;
+        z-index: 999;
+        padding: 12px 14px;
+        background: #1a1a1a;
+        color: #ffffff;
+        text-decoration: none;
+        font-family: 'Intro', sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
     }
 
     .about-name {
@@ -642,5 +769,357 @@
     .contact-link,
     .cv-download {
         transition: none;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PRINT LAYOUT — Professional CV on single A4
+   Design: Clean hierarchy, generous whitespace, clear sections
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 12mm 14mm 10mm 14mm;
+    }
+
+    /* ─── Reset & Hide UI ─── */
+    .main-header,
+    .about-fab,
+    .cv-download-wrapper,
+    .about-cta {
+        display: none !important;
+    }
+
+    * {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* ─── Page Base ─── */
+    .about-page {
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: auto !important;
+        background: white !important;
+        font-family: 'Manrope', system-ui, sans-serif !important;
+        font-size: 7.5pt !important;
+        line-height: 1.35 !important;
+        color: #1a1a1a !important;
+    }
+
+    .about-container {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       HEADER — Photo left, Name/Role right, Contact far right
+       ═══════════════════════════════════════════════════════════════════════ */
+    .about-intro {
+        display: block !important;
+        margin-bottom: 10pt !important;
+        padding-bottom: 8pt !important;
+        border-bottom: 0.75pt solid #1a1a1a !important;
+    }
+
+    .about-hero {
+        display: grid !important;
+        grid-template-columns: 56pt 1fr auto !important;
+        gap: 12pt !important;
+        align-items: start !important;
+        margin-bottom: 6pt !important;
+    }
+
+    .about-hero picture {
+        width: 56pt !important;
+        height: 56pt !important;
+        border: none !important;
+        background: #f5f5f5 !important;
+    }
+
+    .about-photo {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .about-hero-text {
+        padding-top: 2pt !important;
+    }
+
+    .about-hero-text img.about-name-img {
+        height: 22pt !important;
+        width: auto !important;
+        display: block !important;
+        margin-bottom: 3pt !important;
+    }
+
+    .about-role {
+        font-size: 8pt !important;
+        font-weight: 500 !important;
+        color: #1a1a1a !important;
+        margin: 0 0 1pt 0 !important;
+        line-height: 1.2 !important;
+    }
+
+    .about-location {
+        font-size: 7pt !important;
+        color: #666 !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Intro paragraph */
+    .about-lead {
+        font-size: 7pt !important;
+        line-height: 1.4 !important;
+        color: #444 !important;
+        margin: 0 !important;
+        font-style: italic !important;
+        max-width: 85% !important;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       MAIN CONTENT — 2 Column Grid
+       Left: Education + Experience | Right: Skills + Contact
+       ═══════════════════════════════════════════════════════════════════════ */
+    .i18n-block {
+        display: none !important;
+    }
+
+    .i18n-block[style*="block"] {
+        display: grid !important;
+        grid-template-columns: 1.1fr 0.9fr !important;
+        grid-template-rows: auto auto auto 1fr !important;
+        gap: 0 16pt !important;
+        grid-template-areas:
+            "intro intro"
+            "edu skills"
+            "exp skills"
+            "exp contact" !important;
+    }
+
+    .i18n-block[style*="block"] .about-intro {
+        grid-area: intro !important;
+    }
+
+    /* Section styling */
+    .cv-section {
+        margin-bottom: 8pt !important;
+        padding-bottom: 0 !important;
+        border: none !important;
+        page-break-inside: avoid !important;
+    }
+
+    .cv-heading {
+        font-size: 7pt !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.8pt !important;
+        color: #1a1a1a !important;
+        margin-bottom: 5pt !important;
+        padding-bottom: 2pt !important;
+        border-bottom: 0.5pt solid #ccc !important;
+    }
+
+    /* Education = 1st section after intro */
+    .i18n-block[style*="block"] .cv-section:nth-of-type(1) {
+        grid-area: edu !important;
+    }
+
+    /* Experience = 2nd section */
+    .i18n-block[style*="block"] .cv-section:nth-of-type(2) {
+        grid-area: exp !important;
+    }
+
+    /* Skills = 3rd section */
+    .i18n-block[style*="block"] .cv-section:nth-of-type(3) {
+        grid-area: skills !important;
+    }
+
+    /* Contact = 4th section */
+    .i18n-block[style*="block"] .cv-section:nth-of-type(4) {
+        grid-area: contact !important;
+        align-self: end !important;
+    }
+
+    /* ─── Timeline Entries ─── */
+    .cv-entry {
+        display: block !important;
+        margin-bottom: 6pt !important;
+        padding-left: 8pt !important;
+        border-left: 1.5pt solid #e0e0e0 !important;
+        break-inside: avoid !important;
+    }
+
+    .cv-entry::before,
+    .cv-entry::after {
+        display: none !important;
+    }
+
+    .cv-year {
+        display: block !important;
+        font-size: 6pt !important;
+        font-weight: 600 !important;
+        color: #888 !important;
+        letter-spacing: 0.3pt !important;
+        margin-bottom: 1pt !important;
+    }
+
+    .cv-body {
+        display: block !important;
+    }
+
+    .cv-body strong {
+        font-size: 7pt !important;
+        font-weight: 600 !important;
+        color: #1a1a1a !important;
+        display: block !important;
+        line-height: 1.25 !important;
+    }
+
+    .cv-tag {
+        font-size: 5pt !important;
+        font-weight: 500 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.2pt !important;
+        padding: 1pt 3pt !important;
+        background: #f0f0f0 !important;
+        border-radius: 1pt !important;
+        margin-left: 3pt !important;
+        vertical-align: middle !important;
+        color: #666 !important;
+    }
+
+    .cv-detail {
+        display: block !important;
+        font-size: 6.5pt !important;
+        color: #555 !important;
+        margin-top: 1pt !important;
+        line-height: 1.3 !important;
+    }
+
+    .cv-list {
+        display: block !important;
+        margin: 2pt 0 0 0 !important;
+        padding-left: 10pt !important;
+        font-size: 6pt !important;
+        line-height: 1.35 !important;
+        color: #666 !important;
+    }
+
+    .cv-list li {
+        margin-bottom: 1pt !important;
+        position: relative !important;
+    }
+
+    .cv-list li::marker {
+        color: #ccc !important;
+    }
+
+    /* ─── Skills Section ─── */
+    .skills-top {
+        display: block !important;
+        margin-bottom: 6pt !important;
+        padding-bottom: 6pt !important;
+        border-bottom: 0.5pt solid #eee !important;
+    }
+
+    .skills-top__label {
+        display: block !important;
+        font-size: 5.5pt !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5pt !important;
+        color: #888 !important;
+        margin-bottom: 3pt !important;
+    }
+
+    .skills-top__items {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 3pt !important;
+    }
+
+    .skills-more {
+        display: block !important;
+    }
+
+    .skills-more__label {
+        display: block !important;
+        font-size: 5.5pt !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5pt !important;
+        color: #888 !important;
+        margin-bottom: 4pt !important;
+    }
+
+    .skills-cloud {
+        display: block !important;
+    }
+
+    .skills-group {
+        display: block !important;
+        margin-bottom: 5pt !important;
+        break-inside: avoid !important;
+    }
+
+    .skills-group__label {
+        display: block !important;
+        font-size: 5.5pt !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.4pt !important;
+        color: #666 !important;
+        margin-bottom: 2pt !important;
+    }
+
+    .skills-group__items {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 2pt !important;
+    }
+
+    .skill-tag {
+        font-size: 6pt !important;
+        font-weight: 500 !important;
+        padding: 1.5pt 4pt !important;
+        background: #f8f8f8 !important;
+        border: 0.5pt solid #e5e5e5 !important;
+        border-radius: 2pt !important;
+        color: #333 !important;
+    }
+
+    /* ─── Contact Section ─── */
+    .contact-info {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4pt !important;
+    }
+
+    .contact-link {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 4pt !important;
+        font-size: 6.5pt !important;
+        color: #1a1a1a !important;
+        text-decoration: none !important;
+    }
+
+    .contact-link svg {
+        width: 8pt !important;
+        height: 8pt !important;
+        stroke: #666 !important;
+    }
+
+    /* Hide URL suffixes */
+    a::after {
+        content: none !important;
     }
 }
