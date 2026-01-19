@@ -810,7 +810,7 @@
         width: 100%;
         padding-left: 0;
         max-width: 100%;
-        font-size: 15px;
+        font-size: 13px;
         margin: 24px 0 36px;
         text-align: left;
     }
@@ -933,6 +933,11 @@
     .about-page {
         margin-top: 80px;
         padding: 24px 14px 48px;
+    }
+
+    .about-lead {
+        font-size: 12px;
+        margin: 18px 0 28px;
     }
 
     .about-name {
