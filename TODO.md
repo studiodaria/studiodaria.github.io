@@ -11,3 +11,4 @@
 2. favicon / D 
 3. Když scrolluji mám pocit jako by se obrazky projektu dokola znova nacitali
 4. zkontrolovat ru text dpi a pod není v ru a en
+5. nazvy projektu v kartach na preview zkratit plny text jen navodu mysi a mel cele slova 
