@@ -624,6 +624,17 @@
     border-radius: 6px;
 }
 
+/* Make Contact section feel intentional ("bio contact") */
+.js-contact-section {
+    scroll-margin-top: 120px; /* fixed header offset */
+}
+
+.js-contact-section .contact-info {
+    border-color: rgba(26, 26, 26, 0.14);
+    background: rgba(26, 26, 26, 0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
 .contact-link {
     display: inline-flex;
     align-items: center;
@@ -760,8 +771,24 @@
         margin-right: 0;
     }
 
+    .about-role {
+        /* Match "Ing. arch." size in the name SVG */
+        font-size: 7px;
+        letter-spacing: 0.1em;
+        margin: 0 0 4px;
+    }
+
     .about-mini {
         justify-content: flex-start;
+        font-size: 8px;
+        letter-spacing: 0.1em;
+        gap: 4px 8px;
+    }
+
+    /* Make the "Contacts" line in bio a bit larger */
+    .about-hero-text > .about-mini {
+        font-size: 9px;
+        letter-spacing: 0.1em;
     }
 
     .about-cta {
@@ -923,6 +950,10 @@
         gap: 8px;
     }
 
+    .js-contact-section {
+        scroll-margin-top: 96px;
+    }
+
     .cv-download {
         padding: 14px 28px;
         font-size: 10px;
@@ -938,6 +969,18 @@
     .about-lead {
         font-size: 12px;
         margin: 18px 0 28px;
+    }
+
+    .about-role {
+        font-size: 6px;
+    }
+
+    .about-mini {
+        font-size: 7px;
+    }
+
+    .about-hero-text > .about-mini {
+        font-size: 8px;
     }
 
     .about-name {

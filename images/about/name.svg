@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 115" role="img" aria-label="Ing. arch. Daria Vlasova">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&amp;display=swap');
     .title-prefix {
       font-family: "Outfit", system-ui, sans-serif;
       font-weight: 500;
