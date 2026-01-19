@@ -1224,11 +1224,27 @@ nav a {
 
     /* Mobile project tiles - same hover effect as desktop */
     .project-item .project-info .project-title {
-        font-size: clamp(8px, 3vw, 11px);
-        letter-spacing: 0.3px;
-        padding: 0 8px;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
+        /* Title: ~30% smaller than original mobile, but still readable */
+        font-size: clamp(5.6px, 2.1vw, 7.7px);
+        letter-spacing: 0.1px;
+        padding: 0 6px;
+
+        /* Force single-line on mobile */
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .project-item .project-info .project-meta {
+        /* Meta (Year · Category): restore to readable size */
+        font-size: clamp(5px, 1.7vw, 7px);
+        letter-spacing: 0.1em;
+        padding: 0 6px;
+        margin-top: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     /* Footer mobile */
@@ -1332,7 +1348,11 @@ nav a {
     }
 
     .project-item .project-info .project-title {
-        font-size: 8px;
+        font-size: 6px;
+    }
+
+    .project-item .project-info .project-meta {
+        font-size: 5px;
     }
 }
 /* Screen-reader-only utility */
