@@ -1089,6 +1089,11 @@ nav a {
         justify-content: center;
     }
 
+    /* Homepage has more specific rules; keep mobile header consistent with project pages */
+    body.home .main-header {
+        height: 56px;
+    }
+
     .header-center {
         order: 1;
         gap: 3px;
@@ -1099,9 +1104,18 @@ nav a {
         letter-spacing: 0;
     }
 
+    /* Ensure homepage logo matches project pages on mobile */
+    body.home .logo {
+        font-size: 14px;
+    }
+
     /* Mobile: reduce overlap for clarity */
     .logo-daria {
         margin-left: -0.22em;
+    }
+
+    body.home .logo-daria {
+        font-size: 2.2em;
     }
 
     .language-switcher {
@@ -1131,9 +1145,14 @@ nav a {
     }
 
     .nav-link {
-        font-size: 10px;
+        font-size: 9px;
         font-weight: 500;
         letter-spacing: 0.04em;
+    }
+
+    /* Project pages: keep "ABOUT ME / O MNĚ" not oversized on mobile */
+    .nav-link--primary {
+        font-size: 9px;
     }
 
     .nav-separator {
@@ -1148,7 +1167,7 @@ nav a {
     }
 
     .about-link a {
-        font-size: 10px;
+        font-size: 9px;
         font-weight: 400;
         padding: 2px 0;
         letter-spacing: 0.04em;
@@ -1159,10 +1178,14 @@ nav a {
         padding: 8px 0;
     }
 
+    body.home .filters {
+        top: 56px;
+    }
+
     .filter-group {
         gap: 4px;
         flex-wrap: wrap;
-        padding: 0 8px;
+        padding: 0 8px 10px;
     }
 
     .filter-btn {
@@ -1171,10 +1194,32 @@ nav a {
         letter-spacing: 0.5px;
     }
 
+    /* Mobile: per-button underline (single underline "bar" breaks when filters wrap) */
+    .filter-underline {
+        display: none !important;
+    }
+
+    .filter-btn.active::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -6px;
+        width: 18px;
+        height: 1.5px;
+        background: rgba(42, 42, 42, 0.9);
+        border-radius: 999px;
+        pointer-events: none;
+    }
+
     .project-grid {
         margin-top: 100px;
         gap: 2px;
         padding: 2px;
+    }
+
+    body.home .project-grid {
+        margin-top: 100px;
     }
 
     /* Mobile project tiles - same hover effect as desktop */
@@ -1211,7 +1256,15 @@ nav a {
         height: 50px;
     }
 
+    body.home .main-header {
+        height: 50px;
+    }
+
     .logo {
+        font-size: 12px;
+    }
+
+    body.home .logo {
         font-size: 12px;
     }
 
@@ -1220,15 +1273,23 @@ nav a {
         margin-left: -0.18em;
     }
 
+    body.home .logo-daria {
+        font-size: 2.2em;
+    }
+
     .about-link a {
-        font-size: 9px;
+        font-size: 8px;
         font-weight: 400;
         padding: 2px 0;
         letter-spacing: 0.03em;
     }
 
+    .nav-link--primary {
+        font-size: 8px;
+    }
+
     .nav-link {
-        font-size: 9px;
+        font-size: 8px;
         font-weight: 500;
         letter-spacing: 0.03em;
     }
@@ -1253,12 +1314,20 @@ nav a {
         padding: 6px 0;
     }
 
+    body.home .filters {
+        top: 50px;
+    }
+
     .filter-btn {
         font-size: 8px;
         padding: 4px 6px;
     }
 
     .project-grid {
+        margin-top: 90px;
+    }
+
+    body.home .project-grid {
         margin-top: 90px;
     }
 

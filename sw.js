@@ -1,10 +1,10 @@
-﻿/* Service Worker: lightweight caching for faster navigation on a static portfolio
+/* Service Worker: lightweight caching for faster navigation on a static portfolio
    - HTML: network-first (fresh when online, fast fallback when offline)
    - CSS/JS: stale-while-revalidate
    - Images: cache-first with a small cap (to avoid unbounded storage)
 */
 
-const VERSION = 'v37';
+const VERSION = 'v45';
 const CACHE_STATIC = `static-${VERSION}`;
 const CACHE_PAGES = `pages-${VERSION}`;
 const CACHE_IMAGES = `images-${VERSION}`;

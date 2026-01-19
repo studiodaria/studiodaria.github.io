@@ -532,6 +532,9 @@ function initFilterUnderline() {
         underline.className = 'filter-underline';
         filterGroup.appendChild(underline);
     }
+
+    // Mark as JS-enhanced so CSS fallback can disable itself
+    filterGroup.classList.add('has-underline');
     
     // Ensure each button has a measurable text wrapper, so underline aligns to text (not padding)
     const buttons = Array.from(filterGroup.querySelectorAll('.filter-btn'));
@@ -614,7 +617,14 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.setAttribute('aria-pressed', 'true');
         
         // Move underline to active button
-        if (window.__moveFilterUnderline) requestAnimationFrame(() => window.__moveFilterUnderline(btn));
+        if (window.__moveFilterUnderline) {
+            requestAnimationFrame(() => window.__moveFilterUnderline(btn));
+        } else {
+            // If underline wasn't initialized (e.g., a runtime error in DOMContentLoaded),
+            // initialize on-demand so the UI still works without a reload.
+            const mover = initFilterUnderline();
+            if (typeof mover === 'function') requestAnimationFrame(() => mover(btn));
+        }
         
         // Фильтруем проекты
         const category = btn.getAttribute('data-filter');

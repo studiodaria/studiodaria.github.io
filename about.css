@@ -463,9 +463,10 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   Highlights — 4–5 compact lines, calm typography
+   Compact lists (Highlights / Languages) — calm typography
    ───────────────────────────────────────────────────────────────────────────── */
-.highlights-list {
+.highlights-list,
+.languages-list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -474,15 +475,18 @@
     gap: 10px;
 }
 
-.highlights-list li {
+.highlights-list li,
+.languages-list li {
     margin: 0;
     padding-left: 14px;
     position: relative;
+    font-size: 14px; /* keep consistent with CV body text */
     color: rgba(26, 26, 26, 0.66);
     line-height: 1.55;
 }
 
-.highlights-list li::before {
+.highlights-list li::before,
+.languages-list li::before {
     content: "";
     position: absolute;
     left: 0;
@@ -493,9 +497,28 @@
     background: rgba(26, 26, 26, 0.25);
 }
 
-.highlights-list strong {
-    color: #1a1a1a;
-    font-weight: 600;
+.highlights-list strong,
+.languages-list strong {
+    color: inherit;
+    font-weight: inherit; /* avoid accidental bold if strong remains */
+}
+
+/* Languages should be ultra-minimal (no bullet dot) */
+.languages-list li {
+    padding-left: 0;
+}
+
+.languages-list li::before {
+    content: none;
+}
+
+/* Highlights can also be minimal (no bullet dot) */
+.highlights-list li {
+    padding-left: 0;
+}
+
+.highlights-list li::before {
+    content: none;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
