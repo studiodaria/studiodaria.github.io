@@ -512,13 +512,27 @@
     content: none;
 }
 
-/* Highlights can also be minimal (no bullet dot) */
+/* Highlights: match "Experience" list bullets (cv-list) */
+.highlights-list {
+    display: block;
+    list-style: disc;
+    list-style-position: outside;
+    padding-left: 18px;
+}
+
 .highlights-list li {
     padding-left: 0;
+    position: static;
+    margin: 5px 0;
 }
 
 .highlights-list li::before {
     content: none;
+}
+
+.highlights-list li::marker {
+    /* Match Experience bullets (darker, more visible) */
+    color: rgba(26, 26, 26, 0.45);
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -717,17 +731,18 @@
         padding: 32px 18px 60px;
     }
 
-    /* Photo layout on mobile — stacked, centered */
+    /* Mobile: keep photo left + name right, aligned left */
     .about-hero {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        justify-items: center;
-        text-align: center;
+        grid-template-columns: 120px 1fr;
+        gap: 16px;
+        justify-items: start;
+        align-items: start;
+        text-align: left;
     }
 
     .about-hero picture {
-        width: 160px;
-        height: 160px;
+        width: 120px;
+        height: 120px;
     }
 
     .about-photo {
@@ -736,21 +751,21 @@
     }
 
     .about-hero-text {
-        min-height: auto;
+        min-height: 120px;
     }
 
     .about-name-img {
-        max-width: 260px;
-        margin-left: auto;
-        margin-right: auto;
+        max-width: 240px;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .about-mini {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .about-cta {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .project-mini {
@@ -765,7 +780,7 @@
     }
 
     .skills-top__items {
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .about-fab {
@@ -797,13 +812,22 @@
         max-width: 100%;
         font-size: 15px;
         margin: 24px 0 36px;
-        text-align: center;
+        text-align: left;
+    }
+
+    /* Spacing between rows/sections */
+    .cv-section {
+        margin-bottom: 44px;
     }
 
     .cv-entry {
         grid-template-columns: 1fr;
-        gap: 6px;
-        padding: 14px 0 14px 20px;
+        gap: 4px;
+        padding: 12px 0 12px 16px;
+    }
+
+    .cv-list li {
+        margin: 3px 0;
     }
 
     /* Timeline adjustments for mobile */
@@ -832,6 +856,61 @@
     .cv-detail,
     .cv-list {
         font-size: 13px;
+    }
+
+    /* Highlights (Awards / Achievements): match CV body sizing on mobile */
+    .languages-list { gap: 8px; }
+
+    .highlights-list li,
+    .languages-list li {
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .highlights-list li {
+        margin: 3px 0;
+    }
+
+    /* Software (mobile): label on its own line, clean wrap for items */
+    .skills-group {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 10px 0;
+    }
+
+    .skills-group__label {
+        display: block;
+        margin: 0;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(26, 26, 26, 0.55); /* gray label */
+    }
+
+    .skills-group__label::after {
+        content: none; /* remove ":" on mobile */
+    }
+
+    .skills-top__items,
+    .skills-group__items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px 10px;
+        align-items: baseline;
+        line-height: 1.5;
+    }
+
+    .skill-tag {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .skill-tag:not(:last-child)::after {
+        content: none; /* remove commas for a cleaner look */
+        margin-right: 0;
     }
 
     .skills-group:hover {
