@@ -340,7 +340,7 @@ body.home .project-grid {
 
 @media (max-width: 480px) {
     .main-header {
-        padding: 15px 20px;
+        padding: 0 16px !important; /* no vertical padding */
     }
     
     .about-link {
@@ -1096,26 +1096,48 @@ body.is-scrolling .project-item img {
 /* Mobile header improvements */
 @media (max-width: 600px) {
     .main-header {
-        height: 56px;
-        padding: 0 16px;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 56px !important;
+        min-height: 56px !important;
+        max-height: 56px !important;
+        padding: 8px 16px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        /* Prevent jitter on scroll */
+        transition: none !important;
+        transform: none !important;
+        will-change: auto !important;
+        backface-visibility: hidden !important;
+        -webkit-backface-visibility: hidden !important;
     }
 
     /* Homepage has more specific rules; keep mobile header consistent with project pages */
     body.home .main-header {
-        height: 56px;
+        height: 56px !important;
+        min-height: 56px !important;
+        max-height: 56px !important;
     }
 
     .header-center {
-        order: 1;
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-46%, -58%) !important;
         gap: 3px;
+        overflow: visible;
     }
 
     .logo {
         font-size: 14px;
         letter-spacing: 0;
+        overflow: visible;
+        white-space: nowrap;
     }
 
     /* Ensure homepage logo matches project pages on mobile */
@@ -1133,11 +1155,11 @@ body.is-scrolling .project-item img {
     }
 
     .language-switcher {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 16px;
-        gap: 6px;
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        right: 16px !important;
+        gap: 4px;
     }
 
     .lang-link {
@@ -1146,15 +1168,17 @@ body.is-scrolling .project-item img {
     }
 
     .about-link {
-        left: 16px;
-        top: 50%;
-        transform: translateY(-50%);
+        position: absolute !important;
+        left: 16px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
     }
 
     .header-left {
-        left: 16px;
-        top: 50%;
-        transform: translateY(-50%);
+        position: absolute !important;
+        left: 16px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
         gap: 6px;
     }
 
@@ -1291,11 +1315,16 @@ body.is-scrolling .project-item img {
 /* Small mobile (< 400px) */
 @media (max-width: 400px) {
     .main-header {
-        height: 50px;
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+        padding: 0 12px !important;
     }
 
     body.home .main-header {
-        height: 50px;
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
     }
 
     .logo {

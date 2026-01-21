@@ -88,7 +88,21 @@ body.project-6 .home-btn:hover {
         /* Preserve per-project background colors (many use !important) */
         -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
         backdrop-filter: blur(18px) saturate(180%) !important;
-        transition: none;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: 56px !important;
+        min-height: 56px !important;
+        max-height: 56px !important;
+        padding: 0 16px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+        transition: none !important;
+        transform: none !important;
+        will-change: auto !important;
+        backface-visibility: hidden !important;
+        -webkit-backface-visibility: hidden !important;
     }
 }
 
