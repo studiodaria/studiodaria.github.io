@@ -117,7 +117,7 @@
     gap: 6px 10px;
     align-items: baseline;
     font-family: 'Intro', sans-serif;
-    font-size: 10px;
+    font-size: 11px; /* Prague / Contact */
     font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -164,7 +164,7 @@
 /* Small arrow */
 .about-mini__link--contact::after {
     content: "↓";
-    font-size: 9px;
+    font-size: 0.9em; /* keep proportional to text */
     line-height: 1;
     opacity: 0.5;
     transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease;
@@ -265,7 +265,7 @@
 .about-role {
     margin: 0 0 6px;
     font-family: 'Intro', sans-serif;
-    font-size: 10px;
+    font-size: 13px; /* Architect slightly larger (desktop) */
     font-weight: 400;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -279,25 +279,52 @@
     display: none;
 }
 
-/* Lead paragraph — match CV body column width (right of years) */
+/* Lead paragraph — styled as elegant quote */
 .about-lead {
-    margin: 28px 0 56px;
-    padding-left: 0;
-    margin-left: 0; /* align with photo (container left edge) */
-    width: calc(100% - var(--cv-text-offset)); /* align right edge with CV body */
-    font-size: 16px;
-    line-height: 1.85;
-    color: rgba(26, 26, 26, 0.72);
+    margin: 32px 0 56px;
+    padding: 22px 0;
+    margin-left: 0;
+    width: calc(100% - var(--cv-text-offset));
+    font-size: 14px;
+    line-height: 1.9;
+    color: rgba(26, 26, 26, 0.65);
+    font-style: italic;
     max-width: none;
-    text-align: justify;
+    text-align: left;
     hyphens: none;
     -webkit-hyphens: none;
     -ms-hyphens: none;
     word-break: normal;
     overflow-wrap: normal;
+    position: relative;
     opacity: 0;
     transform: translateY(15px);
     animation: fadeSlideUp 0.5s ease 0.45s forwards;
+}
+
+.about-lead::before,
+.about-lead::after {
+    position: absolute;
+    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(26, 26, 26, 0.14);
+    line-height: 1;
+    pointer-events: none;
+}
+
+.about-lead::before {
+    content: "“";
+    left: -2px;
+    top: -6px;
+    font-size: 40px;
+}
+
+.about-lead::after {
+    content: "”";
+    right: -2px;
+    bottom: -18px;
+    font-size: 40px;
 }
 
 /* Mobile floating CTA */
@@ -474,7 +501,8 @@
 }
 
 .cv-body strong {
-    font-size: 16px;
+    /* Institution / position title — responsive + proportionally smaller */
+    font-size: clamp(12.5px, 2.1vw, 14px);
     font-weight: 600;
     color: #1a1a1a;
     line-height: 1.35;
@@ -784,7 +812,7 @@
    ───────────────────────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
     .about-page {
-        margin-top: 90px;
+        margin-top: 70px;
         padding: 32px 18px 60px;
     }
 
@@ -819,21 +847,20 @@
 
     .about-role {
         /* Match "Ing. arch." size in the name SVG */
-        font-size: 7px;
+        font-size: 10px; /* Architect slightly larger */
         letter-spacing: 0.1em;
         margin: 0 0 4px;
     }
 
     .about-mini {
         justify-content: flex-start;
-        font-size: 8px;
+        font-size: 9px; /* same as role + location + contact */
         letter-spacing: 0.1em;
         gap: 4px 8px;
     }
 
-    /* Make the "Contacts" line in bio a bit larger */
     .about-hero-text > .about-mini {
-        font-size: 9px;
+        font-size: 9px; /* keep same as Prague line */
         letter-spacing: 0.1em;
     }
 
@@ -865,11 +892,24 @@
     .about-lead {
         margin-left: 0;
         width: 100%;
-        padding-left: 0;
+        padding: 16px 0;
         max-width: 100%;
-        font-size: 13px;
-        margin: 24px 0 36px;
+        font-size: 12px;
+        margin: 20px 0 32px;
         text-align: left;
+    }
+
+    .about-lead::before,
+    .about-lead::after {
+        font-size: 34px;
+    }
+
+    .about-lead::before {
+        top: -8px;
+    }
+
+    .about-lead::after {
+        bottom: -18px;
     }
 
     /* Spacing between rows/sections */
@@ -907,7 +947,7 @@
     }
 
     .cv-body strong {
-        font-size: 15px;
+        font-size: 12px; /* smaller bold institution titles on mobile */
     }
 
     .cv-detail,
@@ -1002,11 +1042,11 @@
     }
 
     .about-role {
-        font-size: 6px;
+        font-size: 9px; /* Architect slightly larger */
     }
 
     .about-mini {
-        font-size: 7px;
+        font-size: 8px;
     }
 
     .about-hero-text > .about-mini {
@@ -1017,16 +1057,12 @@
         font-size: 24px;
     }
 
-    .about-role {
-        font-size: 12px;
-    }
-
     .cv-heading {
         font-size: 10px;
     }
 
     .cv-body strong {
-        font-size: 14px;
+        font-size: 12px; /* keep consistent with mobile sizing */
     }
 
     .cv-download {
