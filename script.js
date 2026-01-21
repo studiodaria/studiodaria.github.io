@@ -213,14 +213,22 @@ const imageSupport = (() => {
 function preferOptimizedImageUrl(url) {
     if (!url || typeof url !== 'string') return url;
 
+    // Decode first to normalize any existing encoding, then work with clean path
+    let decoded = url;
+    try { decoded = decodeURI(url); } catch { /* keep original */ }
+
     const withPicweb = (u) =>
         String(u).replace(/(images\/project\d+\/)(?!picweb\/)/i, '$1picweb/');
 
     const swap = (ext) =>
-        withPicweb(url).replace(/\.(jpg|jpeg|png)(?=($|[?#]))/i, `.${ext}`);
-    if (imageSupport.avif) return swap('avif');
-    if (imageSupport.webp) return swap('webp');
-    return url;
+        withPicweb(decoded).replace(/\.(jpg|jpeg|png)(?=($|[?#]))/i, `.${ext}`);
+    
+    let result = decoded;
+    if (imageSupport.avif) result = swap('avif');
+    else if (imageSupport.webp) result = swap('webp');
+    
+    // Encode the result to handle spaces and special characters
+    try { return encodeURI(result); } catch { return result; }
 }
 
 function updatePictureSources(pictureEl, fallbackSrc) {
@@ -335,8 +343,11 @@ function initLightbox() {
 
     const normalizeLightboxUrl = (url) => {
         if (!url || typeof url !== 'string') return '';
-        // Keep comparisons stable across browsers by encoding spaces etc.
-        try { return encodeURI(url); } catch { return url; }
+        // Decode first to avoid double-encoding, then re-encode for consistency
+        try {
+            const decoded = decodeURI(url);
+            return encodeURI(decoded);
+        } catch { return url; }
     };
 
     const getCaptionFromLink = (link) => {
