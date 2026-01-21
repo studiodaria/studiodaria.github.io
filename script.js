@@ -691,6 +691,11 @@ function switchLanguage(lang) {
 
     // Homepage: update the “Year · Category” micro-line under titles
     updateHomepageProjectMeta(lang);
+
+    // Homepage: refresh tooltips + truncation after translations change
+    if (window.__refreshHomepageProjectTitles) {
+        window.__refreshHomepageProjectTitles();
+    }
 }
 
 function getLangFromUrl() {
@@ -751,6 +756,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Prefetch likely next navigations (project pages + homepage tiles)
     initPrefetching();
+
+    // UX: avoid hover transitions while scrolling (prevents "reload" illusion)
+    initScrollStateClass();
+
+    // Homepage: 1-line titles on mobile + full title in tooltip on hover
+    initHomepageProjectTitleTooltipsAndTruncation();
 
     // Мягкая защита изображений (не влияет на копирование текста):
     // - запрет drag
@@ -877,6 +888,81 @@ function initPrefetching() {
         a.addEventListener('focus', onIntent, { passive: true });
         a.addEventListener('touchstart', onIntent, { passive: true });
     });
+}
+
+function initScrollStateClass() {
+    // Prevent hover transitions from triggering while user scrolls
+    // (fixes the "images keep reloading while scrolling" feeling on the homepage).
+    let t = null;
+    const onScroll = () => {
+        document.body.classList.add('is-scrolling');
+        if (t) window.clearTimeout(t);
+        t = window.setTimeout(() => {
+            document.body.classList.remove('is-scrolling');
+        }, 140);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+}
+
+function refreshHomepageProjectTitles() {
+    if (!document.body.classList.contains('home')) return;
+    const titles = Array.from(document.querySelectorAll('.project-grid .project-title'));
+    if (!titles.length) return;
+
+    titles.forEach((el) => {
+        const full = (el.textContent || '').trim();
+        if (!full) return;
+        el.dataset.fullTitle = full;
+        // Native tooltip = "full title only on hover"
+        el.setAttribute('title', full);
+    });
+
+    const truncateOneLineToWholeWords = (el) => {
+        const full = (el.dataset.fullTitle || el.textContent || '').trim();
+        if (!full) return;
+
+        // Reset to full, then measure.
+        el.textContent = full;
+        if (el.scrollWidth <= el.clientWidth) return;
+
+        // Reduce by whole words until it fits (avoid cutting mid-word where possible).
+        let current = full;
+        const minLen = 6;
+        while (el.scrollWidth > el.clientWidth && current.length > minLen) {
+            const lastSpace = Math.max(current.lastIndexOf(' '), current.lastIndexOf('\u00A0'));
+            if (lastSpace <= 0) break;
+            current = current.slice(0, lastSpace).trim();
+            el.textContent = current + '…';
+        }
+    };
+
+    const apply = () => {
+        const isMobile = window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
+        titles.forEach((el) => {
+            const full = (el.dataset.fullTitle || '').trim();
+            if (!full) return;
+            el.textContent = full;
+            if (isMobile) truncateOneLineToWholeWords(el);
+        });
+    };
+
+    requestAnimationFrame(apply);
+}
+
+function initHomepageProjectTitleTooltipsAndTruncation() {
+    if (!document.body.classList.contains('home')) return;
+
+    // Initial + after language switch
+    window.__refreshHomepageProjectTitles = refreshHomepageProjectTitles;
+    refreshHomepageProjectTitles();
+
+    window.addEventListener('load', refreshHomepageProjectTitles, { passive: true, once: true });
+
+    let rt = null;
+    window.addEventListener('resize', () => {
+        if (rt) window.clearTimeout(rt);
+        rt = window.setTimeout(refreshHomepageProjectTitles, 140);
+    }, { passive: true });
 }
 
 function initProject5GalleryAutoHeights() {

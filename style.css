@@ -1032,6 +1032,16 @@ nav a {
     opacity: 0;
 }
 
+/* While scrolling, disable hover-fade so it doesn't look like images "reload" */
+body.is-scrolling .project-item:hover img,
+body.is-scrolling .project-item:focus-within img {
+    opacity: 1 !important;
+}
+
+body.is-scrolling .project-item img {
+    transition: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .project-item .project-info,
     .project-item .project-info::before,

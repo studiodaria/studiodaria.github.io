@@ -4,7 +4,7 @@
    - Images: cache-first with a small cap (to avoid unbounded storage)
 */
 
-const VERSION = 'v68';
+const VERSION = 'v72';
 const CACHE_STATIC = `static-${VERSION}`;
 const CACHE_PAGES = `pages-${VERSION}`;
 const CACHE_IMAGES = `images-${VERSION}`;
@@ -13,6 +13,7 @@ const CACHE_IMAGES = `images-${VERSION}`;
 const PRECACHE_URLS = [
   './',
   './index.html',
+  './favicon.svg',
   './style.css',
   './script.js',
   './about.html',
