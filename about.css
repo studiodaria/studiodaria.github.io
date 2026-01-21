@@ -947,7 +947,9 @@
     }
 
     .cv-body strong {
-        font-size: 12px; /* smaller bold institution titles on mobile */
+        font-size: 12.5px;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
     }
 
     .cv-detail,
@@ -1062,7 +1064,9 @@
     }
 
     .cv-body strong {
-        font-size: 12px; /* keep consistent with mobile sizing */
+        font-size: 12px;
+        letter-spacing: -0.01em;
+        line-height: 1.3;
     }
 
     .cv-download {
