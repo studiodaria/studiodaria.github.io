@@ -1154,28 +1154,28 @@ body.is-scrolling .project-item img {
         left: 12px;
         top: 50%;
         transform: translateY(-50%);
-        gap: 4px;
+        gap: 3px;
     }
 
     .nav-link {
-        font-size: 9px;
+        font-size: 8px;
         font-weight: 500;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.02em;
     }
 
     /* Project pages: keep "ABOUT ME / O MNĚ" not oversized on mobile */
     .nav-link--primary {
-        font-size: 9px;
+        font-size: 8px;
     }
 
     .nav-separator {
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .nav-current {
-        font-size: 10px;
+        font-size: 9px;
         font-weight: 500;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.02em;
         max-width: min(32vw, 180px);
     }
 

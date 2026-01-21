@@ -135,6 +135,39 @@
     border-bottom: 1px solid rgba(26, 26, 26, 0.15);
 }
 
+.about-mini__link--contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid rgba(26, 26, 26, 0.22);
+    background: rgba(26, 26, 26, 0.03);
+    border-radius: 0;
+    color: rgba(26, 26, 26, 0.72);
+    letter-spacing: 0.14em;
+    border-bottom: 0;
+    transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.about-mini__link--contact::after {
+    content: "↓";
+    font-size: 12px;
+    line-height: 1;
+    opacity: 0.75;
+    transform: translateY(-0.5px);
+}
+
+.about-mini__link--contact:hover {
+    background: rgba(26, 26, 26, 0.055);
+    border-color: rgba(26, 26, 26, 0.32);
+    color: #1a1a1a;
+    transform: translateY(-1px);
+}
+
+.about-mini__link--contact:active {
+    transform: translateY(0);
+}
+
 .about-mini__button {
     background: transparent;
     border: 0;
@@ -253,9 +286,7 @@
 }
 
 /* Mobile floating CTA */
-.about-fab {
-    display: none;
-}
+.about-fab { display: none; }
 
 /* Software: Top + More */
 .skills-top {
@@ -810,23 +841,7 @@
         justify-content: flex-start;
     }
 
-    .about-fab {
-        display: inline-flex;
-        position: fixed;
-        right: 14px;
-        bottom: 14px;
-        z-index: 999;
-        padding: 12px 14px;
-        background: #1a1a1a;
-        color: #ffffff;
-        text-decoration: none;
-        font-family: 'Intro', sans-serif;
-        font-size: 10px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-    }
+    /* no floating contact button — keep only the inline CTA near the name */
 
     .about-name {
         font-size: 28px;
@@ -1043,7 +1058,6 @@
 
     /* ─── Reset & Hide UI ─── */
     .main-header,
-    .about-fab,
     .cv-download-wrapper,
     .about-cta {
         display: none !important;

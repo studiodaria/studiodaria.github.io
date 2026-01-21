@@ -77,6 +77,19 @@ body.project-6 .home-btn:hover {
     backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     transition: background 0.3s ease, backdrop-filter 0.3s ease;
+    /* Mobile Safari: reduce “floating” / jitter on scroll */
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Mobile: keep the glass effect, but remove transitions to avoid "floating" feel */
+@media (max-width: 600px) {
+    .main-header {
+        /* Preserve per-project background colors (many use !important) */
+        -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+        backdrop-filter: blur(18px) saturate(180%) !important;
+        transition: none;
+    }
 }
 
 /* Project 1 - poloprůhledná verze */
@@ -396,13 +409,19 @@ body.lightbox-open {
     position: fixed;
     inset: 0;
     /* Minimal, modern: simple dim background (no glass) */
-    background: rgba(0, 0, 0, 0.72);
+    background: rgba(0, 0, 0, 0.92);
     display: none;
     align-items: center;
     justify-content: center;
     padding: clamp(12px, 3vw, 28px);
     z-index: 2000;
     overflow: hidden;
+}
+
+/* When lightbox is open, hide the page header so it never shows through */
+body.lightbox-open .main-header {
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .lightbox-overlay.is-open {
@@ -957,7 +976,7 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
     .drawings-main.drawings-main--visual {
         height: min(70vh, 520px);
         aspect-ratio: auto;
-        background: #f5f5f5;
+        background: #fff;
     }
 
     .drawings-main.drawings-main--visual img {
@@ -966,10 +985,10 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
         object-fit: contain;
     }
 
-    /* Slightly smaller thumbs for the top gallery */
+    /* Thumbs for the top gallery (square, like the rest) */
     .drawings-gallery--visual .drawings-thumb {
-        width: 62px;
-        height: 44px;
+        width: 56px;
+        height: 56px;
     }
 }
 
@@ -1243,7 +1262,7 @@ body.project-5 .project-hero {
 body.project-5 .project-hero img {
     height: 100%;
     object-fit: cover;
-    object-position: center 78%;
+    object-position: 60% 78%;
 }
 
 body.project-5 .project-gallery-vertical .gallery-frame img {
@@ -2574,7 +2593,8 @@ body.project-5 .project-section-text .project-description strong {
     width: 70px;
     height: 45px;
     border: none;
-    background: #f5f5f5;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     padding: 0;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -2593,6 +2613,8 @@ body.project-5 .project-section-text .project-description strong {
 
 .drawings-thumb.active {
     opacity: 1;
+    border-color: rgba(20, 20, 20, 0.35);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .drawings-thumb picture {
@@ -2664,7 +2686,7 @@ body.project-5 .drawings-thumb img {
     .drawings-thumb {
         width: 56px;
         height: 56px;
-        background: rgba(0, 0, 0, 0.04);
+        background: #fff;
     }
 
     /* For visualizations gallery, thumbnails look better as "cover" */

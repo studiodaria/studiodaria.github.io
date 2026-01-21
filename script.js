@@ -903,6 +903,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // About page: "Download PDF" (Print → Save as PDF)
     initAboutPdfDownload();
+
 });
 
 function initAboutContactScroll() {
@@ -1295,6 +1296,7 @@ function initDrawingsGallery() {
         const nextBtn = gallery.querySelector('.drawings-next');
         const currentNum = gallery.querySelector('#drawingsCurrentNum');
         const totalNum = gallery.querySelector('#drawingsTotalNum');
+        const thumbsRow = gallery.querySelector('.drawings-thumbnails');
 
         if (!mainImg || !thumbs.length) return;
 
@@ -1303,6 +1305,37 @@ function initDrawingsGallery() {
 
         const total = thumbs.length;
         if (totalNum) totalNum.textContent = total;
+
+        const prefersReducedMotion = () =>
+            typeof window !== 'undefined' &&
+            window.matchMedia &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+        function ensureActiveThumbVisible(thumbEl) {
+            if (!thumbEl || !thumbsRow) return;
+
+            const rowRect = thumbsRow.getBoundingClientRect();
+            const tRect = thumbEl.getBoundingClientRect();
+
+            // If fully visible, do nothing
+            if (tRect.left >= rowRect.left && tRect.right <= rowRect.right) return;
+
+            const target =
+                thumbEl.offsetLeft -
+                (thumbsRow.clientWidth / 2) +
+                (thumbEl.clientWidth / 2);
+
+            const maxScroll = Math.max(0, thumbsRow.scrollWidth - thumbsRow.clientWidth);
+            const left = clamp(target, 0, maxScroll);
+
+            try {
+                thumbsRow.scrollTo({ left, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+            } catch {
+                thumbsRow.scrollLeft = left;
+            }
+        }
 
         function updateGallery(index) {
             currentIndex = index;
@@ -1323,6 +1356,8 @@ function initDrawingsGallery() {
             // Update active thumb
             thumbs.forEach(t => t.classList.remove('active'));
             thumb.classList.add('active');
+            // Keep the active preview in view (important on mobile)
+            ensureActiveThumbVisible(thumb);
 
             // Optional counter
             if (currentNum) currentNum.textContent = String(index + 1);
@@ -1334,6 +1369,8 @@ function initDrawingsGallery() {
             if (mainPicture) updatePictureSources(mainPicture, activeThumb.dataset.src);
             mainImg.src = activeThumb.dataset.src;
             mainImg.alt = activeThumb.dataset.alt || '';
+            // Make sure the active preview is visible on load
+            requestAnimationFrame(() => ensureActiveThumbVisible(activeThumb));
         }
 
         thumbs.forEach((thumb, i) => {
