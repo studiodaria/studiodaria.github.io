@@ -256,8 +256,8 @@ body.project-1 .project-hero {
     }
     
     .project-hero-title-text {
-        font-size: clamp(13px, 3.6vw, 20px);
-        letter-spacing: 1.6px;
+        font-size: clamp(11px, 3.2vw, 17px);
+        letter-spacing: 1.3px;
     }
 }
 
@@ -269,8 +269,8 @@ body.project-1 .project-hero {
     }
     
     .project-hero-title-text {
-        font-size: clamp(12px, 3.5vw, 18px);
-        letter-spacing: 1.5px;
+        font-size: clamp(10px, 3.0vw, 15px);
+        letter-spacing: 1.15px;
     }
 }
 
@@ -286,8 +286,8 @@ body.project-1 .project-hero {
     }
     
     .project-hero-title-text {
-        font-size: clamp(10px, 3vw, 14px);
-        letter-spacing: 1px;
+        font-size: clamp(9px, 2.8vw, 13px);
+        letter-spacing: 0.95px;
     }
 }
 
@@ -395,11 +395,12 @@ body.lightbox-open {
 .lightbox-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.92);
+    /* Minimal, modern: simple dim background (no glass) */
+    background: rgba(0, 0, 0, 0.72);
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 20px 70px;
+    padding: clamp(12px, 3vw, 28px);
     z-index: 2000;
     overflow: hidden;
 }
@@ -414,160 +415,216 @@ body.lightbox-open {
     cursor: pointer;
 }
 
-.lightbox-content {
-    max-width: min(1400px, calc(100vw - 140px));
-    max-height: calc(100vh - 100px);
-    position: relative;
-    z-index: 1;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* Scrim element (click-to-close area) */
+.lightbox-scrim {
+    position: absolute;
+    inset: 0;
 }
 
-.lightbox-content img {
+/* Main lightbox container */
+.lightbox-shell {
+    width: min(1100px, calc(100vw - 2 * clamp(12px, 3vw, 28px)));
+    height: 100%;
+    max-height: calc(100vh - 2 * clamp(12px, 3vw, 28px));
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 12px;
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    box-shadow:
+        0 18px 70px rgba(0, 0, 0, 0.35),
+        0 2px 16px rgba(0, 0, 0, 0.22);
+    padding: 14px 14px 12px;
+    box-sizing: border-box;
+}
+
+/* Header (close only, top-right) */
+.lightbox-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    padding-top: max(0px, env(safe-area-inset-top));
+}
+
+.lightbox-title {
+    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    line-height: 1.35;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgba(20, 20, 20, 0.55);
+    padding-left: 4px;
+}
+
+.lightbox-close {
+    width: 28px;
+    height: 28px;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    color: rgba(20, 20, 20, 0.70);
+    font-size: 22px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    transition: color 140ms ease;
+}
+
+.lightbox-close:hover {
+    transform: none;
+    background: transparent;
+    color: rgba(20, 20, 20, 0.95);
+}
+
+.lightbox-close:active {
+    transform: none;
+    color: rgba(20, 20, 20, 1);
+}
+
+.lightbox-close:focus-visible {
+    outline: 2px solid rgba(255, 153, 153, 0.9);
+    outline-offset: 3px;
+}
+
+/* Image stage */
+.lightbox-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.lightbox-stage img {
     max-width: 100%;
-    max-height: calc(100vh - 120px);
+    max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
     display: block;
     background: #fff;
+    border-radius: 0;
+    border: none;
+    box-shadow:
+        0 12px 44px rgba(0, 0, 0, 0.10),
+        0 2px 10px rgba(0, 0, 0, 0.06);
     pointer-events: auto;
+    transition: opacity 0.2s ease;
 }
 
-.lightbox-caption {
-    margin-top: 12px;
+/* Invisible tap zones (mobile navigation without visible buttons) */
+.lightbox-hit {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 22%;
+    pointer-events: none; /* enabled on mobile only */
+}
+
+.lightbox-hit--prev { left: 0; }
+.lightbox-hit--next { right: 0; }
+
+/* Footer: minimal nav */
+.lightbox-footer {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.lightbox-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    user-select: none;
+}
+
+.lightbox-counter {
+    text-align: center;
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.75);
-    letter-spacing: 1px;
-}
-
-.lightbox-close {
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    width: 44px;
-    height: 44px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(0, 0, 0, 0.5);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    color: #fff;
-    font-size: 24px;
-    line-height: 42px;
-    cursor: pointer;
-    z-index: 2010;
-    transition: all 0.2s ease;
-    pointer-events: auto;
-}
-
-.lightbox-close:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
+    letter-spacing: 0.06em;
+    color: rgba(20, 20, 20, 0.55);
+    user-select: none;
 }
 
 /* Lightbox navigation arrows */
 .lightbox-prev,
 .lightbox-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(0, 0, 0, 0.6);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    color: #fff;
+    position: static;
+    width: 32px;
+    height: 32px;
+    border-radius: 0;
+    border: none;
+    background: transparent;
+    color: rgba(20, 20, 20, 0.62);
     cursor: pointer;
     z-index: 2010;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: transform 140ms ease, background 140ms ease;
     pointer-events: auto;
-}
-
-.lightbox-prev {
-    left: 16px;
-}
-
-.lightbox-next {
-    right: 16px;
 }
 
 .lightbox-prev:hover,
 .lightbox-next:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-50%) scale(1.05);
+    color: rgba(20, 20, 20, 0.88);
+    transform: translateY(-1px);
 }
 
 .lightbox-prev:active,
 .lightbox-next:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: translateY(0);
 }
 
-/* Lightbox image transition */
-.lightbox-content img {
-    transition: opacity 0.2s ease;
+/* Remove the big round project navigation buttons everywhere */
+.project-end-nav {
+    display: none !important;
 }
 
 /* Tablet adjustments for lightbox */
 @media (max-width: 1024px) {
     .lightbox-overlay {
-        padding: 15px 60px;
+        padding: 14px;
     }
-    
-    .lightbox-content {
-        max-width: calc(100vw - 120px);
-        max-height: calc(100vh - 60px);
-    }
-    
-    .lightbox-content img {
-        max-height: calc(100vh - 80px);
+
+    .lightbox-shell {
+        width: min(100%, 980px);
+        gap: 12px;
     }
 }
 
 /* Mobile adjustments for lightbox */
 @media (max-width: 768px) {
     .lightbox-overlay {
-        padding: 10px 50px;
+        padding: 10px;
     }
     
-    .lightbox-prev,
-    .lightbox-next {
-        width: 44px;
-        height: 44px;
+    .lightbox-shell {
+        width: 100%;
+        gap: 10px;
+        padding: 12px 12px 10px;
     }
-    
-    .lightbox-prev {
-        left: 8px;
+
+    .lightbox-stage img {
+        border-radius: 0;
     }
-    
-    .lightbox-next {
-        right: 8px;
-    }
-    
-    .lightbox-close {
-        top: 10px;
-        right: 10px;
-        width: 40px;
-        height: 40px;
-        font-size: 22px;
-        line-height: 38px;
-    }
-    
-    .lightbox-content {
-        max-width: calc(100vw - 100px);
-        max-height: calc(100vh - 50px);
-    }
-    
-    .lightbox-content img {
-        max-height: calc(100vh - 70px);
+
+    .lightbox-title { font-size: 11px; }
+
+    .lightbox-hit {
+        pointer-events: auto;
     }
 }
 
@@ -895,140 +952,29 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
     }
 }
 
-/* Main image container */
-.mobile-gallery-main {
-    width: 100%;
-    min-height: 250px;
-    max-height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: #f5f5f5;
-    cursor: zoom-in;
-    position: relative;
+/* Visualizations gallery on mobile/tablet: match drawings UX but allow taller images */
+@media (max-width: 1024px) {
+    .drawings-main.drawings-main--visual {
+        height: min(70vh, 520px);
+        aspect-ratio: auto;
+        background: #f5f5f5;
+    }
+
+    .drawings-main.drawings-main--visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    /* Slightly smaller thumbs for the top gallery */
+    .drawings-gallery--visual .drawings-thumb {
+        width: 62px;
+        height: 44px;
+    }
 }
 
-.mobile-gallery-main img {
-    width: 100%;
-    height: auto;
-    max-height: 70vh;
-    object-fit: contain;
-    transition: opacity 0.25s ease;
-}
-
-/* Swipe hint arrows - floating on image */
-.mobile-gallery-arrows {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 8px;
-    pointer-events: none;
-}
-
-.mobile-gallery-arrow {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    font-size: 18px;
-    line-height: 1;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1a1a1a;
-    pointer-events: auto;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-}
-
-.mobile-gallery:hover .mobile-gallery-arrow,
-.mobile-gallery-arrow:focus {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.mobile-gallery-arrow:active {
-    transform: scale(0.95);
-    background: rgba(255, 255, 255, 1);
-}
-
-/* Modern progress bar + dots navigation */
-.mobile-gallery-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 20px;
-    background: transparent;
-}
-
-/* Progress bar */
-.mobile-gallery-progress {
-    width: 100%;
-    height: 2px;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 1px;
-    overflow: hidden;
-}
-
-.mobile-gallery-progress-bar {
-    height: 100%;
-    background: #1a1a1a;
-    border-radius: 1px;
-    transition: width 0.3s ease;
-}
-
-/* Dots navigation */
-.mobile-gallery-dots {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 100%;
-}
-
-.mobile-gallery-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.2);
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.mobile-gallery-dot:hover {
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.mobile-gallery-dot.active {
-    background: #1a1a1a;
-    width: 24px;
-    border-radius: 4px;
-}
-
-/* Counter - minimal style */
-.mobile-gallery-counter {
-    font-size: 11px;
-    font-weight: 500;
-    color: #999;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
+/* (Removed) old mobile-gallery UI (progress + arrows).
+   Mobile now uses a thumbnails gallery matching the drawings UX. */
 
 .gallery-vertical-item {
     margin: 0;
@@ -2588,26 +2534,25 @@ body.project-5 .project-section-text .project-description strong {
 }
 
 .drawings-arrow {
-    width: 36px;
-    height: 36px;
-    border: 1px solid #ddd;
-    background: #fff;
-    border-radius: 50%;
-    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    font-size: 22px;
     line-height: 1;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #333;
+    color: rgba(20, 20, 20, 0.62);
     flex-shrink: 0;
 }
 
 .drawings-arrow:hover {
-    background: #333;
-    color: #fff;
-    border-color: #333;
+    background: rgba(20, 20, 20, 0.04);
+    color: rgba(20, 20, 20, 0.88);
 }
 
 .drawings-thumbnails {
@@ -2615,6 +2560,14 @@ body.project-5 .project-section-text .project-description strong {
     gap: 8px;
     overflow-x: auto;
     padding: 5px 0;
+    scrollbar-width: none; /* Firefox: hide scrollbar */
+    -ms-overflow-style: none; /* IE/Edge legacy */
+}
+
+.drawings-thumbnails::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+    display: none;
 }
 
 .drawings-thumb {
@@ -2630,6 +2583,8 @@ body.project-5 .project-section-text .project-description strong {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 0;
+    overflow: hidden;
 }
 
 .drawings-thumb:hover {
@@ -2687,8 +2642,8 @@ body.project-5 .drawings-thumb img {
 
 @media (max-width: 768px) {
     .drawings-thumb {
-        width: 60px;
-        height: 40px;
+        width: 54px;
+        height: 54px;
     }
     
     .drawings-arrow {
@@ -2703,3 +2658,19 @@ body.project-5 .drawings-thumb img {
         height: 60px;
     }
 } 
+
+/* Mobile/tablet: make thumbnails square + cleaner */
+@media (max-width: 1024px) {
+    .drawings-thumb {
+        width: 56px;
+        height: 56px;
+        background: rgba(0, 0, 0, 0.04);
+    }
+
+    /* For visualizations gallery, thumbnails look better as "cover" */
+    .drawings-gallery--visual .drawings-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}

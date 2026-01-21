@@ -23,22 +23,31 @@ const translations = {
         all_projects: 'All Projects',
         // Project 1
         project1_title: 'High-Speed Rail Terminal Prague-East',
+        project1_title_short: 'High-Speed Rail Terminal',
         // Project 2
         project2_title: 'Design – Art – and – Peace – Factory',
+        project2_title_short: 'Design – Art – and – Peace',
         // Project 3
         project3_title: 'Žluté lázně – Riverside Leisure & Spa',
+        project3_title_short: 'Žluté lázně – Riverside',
         // Project 4
         project4_title: 'The Roof Club – Yacht Club Podolí',
+        project4_title_short: 'The Roof',
         // Project 5
         project5_title: 'Středokluky Village Center',
+        project5_title_short: 'Středokluky',
         // Project 6
         project6_title: 'ČVUT Exhibition for the Gaudeamus Higher Education Fair',
+        project6_title_short: 'ČVUT Exhibition',
         // Project 7
         project7_title: 'New Branch of Olomouc City Library – Trnkova',
+        project7_title_short: 'Olomouc Library – Trnkova',
         // Project 8
         project8_title: 'Primary School Stará Boleslav',
+        project8_title_short: 'Primary School Stará Boleslav',
         // Project 9
         project9_title: 'In-between Spaces of Prague Market — Urban & Landscape Proposal',
+        project9_title_short: 'In-between Spaces of Prague Market',
         type_label: 'Type',
         conversion: 'Conversion',
         authors_label: 'Authors',
@@ -50,6 +59,7 @@ const translations = {
         client_label: 'Client',
         award_label: 'Award',
         award_2nd_place: '2nd Place',
+        gallery_additional: 'Additional',
         // scroll_down removed (scroll indicator disabled)
         // Footer
         no_copy: 'All content is protected by copyright. Reproduction without permission is not allowed.'
@@ -77,22 +87,31 @@ const translations = {
         all_projects: 'Все проекты',
         // Project 1
         project1_title: 'Терминал ВСМ Прага-восток',
+        project1_title_short: 'Терминал ВСМ',
         // Project 2
         project2_title: 'Design – Art – and – Peace – Factory',
+        project2_title_short: 'Школа дизайна и искусства',
         // Project 3
         project3_title: 'Žluté lázně – Riverside Leisure & Spa',
+        project3_title_short: 'Žluté lázně – Riverside',
         // Project 4
         project4_title: 'The Roof Club – Яхт-клуб Подоли',
+        project4_title_short: 'The Roof',
         // Project 5
         project5_title: 'Центр деревни Стршедоклуки',
+        project5_title_short: 'Стршедоклуки',
         // Project 6
         project6_title: 'Экспозиция ЧВУТ для выставки вузов Gaudeamus',
+        project6_title_short: 'Экспозиция ЧВУТ',
         // Project 7
         project7_title: 'Новый филиал библиотеки города Оломоуц – Трнкова',
+        project7_title_short: 'Оломоуц – Трнкова',
         // Project 8
         project8_title: 'Начальная школа Стара-Болеслав',
+        project8_title_short: 'Школа Стара-Болеслав',
         // Project 9
         project9_title: 'Межпространства Пражского рынка — градостроительно-ландшафтное предложение',
+        project9_title_short: 'Межпространства Пражского рынка',
         type_label: 'Тип',
         conversion: 'Конверсия',
         authors_label: 'Авторы',
@@ -104,6 +123,7 @@ const translations = {
         client_label: 'Клиент',
         award_label: 'Награда',
         award_2nd_place: '2-е место',
+        gallery_additional: 'Дополнительно',
         // scroll_down removed (scroll indicator disabled)
         // Footer
         no_copy: 'Весь контент защищён авторским правом. Воспроизведение без разрешения запрещено.'
@@ -131,22 +151,31 @@ const translations = {
         all_projects: 'Všechny projekty',
         // Project 1
         project1_title: 'Terminál VRT Praha-východ',
+        project1_title_short: 'Terminál VRT',
         // Project 2
         project2_title: 'Design – Art – and – Peace – Factory',
+        project2_title_short: 'Škola designu a umění',
         // Project 3
         project3_title: 'Žluté lázně – Riverside Leisure & Spa',
+        project3_title_short: 'Žluté lázně – Riverside',
         // Project 4
         project4_title: 'The Roof Club – Jachtařský klub Podolí',
+        project4_title_short: 'The Roof',
         // Project 5
         project5_title: 'Centrum obce Středokluky',
+        project5_title_short: 'Centrum obce Středokluky',
         // Project 6
         project6_title: 'Expozice ČVUT pro veletrh vysokých škol Gaudeamus',
+        project6_title_short: 'Expozice ČVUT',
         // Project 7
         project7_title: 'Nová pobočka knihovny města Olomouce – Trnkova',
+        project7_title_short: 'Olomouc – Trnkova',
         // Project 8
         project8_title: 'ZŠ Stará Boleslav',
+        project8_title_short: 'ZŠ Stará Boleslav',
         // Project 9
         project9_title: 'Meziprostory Pražské tržnice — urbanisticko-krajinářský návrh',
+        project9_title_short: 'Meziprostory Pražské tržnice',
         type_label: 'Typ',
         conversion: 'Konverze',
         authors_label: 'Autoři',
@@ -158,6 +187,7 @@ const translations = {
         client_label: 'Klient',
         award_label: 'Ocenění',
         award_2nd_place: '2. místo',
+        gallery_additional: 'Další',
         // scroll_down removed (scroll indicator disabled)
         // Footer
         no_copy: 'Veškerý obsah je chráněn autorským právem. Reprodukce bez souhlasu není povolena.'
@@ -252,31 +282,48 @@ function initLightbox() {
     if (!links.length) return;
     
     let overlay = document.querySelector('.lightbox-overlay');
+    const template = `
+        <div class="lightbox-scrim" aria-hidden="true"></div>
+        <div class="lightbox-shell" role="dialog" aria-modal="true" aria-label="Image viewer">
+            <div class="lightbox-header" aria-label="Lightbox controls">
+                <div class="lightbox-title"></div>
+                <button class="lightbox-close" type="button" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="lightbox-stage">
+                <div class="lightbox-hit lightbox-hit--prev" aria-hidden="true"></div>
+                <img alt="">
+                <div class="lightbox-hit lightbox-hit--next" aria-hidden="true"></div>
+            </div>
+            <div class="lightbox-footer">
+                <div class="lightbox-nav" aria-label="Image navigation">
+                    <button class="lightbox-prev" type="button" aria-label="Previous">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <div class="lightbox-counter" aria-live="polite"></div>
+                    <button class="lightbox-next" type="button" aria-label="Next">
+                        <span aria-hidden="true">›</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
     if (!overlay) {
         overlay = document.createElement('div');
         overlay.className = 'lightbox-overlay';
-        overlay.innerHTML = `
-            <button class="lightbox-close" type="button" aria-label="Close">×</button>
-            <button class="lightbox-prev" type="button" aria-label="Previous">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 18l-6-6 6-6"/>
-                </svg>
-            </button>
-            <button class="lightbox-next" type="button" aria-label="Next">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 18l6-6-6-6"/>
-                </svg>
-            </button>
-            <div class="lightbox-content" role="dialog" aria-modal="true">
-                <img alt="">
-                <div class="lightbox-caption"></div>
-            </div>
-        `;
+        overlay.innerHTML = template;
         document.body.appendChild(overlay);
+    } else if (!overlay.querySelector('.lightbox-title')) {
+        // Upgrade existing markup (avoid stale overlay across navigations)
+        overlay.innerHTML = template;
     }
 
-    const imgEl = overlay.querySelector('.lightbox-content img');
-    const captionEl = overlay.querySelector('.lightbox-caption');
+    const shellEl = overlay.querySelector('.lightbox-shell');
+    const imgEl = overlay.querySelector('.lightbox-stage img');
+    const captionEl = overlay.querySelector('.lightbox-title');
+    const counterEl = overlay.querySelector('.lightbox-counter');
     const closeBtn = overlay.querySelector('.lightbox-close');
     const prevBtn = overlay.querySelector('.lightbox-prev');
     const nextBtn = overlay.querySelector('.lightbox-next');
@@ -284,14 +331,36 @@ function initLightbox() {
     // Gallery state
     let galleryImages = [];
     let currentGalleryIndex = 0;
+    let lastActiveEl = null;
+
+    const normalizeLightboxUrl = (url) => {
+        if (!url || typeof url !== 'string') return '';
+        // Keep comparisons stable across browsers by encoding spaces etc.
+        try { return encodeURI(url); } catch { return url; }
+    };
+
+    const getCaptionFromLink = (link) => {
+        if (!link) return '';
+        const fromData = (link.getAttribute('data-caption') || '').trim();
+        if (fromData) return fromData;
+        const img = link.querySelector('img');
+        return (img?.getAttribute('alt') || '').trim();
+    };
 
     const close = () => {
         overlay.classList.remove('is-open');
         document.body.classList.remove('lightbox-open');
         imgEl.removeAttribute('src');
         captionEl.textContent = '';
+        if (counterEl) counterEl.textContent = '';
         galleryImages = [];
         currentGalleryIndex = 0;
+        // Restore focus for accessibility
+        const toFocus = lastActiveEl;
+        lastActiveEl = null;
+        if (toFocus && typeof toFocus.focus === 'function') {
+            try { toFocus.focus({ preventScroll: true }); } catch { toFocus.focus(); }
+        }
     };
 
     const showImage = (index) => {
@@ -301,9 +370,12 @@ function initLightbox() {
         
         imgEl.style.opacity = '0';
         setTimeout(() => {
-            imgEl.src = img.src;
+            imgEl.src = normalizeLightboxUrl(img.src);
             imgEl.alt = img.alt || '';
-            captionEl.textContent = img.alt || '';
+            const caption = (img.alt || '').trim();
+            captionEl.textContent = caption;
+            overlay.classList.toggle('has-caption', Boolean(caption));
+            if (counterEl) counterEl.textContent = `${currentGalleryIndex + 1} / ${galleryImages.length}`;
             imgEl.style.opacity = '1';
         }, 100);
         
@@ -317,9 +389,14 @@ function initLightbox() {
         galleryImages = gallery;
         currentGalleryIndex = startIndex;
         
+        lastActiveEl = document.activeElement instanceof HTMLElement ? document.activeElement : null;
         overlay.classList.add('is-open');
         document.body.classList.add('lightbox-open');
         showImage(currentGalleryIndex);
+        // Focus close button so keyboard users are “in” the dialog
+        if (closeBtn && typeof closeBtn.focus === 'function') {
+            try { closeBtn.focus({ preventScroll: true }); } catch { closeBtn.focus(); }
+        }
     };
 
     const prev = () => {
@@ -335,13 +412,13 @@ function initLightbox() {
     };
 
     // Collect all gallery images from the page
-    const collectGalleryImages = (clickedLink) => {
+    const collectGalleryImages = () => {
         const images = [];
         
         // Get all lightbox links on the page
         document.querySelectorAll('a.lightbox-link[href]').forEach(link => {
-            const src = preferOptimizedImageUrl(link.getAttribute('href'));
-            const alt = link.querySelector('img')?.getAttribute('alt') || '';
+            const src = normalizeLightboxUrl(preferOptimizedImageUrl(link.getAttribute('href')));
+            const alt = getCaptionFromLink(link);
             if (src && !images.some(i => i.src === src)) {
                 images.push({ src, alt });
             }
@@ -349,8 +426,8 @@ function initLightbox() {
         
         // Also get images from drawings gallery thumbnails
         document.querySelectorAll('.drawings-gallery .drawings-thumb').forEach(thumb => {
-            const src = preferOptimizedImageUrl(thumb.dataset.src);
-            const alt = thumb.dataset.alt || '';
+            const src = normalizeLightboxUrl(preferOptimizedImageUrl(thumb.dataset.src));
+            const alt = (thumb.dataset.caption || thumb.dataset.alt || '').trim();
             if (src && !images.some(i => i.src === src)) {
                 images.push({ src, alt });
             }
@@ -364,11 +441,11 @@ function initLightbox() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const href = link.getAttribute('href');
-            const clickedSrc = preferOptimizedImageUrl(href);
-            const caption = link.querySelector('img')?.getAttribute('alt') || '';
+            const clickedSrc = normalizeLightboxUrl(preferOptimizedImageUrl(href));
+            const caption = getCaptionFromLink(link);
             
             // Collect all images and find current index
-            const allImages = collectGalleryImages(link);
+            const allImages = collectGalleryImages();
             let startIndex = allImages.findIndex(img => img.src === clickedSrc);
             
             if (startIndex < 0) startIndex = 0;
@@ -409,9 +486,23 @@ function initLightbox() {
             next();
             return;
         }
+
+        // Mobile: invisible tap-zones (no buttons on top of the image)
+        if (target.closest('.lightbox-hit--prev')) {
+            e.preventDefault();
+            e.stopPropagation();
+            prev();
+            return;
+        }
+        if (target.closest('.lightbox-hit--next')) {
+            e.preventDefault();
+            e.stopPropagation();
+            next();
+            return;
+        }
         
-        // Click on overlay background closes
-        if (target === overlay) {
+        // Click on scrim/background closes
+        if (target === overlay || target.classList?.contains('lightbox-scrim')) {
             close();
         }
     });
@@ -421,6 +512,24 @@ function initLightbox() {
         if (e.key === 'Escape') close();
         if (e.key === 'ArrowLeft') prev();
         if (e.key === 'ArrowRight') next();
+
+        // Basic focus trap inside the lightbox
+        if (e.key === 'Tab' && shellEl) {
+            const focusables = Array.from(
+                shellEl.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+            ).filter((el) => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+            if (!focusables.length) return;
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            const active = document.activeElement;
+            if (e.shiftKey && active === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && active === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
     });
     
     // Listen for custom event from drawings gallery
@@ -634,6 +743,9 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 // Функция для переключения языков
 function switchLanguage(lang) {
+    // Keep current language accessible to other helpers (homepage title shortening, etc.)
+    window.__currentLang = lang;
+
     // Убираем активный класс у всех языковых ссылок
     document.querySelectorAll('.lang-link').forEach(link => {
         link.classList.remove('active');
@@ -784,6 +896,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile gallery: convert vertical gallery to swipeable gallery on mobile
     initMobileGallery();
 
+    // Keep the “drawings” galleries as-is (no collapsing)
+
     // About page: scroll-to-contact button (works with language blocks)
     initAboutContactScroll();
 
@@ -909,44 +1023,31 @@ function refreshHomepageProjectTitles() {
     const titles = Array.from(document.querySelectorAll('.project-grid .project-title'));
     if (!titles.length) return;
 
+    const lang =
+        (typeof window !== 'undefined' && window.__currentLang) ||
+        (document.querySelector('.lang-link.active')?.getAttribute('data-lang')) ||
+        'en';
+    const t = translations?.[lang] || translations?.en || {};
+
     titles.forEach((el) => {
-        const full = (el.textContent || '').trim();
+        const key = el.dataset.translate || '';
+        const fullFromT = key && t[key] ? String(t[key]) : '';
+        const shortKey = key ? `${key}_short` : '';
+        const shortFromT = shortKey && t[shortKey] ? String(t[shortKey]) : '';
+
+        const full = (fullFromT || el.dataset.fullTitle || el.textContent || '').trim();
         if (!full) return;
+
+        const display = (shortFromT || full).trim();
         el.dataset.fullTitle = full;
+        el.dataset.displayTitle = display;
+
         // Native tooltip = "full title only on hover"
         el.setAttribute('title', full);
+
+        // Always show the short title on cards (no wrapping, no ellipsis — short strings must fit).
+        el.textContent = display;
     });
-
-    const truncateOneLineToWholeWords = (el) => {
-        const full = (el.dataset.fullTitle || el.textContent || '').trim();
-        if (!full) return;
-
-        // Reset to full, then measure.
-        el.textContent = full;
-        if (el.scrollWidth <= el.clientWidth) return;
-
-        // Reduce by whole words until it fits (avoid cutting mid-word where possible).
-        let current = full;
-        const minLen = 6;
-        while (el.scrollWidth > el.clientWidth && current.length > minLen) {
-            const lastSpace = Math.max(current.lastIndexOf(' '), current.lastIndexOf('\u00A0'));
-            if (lastSpace <= 0) break;
-            current = current.slice(0, lastSpace).trim();
-            el.textContent = current + '…';
-        }
-    };
-
-    const apply = () => {
-        const isMobile = window.matchMedia && window.matchMedia('(max-width: 600px)').matches;
-        titles.forEach((el) => {
-            const full = (el.dataset.fullTitle || '').trim();
-            if (!full) return;
-            el.textContent = full;
-            if (isMobile) truncateOneLineToWholeWords(el);
-        });
-    };
-
-    requestAnimationFrame(apply);
 }
 
 function initHomepageProjectTitleTooltipsAndTruncation() {
@@ -1184,6 +1285,9 @@ function initDrawingsGallery() {
     if (!galleries.length) return;
 
     galleries.forEach(gallery => {
+        if (gallery.dataset.drawingsInit === '1') return;
+        gallery.dataset.drawingsInit = '1';
+
         const mainImg = gallery.querySelector('.drawings-main img');
         const mainPicture = mainImg ? mainImg.closest('picture') : null;
         const thumbs = Array.from(gallery.querySelectorAll('.drawings-thumb'));
@@ -1278,6 +1382,9 @@ function initDrawingsGallery() {
 function initMobileGallery() {
     const verticalGallery = document.querySelector('.project-gallery-vertical');
     if (!verticalGallery) return;
+
+    const mq = window.matchMedia ? window.matchMedia('(max-width: 1024px)') : null;
+    if (!mq || !mq.matches) return;
     
     // Check if mobile gallery already exists
     if (document.querySelector('.mobile-gallery')) return;
@@ -1297,131 +1404,69 @@ function initMobileGallery() {
     
     if (allImages.length === 0) return;
     
-    // Create mobile gallery HTML with modern navigation
+    // Build a thumbnails gallery (same UX as the "drawings" gallery)
     const mobileGallery = document.createElement('div');
     mobileGallery.className = 'mobile-gallery';
-    
-    const dotsHtml = allImages.map((_, i) => `
-        <button class="mobile-gallery-dot${i === 0 ? ' active' : ''}" data-index="${i}" aria-label="Image ${i + 1}"></button>
-    `).join('');
-    
-    mobileGallery.innerHTML = `
-        <div class="mobile-gallery-main">
-            <img src="${allImages[0].src}" alt="${allImages[0].alt}">
-            <div class="mobile-gallery-arrows">
-                <button class="mobile-gallery-arrow mobile-gallery-prev" aria-label="Previous">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 18l-6-6 6-6"/>
-                    </svg>
-                </button>
-                <button class="mobile-gallery-arrow mobile-gallery-next" aria-label="Next">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 18l6-6-6-6"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <div class="mobile-gallery-nav">
-            <div class="mobile-gallery-progress">
-                <div class="mobile-gallery-progress-bar" style="width: ${100 / allImages.length}%"></div>
-            </div>
-            <div class="mobile-gallery-dots">
-                ${dotsHtml}
-            </div>
-            <div class="mobile-gallery-counter">${allImages.length} images</div>
-        </div>
-    `;
+
+    const g = document.createElement('div');
+    g.className = 'drawings-gallery drawings-gallery--visual';
+
+    const main = document.createElement('div');
+    main.className = 'drawings-main drawings-main--visual';
+    const mainImg = document.createElement('img');
+    mainImg.src = allImages[0].src;
+    mainImg.alt = allImages[0].alt || '';
+    mainImg.loading = 'lazy';
+    main.appendChild(mainImg);
+
+    const nav = document.createElement('div');
+    nav.className = 'drawings-nav drawings-nav--visual';
+
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'drawings-arrow drawings-prev';
+    prevBtn.type = 'button';
+    prevBtn.setAttribute('aria-label', 'Previous');
+    prevBtn.textContent = '‹';
+
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'drawings-arrow drawings-next';
+    nextBtn.type = 'button';
+    nextBtn.setAttribute('aria-label', 'Next');
+    nextBtn.textContent = '›';
+
+    const thumbs = document.createElement('div');
+    thumbs.className = 'drawings-thumbnails';
+
+    allImages.forEach((img, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = `drawings-thumb${i === 0 ? ' active' : ''}`;
+        b.dataset.src = img.src;
+        b.dataset.alt = img.alt || '';
+
+        const tImg = document.createElement('img');
+        tImg.src = img.src;
+        tImg.alt = '';
+        tImg.loading = 'lazy';
+        b.appendChild(tImg);
+
+        thumbs.appendChild(b);
+    });
+
+    nav.appendChild(prevBtn);
+    nav.appendChild(thumbs);
+    nav.appendChild(nextBtn);
+
+    g.appendChild(main);
+    g.appendChild(nav);
+    mobileGallery.appendChild(g);
     
     // Insert after vertical gallery
     verticalGallery.parentNode.insertBefore(mobileGallery, verticalGallery.nextSibling);
-    
-    // Initialize gallery functionality
-    const mainImg = mobileGallery.querySelector('.mobile-gallery-main img');
-    const dots = Array.from(mobileGallery.querySelectorAll('.mobile-gallery-dot'));
-    const prevBtn = mobileGallery.querySelector('.mobile-gallery-prev');
-    const nextBtn = mobileGallery.querySelector('.mobile-gallery-next');
-    const progressBar = mobileGallery.querySelector('.mobile-gallery-progress-bar');
-    
-    let currentIndex = 0;
-    const total = allImages.length;
-    
-    function updateGallery(index) {
-        currentIndex = index;
-        const img = allImages[index];
-        
-        // Fade effect
-        mainImg.style.opacity = '0';
-        setTimeout(() => {
-            mainImg.src = img.src;
-            mainImg.alt = img.alt;
-            mainImg.style.opacity = '1';
-        }, 120);
-        
-        // Update active dot
-        dots.forEach((d, i) => d.classList.toggle('active', i === index));
-        
-        // Update progress bar
-        if (progressBar) {
-            const progress = ((index + 1) / total) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
-    }
-    
-    dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => updateGallery(i));
-    });
-    
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            updateGallery((currentIndex - 1 + total) % total);
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            updateGallery((currentIndex + 1) % total);
-        });
-    }
-    
-    // Click on main image opens lightbox with full gallery
-    const mainContainer = mobileGallery.querySelector('.mobile-gallery-main');
-    if (mainContainer) {
-        mainContainer.addEventListener('click', (e) => {
-            // Don't open lightbox if clicking arrows
-            if (e.target.closest('.mobile-gallery-arrow')) return;
-            
-            if (window.openLightboxGallery) {
-                window.openLightboxGallery(
-                    allImages[currentIndex].src,
-                    allImages[currentIndex].alt,
-                    allImages,
-                    currentIndex
-                );
-            }
-        });
-    }
-    
-    // Swipe support for touch devices
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    mainContainer.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    
-    mainContainer.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-                // Swipe left - next
-                updateGallery((currentIndex + 1) % total);
-            } else {
-                // Swipe right - prev
-                updateGallery((currentIndex - 1 + total) % total);
-            }
-        }
-    }, { passive: true });
+
+    // Initialize behavior using the same handler as drawings galleries
+    initDrawingsGallery();
 }
+
+// (Removed) initDrawingsAccordion — it hid important images and confused users on mobile.
 

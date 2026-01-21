@@ -4,7 +4,7 @@
    - Images: cache-first with a small cap (to avoid unbounded storage)
 */
 
-const VERSION = 'v72';
+const VERSION = 'v79';
 const CACHE_STATIC = `static-${VERSION}`;
 const CACHE_PAGES = `pages-${VERSION}`;
 const CACHE_IMAGES = `images-${VERSION}`;

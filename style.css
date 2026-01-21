@@ -979,18 +979,17 @@ nav a {
     text-transform: uppercase;
     letter-spacing: clamp(0.45px, 0.09vw, 1.1px);
     line-height: 1.3;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
+    /* Single-line titles on cards (no wrapping, no hyphenation) */
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    white-space: nowrap;
     transition: color 140ms ease, font-weight 140ms ease, font-size 140ms ease;
 
-    /* Clamp lines so long titles never overflow the card */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
+    /* No ellipsis: titles must be short enough by content */
+    display: block;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: clip;
 }
 
 /* Hover state: use tile color for text, bold, larger */
@@ -998,6 +997,14 @@ nav a {
     color: var(--tile-fg, #1a1a1a);
     font-weight: 600;
     font-size: clamp(9px, 0.85vw, 13px);
+    /* Do not wrap / hyphenate on hover card */
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
 }
 
 /* Homepage: small meta line under title (Year · Category) */
@@ -1235,11 +1242,19 @@ body.is-scrolling .project-item img {
         letter-spacing: 0.1px;
         padding: 0 6px;
 
-        /* Force single-line on mobile */
+        /* Force single-line on mobile (no ellipsis) */
         display: block;
         white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;
+        text-overflow: clip;
+    }
+
+    /* Mobile: keep hover/focus title small too (devtools hover should not “inflate” it) */
+    .project-item:hover .project-info .project-title,
+    .project-item:focus-within .project-info .project-title,
+    .project-item:active .project-info .project-title {
+        font-size: clamp(5.6px, 2.1vw, 7.7px);
+        letter-spacing: 0.1px;
     }
 
     .project-item .project-info .project-meta {
