@@ -709,14 +709,20 @@ body.lightbox-open .main-header {
     line-height: 1.65;
     color: #111;
     margin-bottom: 36px;
+    text-indent: 0;
 }
 
 /* Section paragraphs with visual pause */
 .project-section {
-    margin-bottom: 28px;
+    margin-bottom: 0;
 }
 
 .project-section:last-child {
+    margin-bottom: 0;
+}
+
+/* Remove bottom margin from last description in section */
+.project-section .project-description:last-child {
     margin-bottom: 0;
 }
 
@@ -736,9 +742,10 @@ body.lightbox-open .main-header {
     line-height: 1.8;
     color: #262626;
     font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.01em;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+    text-indent: 2em;
 }
 
 .project-description:last-child {
