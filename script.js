@@ -913,6 +913,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile gallery: convert vertical gallery to swipeable gallery on mobile
     initMobileGallery();
 
+    // Mobile hero: if the hero image is pannable (scrollable), start centered
+    centerPannableHeroImages();
+
     // Keep the “drawings” galleries as-is (no collapsing)
 
     // About page: scroll-to-contact button (works with language blocks)
@@ -922,6 +925,34 @@ document.addEventListener('DOMContentLoaded', () => {
     initAboutPdfDownload();
 
 });
+
+function centerPannableHeroImages() {
+    // Only applies to mobile layout where <picture> becomes the scroll container.
+    if (!window.matchMedia || !window.matchMedia('(max-width: 768px)').matches) return;
+
+    const pictures = Array.from(document.querySelectorAll('.project-hero > picture'));
+    if (!pictures.length) return;
+
+    const centerScroll = (pic) => {
+        const max = Math.max(0, (pic.scrollWidth || 0) - (pic.clientWidth || 0));
+        if (max <= 0) return;
+        // Center the horizontal overflow so the hero "opens" centered.
+        pic.scrollLeft = Math.round(max / 2);
+    };
+
+    pictures.forEach((pic) => {
+        const img = pic.querySelector('img');
+        if (!img) return;
+
+        const run = () => {
+            // Two RAFs helps after layout settles (fonts/header overlay etc.)
+            requestAnimationFrame(() => requestAnimationFrame(() => centerScroll(pic)));
+        };
+
+        if (img.complete) run();
+        else img.addEventListener('load', run, { once: true });
+    });
+}
 
 function initAboutContactScroll() {
     const triggers = Array.from(document.querySelectorAll('.js-scroll-contact'));
