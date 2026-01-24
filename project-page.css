@@ -2491,6 +2491,38 @@ body.project-5 .project-section-text .project-description strong {
     .project-hero {
         height: 100vh;
         margin-top: 0;
+        /* Mobile: title overlay must stay fixed; only the image should pan */
+        overflow: hidden;
+    }
+
+    /* Make the <picture> the horizontal scroll container */
+    .project-hero > picture {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .project-hero > picture::-webkit-scrollbar {
+        display: none; /* WebKit */
+        width: 0;
+        height: 0;
+    }
+
+    /* Default: show the full image height; allow horizontal scroll if needed */
+    .project-hero > picture > img,
+    .project-hero img {
+        width: auto;
+        height: 100%;
+        max-width: none;
+        object-fit: contain;
+        object-position: center center;
     }
 
     .project-gallery {
