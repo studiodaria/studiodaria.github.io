@@ -1083,11 +1083,6 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
     .project-gallery-vertical {
         display: none !important;
     }
-    
-    /* Project 6 has custom responsive gallery - keep visible */
-    body.project-6 .project-gallery-vertical {
-        display: flex !important;
-    }
 }
 
 .mobile-gallery {

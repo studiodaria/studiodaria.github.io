@@ -223,6 +223,13 @@ function preferOptimizedImageUrl(url) {
     let decoded = url;
     try { decoded = decodeURI(url); } catch { /* keep original */ }
 
+    // Some assets live in special folders without generated /picweb counterparts.
+    // In that case, keep the original URL to avoid rewriting into a 404.
+    const lower = String(decoded).toLowerCase();
+    if (lower.includes('/original-cmyk/')) {
+        try { return encodeURI(decoded); } catch { return decoded; }
+    }
+
     const withPicweb = (u) =>
         String(u).replace(/(images\/project\d+\/)(?!picweb\/)/i, '$1picweb/');
 
@@ -240,6 +247,7 @@ function preferOptimizedImageUrl(url) {
 function updatePictureSources(pictureEl, fallbackSrc) {
     if (!pictureEl || !fallbackSrc) return;
 
+    const lower = String(fallbackSrc).toLowerCase();
     const withPicweb = (u) =>
         String(u).replace(/(images\/project\d+\/)(?!picweb\/)/i, '$1picweb/');
 
@@ -248,6 +256,13 @@ function updatePictureSources(pictureEl, fallbackSrc) {
 
     const avif = pictureEl.querySelector('source[type="image/avif"]');
     const webp = pictureEl.querySelector('source[type="image/webp"]');
+
+    // Special-case: avoid pointing <source> elements at non-existent optimized assets.
+    if (lower.includes('/original-cmyk/')) {
+        if (avif) avif.removeAttribute('srcset');
+        if (webp) webp.removeAttribute('srcset');
+        return;
+    }
 
     if (avif) avif.setAttribute('srcset', encodeURI(swap('avif')));
     if (webp) webp.setAttribute('srcset', encodeURI(swap('webp')));
