@@ -468,7 +468,7 @@ body.lightbox-open .main-header {
 }
 
 .lightbox-title {
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-size: 12px;
     letter-spacing: 0.2px;
     line-height: 1.35;
@@ -699,16 +699,17 @@ body.lightbox-open .main-header {
 
 .project-main-info {
     padding-right: 40px;
-    max-width: 520px;
+    /* Comfortable line-length for long paragraphs (CZ/RU/EN) */
+    max-width: min(65ch, 520px);
 }
 
 /* Lead paragraph — first/intro paragraph, stronger */
 .project-description.project-lead {
-    font-size: 18px;
+    font-size: clamp(17px, 1.15vw, 19px);
     font-weight: 500;
-    line-height: 1.65;
+    line-height: 1.6;
     color: #111;
-    margin-bottom: 36px;
+    margin-bottom: 1.8em;
     text-indent: 0;
 }
 
@@ -738,14 +739,14 @@ body.lightbox-open .main-header {
 
 
 .project-description {
-    font-size: 15px;
-    line-height: 1.8;
+    font-size: clamp(15px, 1.05vw, 17px);
+    line-height: 1.75;
     color: #262626;
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: var(--font-body, 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif);
     font-weight: 400;
-    letter-spacing: 0.01em;
-    margin-bottom: 24px;
-    text-indent: 2em;
+    letter-spacing: 0.005em;
+    margin-bottom: 1.6em;
+    text-indent: 0;
 }
 
 .project-description:last-child {
@@ -765,7 +766,7 @@ body.lightbox-open .main-header {
     margin-bottom: 28px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-size: 12px;
     color: #666;
     letter-spacing: 0.02em;
@@ -824,7 +825,7 @@ body.lightbox-open .main-header {
     text-transform: uppercase;
     color: #888;
     margin: 0 0 6px 0;
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 400;
     letter-spacing: 0.1em;
 }
@@ -833,7 +834,7 @@ body.lightbox-open .main-header {
     font-size: 14px;
     text-transform: none;
     color: #1a1a1a;
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 500;
     letter-spacing: 0.01em;
     line-height: 1.45;
@@ -1081,6 +1082,11 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
 @media (max-width: 1024px) {
     .project-gallery-vertical {
         display: none !important;
+    }
+    
+    /* Project 6 has custom responsive gallery - keep visible */
+    body.project-6 .project-gallery-vertical {
+        display: flex !important;
     }
 }
 
@@ -2509,18 +2515,18 @@ body.project-5 .project-section-text .project-description strong {
     .detail-item p {
         font-size: 13px;
         font-weight: 500;
-        letter-spacing: 0.01em;
+        letter-spacing: 0.005em;
     }
     
     .project-description {
-        font-size: 13px;
+        font-size: 14px;
         line-height: 1.65;
     }
 
     .project-description.project-lead {
-        font-size: 14px;
-        line-height: 1.65;
-        margin-bottom: 20px;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 1.6em;
     }
 
     .project-metrics {
@@ -2606,7 +2612,7 @@ body.project-5 .project-section-text .project-description strong {
     }
     
     .project-description {
-        font-size: 12px;
+        font-size: 14px;
     }
     
     .detail-item h3 {
@@ -2654,7 +2660,7 @@ body.project-5 .project-section-text .project-description strong {
     }
     
     .project-description {
-        font-size: 12px;
+        font-size: 13px;
     }
     
     .detail-item h3 {

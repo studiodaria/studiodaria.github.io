@@ -18,7 +18,7 @@
     margin-top: 110px;
     min-height: calc(100vh - 110px);
     padding: 48px 24px 80px;
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     background: #ffffff;
 }
 
@@ -305,7 +305,7 @@
 .about-lead::before,
 .about-lead::after {
     position: absolute;
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 400;
     font-style: normal;
     color: rgba(26, 26, 26, 0.14);
@@ -1133,7 +1133,7 @@
         padding: 0 !important;
         min-height: auto !important;
         background: white !important;
-        font-family: 'TikTok Sans', system-ui, sans-serif !important;
+        font-family: 'Inter', system-ui, sans-serif !important;
         font-size: 7.5pt !important;
         line-height: 1.35 !important;
         color: #1a1a1a !important;

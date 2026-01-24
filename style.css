@@ -1,9 +1,9 @@
 /* Fonts are loaded via <link> in HTML <head> (avoid @import to prevent mobile FOUT). */
 
-/* TikTok Sans — variable font (replaces Manrope for body text) */
+/* Inter — variable font for body text */
 @font-face {
-    font-family: 'TikTok Sans';
-    src: url('./fonts/TikTok_Sans/TikTokSans-VariableFont_opsz,slnt,wdth,wght.ttf') format('truetype');
+    font-family: 'Inter';
+    src: url('./fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
@@ -17,6 +17,10 @@
     --gray-color: #999;
     --transition: 0.3s ease;
     --spacing: 20px;
+
+    /* Typography system */
+    --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    --font-ui: 'Intro', 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 
 }
 
@@ -36,7 +40,8 @@ body {
     padding: 0;
     background: var(--bg-color);
     color: var(--text-color);
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-body);
+    font-weight: 400;
     line-height: 1.6;
     min-height: 100vh;
     transition: background 0.3s ease, color 0.3s ease;
@@ -58,27 +63,22 @@ body {
     color: #2a2a2a;
 }
 
-/* Общие стили для всего сайта */
-* {
-    font-family: 'Intro', sans-serif;
-}
-
-/* Body text: lighter, more editorial */
+/* Body text */
 p,
 .project-description,
 .footer-notice,
 .footer-contact,
 .legal-content p {
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-    font-weight: 300;
-    letter-spacing: 0.2px;
+    font-family: var(--font-body);
+    font-weight: 400;
+    letter-spacing: 0.005em;
 }
 
 /* Project meta (Category / Year / Location / Client...) */
 .detail-item h3,
 .detail-item p {
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-    letter-spacing: 0.2px;
+    font-family: var(--font-body);
+    letter-spacing: 0.005em;
 }
 
 /* Стили хедера */
@@ -195,6 +195,7 @@ body.home .project-grid {
 .lang-link {
     text-decoration: none;
     color: rgba(42, 42, 42, 0.45);
+    font-family: var(--font-ui);
     font-size: 13px;
     text-transform: lowercase;
     transition: all 0.2s ease;
@@ -238,6 +239,7 @@ body.home .project-grid {
     text-decoration: none;
     /* Same as .about-link a on homepage */
     color: rgba(42, 42, 42, 0.72);
+    font-family: var(--font-ui);
     font-size: 12px;
     font-weight: 500;
     transition: color 220ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -263,6 +265,7 @@ body.home .project-grid {
 
 .nav-separator {
     color: rgba(42, 42, 42, 0.45);
+    font-family: var(--font-ui);
     font-size: 12px;
     font-weight: 400;
     margin: 0 2px;
@@ -270,6 +273,7 @@ body.home .project-grid {
 
 .nav-current {
     color: rgba(42, 42, 42, 0.72);
+    font-family: var(--font-ui);
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.12em;
@@ -292,6 +296,7 @@ body.home .project-grid {
     text-decoration: none;
     /* Same system as menu items (normal nav link) */
     color: rgba(42, 42, 42, 0.72);
+    font-family: var(--font-ui);
     font-size: 13px;
     font-weight: 500; /* match menu weight */
     transition: color 220ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -423,6 +428,8 @@ nav a {
     background: none;
     border: none;
     color: var(--text-color);
+    font-family: var(--font-ui);
+    font-weight: 500;
     padding: 8px 20px;
     cursor: pointer;
     transition: var(--transition);
@@ -759,6 +766,7 @@ nav a {
     cursor: pointer;
     font-size: 11px;
     color: rgba(42, 42, 42, 0.55);
+    font-family: var(--font-ui);
     transition: 
         color 280ms cubic-bezier(0.22, 1, 0.36, 1),
         transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -859,6 +867,7 @@ nav a {
 }
 
 .footer-copyright {
+    font-family: var(--font-ui);
     font-size: 12px;
     color: #999;
     margin: 0 0 25px 0;
@@ -1028,7 +1037,7 @@ nav a {
 /* Homepage: small meta line under title (Year · Category) */
 .project-item .project-info .project-meta {
     color: rgba(255, 255, 255, 0.65);
-    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 400;
     font-size: clamp(7px, 0.58vw, 9px);
     letter-spacing: 0.14em;
