@@ -931,6 +931,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile hero: if the hero image is pannable (scrollable), start centered
     centerPannableHeroImages();
 
+    // Mobile gallery preview: allow pan + start centered
+    centerPannableGalleryPreviews();
+
     // Keep the “drawings” galleries as-is (no collapsing)
 
     // About page: scroll-to-contact button (works with language blocks)
@@ -966,6 +969,83 @@ function centerPannableHeroImages() {
 
         if (img.complete) run();
         else img.addEventListener('load', run, { once: true });
+    });
+}
+
+function centerPannableGalleryPreviews() {
+    // On phones, some previews are horizontally scrollable (like hero).
+    if (!window.matchMedia || !window.matchMedia('(max-width: 768px)').matches) return;
+
+    // Only the visual (top) gallery uses this pannable preview.
+    const mains = Array.from(document.querySelectorAll('.drawings-main.drawings-main--visual'));
+    if (!mains.length) return;
+
+    const updatePanStateAndCenter = (main, img) => {
+        const cw = main.clientWidth || 0;
+        const ch = main.clientHeight || 0;
+        const nw = img?.naturalWidth || 0;
+        const nh = img?.naturalHeight || 0;
+        if (!cw || !ch || !nw || !nh) {
+            main.classList.remove('is-pannable');
+            main.scrollLeft = 0;
+            return;
+        }
+
+        const aspect = nw / nh;
+
+        // If we display the image at full container height, its width would be:
+        const projectedWidth = ch * aspect;
+        const overflowPx = projectedWidth - cw;
+
+        // If the overflow is small, prefer fitting fully (no panning).
+        // User preference: only enable pan for clearly wide (panoramic) images.
+        const smallOverflowThresholdPx = Math.min(420, Math.max(140, Math.round(cw * 0.30)));
+        const pannable = overflowPx > smallOverflowThresholdPx;
+
+        main.classList.toggle('is-pannable', pannable);
+
+        if (!pannable) {
+            main.scrollLeft = 0;
+            return;
+        }
+
+        // Panoramas: start centered, but allow panning to both sides
+        const max = Math.max(0, (main.scrollWidth || 0) - (main.clientWidth || 0));
+        if (max <= 0) {
+            main.scrollLeft = 0;
+            return;
+        }
+        main.scrollLeft = Math.round(max / 2);
+    };
+
+    mains.forEach((main) => {
+        if (main.dataset.panInit === '1') return;
+        main.dataset.panInit = '1';
+
+        const img = main.querySelector('img');
+        if (!img) return;
+
+        const run = () => {
+            // Two RAFs helps after layout settles (thumb strip, fonts, etc.)
+            requestAnimationFrame(() => requestAnimationFrame(() => updatePanStateAndCenter(main, img)));
+        };
+
+        if (img.complete) run();
+        else img.addEventListener('load', run, { once: true });
+
+        // Re-center when the preview image changes (thumb click / arrows)
+        const obs = new MutationObserver(() => {
+            // Trigger after the new image actually loads too (important for correct scrollWidth)
+            img.addEventListener('load', run, { once: true });
+            run();
+        });
+        obs.observe(img, { attributes: true, attributeFilter: ['src'] });
+
+        // Re-evaluate on resize/orientation changes
+        window.addEventListener('resize', run, { passive: true });
+
+        // Expose a per-element refresh hook so other code (auto-crop) can re-evaluate.
+        main.__refreshPanState = run;
     });
 }
 
@@ -1400,6 +1480,159 @@ function initDrawingsGallery() {
             }
         }
 
+        function applyMainImageTuningFromThumb(thumbEl) {
+            if (!thumbEl || !mainImg) return;
+
+            // Optional per-image tuning (used by Project 6 “visualizations” gallery)
+            const zoomRaw = thumbEl.dataset.zoom;
+            const xRaw = thumbEl.dataset.posX;
+            const yRaw = thumbEl.dataset.posY;
+
+            const zoom = zoomRaw ? Number(zoomRaw) : null;
+            const posX = xRaw ? Number(xRaw) : 50;
+            const posY = yRaw ? Number(yRaw) : 50;
+
+            // For panoramas (pannable), the preview must match the lightbox (no crop/zoom).
+            const mainContainer = mainImg.closest('.drawings-main');
+            const isPannable = Boolean(mainContainer && mainContainer.classList.contains('is-pannable'));
+
+            if (!isPannable && typeof zoom === 'number' && Number.isFinite(zoom) && zoom > 0) {
+                mainImg.style.transform = `scale(${zoom})`;
+                mainImg.style.transformOrigin = `${posX}% ${posY}%`;
+            } else {
+                // Reset to default behavior
+                mainImg.style.removeProperty('transform');
+                mainImg.style.removeProperty('transform-origin');
+            }
+        }
+
+        async function computeAutoCropForWhiteMargins(imgEl) {
+            // Only for the generated "visualizations" gallery (preview + thumbs)
+            if (!gallery.classList.contains('drawings-gallery--visual')) return null;
+            if (!imgEl) return null;
+            const nw = imgEl.naturalWidth || 0;
+            const nh = imgEl.naturalHeight || 0;
+            if (!nw || !nh) return null;
+
+            // Never auto-crop wide panoramas — they should be pannable and match the lightbox.
+            const mainContainer = imgEl.closest('.drawings-main');
+            const cw = mainContainer?.clientWidth || 0;
+            const ch = mainContainer?.clientHeight || 0;
+            if (cw && ch) {
+                const aspect = nw / nh;
+                const projectedWidth = ch * aspect;
+                const overflowPx = projectedWidth - cw;
+                const thresholdPx = Math.min(420, Math.max(140, Math.round(cw * 0.30)));
+                if (overflowPx > thresholdPx) return null;
+            }
+
+            // Downscale for speed
+            const maxDim = 320;
+            const scale = Math.min(1, maxDim / Math.max(nw, nh));
+            const w = Math.max(1, Math.round(nw * scale));
+            const h = Math.max(1, Math.round(nh * scale));
+
+            let canvas;
+            try {
+                canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                if (!ctx) return null;
+                ctx.drawImage(imgEl, 0, 0, w, h);
+                const { data } = ctx.getImageData(0, 0, w, h);
+
+                // Detect bounding box of non-white (foreground) pixels.
+                // This is a heuristic intended for images with large white margins.
+                const isFg = (r, g, b, a) => {
+                    if (a < 16) return false;
+                    // Treat near-white as background
+                    return !(r > 250 && g > 250 && b > 250);
+                };
+
+                // Quick safety: only attempt auto-crop when the outer border is mostly white.
+                // This avoids bad crops on dark/colored backgrounds.
+                const isBg = (r, g, b, a) => a >= 16 && r > 250 && g > 250 && b > 250;
+                const sampleBorder = () => {
+                    const step = Math.max(1, Math.round(Math.min(w, h) / 64));
+                    let total = 0;
+                    let white = 0;
+                    const sample = (x, y) => {
+                        const i = (y * w + x) * 4;
+                        total += 1;
+                        if (isBg(data[i], data[i + 1], data[i + 2], data[i + 3])) white += 1;
+                    };
+                    for (let x = 0; x < w; x += step) {
+                        sample(x, 0);
+                        sample(x, h - 1);
+                    }
+                    for (let y = 0; y < h; y += step) {
+                        sample(0, y);
+                        sample(w - 1, y);
+                    }
+                    const ratio = total ? (white / total) : 0;
+                    return ratio;
+                };
+
+                if (sampleBorder() < 0.90) return null;
+
+                let minX = w, minY = h, maxX = -1, maxY = -1;
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        const i = (y * w + x) * 4;
+                        const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
+                        if (!isFg(r, g, b, a)) continue;
+                        if (x < minX) minX = x;
+                        if (y < minY) minY = y;
+                        if (x > maxX) maxX = x;
+                        if (y > maxY) maxY = y;
+                    }
+                }
+
+                if (maxX < minX || maxY < minY) return null;
+
+                // Add padding so we don't crop too tight to thin lines.
+                const pad = Math.round(Math.min(w, h) * 0.06);
+                minX = Math.max(0, minX - pad);
+                minY = Math.max(0, minY - pad);
+                maxX = Math.min(w - 1, maxX + pad);
+                maxY = Math.min(h - 1, maxY + pad);
+
+                const boxW = Math.max(1, maxX - minX + 1);
+                const boxH = Math.max(1, maxY - minY + 1);
+
+                // Only auto-crop when margins are clearly huge (avoid chopping drawings)
+                const fill = (boxW * boxH) / (w * h);
+                if (fill > 0.72) return null;
+
+                // Convert box back to natural coordinates
+                const bx = minX / scale;
+                const by = minY / scale;
+                const bw = boxW / scale;
+                const bh = boxH / scale;
+
+                // Compute a safe zoom that trims margins but keeps the content box fully visible.
+                // (It effectively "zooms" until the tight box becomes the dominant boundary.)
+                const zoom = Math.min(nw / bw, nh / bh);
+                // Cap zoom to avoid "pseudo-cropping" meaningful edges
+                const z = Math.max(1, Math.min(zoom, 1.55));
+                if (z <= 1.01) return null;
+
+                const cx = (bx + bw / 2) / nw * 100;
+                const cy = (by + bh / 2) / nh * 100;
+
+                return {
+                    zoom: Number(z.toFixed(3)),
+                    x: Number(cx.toFixed(2)),
+                    y: Number(cy.toFixed(2)),
+                };
+            } catch {
+                return null;
+            } finally {
+                canvas = null;
+            }
+        }
+
         function updateGallery(index) {
             currentIndex = index;
             const thumb = thumbs[index];
@@ -1415,6 +1648,28 @@ function initDrawingsGallery() {
                 mainImg.alt = alt;
                 mainImg.style.opacity = '1';
             }, 150);
+
+            // After the new image loads, compute auto-crop (if needed) and apply tuning.
+            const onLoad = async () => {
+                try {
+                    // If there is no manual tuning, try auto-cropping white margins.
+                    if (!thumb.dataset.zoom) {
+                        const tuning = await computeAutoCropForWhiteMargins(mainImg);
+                        if (tuning) {
+                            thumb.dataset.zoom = String(tuning.zoom);
+                            thumb.dataset.posX = String(tuning.x);
+                            thumb.dataset.posY = String(tuning.y);
+                        }
+                    }
+                } finally {
+                    applyMainImageTuningFromThumb(thumb);
+                    // Re-evaluate pan vs fit now that tuning may have changed.
+                    const main = mainImg.closest('.drawings-main');
+                    if (main && typeof main.__refreshPanState === 'function') main.__refreshPanState();
+                }
+            };
+
+            mainImg.addEventListener('load', onLoad, { once: true });
 
             // Update active thumb
             thumbs.forEach(t => t.classList.remove('active'));
@@ -1432,6 +1687,23 @@ function initDrawingsGallery() {
             if (mainPicture) updatePictureSources(mainPicture, activeThumb.dataset.src);
             mainImg.src = activeThumb.dataset.src;
             mainImg.alt = activeThumb.dataset.alt || '';
+            // Attempt auto-crop on first paint too
+            mainImg.addEventListener('load', async () => {
+                try {
+                    if (!activeThumb.dataset.zoom) {
+                        const tuning = await computeAutoCropForWhiteMargins(mainImg);
+                        if (tuning) {
+                            activeThumb.dataset.zoom = String(tuning.zoom);
+                            activeThumb.dataset.posX = String(tuning.x);
+                            activeThumb.dataset.posY = String(tuning.y);
+                        }
+                    }
+                } finally {
+                    applyMainImageTuningFromThumb(activeThumb);
+                    const main = mainImg.closest('.drawings-main');
+                    if (main && typeof main.__refreshPanState === 'function') main.__refreshPanState();
+                }
+            }, { once: true });
             // Make sure the active preview is visible on load
             requestAnimationFrame(() => ensureActiveThumbVisible(activeThumb));
         }
@@ -1483,14 +1755,41 @@ function initMobileGallery() {
     const verticalGallery = document.querySelector('.project-gallery-vertical');
     if (!verticalGallery) return;
 
-    const mq = window.matchMedia ? window.matchMedia('(max-width: 1024px)') : null;
-    if (!mq || !mq.matches) return;
-    
     // Check if mobile gallery already exists
     if (document.querySelector('.mobile-gallery')) return;
     
     // Collect all images from the vertical gallery
     const allImages = [];
+
+    const getProjectKey = () => {
+        const cls = Array.from(document.body.classList).find(c => /^project-\d+$/.test(c));
+        return cls || 'project';
+    };
+
+    const getTuningForSrc = (src) => {
+        const projectKey = getProjectKey();
+        const tuningMaps = {
+            // Example (we can add more rules per-project later)
+            'project-6': new Map([
+                // Scheme / diagrams (often lots of white margins)
+                ['Scheme1_page-0001.jpg', { zoom: 1.12, x: 50, y: 50 }],
+
+                // Axo / top views
+                ['kub.effectsResult1.png', { zoom: 1.14, x: 50, y: 50 }],
+                ['kub_2.effectsResult.png', { zoom: 1.12, x: 50, y: 50 }],
+
+                // Facade views (small object in a wide canvas)
+                ['pohled1.effectsResult.png', { zoom: 1.35, x: 50, y: 40 }],
+                ['pohled2.effectsResult.png', { zoom: 1.45, x: 50, y: 42 }],
+            ]),
+        };
+
+        const map = tuningMaps[projectKey];
+        if (!map || !src) return null;
+        const clean = String(src).split(/[?#]/)[0] || '';
+        const file = clean.split('/').pop() || '';
+        return map.get(file) || null;
+    };
     
     // Get images from figures and lightbox links
     verticalGallery.querySelectorAll('img').forEach(img => {
@@ -1544,6 +1843,13 @@ function initMobileGallery() {
         b.dataset.src = img.src;
         b.dataset.alt = img.alt || '';
 
+        const tuning = getTuningForSrc(img.src);
+        if (tuning) {
+            b.dataset.zoom = String(tuning.zoom);
+            b.dataset.posX = String(tuning.x);
+            b.dataset.posY = String(tuning.y);
+        }
+
         const tImg = document.createElement('img');
         tImg.src = img.src;
         tImg.alt = '';
@@ -1563,6 +1869,9 @@ function initMobileGallery() {
     
     // Insert after vertical gallery
     verticalGallery.parentNode.insertBefore(mobileGallery, verticalGallery.nextSibling);
+
+    // Mark page as JS-enhanced so CSS can swap galleries safely
+    document.body.classList.add('has-mobile-gallery');
 
     // Initialize behavior using the same handler as drawings galleries
     initDrawingsGallery();

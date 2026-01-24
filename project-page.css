@@ -1078,11 +1078,9 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
    Mobile Gallery (swipeable with navigator)
    ======================================== */
 
-/* Tablet/Mobile: hide vertical gallery, show mobile gallery */
-@media (max-width: 1024px) {
-    .project-gallery-vertical {
-        display: none !important;
-    }
+/* Mobile gallery is injected by JS. We only swap layouts once it's present. */
+body.has-mobile-gallery .project-gallery-vertical {
+    display: none !important;
 }
 
 .mobile-gallery {
@@ -1093,11 +1091,9 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
     position: relative;
 }
 
-/* Show mobile gallery on tablets and phones (iPad included) */
-@media (max-width: 1024px) {
-    .mobile-gallery {
-        display: block;
-    }
+/* Show injected mobile gallery once it's available */
+body.has-mobile-gallery .mobile-gallery {
+    display: block;
 }
 
 /* Visualizations gallery on mobile/tablet: match drawings UX but allow taller images */
@@ -1119,6 +1115,141 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
         width: 56px;
         height: 56px;
     }
+}
+
+/* ========================================
+   Variant 1 (ALL PROJECTS): ONE gallery everywhere (preview + thumbnails)
+   - Hide the vertical full-bleed gallery
+   - Show the generated thumbnails gallery on all breakpoints
+   ======================================== */
+body.has-mobile-gallery[class*="project-"] .project-gallery-vertical {
+    display: none !important;
+}
+
+body.has-mobile-gallery[class*="project-"] .mobile-gallery {
+    display: block !important;
+    /* Match the full-bleed behavior of the original vertical gallery */
+    margin-top: 80px;
+    margin-left: -80px;
+    margin-right: -80px;
+}
+
+/* Visual gallery (generated): desktop sizing */
+body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual {
+    height: clamp(420px, 72vh, 860px);
+    aspect-ratio: auto;
+    background: #fff;
+}
+
+/* Spacing between the two galleries (visualizations → drawings) */
+body.has-mobile-gallery .drawings-section {
+    margin-top: 48px !important;
+}
+
+@media (max-width: 992px) {
+    body.has-mobile-gallery .drawings-section {
+        margin-top: 42px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    body.has-mobile-gallery .drawings-section {
+        /* Match .project-content padding (24px) */
+        margin-left: -24px;
+        margin-right: -24px;
+        margin-top: 36px !important;
+    }
+
+    body.has-mobile-gallery .drawings-title {
+        padding: 0 24px;
+        margin-bottom: 18px;
+    }
+
+    body.has-mobile-gallery .drawings-nav {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+/* Visual gallery thumbs: slightly larger on desktop */
+body.has-mobile-gallery[class*="project-"] .drawings-gallery--visual .drawings-thumb {
+    width: 72px;
+    height: 72px;
+}
+
+body.has-mobile-gallery[class*="project-"] .drawings-gallery--visual .drawings-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 992px) {
+    body.has-mobile-gallery[class*="project-"] .mobile-gallery {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+}
+
+@media (max-width: 768px) {
+    body.has-mobile-gallery[class*="project-"] .mobile-gallery {
+        /* Match .project-content padding (24px) */
+        margin-left: -24px;
+        margin-right: -24px;
+    }
+}
+
+/* Phones: allow finger-pan ONLY when JS marks the preview as pannable */
+@media (max-width: 768px) {
+    body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual {
+        /* Default: fit = static */
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual.is-pannable {
+        /* Important: override base .drawings-main centering, otherwise left edge is unreachable */
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual.is-pannable::-webkit-scrollbar {
+        display: none; /* WebKit */
+        width: 0;
+        height: 0;
+    }
+
+    /* Default: fit fully, centered */
+    body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        object-position: center center;
+    }
+
+    /* Pannable: fill height to maximize presence (may overflow horizontally) */
+    body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual.is-pannable img {
+        /* In pannable mode we need a real left edge */
+        margin-left: 0;
+        margin-right: 0;
+        width: auto;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        object-fit: contain;
+    }
+}
+
+/* Ensure ONE consistent preview height across all project pages (overrides per-project rules) */
+body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual {
+    height: clamp(420px, 72vh, 860px) !important;
 }
 
 /* (Removed) old mobile-gallery UI (progress + arrows).
