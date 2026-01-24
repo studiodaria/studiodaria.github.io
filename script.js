@@ -41,7 +41,7 @@ const translations = {
         project6_title_short: 'ČVUT Exhibition',
         // Project 7
         project7_title: 'New Branch of Olomouc City Library – Trnkova',
-        project7_title_short: 'Olomouc Library – Trnkova',
+        project7_title_short: 'Olomouc – Trnkova',
         // Project 8
         project8_title: 'Primary School Stará Boleslav',
         project8_title_short: 'Primary School Stará Boleslav',

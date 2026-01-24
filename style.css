@@ -1,5 +1,14 @@
 /* Fonts are loaded via <link> in HTML <head> (avoid @import to prevent mobile FOUT). */
 
+/* TikTok Sans — variable font (replaces Manrope for body text) */
+@font-face {
+    font-family: 'TikTok Sans';
+    src: url('./fonts/TikTok_Sans/TikTokSans-VariableFont_opsz,slnt,wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --bg-color: #ffffff;
     --text-color: #1a1a1a;
@@ -50,13 +59,13 @@ body {
     font-family: 'Intro', sans-serif;
 }
 
-/* Body text: lighter, more editorial (free alternative) */
+/* Body text: lighter, more editorial */
 p,
 .project-description,
 .footer-notice,
 .footer-contact,
 .legal-content p {
-    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 300;
     letter-spacing: 0.2px;
 }
@@ -64,7 +73,7 @@ p,
 /* Project meta (Category / Year / Location / Client...) */
 .detail-item h3,
 .detail-item p {
-    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     letter-spacing: 0.2px;
 }
 
@@ -1010,7 +1019,7 @@ nav a {
 /* Homepage: small meta line under title (Year · Category) */
 .project-item .project-info .project-meta {
     color: rgba(255, 255, 255, 0.65);
-    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 400;
     font-size: clamp(7px, 0.58vw, 9px);
     letter-spacing: 0.14em;

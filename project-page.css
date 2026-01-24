@@ -467,7 +467,7 @@ body.lightbox-open .main-header {
 }
 
 .lightbox-title {
-    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-size: 12px;
     letter-spacing: 0.2px;
     line-height: 1.35;
@@ -697,29 +697,104 @@ body.lightbox-open .main-header {
 
 .project-main-info {
     padding-right: 40px;
+    max-width: 560px;
+}
+
+/* Lead paragraph — first/intro paragraph, stronger */
+.project-description.project-lead {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: #1a1a1a;
+    margin-bottom: 28px;
+}
+
+/* Section paragraphs with visual pause */
+.project-section {
+    margin-bottom: 28px;
+}
+
+.project-section:last-child {
+    margin-bottom: 0;
+}
+
+/* Friendly closing line */
+.project-closing {
+    font-size: 14px;
+    font-style: italic;
+    color: #666;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 
 .project-description {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #333;
-    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #3a3a3a;
+    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 300;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.01em;
+    margin-bottom: 24px;
+}
+
+.project-description:last-child {
+    margin-bottom: 0;
+}
+
+.project-description strong {
+    font-weight: 500;
+    color: #1a1a1a;
+}
+
+/* Program metrics line — architectural case style */
+.project-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 0.02em;
+}
+
+.project-metrics span {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.project-metrics .metrics-label {
+    font-weight: 500;
+    color: #999;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+}
+
+.project-metrics .metrics-value {
+    color: #3a3a3a;
+}
+
+.project-metrics .metrics-sep {
+    color: #ccc;
 }
 
 /* ========================================
-   Project Details - Clean Typography
+   Project Details - Clean Typography with Strong Contrast
    ======================================== */
 .project-details {
-    border-left: 1px solid rgba(0, 0, 0, 0.08);
-    padding-left: 32px;
+    border-left: none;
+    padding-left: 0;
     padding-top: 0;
 }
 
 .detail-item {
-    margin-bottom: 28px;
+    margin-bottom: 22px;
 }
 
 .detail-item:last-child {
@@ -727,24 +802,56 @@ body.lightbox-open .main-header {
 }
 
 .detail-item h3 {
-    font-size: 12px;
+    font-size: 10px;
     text-transform: uppercase;
     color: #999;
-    margin: 0 0 12px 0;
-    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    margin: 0 0 5px 0;
+    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 400;
-    letter-spacing: 1.8px;
+    letter-spacing: 0.1em;
 }
 
 .detail-item p {
     font-size: 14px;
-    text-transform: uppercase;
+    text-transform: none;
     color: #1a1a1a;
-    font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-    font-weight: 400;
-    letter-spacing: 1.2px;
-    line-height: 1.5;
+    font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.45;
     margin: 0;
+}
+
+/* Award highlight — subtle background accent, extends to right edge */
+.detail-item--award {
+    background: rgba(0, 0, 0, 0.025);
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    margin-left: 0;
+    margin-right: -100vw;
+    padding-right: 100vw;
+}
+
+.detail-item--award h3 {
+    font-size: 9px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.detail-item--award p {
+    font-size: 15px;
+    color: #1a1a1a;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.detail-item--award .award-context {
+    display: block;
+    margin-top: 3px;
+    font-size: 11px;
+    font-weight: 400;
+    color: #777;
+    letter-spacing: 0.01em;
 }
 
 /* Award highlight style */
@@ -2337,10 +2444,15 @@ body.project-5 .project-section-text .project-description strong {
 
     .project-details {
         border-left: none;
-        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
         padding-left: 0;
-        padding-top: 28px;
-        margin-top: 28px;
+        padding-top: 24px;
+        margin-top: 8px;
+    }
+
+    .project-main-info {
+        max-width: 100%;
+        padding-right: 0;
     }
 }
 
@@ -2354,24 +2466,61 @@ body.project-5 .project-section-text .project-description strong {
         grid-template-columns: 1fr;
     }
 
+    .project-content {
+        padding: 40px 24px;
+    }
+
     .detail-item {
         margin-bottom: 18px;
     }
 
     .detail-item h3 {
         font-size: 9px;
-        letter-spacing: 1.2px;
-        margin-bottom: 8px;
+        letter-spacing: 0.1em;
+        margin-bottom: 4px;
     }
 
     .detail-item p {
-        font-size: 12px;
-        letter-spacing: 0.8px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
     }
     
     .project-description {
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .project-description.project-lead {
         font-size: 14px;
-        line-height: 1.5;
+        line-height: 1.65;
+        margin-bottom: 20px;
+    }
+
+    .project-metrics {
+        gap: 4px 12px;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        font-size: 11px;
+    }
+
+    .project-metrics .metrics-label {
+        font-size: 9px;
+    }
+
+    .detail-item--award {
+        padding: 12px 14px;
+        margin-left: 0;
+        margin-right: -100vw;
+        padding-right: 100vw;
+    }
+
+    .detail-item--award p {
+        font-size: 13px;
+    }
+
+    .detail-item--award .award-context {
+        font-size: 10px;
     }
     
     .project-credits {
@@ -2418,19 +2567,21 @@ body.project-5 .project-section-text .project-description strong {
     }
     
     .project-content {
-        padding: 30px 15px;
+        padding: 30px 24px;
     }
     
     .project-description {
-        font-size: 13px;
+        font-size: 12px;
     }
     
     .detail-item h3 {
         font-size: 8px;
+        letter-spacing: 0.1em;
     }
     
     .detail-item p {
-        font-size: 11px;
+        font-size: 12px;
+        font-weight: 600;
     }
     
     .project-title {
@@ -2473,10 +2624,12 @@ body.project-5 .project-section-text .project-description strong {
     
     .detail-item h3 {
         font-size: 7px;
+        letter-spacing: 0.08em;
     }
     
     .detail-item p {
-        font-size: 10px;
+        font-size: 11px;
+        font-weight: 600;
     }
 }
 
