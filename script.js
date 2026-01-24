@@ -59,6 +59,8 @@ const translations = {
         client_label: 'Client',
         award_label: 'Award',
         award_2nd_place: '2nd Place',
+        award_context: 'Architectural Competition',
+        award_context_student: 'Student Competition',
         gallery_additional: 'Additional',
         // scroll_down removed (scroll indicator disabled)
         // Footer
@@ -123,6 +125,8 @@ const translations = {
         client_label: 'Клиент',
         award_label: 'Награда',
         award_2nd_place: '2-е место',
+        award_context: 'Архитектурный конкурс',
+        award_context_student: 'Студенческий конкурс',
         gallery_additional: 'Дополнительно',
         // scroll_down removed (scroll indicator disabled)
         // Footer
@@ -187,6 +191,8 @@ const translations = {
         client_label: 'Klient',
         award_label: 'Ocenění',
         award_2nd_place: '2. místo',
+        award_context: 'Architektonická soutěž',
+        award_context_student: 'Studentská soutěž',
         gallery_additional: 'Další',
         // scroll_down removed (scroll indicator disabled)
         // Footer

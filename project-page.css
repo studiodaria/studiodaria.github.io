@@ -225,9 +225,10 @@ body.project-1 .project-hero {
 /* Title container - aligned with .project-content */
 .project-hero-title {
     width: 100%;
-    /* Desktop alignment: can be overridden via JS to match header breadcrumb */
-    padding-left: var(--hero-title-left, 96px);
-    padding-right: 96px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 80px;
+    padding-right: 80px;
     box-sizing: border-box;
 }
 
@@ -245,7 +246,14 @@ body.project-1 .project-hero {
     text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
 }
 
-/* Mobile: keep the same translucent overlay as desktop */
+/* Tablet: match .project-content padding */
+@media (max-width: 992px) {
+    .project-hero-title {
+        padding: 0 20px;
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
     .project-hero-overlay {
         display: flex; /* Keep overlay visible on mobile */
@@ -261,12 +269,12 @@ body.project-1 .project-hero {
     }
     
     .project-hero-title {
-        padding: 0 15px;
+        padding: 0 24px;
     }
     
     .project-hero-title-text {
-        font-size: clamp(11px, 3.2vw, 17px);
-        letter-spacing: 1.3px;
+        font-size: clamp(13px, 3.8vw, 20px);
+        letter-spacing: 1.5px;
     }
 }
 
@@ -278,8 +286,8 @@ body.project-1 .project-hero {
     }
     
     .project-hero-title-text {
-        font-size: clamp(10px, 3.0vw, 15px);
-        letter-spacing: 1.15px;
+        font-size: clamp(12px, 3.5vw, 18px);
+        letter-spacing: 1.3px;
     }
 }
 
@@ -291,19 +299,12 @@ body.project-1 .project-hero {
     }
     
     .project-hero-title {
-        padding: 0 12px;
+        padding: 0 24px;
     }
     
     .project-hero-title-text {
-        font-size: clamp(9px, 2.8vw, 13px);
-        letter-spacing: 0.95px;
-    }
-}
-
-/* Tablet: smaller padding for the hero title */
-@media (max-width: 992px) {
-    .project-hero-title {
-        padding: 0 24px;
+        font-size: clamp(11px, 3.2vw, 15px);
+        letter-spacing: 1.1px;
     }
 }
 
@@ -647,12 +648,13 @@ body.lightbox-open .main-header {
     max-width: 1440px;
     margin: 0 auto;
     padding: 60px 80px;
+    box-sizing: border-box;
 }
 
 .project-info-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 80px;
+    gap: 0;
     margin-bottom: 80px;
 }
 
@@ -697,16 +699,16 @@ body.lightbox-open .main-header {
 
 .project-main-info {
     padding-right: 40px;
-    max-width: 560px;
+    max-width: 520px;
 }
 
 /* Lead paragraph — first/intro paragraph, stronger */
 .project-description.project-lead {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.75;
-    color: #1a1a1a;
-    margin-bottom: 28px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.65;
+    color: #111;
+    margin-bottom: 36px;
 }
 
 /* Section paragraphs with visual pause */
@@ -732,11 +734,11 @@ body.lightbox-open .main-header {
 .project-description {
     font-size: 15px;
     line-height: 1.8;
-    color: #3a3a3a;
+    color: #262626;
     font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 300;
     letter-spacing: 0.01em;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
 }
 
 .project-description:last-child {
@@ -788,24 +790,33 @@ body.lightbox-open .main-header {
    Project Details - Clean Typography with Strong Contrast
    ======================================== */
 .project-details {
-    border-left: none;
-    padding-left: 0;
-    padding-top: 0;
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+    padding-left: 28px;
+    padding-top: 4px;
+    margin-top: -4px;
 }
 
 .detail-item {
-    margin-bottom: 22px;
+    margin-bottom: 0;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.detail-item:first-child:not(.detail-item--award) {
+    padding-top: 0;
 }
 
 .detail-item:last-child {
     margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .detail-item h3 {
     font-size: 10px;
     text-transform: uppercase;
-    color: #999;
-    margin: 0 0 5px 0;
+    color: #888;
+    margin: 0 0 6px 0;
     font-family: 'TikTok Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     font-weight: 400;
     letter-spacing: 0.1em;
@@ -822,36 +833,43 @@ body.lightbox-open .main-header {
     margin: 0;
 }
 
-/* Award highlight — subtle background accent, extends to right edge */
+/* Award highlight — subtle background accent */
 .detail-item--award {
-    background: rgba(0, 0, 0, 0.025);
-    padding: 14px 16px;
-    margin-bottom: 24px;
-    margin-left: 0;
+    background: rgba(0, 0, 0, 0.02);
+    padding: 18px 0;
+    padding-top: 18px;
+    margin-bottom: 0;
+    margin-left: -28px;
     margin-right: -100vw;
+    padding-left: 28px;
     padding-right: 100vw;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .detail-item--award h3 {
-    font-size: 9px;
-    color: #999;
-    margin-bottom: 4px;
+    font-size: 10px;
+    color: #888;
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    text-transform: uppercase;
 }
 
 .detail-item--award p {
-    font-size: 15px;
+    font-size: 14px;
     color: #1a1a1a;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.01em;
+    line-height: 1.45;
 }
 
 .detail-item--award .award-context {
     display: block;
-    margin-top: 3px;
+    margin-top: 6px;
     font-size: 11px;
     font-weight: 400;
-    color: #777;
-    letter-spacing: 0.01em;
+    color: #555;
+    letter-spacing: 0.02em;
 }
 
 /* Award highlight style */
@@ -2471,7 +2489,8 @@ body.project-5 .project-section-text .project-description strong {
     }
 
     .detail-item {
-        margin-bottom: 18px;
+        margin-bottom: 0;
+        padding: 14px 0;
     }
 
     .detail-item h3 {
@@ -2482,7 +2501,7 @@ body.project-5 .project-section-text .project-description strong {
 
     .detail-item p {
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 500;
         letter-spacing: 0.01em;
     }
     
@@ -2509,10 +2528,19 @@ body.project-5 .project-section-text .project-description strong {
     }
 
     .detail-item--award {
-        padding: 12px 14px;
-        margin-left: 0;
+        padding: 14px 16px;
+        margin-left: -24px;
         margin-right: -100vw;
+        padding-left: 24px;
         padding-right: 100vw;
+    }
+
+    .detail-item--award h3 {
+        margin-bottom: 6px;
+    }
+
+    .detail-item--award .award-context {
+        margin-top: 4px;
     }
 
     .detail-item--award p {
