@@ -980,7 +980,21 @@ function centerPannableGalleryPreviews() {
     const mains = Array.from(document.querySelectorAll('.drawings-main.drawings-main--visual'));
     if (!mains.length) return;
 
+    const getActiveThumb = (main) => {
+        const gallery = main.closest('.drawings-gallery');
+        if (!gallery) return null;
+        return gallery.querySelector('.drawings-thumb.active');
+    };
+
     const updatePanStateAndCenter = (main, img) => {
+        // Per-image override: force "fit" mode (never pannable)
+        const activeThumb = getActiveThumb(main);
+        if (activeThumb?.dataset?.forceFit === '1') {
+            main.classList.remove('is-pannable');
+            main.scrollLeft = 0;
+            return;
+        }
+
         const cw = main.clientWidth || 0;
         const ch = main.clientHeight || 0;
         const nw = img?.naturalWidth || 0;
@@ -1653,7 +1667,7 @@ function initDrawingsGallery() {
             const onLoad = async () => {
                 try {
                     // If there is no manual tuning, try auto-cropping white margins.
-                    if (!thumb.dataset.zoom) {
+                    if (!thumb.dataset.zoom && thumb.dataset.noAutoCrop !== '1') {
                         const tuning = await computeAutoCropForWhiteMargins(mainImg);
                         if (tuning) {
                             thumb.dataset.zoom = String(tuning.zoom);
@@ -1690,7 +1704,7 @@ function initDrawingsGallery() {
             // Attempt auto-crop on first paint too
             mainImg.addEventListener('load', async () => {
                 try {
-                    if (!activeThumb.dataset.zoom) {
+                    if (!activeThumb.dataset.zoom && activeThumb.dataset.noAutoCrop !== '1') {
                         const tuning = await computeAutoCropForWhiteMargins(mainImg);
                         if (tuning) {
                             activeThumb.dataset.zoom = String(tuning.zoom);
@@ -1755,6 +1769,10 @@ function initMobileGallery() {
     const verticalGallery = document.querySelector('.project-gallery-vertical');
     if (!verticalGallery) return;
 
+    // Only build the JS gallery on tablet/phone. Desktop should keep the original layout.
+    const mq = window.matchMedia ? window.matchMedia('(max-width: 1024px)') : null;
+    if (!mq || !mq.matches) return;
+
     // Check if mobile gallery already exists
     if (document.querySelector('.mobile-gallery')) return;
     
@@ -1778,9 +1796,20 @@ function initMobileGallery() {
                 ['kub.effectsResult1.png', { zoom: 1.14, x: 50, y: 50 }],
                 ['kub_2.effectsResult.png', { zoom: 1.12, x: 50, y: 50 }],
 
-                // Facade views (small object in a wide canvas)
-                ['pohled1.effectsResult.png', { zoom: 1.35, x: 50, y: 40 }],
-                ['pohled2.effectsResult.png', { zoom: 1.45, x: 50, y: 42 }],
+                // Facade views: force-fit (never panoramas) + slightly smaller in the frame
+                ['pohled1.effectsResult.png', { forceFit: true, noAutoCrop: true, zoom: 1.296, x: 50, y: 50 }],
+                ['pohled2.effectsResult.png', { forceFit: true, noAutoCrop: true, zoom: 1.296, x: 50, y: 50 }],
+            ]),
+            'project-5': new Map([
+                // Situace + detail plans should never be panoramas (always fully visible)
+                ['situace s legendou.jpg', { forceFit: true, noAutoCrop: true }],
+                ['situace_hiscentrum_podrobne.png', { forceFit: true, noAutoCrop: true }],
+                ['situace_spolcentrm_podrobne.png', { forceFit: true, noAutoCrop: true }],
+                ['situace_servisy_podrobne.png', { forceFit: true, noAutoCrop: true }],
+            ]),
+            'project-8': new Map([
+                // Axonometry should be fully visible (no panorama swipe)
+                ['axonometrie-1.jpg', { forceFit: true, noAutoCrop: true }],
             ]),
         };
 
@@ -1788,7 +1817,40 @@ function initMobileGallery() {
         if (!map || !src) return null;
         const clean = String(src).split(/[?#]/)[0] || '';
         const file = clean.split('/').pop() || '';
-        return map.get(file) || null;
+
+        // Support optimized extensions (avif/webp) by matching by stem too.
+        const stem = file.replace(/\.(avif|webp|jpe?g|png)$/i, '');
+        let decodedFile = file;
+        let decodedStem = stem;
+        try {
+            decodedFile = decodeURIComponent(file);
+            decodedStem = decodeURIComponent(stem);
+        } catch {
+            // keep original
+        }
+        const candidates = [
+            file,
+            stem,
+            decodedFile,
+            decodedStem,
+            `${stem}.png`,
+            `${stem}.jpg`,
+            `${stem}.jpeg`,
+            `${stem}.webp`,
+            `${stem}.avif`,
+            `${decodedStem}.png`,
+            `${decodedStem}.jpg`,
+            `${decodedStem}.jpeg`,
+            `${decodedStem}.webp`,
+            `${decodedStem}.avif`,
+        ];
+
+        for (const key of candidates) {
+            const v = map.get(key);
+            if (v) return v;
+        }
+
+        return null;
     };
     
     // Get images from figures and lightbox links
@@ -1802,6 +1864,22 @@ function initMobileGallery() {
     });
     
     if (allImages.length === 0) return;
+
+    // Project-specific ordering
+    // Project 5: show renderings first, then situace + details (plans)
+    if (document.body.classList.contains('project-5')) {
+        const isSituace = (item) => {
+            const src = (item?.src || '').toLowerCase();
+            const alt = (item?.alt || '').toLowerCase();
+            return src.includes('situace') || alt.includes('site plan') || alt.includes('situace');
+        };
+
+        const renders = [];
+        const plans = [];
+        allImages.forEach((it) => (isSituace(it) ? plans : renders).push(it));
+        allImages.length = 0;
+        allImages.push(...renders, ...plans);
+    }
     
     // Build a thumbnails gallery (same UX as the "drawings" gallery)
     const mobileGallery = document.createElement('div');
@@ -1845,9 +1923,11 @@ function initMobileGallery() {
 
         const tuning = getTuningForSrc(img.src);
         if (tuning) {
-            b.dataset.zoom = String(tuning.zoom);
-            b.dataset.posX = String(tuning.x);
-            b.dataset.posY = String(tuning.y);
+            if (tuning.forceFit) b.dataset.forceFit = '1';
+            if (tuning.noAutoCrop) b.dataset.noAutoCrop = '1';
+            if (tuning.zoom) b.dataset.zoom = String(tuning.zoom);
+            if (typeof tuning.x === 'number') b.dataset.posX = String(tuning.x);
+            if (typeof tuning.y === 'number') b.dataset.posY = String(tuning.y);
         }
 
         const tImg = document.createElement('img');

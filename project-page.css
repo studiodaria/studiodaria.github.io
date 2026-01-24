@@ -1078,9 +1078,11 @@ body.project-5 .gallery-row-2col .gallery-item-half img {
    Mobile Gallery (swipeable with navigator)
    ======================================== */
 
-/* Mobile gallery is injected by JS. We only swap layouts once it's present. */
-body.has-mobile-gallery .project-gallery-vertical {
-    display: none !important;
+/* Mobile gallery is injected by JS. We only swap layouts on tablet/phone. */
+@media (max-width: 1024px) {
+    body.has-mobile-gallery .project-gallery-vertical {
+        display: none !important;
+    }
 }
 
 .mobile-gallery {
@@ -1091,9 +1093,11 @@ body.has-mobile-gallery .project-gallery-vertical {
     position: relative;
 }
 
-/* Show injected mobile gallery once it's available */
-body.has-mobile-gallery .mobile-gallery {
-    display: block;
+/* Show injected mobile gallery once it's available (tablet/phone only) */
+@media (max-width: 1024px) {
+    body.has-mobile-gallery .mobile-gallery {
+        display: block;
+    }
 }
 
 /* Visualizations gallery on mobile/tablet: match drawings UX but allow taller images */
@@ -1118,32 +1122,31 @@ body.has-mobile-gallery .mobile-gallery {
 }
 
 /* ========================================
-   Variant 1 (ALL PROJECTS): ONE gallery everywhere (preview + thumbnails)
-   - Hide the vertical full-bleed gallery
-   - Show the generated thumbnails gallery on all breakpoints
+   Variant 1 (tablet/phone): ONE gallery (preview + thumbnails)
+   - Desktop keeps the original full layout
    ======================================== */
-body.has-mobile-gallery[class*="project-"] .project-gallery-vertical {
-    display: none !important;
-}
+@media (max-width: 1024px) {
+    body.has-mobile-gallery[class*="project-"] .mobile-gallery {
+        display: block !important;
+        /* Match the full-bleed behavior of the original vertical gallery */
+        margin-top: 80px;
+        margin-left: -80px;
+        margin-right: -80px;
+    }
 
-body.has-mobile-gallery[class*="project-"] .mobile-gallery {
-    display: block !important;
-    /* Match the full-bleed behavior of the original vertical gallery */
-    margin-top: 80px;
-    margin-left: -80px;
-    margin-right: -80px;
-}
-
-/* Visual gallery (generated): desktop sizing */
-body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual {
-    height: clamp(420px, 72vh, 860px);
-    aspect-ratio: auto;
-    background: #fff;
+    /* Visual gallery (generated): consistent sizing */
+    body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual {
+        height: clamp(420px, 72vh, 860px);
+        aspect-ratio: auto;
+        background: #fff;
+    }
 }
 
 /* Spacing between the two galleries (visualizations → drawings) */
-body.has-mobile-gallery .drawings-section {
-    margin-top: 48px !important;
+@media (max-width: 1024px) {
+    body.has-mobile-gallery .drawings-section {
+        margin-top: 48px !important;
+    }
 }
 
 @media (max-width: 992px) {
@@ -1248,8 +1251,10 @@ body.has-mobile-gallery[class*="project-"] .drawings-gallery--visual .drawings-t
 }
 
 /* Ensure ONE consistent preview height across all project pages (overrides per-project rules) */
-body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual {
-    height: clamp(420px, 72vh, 860px) !important;
+@media (max-width: 1024px) {
+    body.has-mobile-gallery[class*="project-"] .drawings-main.drawings-main--visual {
+        height: clamp(420px, 72vh, 860px) !important;
+    }
 }
 
 /* (Removed) old mobile-gallery UI (progress + arrows).
