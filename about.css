@@ -84,6 +84,11 @@
     min-height: 176px; /* match photo height */
 }
 
+.about-hero-text > .about-mini:last-child {
+    margin-top: auto;
+    margin-bottom: -4px; /* align with bottom of photo */
+}
+
 .about-hero-top {
     display: flex;
     flex-direction: column;
