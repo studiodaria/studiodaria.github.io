@@ -105,7 +105,7 @@ body.project-1 .main-header {
 }
 
 .main-header .lang-link {
-    color: #999 !important;
+    color: #666 !important;
 }
 
 .main-header .about-link a {
@@ -311,18 +311,20 @@ body.project-1 .project-hero {
 
 /* Project pages: language switcher micro-interactions */
 .main-header .lang-link {
-    font-weight: 400;
-    opacity: 0.66;
-    transition: opacity 0.15s ease;
+    font-weight: 500;
+    opacity: 0.85;
+    transition: opacity 0.15s ease, color 0.15s ease;
 }
 
 .main-header .lang-link.active {
     font-weight: 700;
     opacity: 1;
+    color: #1a1a1a !important;
 }
 
 .main-header .lang-link:hover {
-    opacity: 0.95;
+    opacity: 1;
+    color: #1a1a1a !important;
 }
 
 /* ========================================
@@ -1596,7 +1598,7 @@ body.project-6 .main-header .lang-link {
 
 body.project-6 .main-header .lang-link.active,
 body.project-6 .main-header .lang-link:hover {
-    color: var(--p6-accent) !important;
+    color: #1a1a1a !important;
 }
 
 body.project-6 .main-header .about-link a {
@@ -1905,12 +1907,12 @@ body.project-7 .main-header .logo a {
 }
 
 body.project-7 .main-header .lang-link {
-    color: #999 !important;
+    color: #666 !important;
 }
 
 body.project-7 .main-header .lang-link.active,
 body.project-7 .main-header .lang-link:hover {
-    color: var(--p7-accent) !important;
+    color: #1a1a1a !important;
 }
 
 body.project-7 .main-header .about-link a {
@@ -2090,12 +2092,12 @@ body.project-8 .main-header .logo a {
 }
 
 body.project-8 .main-header .lang-link {
-    color: rgba(38, 36, 35, 0.6) !important;
+    color: #666 !important;
 }
 
 body.project-8 .main-header .lang-link.active,
 body.project-8 .main-header .lang-link:hover {
-    color: #262423 !important;
+    color: #1a1a1a !important;
 }
 
 body.project-8 .main-header .about-link a {
