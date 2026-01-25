@@ -19,6 +19,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="about.css">
+    <!-- Prevent logo FOUT: hide until fonts ready, then fade in -->
+    <style>
+      .logo { opacity: 0; transition: opacity 0.2s ease; }
+      .fonts-ready .logo { opacity: 1; }
+    </style>
 </head>
 <body>
     <header class="main-header">
@@ -785,5 +790,12 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+      (function() {
+        var show = function() { document.body.classList.add('fonts-ready'); };
+        if (document.fonts && document.fonts.ready) { document.fonts.ready.then(show); }
+        setTimeout(show, 400);
+      })();
+    </script>
 </body>
 </html>
