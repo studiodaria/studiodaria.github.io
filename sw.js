@@ -4,10 +4,28 @@
    - Images: cache-first with a small cap (to avoid unbounded storage)
 */
 
-const VERSION = 'v110';
+const VERSION = 'v112';
 const CACHE_STATIC = `static-${VERSION}`;
 const CACHE_PAGES = `pages-${VERSION}`;
 const CACHE_IMAGES = `images-${VERSION}`;
+
+// Homepage "above the fold" thumbnails (first 3 cards).
+// Precached so they survive gallery browsing and returning home feels instant.
+// We only include formats the browser will actually request (avif > webp > fallback).
+const HOME_THUMB_URLS = [
+  // Project 1 (avif/webp/jpg)
+  './images/project1/picweb/ra15_Terminal_0013 (1).avif',
+  './images/project1/picweb/ra15_Terminal_0013 (1).webp',
+  './images/project1/ra15_Terminal_0013 (1).jpg',
+  // Project 2
+  './images/project2/picweb/hlavni copy.avif',
+  './images/project2/picweb/hlavni copy.webp',
+  './images/project2/hlavni copy.jpg',
+  // Project 3
+  './images/project3/picweb/1.avif',
+  './images/project3/picweb/1.webp',
+  './images/project3/1.jpg',
+];
 
 // Keep this list small; images are handled at runtime.
 const PRECACHE_URLS = [
@@ -36,6 +54,19 @@ self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_STATIC);
     await cache.addAll(PRECACHE_URLS);
+
+    // Pre-warm homepage thumbnails into the images cache.
+    // They go into CACHE_IMAGES so the same cache-first logic serves them,
+    // but we add them early so they're ready before user even visits home.
+    const imgCache = await caches.open(CACHE_IMAGES);
+    await Promise.all(
+      HOME_THUMB_URLS.map((url) =>
+        imgCache.add(url).catch(() => {
+          // Silently ignore if file doesn't exist (e.g. typo, missing format)
+        })
+      )
+    );
+
     self.skipWaiting();
   })());
 });
@@ -122,7 +153,8 @@ self.addEventListener('fetch', (event) => {
 
   // Images (limit to keep storage bounded)
   if ((req.headers.get('accept') || '').includes('image/')) {
-    event.respondWith(cacheFirst(req, CACHE_IMAGES, { maxEntries: 40 }));
+    // Total images in this portfolio are ~244; keep extra headroom for fallbacks.
+    event.respondWith(cacheFirst(req, CACHE_IMAGES, { maxEntries: 320 }));
     return;
   }
 
