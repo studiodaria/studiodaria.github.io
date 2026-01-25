@@ -143,6 +143,7 @@ body.project-1 .project-hero {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
 }
 
 /* <picture> wrappers: keep original gallery/hero layout */
@@ -236,11 +237,11 @@ body.project-1 .project-hero {
 .project-hero-title-text {
     margin: 0;
     font-family: 'Outfit', sans-serif;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 2.8px;
-    font-size: clamp(18px, 2.0vw, 30px);
-    line-height: 1.12;
+    letter-spacing: 2.2px;
+    font-size: clamp(14px, 1.5vw, 22px);
+    line-height: 1.15;
     color: #ffffff;
     display: block;
     text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
@@ -468,7 +469,7 @@ body.lightbox-open .main-header {
 }
 
 .lightbox-title {
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 12px;
     letter-spacing: 0.2px;
     line-height: 1.35;
@@ -652,11 +653,12 @@ body.lightbox-open .main-header {
 }
 
 .project-info-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 0;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
     margin-bottom: 80px;
 }
+
 
 /* Název projektu - mobilní fallback (skrytý na desktopu, viz overlay pravidla výše) */
 .project-title-section {
@@ -699,17 +701,17 @@ body.lightbox-open .main-header {
 
 .project-main-info {
     padding-right: 40px;
-    /* Comfortable line-length for long paragraphs (CZ/RU/EN) */
-    max-width: min(65ch, 520px);
+    max-width: 500px;
+    flex-shrink: 0;
 }
 
-/* Lead paragraph — first/intro paragraph, stronger */
+/* Lead paragraph — first/intro paragraph (same weight as body text) */
 .project-description.project-lead {
-    font-size: clamp(17px, 1.15vw, 19px);
-    font-weight: 500;
-    line-height: 1.6;
-    color: #111;
-    margin-bottom: 1.8em;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #212529;
+    margin-bottom: 16px;
     text-indent: 0;
 }
 
@@ -739,13 +741,13 @@ body.lightbox-open .main-header {
 
 
 .project-description {
-    font-size: clamp(15px, 1.05vw, 17px);
-    line-height: 1.75;
-    color: #262626;
-    font-family: var(--font-body, 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif);
-    font-weight: 400;
-    letter-spacing: 0.005em;
-    margin-bottom: 1.6em;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #212529;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0;
+    margin-bottom: 16px;
     text-indent: 0;
 }
 
@@ -754,8 +756,8 @@ body.lightbox-open .main-header {
 }
 
 .project-description strong {
-    font-weight: 500;
-    color: #1a1a1a;
+    font-weight: 600;
+    color: #212529;
 }
 
 /* Program metrics line — architectural case style */
@@ -766,7 +768,7 @@ body.lightbox-open .main-header {
     margin-bottom: 28px;
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 12px;
     color: #666;
     letter-spacing: 0.02em;
@@ -802,6 +804,7 @@ body.lightbox-open .main-header {
     padding-left: 28px;
     padding-top: 4px;
     margin-top: -4px;
+    min-width: 180px;
 }
 
 .detail-item {
@@ -825,7 +828,7 @@ body.lightbox-open .main-header {
     text-transform: uppercase;
     color: #888;
     margin: 0 0 6px 0;
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     letter-spacing: 0.1em;
 }
@@ -834,7 +837,7 @@ body.lightbox-open .main-header {
     font-size: 14px;
     text-transform: none;
     color: #1a1a1a;
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 500;
     letter-spacing: 0.01em;
     line-height: 1.45;
@@ -2594,13 +2597,10 @@ body.project-5 .project-section-text .project-description strong {
 }
 
 /* Медиа-запросы */
-@media (max-width: 992px) {
-    .project-content {
-        padding: 40px 20px;
-    }
-
+@media (max-width: 1100px) {
     .project-info-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
         gap: 40px;
     }
 
@@ -2610,11 +2610,26 @@ body.project-5 .project-section-text .project-description strong {
         padding-left: 0;
         padding-top: 24px;
         margin-top: 8px;
+        min-width: auto;
+        width: 100%;
+        max-width: 500px;
     }
 
     .project-main-info {
-        max-width: 100%;
+        max-width: 500px;
+        width: 100%;
         padding-right: 0;
+    }
+
+    /* Hero image: ensure centered on narrow desktop/tablet */
+    .project-hero img {
+        object-position: center center;
+    }
+}
+
+@media (max-width: 992px) {
+    .project-content {
+        padding: 40px 20px;
     }
 }
 
@@ -2682,14 +2697,14 @@ body.project-5 .project-section-text .project-description strong {
     }
     
     .project-description {
-        font-size: 14px;
-        line-height: 1.65;
+        font-size: 15px;
+        line-height: 1.7;
     }
 
     .project-description.project-lead {
         font-size: 15px;
-        line-height: 1.6;
-        margin-bottom: 1.6em;
+        line-height: 1.7;
+        margin-bottom: 16px;
     }
 
     .project-metrics {

@@ -19,7 +19,7 @@
     --spacing: 20px;
 
     /* Typography system */
-    --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    --font-body: 'Open Sans', sans-serif;
     --font-ui: 'Intro', 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 
 }
@@ -1037,7 +1037,7 @@ nav a {
 /* Homepage: small meta line under title (Year · Category) */
 .project-item .project-info .project-meta {
     color: rgba(255, 255, 255, 0.65);
-    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-size: clamp(7px, 0.58vw, 9px);
     letter-spacing: 0.14em;
