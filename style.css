@@ -917,18 +917,16 @@ body.is-scrolling .project-item img {
 
 /* Project tile colors (match each project's title section color) */
 /* White text everywhere, darker backgrounds for good contrast */
-.project-item--p1 { --tile-bg: #8a8f59; --tile-fg: #ffffff; }
-.project-item--p2 { --tile-bg: #D4A84A; --tile-fg: #ffffff; } /* darker yellow/gold */
-.project-item--p3 { --tile-bg: #7A78E8; --tile-fg: #ffffff; }
-.project-item--p4 { --tile-bg: #A070B8; --tile-fg: #ffffff; } /* darker purple */
-.project-item--p5 { --tile-bg: #D4854A; --tile-fg: #ffffff; } /* darker orange */
-
-/* Project 6: match the project header color on project pages */
-.project-item--p6 { --tile-bg: #5A6CFF; --tile-fg: #ffffff; }
-.project-item--p7 { --tile-bg: #9B8079; --tile-fg: #ffffff; }
-
-.project-item--p8 { --tile-bg: #C48AAA; --tile-fg: #ffffff; } /* darker pink */
-.project-item--p9 { --tile-bg: #7A9B5A; --tile-fg: #ffffff; } /* darker green */
+/* Fresh vibrant palette: saturation ~55-65%, lightness ~60-68% — balanced brightness */
+.project-item--p1 { --tile-bg: #9BA65E; --tile-fg: #ffffff; } /* fresh olive */
+.project-item--p2 { --tile-bg: #D4A84A; --tile-fg: #ffffff; } /* warm gold */
+.project-item--p3 { --tile-bg: #8B8BE0; --tile-fg: #ffffff; } /* soft lavender */
+.project-item--p4 { --tile-bg: #B07EC8; --tile-fg: #ffffff; } /* orchid purple */
+.project-item--p5 { --tile-bg: #D4935A; --tile-fg: #ffffff; } /* warm terracotta */
+.project-item--p6 { --tile-bg: #6A82E0; --tile-fg: #ffffff; } /* cornflower blue */
+.project-item--p7 { --tile-bg: #B89B8A; --tile-fg: #ffffff; } /* warm sand */
+.project-item--p8 { --tile-bg: #D48EB8; --tile-fg: #ffffff; } /* fresh pink */
+.project-item--p9 { --tile-bg: #7DB85E; --tile-fg: #ffffff; } /* fresh green */
 
 /* Active link style */
 .about-link a.active {
