@@ -28,23 +28,23 @@ const translations = {
         project2_title: 'Design – Art – and – Peace – Factory',
         project2_title_short: 'Design – Art – and – Peace',
         // Project 3
-        project3_title: 'Žluté lázně – Riverside Leisure & Spa',
-        project3_title_short: 'Žluté lázně – Hotel & Spa',
+        project3_title: 'Zlute lazne – Riverside Leisure & Spa',
+        project3_title_short: 'Zlute lazne – Hotel & Spa',
         // Project 4
-        project4_title: 'The Roof Club – Yacht Club Podolí',
+        project4_title: 'The Roof Club – Yacht Club Podoli',
         project4_title_short: 'The Roof – Yacht Club',
         // Project 5
-        project5_title: 'Středokluky Village Center',
-        project5_title_short: 'Středokluky – Village Center',
+        project5_title: 'Village Center Stredokluky',
+        project5_title_short: 'Village Center Stredokluky',
         // Project 6
-        project6_title: 'ČVUT Exhibition for the Gaudeamus Higher Education Fair',
-        project6_title_short: 'ČVUT Exhibition',
+        project6_title: 'CTU Exhibition for the Gaudeamus Higher Education Fair',
+        project6_title_short: 'CTU Exhibition',
         // Project 7
         project7_title: 'New Branch of Olomouc City Library – Trnkova',
         project7_title_short: 'Olomouc Library – Trnkova',
         // Project 8
-        project8_title: 'Primary School Stará Boleslav',
-        project8_title_short: 'Primary School Stará Boleslav',
+        project8_title: 'Primary School Stara Boleslav',
+        project8_title_short: 'Primary School Stara Boleslav',
         // Project 9
         project9_title: 'In-between Spaces of Prague Market — Urban & Landscape Proposal',
         project9_title_short: 'Prague Market – Public Spaces',
@@ -91,19 +91,19 @@ const translations = {
         project1_title: 'Терминал ВСМ Прага-восток',
         project1_title_short: 'Терминал ВСМ',
         // Project 2
-        project2_title: 'Design – Art – and – Peace – Factory',
-        project2_title_short: 'Школа дизайна и искусства',
+        project2_title: 'Фабрика дизайна, искусства и мира',
+        project2_title_short: 'Фабрика дизайна и искусства',
         // Project 3
-        project3_title: 'Žluté lázně – Riverside Leisure & Spa',
-        project3_title_short: 'Žluté lázně – Отель и спа',
+        project3_title: 'Жёлтые лазне – Отель и спа у реки',
+        project3_title_short: 'Жёлтые лазне – Отель и спа',
         // Project 4
         project4_title: 'The Roof Club – Яхт-клуб Подоли',
         project4_title_short: 'The Roof – Яхт-клуб',
         // Project 5
         project5_title: 'Центр деревни Стршедоклуки',
-        project5_title_short: 'Стршедоклуки – Центр',
+        project5_title_short: 'Центр Стршедоклуки',
         // Project 6
-        project6_title: 'Экспозиция ЧВУТ для выставки вузов Gaudeamus',
+        project6_title: 'Экспозиция ЧВУТ для ярмарки вузов Gaudeamus',
         project6_title_short: 'Экспозиция ЧВУТ',
         // Project 7
         project7_title: 'Новый филиал библиотеки города Оломоуц – Трнкова',
@@ -160,7 +160,7 @@ const translations = {
         project2_title: 'Design – Art – and – Peace – Factory',
         project2_title_short: 'Škola designu a umění',
         // Project 3
-        project3_title: 'Žluté lázně – Riverside Leisure & Spa',
+        project3_title: 'Žluté lázně – Hotel a wellness u řeky',
         project3_title_short: 'Žluté lázně – Hotel a lázně',
         // Project 4
         project4_title: 'The Roof Club – Jachtařský klub Podolí',
