@@ -730,8 +730,8 @@ body.home .project-grid {
 .project-item .project-info::after {
     content: '';
     position: absolute;
-    /* Background crossfade should feel instant (no "wait then color") */
-    transition: opacity 160ms cubic-bezier(0.22, 1, 0.36, 1);
+    /* Smooth crossfade */
+    transition: opacity 280ms ease-out;
     will-change: opacity;
 }
 
@@ -804,7 +804,7 @@ body.home .project-grid {
 
     .project-item:active img,
     .project-item:focus-within img {
-        opacity: 0;
+        opacity: 0.12;
     }
 }
 
@@ -871,15 +871,15 @@ body.home .project-grid {
     color: rgba(255, 255, 255, 0.92);
 }
 
-/* Hide image on hover/focus (desktop) */
+/* Fade image on hover/focus (desktop) */
 .project-item img {
-    transition: opacity 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 240ms ease-out;
     will-change: opacity;
 }
 
 .project-item:hover img,
 .project-item:focus-within img {
-    opacity: 0;
+    opacity: 0.12; /* subtle hint of image remains */
 }
 
 /* While scrolling, disable hover-fade so it doesn't look like images "reload" */
@@ -903,7 +903,7 @@ body.is-scrolling .project-item img {
 
 .project-item:hover,
 .project-item:focus-within {
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* softer elevation */
     z-index: 2;
 }
 
