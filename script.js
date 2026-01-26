@@ -30,17 +30,17 @@ const translations = {
         project2_title: 'Design – Art – and – Peace – Factory',
         project2_title_short: 'Design – Art – and – Peace',
         project2_location: 'Kherson, Ukraine',
-        project2_client: 'CTU FA, Atelier Fránek',
+        project2_client: 'CTU FA, Studio Fránek',
         // Project 3
         project3_title: 'Zlute lazne – Riverside Leisure & Spa',
         project3_title_short: 'Zlute lazne – Hotel & Spa',
         project3_location: 'Prague, Podolské Embankment – Žluté lázně',
-        project3_client: 'CTU FA, Atelier Lampa',
+        project3_client: 'CTU FA, Studio Lampa',
         // Project 4
         project4_title: 'The Roof Club – Yacht Club Podoli',
         project4_title_short: 'The Roof – Yacht Club',
         project4_location: 'Prague – Podolí, Podolský Island (Vltava)',
-        project4_client: 'CTU FA, Atelier Lampa',
+        project4_client: 'CTU FA, Studio Lampa',
         // Project 5
         project5_title: 'Village Center Stredokluky',
         project5_title_short: 'Village Center Stredokluky',
