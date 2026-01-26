@@ -24,30 +24,48 @@ const translations = {
         // Project 1
         project1_title: 'High-Speed Rail Terminal Prague-East',
         project1_title_short: 'High-Speed Rail Terminal',
+        project1_location: 'Nehvizdy, Czech Republic',
+        project1_client: 'Railway Administration',
         // Project 2
         project2_title: 'Design – Art – and – Peace – Factory',
         project2_title_short: 'Design – Art – and – Peace',
+        project2_location: 'Kherson, Ukraine',
+        project2_client: 'CTU FA, Atelier Fránek',
         // Project 3
         project3_title: 'Zlute lazne – Riverside Leisure & Spa',
         project3_title_short: 'Zlute lazne – Hotel & Spa',
+        project3_location: 'Prague, Podolské Embankment – Žluté lázně',
+        project3_client: 'CTU FA, Atelier Lampa',
         // Project 4
         project4_title: 'The Roof Club – Yacht Club Podoli',
         project4_title_short: 'The Roof – Yacht Club',
+        project4_location: 'Prague – Podolí, Podolský Island (Vltava)',
+        project4_client: 'CTU FA, Atelier Lampa',
         // Project 5
         project5_title: 'Village Center Stredokluky',
         project5_title_short: 'Village Center Stredokluky',
+        project5_location: 'Středokluky, Czech Republic',
+        project5_client: 'Czech Chamber of Architects',
         // Project 6
         project6_title: 'CTU Exhibition for the Gaudeamus Higher Education Fair',
         project6_title_short: 'CTU Exhibition',
+        project6_location: 'Gaudeamus Higher Education Fair',
+        project6_client: 'CTU',
         // Project 7
         project7_title: 'New Branch of Olomouc City Library – Trnkova',
         project7_title_short: 'Olomouc Library – Trnkova',
+        project7_location: 'Olomouc – Trnkova, Czech Republic',
+        project7_client: 'Czech Chamber of Architects',
         // Project 8
         project8_title: 'Primary School Stara Boleslav',
         project8_title_short: 'Primary School Stara Boleslav',
+        project8_location: 'Stará Boleslav, Czech Republic',
+        project8_client: 'City of Brandýs nad Labem – Stará Boleslav',
         // Project 9
         project9_title: 'In-between Spaces of Prague Market — Urban & Landscape Proposal',
         project9_title_short: 'Prague Market – Public Spaces',
+        project9_location: 'Prague – Holešovice',
+        project9_client: 'City of Prague',
         type_label: 'Type',
         conversion: 'Conversion',
         authors_label: 'Authors',
@@ -90,30 +108,48 @@ const translations = {
         // Project 1
         project1_title: 'Терминал ВСМ Прага-восток',
         project1_title_short: 'Терминал ВСМ',
+        project1_location: 'Негвизды, Чехия',
+        project1_client: 'Управление железных дорог',
         // Project 2
         project2_title: 'Фабрика дизайна, искусства и мира',
         project2_title_short: 'Фабрика дизайна и искусства',
+        project2_location: 'Херсон, Украина',
+        project2_client: 'ФА ЧВУТ, Ателье Франек',
         // Project 3
         project3_title: 'Жёлтые лазне – Отель и спа у реки',
         project3_title_short: 'Жёлтые лазне – Отель и спа',
+        project3_location: 'Прага, Подольская набережная – Жёлтые лазне',
+        project3_client: 'ФА ЧВУТ, Ателье Лампа',
         // Project 4
         project4_title: 'The Roof Club – Яхт-клуб Подоли',
         project4_title_short: 'The Roof – Яхт-клуб',
+        project4_location: 'Прага – Подоли, остров Подольский (Влтава)',
+        project4_client: 'ФА ЧВУТ, Ателье Лампа',
         // Project 5
         project5_title: 'Центр деревни Стршедоклуки',
         project5_title_short: 'Центр Стршедоклуки',
+        project5_location: 'Стршедоклуки, Чехия',
+        project5_client: 'Чешская палата архитекторов',
         // Project 6
         project6_title: 'Экспозиция ЧВУТ для ярмарки вузов Gaudeamus',
         project6_title_short: 'Экспозиция ЧВУТ',
+        project6_location: 'Ярмарка вузов Gaudeamus',
+        project6_client: 'ЧВУТ',
         // Project 7
         project7_title: 'Новый филиал библиотеки города Оломоуц – Трнкова',
         project7_title_short: 'Библиотека Оломоуц – Трнкова',
+        project7_location: 'Оломоуц – Трнкова, Чехия',
+        project7_client: 'Чешская палата архитекторов',
         // Project 8
         project8_title: 'Начальная школа Стара-Болеслав',
         project8_title_short: 'Школа Стара-Болеслав',
+        project8_location: 'Стара-Болеслав, Чехия',
+        project8_client: 'Город Брандис-над-Лабем – Стара-Болеслав',
         // Project 9
         project9_title: 'Межпространства Пражского рынка — градостроительно-ландшафтное предложение',
         project9_title_short: 'Пражский рынок – Общественные пространства',
+        project9_location: 'Прага – Голешовице',
+        project9_client: 'Город Прага',
         type_label: 'Тип',
         conversion: 'Конверсия',
         authors_label: 'Авторы',
@@ -156,30 +192,48 @@ const translations = {
         // Project 1
         project1_title: 'Terminál VRT Praha-východ',
         project1_title_short: 'Terminál VRT',
+        project1_location: 'Nehvizdy, Česká republika',
+        project1_client: 'Správa železnic',
         // Project 2
         project2_title: 'Design – Art – and – Peace – Factory',
         project2_title_short: 'Škola designu a umění',
+        project2_location: 'Cherson, Ukrajina',
+        project2_client: 'FA ČVUT, Ateliér Fránek',
         // Project 3
         project3_title: 'Žluté lázně – Hotel a wellness u řeky',
         project3_title_short: 'Žluté lázně – Hotel a lázně',
+        project3_location: 'Praha, Podolské nábřeží – Žluté lázně',
+        project3_client: 'FA ČVUT, Ateliér Lampa',
         // Project 4
         project4_title: 'The Roof Club – Jachtařský klub Podolí',
         project4_title_short: 'The Roof – Jachtařský klub',
+        project4_location: 'Praha – Podolí, Podolský ostrov (Vltava)',
+        project4_client: 'FA ČVUT, Ateliér Lampa',
         // Project 5
         project5_title: 'Centrum obce Středokluky',
         project5_title_short: 'Středokluky – Centrum obce',
+        project5_location: 'Středokluky, Česká republika',
+        project5_client: 'Česká komora architektů',
         // Project 6
         project6_title: 'Expozice ČVUT pro veletrh vysokých škol Gaudeamus',
         project6_title_short: 'Expozice ČVUT',
+        project6_location: 'Veletrh vysokých škol Gaudeamus',
+        project6_client: 'ČVUT',
         // Project 7
         project7_title: 'Nová pobočka knihovny města Olomouce – Trnkova',
         project7_title_short: 'Knihovna Olomouc – Trnkova',
+        project7_location: 'Olomouc – Trnkova, Česká republika',
+        project7_client: 'Česká komora architektů',
         // Project 8
         project8_title: 'ZŠ Stará Boleslav',
         project8_title_short: 'ZŠ Stará Boleslav',
+        project8_location: 'Stará Boleslav, Česká republika',
+        project8_client: 'Město Brandýs nad Labem – Stará Boleslav',
         // Project 9
         project9_title: 'Meziprostory Pražské tržnice — urbanisticko-krajinářský návrh',
         project9_title_short: 'Pražská tržnice – Veřejné prostory',
+        project9_location: 'Praha – Holešovice',
+        project9_client: 'Hlavní město Praha',
         type_label: 'Typ',
         conversion: 'Konverze',
         authors_label: 'Autoři',
