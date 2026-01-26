@@ -1,7 +1,6 @@
 /* Стили для страницы проекта в стиле MVRDV */
+/* Fonts loaded via <link> in HTML <head> */
 
-/* Fonts (Google Fonts) */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 /* Home button in header */
 .home-btn {
     position: absolute;
