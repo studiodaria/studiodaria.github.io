@@ -162,7 +162,7 @@ body.home .project-grid {
     letter-spacing: 0;
     vertical-align: baseline;
     color: inherit; /* allow hover color on the whole logo */
-    margin-left: -0.15em; /* consistent proportional overlap */
+    margin-left: -0.10em; /* subtle proportional overlap */
     position: relative;
     top: 0.08em; /* optical alignment with STUDIO baseline */
     z-index: 3; /* D layer ON TOP of O - clear intentional overlap */
@@ -523,7 +523,7 @@ body.home .project-grid {
 
     /* Keep proportional overlap on tablet */
     .logo-daria {
-        margin-left: -0.15em;
+        margin-left: -0.10em;
     }
 
     .filters {
@@ -988,7 +988,7 @@ body.is-scrolling .project-item img {
     }
 
     .logo-daria {
-        margin-left: -0.15em; /* same proportional overlap */
+        margin-left: -0.10em; /* same proportional overlap */
         font-size: 2.2em;
     }
 
@@ -1183,7 +1183,7 @@ body.is-scrolling .project-item img {
     }
 
     .logo-daria {
-        margin-left: -0.15em; /* same proportional overlap */
+        margin-left: -0.10em; /* same proportional overlap */
         font-size: 2.1em;
     }
 
