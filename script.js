@@ -932,11 +932,10 @@ document.addEventListener('DOMContentLoaded', () => {
         el.textContent = year;
     });
 
-    // Load saved language; if none is saved, default to Czech for Czech browsers.
+    // Load saved language; if none is saved, default to English.
     let storedLanguage = null;
     try { storedLanguage = localStorage.getItem('selectedLanguage'); } catch {}
-    const browserLang = (navigator.language || '').toLowerCase();
-    const defaultLanguage = browserLang.startsWith('cs') ? 'cz' : 'en';
+    const defaultLanguage = 'en';
     const urlLanguage = getLangFromUrl();
     switchLanguage(urlLanguage || storedLanguage || defaultLanguage);
     syncProjectHeroTitleAlignment();
