@@ -20,8 +20,8 @@
   - Studie staveb a interiérů
   - Projektový stupeň: studie / DPI
   - podpora při autorském dozoru
-  - Komunikace s klienty a dodavateli, koordinace podkladů
-  - Výkresová dokumentace, detailní řešení, 3D modelování, vizualizace
+  - Komunikace s klienty a dodavateli, koordinace projektu
+  - Výkresová dokumentace, detailní řešení, FF&E (nábytek a vybavení), 3D modelování, vizualizace
 
 - **2020–dosud** — Samostatná praxe — architekt / konzultant
   - Individuální zakázky: studie staveb a interiérů

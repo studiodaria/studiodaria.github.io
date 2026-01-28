@@ -82,7 +82,7 @@ const translations = {
         gallery_additional: 'Additional',
         // scroll_down removed (scroll indicator disabled)
         // Footer
-        no_copy: 'All content is protected by copyright. Reproduction without permission is not allowed.'
+        no_copy: 'Copyright protected. No reproduction without permission.'
     },
     'ru': {
         about: 'ОБО МНЕ',
@@ -166,7 +166,7 @@ const translations = {
         gallery_additional: 'Дополнительно',
         // scroll_down removed (scroll indicator disabled)
         // Footer
-        no_copy: 'Весь контент защищён авторским правом. Воспроизведение без разрешения запрещено.'
+        no_copy: 'Контент защищён авторским правом. Копирование без разрешения запрещено.'
     },
     'cz': {
         about: 'O MNĚ',
@@ -250,7 +250,7 @@ const translations = {
         gallery_additional: 'Další',
         // scroll_down removed (scroll indicator disabled)
         // Footer
-        no_copy: 'Veškerý obsah je chráněn autorským právem. Reprodukce bez souhlasu není povolena.'
+        no_copy: 'Obsah je chráněn autorským právem. Reprodukce bez souhlasu zakázána.'
     }
 };
 
