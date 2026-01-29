@@ -2,6 +2,7 @@
 const translations = {
     'en': {
         about: 'ABOUT ME',
+        contact: 'CONTACT',
         projects: 'PROJECTS',
         legal: 'LEGAL',
         legal_title: 'Legal & Copyright',
@@ -86,6 +87,7 @@ const translations = {
     },
     'ru': {
         about: 'ОБО МНЕ',
+        contact: 'КОНТАКТ',
         projects: 'ПРОЕКТЫ',
         legal: 'ПРАВО',
         legal_title: 'Правовая информация',
@@ -170,6 +172,7 @@ const translations = {
     },
     'cz': {
         about: 'O MNĚ',
+        contact: 'KONTAKT',
         projects: 'PROJEKTY',
         legal: 'PRÁVO',
         legal_title: 'Právní informace',
@@ -1138,6 +1141,12 @@ function initAboutContactScroll() {
             scrollToContact();
         });
     });
+
+    // Auto-scroll to contact if URL has #contact hash
+    if (window.location.hash === '#contact') {
+        // Small delay to ensure page is fully rendered
+        setTimeout(scrollToContact, 100);
+    }
 }
 
 function initAboutPdfDownload() {

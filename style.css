@@ -285,6 +285,9 @@ body.home .project-grid {
     left: 35px;
     top: 50%;
     transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .about-link a {
